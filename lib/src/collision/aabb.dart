@@ -63,10 +63,10 @@ class AABB {
    * @param aabb the object to copy from
    */
   void set(final AABB aabb) {
-    Vector2 v = aabb.lowerBound;
+    final Vector2 v = aabb.lowerBound;
     lowerBound.x = v.x;
     lowerBound.y = v.y;
-    Vector2 v1 = aabb.upperBound;
+    final Vector2 v1 = aabb.upperBound;
     upperBound.x = v1.x;
     upperBound.y = v1.y;
   }
@@ -273,7 +273,7 @@ class AABB {
         return false;
       }
     } else {
-      double inv_d = 1.0 / d.y;
+      final double inv_d = 1.0 / d.y;
       double t1 = (lowerBound.y - p.y) * inv_d;
       double t2 = (upperBound.y - p.y) * inv_d;
 
