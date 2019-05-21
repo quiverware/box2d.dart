@@ -33,12 +33,16 @@ abstract class Contact {
   // Flags stored in _flags
   // Used when crawling contact graph when forming islands.
   static final int ISLAND_FLAG = 0x0001;
+
   // Set when the shapes are touching.
   static final int TOUCHING_FLAG = 0x0002;
+
   // This contact can be disabled (by user)
   static final int ENABLED_FLAG = 0x0004;
+
   // This contact needs filtering because a fixture filter was changed.
   static final int FILTER_FLAG = 0x0008;
+
   // This bullet contact had a TOI event
   static final int BULLET_HIT_FLAG = 0x0010;
 
@@ -210,22 +214,22 @@ abstract class Contact {
     _flags |= ENABLED_FLAG;
 
     bool touching = false;
-    bool wasTouching = (_flags & TOUCHING_FLAG) == TOUCHING_FLAG;
+    final bool wasTouching = (_flags & TOUCHING_FLAG) == TOUCHING_FLAG;
 
-    bool sensorA = _fixtureA.isSensor();
-    bool sensorB = _fixtureB.isSensor();
-    bool sensor = sensorA || sensorB;
+    final bool sensorA = _fixtureA.isSensor();
+    final bool sensorB = _fixtureB.isSensor();
+    final bool sensor = sensorA || sensorB;
 
-    Body bodyA = _fixtureA.getBody();
-    Body bodyB = _fixtureB.getBody();
-    Transform xfA = bodyA._transform;
-    Transform xfB = bodyB._transform;
+    final Body bodyA = _fixtureA.getBody();
+    final Body bodyB = _fixtureB.getBody();
+    final Transform xfA = bodyA._transform;
+    final Transform xfB = bodyB._transform;
     // log.debug("TransformA: "+xfA);
     // log.debug("TransformB: "+xfB);
 
     if (sensor) {
-      Shape shapeA = _fixtureA.getShape();
-      Shape shapeB = _fixtureB.getShape();
+      final Shape shapeA = _fixtureA.getShape();
+      final Shape shapeB = _fixtureB.getShape();
       touching = _pool
           .getCollision()
           .testOverlap(shapeA, _indexA, shapeB, _indexB, xfA, xfB);
@@ -239,13 +243,13 @@ abstract class Contact {
       // Match old contact ids to new contact ids and copy the
       // stored impulses to warm start the solver.
       for (int i = 0; i < _manifold.pointCount; ++i) {
-        ManifoldPoint mp2 = _manifold.points[i];
-        mp2.normalImpulse = 0.0;
-        mp2.tangentImpulse = 0.0;
-        ContactID id2 = mp2.id;
+        final ManifoldPoint mp2 = _manifold.points[i]
+          ..normalImpulse = 0.0
+          ..tangentImpulse = 0.0;
+        final ContactID id2 = mp2.id;
 
         for (int j = 0; j < _oldManifold.pointCount; ++j) {
-          ManifoldPoint mp1 = _oldManifold.points[j];
+          final ManifoldPoint mp1 = _oldManifold.points[j];
 
           if (mp1.id.isEqual(id2)) {
             mp2.normalImpulse = mp1.normalImpulse;

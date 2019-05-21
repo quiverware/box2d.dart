@@ -107,14 +107,14 @@ class DistanceJoint extends Joint {
     _invIA = _bodyA._invI;
     _invIB = _bodyB._invI;
 
-    Vector2 cA = data.positions[_indexA].c;
-    double aA = data.positions[_indexA].a;
-    Vector2 vA = data.velocities[_indexA].v;
+    final Vector2 cA = data.positions[_indexA].c;
+    final double aA = data.positions[_indexA].a;
+    final Vector2 vA = data.velocities[_indexA].v;
     double wA = data.velocities[_indexA].w;
 
-    Vector2 cB = data.positions[_indexB].c;
-    double aB = data.positions[_indexB].a;
-    Vector2 vB = data.velocities[_indexB].v;
+    final Vector2 cB = data.positions[_indexB].c;
+    final double aB = data.positions[_indexB].a;
+    final Vector2 vB = data.velocities[_indexB].v;
     double wB = data.velocities[_indexB].w;
 
     final Rot qA = pool.popRot();
@@ -145,7 +145,7 @@ class DistanceJoint extends Joint {
     pool.pushRot(2);
 
     // Handle singularity.
-    double length = _u.length;
+    final double length = _u.length;
     if (length > Settings.linearSlop) {
       _u.x *= 1.0 / length;
       _u.y *= 1.0 / length;
@@ -153,8 +153,8 @@ class DistanceJoint extends Joint {
       _u.setValues(0.0, 0.0);
     }
 
-    double crAu = _rA.cross(_u);
-    double crBu = _rB.cross(_u);
+    final double crAu = _rA.cross(_u);
+    final double crBu = _rB.cross(_u);
     double invMass =
         _invMassA + _invIA * crAu * crAu + _invMassB + _invIB * crBu * crBu;
 
@@ -162,19 +162,19 @@ class DistanceJoint extends Joint {
     _mass = invMass != 0.0 ? 1.0 / invMass : 0.0;
 
     if (_frequencyHz > 0.0) {
-      double C = length - _length;
+      final double C = length - _length;
 
       // Frequency
-      double omega = 2.0 * Math.pi * _frequencyHz;
+      final double omega = 2.0 * Math.pi * _frequencyHz;
 
       // Damping coefficient
-      double d = 2.0 * _mass * _dampingRatio * omega;
+      final double d = 2.0 * _mass * _dampingRatio * omega;
 
       // Spring stiffness
-      double k = _mass * omega * omega;
+      final double k = _mass * omega * omega;
 
       // magic formulas
-      double h = data.step.dt;
+      final double h = data.step.dt;
       _gamma = h * (d + h * k);
       _gamma = _gamma != 0.0 ? 1.0 / _gamma : 0.0;
       _bias = C * h * k * _gamma;
@@ -189,8 +189,7 @@ class DistanceJoint extends Joint {
       // Scale the impulse to support a variable time step.
       _impulse *= data.step.dtRatio;
 
-      Vector2 P = pool.popVec2();
-      P
+      final Vector2 P = pool.popVec2()
         ..setFrom(_u)
         ..scale(_impulse);
 
@@ -213,9 +212,9 @@ class DistanceJoint extends Joint {
   }
 
   void solveVelocityConstraints(final SolverData data) {
-    Vector2 vA = data.velocities[_indexA].v;
+    final Vector2 vA = data.velocities[_indexA].v;
     double wA = data.velocities[_indexA].w;
-    Vector2 vB = data.velocities[_indexB].v;
+    final Vector2 vB = data.velocities[_indexB].v;
     double wB = data.velocities[_indexB].w;
 
     final Vector2 vpA = pool.popVec2();
@@ -226,13 +225,13 @@ class DistanceJoint extends Joint {
     vpA.add(vA);
     _rB.scaleOrthogonalInto(wB, vpB);
     vpB.add(vB);
-    double Cdot = _u.dot(vpB..sub(vpA));
+    final double Cdot = _u.dot(vpB..sub(vpA));
 
-    double impulse = -_mass * (Cdot + _bias + _gamma * _impulse);
+    final double impulse = -_mass * (Cdot + _bias + _gamma * _impulse);
     _impulse += impulse;
 
-    double Px = impulse * _u.x;
-    double Py = impulse * _u.y;
+    final double Px = impulse * _u.x;
+    final double Py = impulse * _u.y;
 
     vA.x -= _invMassA * Px;
     vA.y -= _invMassA * Py;
@@ -259,9 +258,9 @@ class DistanceJoint extends Joint {
     final Vector2 rB = pool.popVec2();
     final Vector2 u = pool.popVec2();
 
-    Vector2 cA = data.positions[_indexA].c;
+    final Vector2 cA = data.positions[_indexA].c;
     double aA = data.positions[_indexA].a;
-    Vector2 cB = data.positions[_indexB].c;
+    final Vector2 cB = data.positions[_indexB].c;
     double aB = data.positions[_indexB].a;
 
     qA.setAngle(aA);
@@ -285,14 +284,14 @@ class DistanceJoint extends Joint {
       ..sub(cA)
       ..sub(rA);
 
-    double length = u.normalize();
+    final double length = u.normalize();
     double C = length - _length;
     C = MathUtils.clampDouble(
         C, -Settings.maxLinearCorrection, Settings.maxLinearCorrection);
 
-    double impulse = -_mass * C;
-    double Px = impulse * u.x;
-    double Py = impulse * u.y;
+    final double impulse = -_mass * C;
+    final double Px = impulse * u.x;
+    final double Py = impulse * u.y;
 
     cA.x -= _invMassA * Px;
     cA.y -= _invMassA * Py;

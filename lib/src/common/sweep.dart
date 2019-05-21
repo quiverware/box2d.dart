@@ -49,7 +49,7 @@ class Sweep {
   }
 
   void normalize() {
-    double d = MathUtils.TWOPI * (a0 / MathUtils.TWOPI).floor();
+    final double d = MathUtils.TWOPI * (a0 / MathUtils.TWOPI).floor();
     a0 -= d;
     a -= d;
   }
@@ -77,7 +77,7 @@ class Sweep {
     // xf->q.Set(angle);
     xf.p.x = (1.0 - beta) * c0.x + beta * c.x;
     xf.p.y = (1.0 - beta) * c0.y + beta * c.y;
-    double angle = (1.0 - beta) * a0 + beta * a;
+    final double angle = (1.0 - beta) * a0 + beta * a;
     xf.q.setAngle(angle);
 
     // Shift to origin
@@ -98,7 +98,7 @@ class Sweep {
     // c0 += beta * (c - c0);
     // a0 += beta * (a - a0);
     // alpha0 = alpha;
-    double beta = (alpha - alpha0) / (1.0 - alpha0);
+    final double beta = (alpha - alpha0) / (1.0 - alpha0);
     c0.x += beta * (c.x - c0.x);
     c0.y += beta * (c.y - c0.y);
     a0 += beta * (a - a0);

@@ -35,7 +35,7 @@ class CircleShape extends Shape {
   }
 
   Shape clone() {
-    CircleShape shape = CircleShape();
+    final CircleShape shape = CircleShape();
     shape.p.x = p.x;
     shape.p.y = p.y;
     shape.radius = radius;
@@ -86,8 +86,8 @@ class CircleShape extends Shape {
     // return Vec2.dot(d, d) <= _radius * _radius;
     final Rot q = transform.q;
     final Vector2 tp = transform.p;
-    double centerx = -(q.c * p.x - q.s * p.y + tp.x - p.x);
-    double centery = -(q.s * p.x + q.c * p.y + tp.y - p.y);
+    final double centerx = -(q.c * p.x - q.s * p.y + tp.x - p.x);
+    final double centery = -(q.s * p.x + q.c * p.y + tp.y - p.y);
 
     return centerx * centerx + centery * centery <= radius * radius;
   }
@@ -95,11 +95,11 @@ class CircleShape extends Shape {
   double computeDistanceToOut(
       Transform xf, Vector2 p, int childIndex, Vector2 normalOut) {
     final Rot xfq = xf.q;
-    double centerx = xfq.c * p.x - xfq.s * p.y + xf.p.x;
-    double centery = xfq.s * p.x + xfq.c * p.y + xf.p.y;
-    double dx = p.x - centerx;
-    double dy = p.y - centery;
-    double d1 = Math.sqrt(dx * dx + dy * dy);
+    final double centerx = xfq.c * p.x - xfq.s * p.y + xf.p.x;
+    final double centery = xfq.s * p.x + xfq.c * p.y + xf.p.y;
+    final double dx = p.x - centerx;
+    final double dy = p.y - centery;
+    final double d1 = Math.sqrt(dx * dx + dy * dy);
     normalOut.x = dx * 1 / d1;
     normalOut.y = dy * 1 / d1;
     return d1 - radius;

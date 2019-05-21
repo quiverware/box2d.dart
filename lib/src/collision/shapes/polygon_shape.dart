@@ -73,8 +73,7 @@ class PolygonShape extends Shape {
   }
 
   Shape clone() {
-    PolygonShape shape = PolygonShape();
-    shape.centroid.setFrom(this.centroid);
+    final PolygonShape shape = PolygonShape()..centroid.setFrom(this.centroid);
     for (int i = 0; i < shape.normals.length; i++) {
       shape.normals[i].setFrom(normals[i]);
       shape.vertices[i].setFrom(vertices[i]);
@@ -113,12 +112,12 @@ class PolygonShape extends Shape {
     int n = Math.min(num, Settings.maxPolygonVertices);
 
     // Perform welding and copy vertices into local buffer.
-    List<Vector2> ps = (vecPool != null)
+    final List<Vector2> ps = (vecPool != null)
         ? vecPool.get(Settings.maxPolygonVertices)
         : List<Vector2>(Settings.maxPolygonVertices);
     int tempCount = 0;
     for (int i = 0; i < n; ++i) {
-      Vector2 v = verts[i];
+      final Vector2 v = verts[i];
       bool unique = true;
       for (int j = 0; j < tempCount; ++j) {
         if (MathUtils.distanceSquared(v, ps[j]) < 0.5 * Settings.linearSlop) {
@@ -147,14 +146,14 @@ class PolygonShape extends Shape {
     int i0 = 0;
     double x0 = ps[0].x;
     for (int i = 1; i < n; ++i) {
-      double x = ps[i].x;
+      final double x = ps[i].x;
       if (x > x0 || (x == x0 && ps[i].y < ps[i0].y)) {
         i0 = i;
         x0 = x;
       }
     }
 
-    List<int> hull = (intPool != null)
+    final List<int> hull = (intPool != null)
         ? intPool.get(Settings.maxPolygonVertices)
         : BufferUtils.allocClearIntList(Settings.maxPolygonVertices);
     int m = 0;
@@ -170,13 +169,13 @@ class PolygonShape extends Shape {
           continue;
         }
 
-        Vector2 r = _pool1
+        final Vector2 r = _pool1
           ..setFrom(ps[ie])
           ..sub(ps[hull[m]]);
-        Vector2 v = _pool2
+        final Vector2 v = _pool2
           ..setFrom(ps[j])
           ..sub(ps[hull[m]]);
-        double c = r.cross(v);
+        final double c = r.cross(v);
         if (c < 0.0) {
           ie = j;
         }
@@ -319,8 +318,8 @@ class PolygonShape extends Shape {
     }
 
     for (int i = 0; i < count; ++i) {
-      Vector2 vertex = vertices[i];
-      Vector2 normal = normals[i];
+      final Vector2 vertex = vertices[i];
+      final Vector2 normal = normals[i];
       tempx = pLocalx - vertex.x;
       tempy = pLocaly - vertex.y;
       final double dot = normal.x * tempx + normal.y * tempy;
@@ -346,10 +345,10 @@ class PolygonShape extends Shape {
     upper.y = lower.y;
 
     for (int i = 1; i < count; ++i) {
-      Vector2 v2 = vertices[i];
+      final Vector2 v2 = vertices[i];
       // Vec2 v = Mul(xf, _vertices[i]);
-      double vx = (xfqc * v2.x - xfqs * v2.y) + xfpx;
-      double vy = (xfqs * v2.x + xfqc * v2.y) + xfpy;
+      final double vx = (xfqc * v2.x - xfqs * v2.y) + xfpx;
+      final double vy = (xfqs * v2.x + xfqc * v2.y) + xfpy;
       lower.x = lower.x < vx ? lower.x : vx;
       lower.y = lower.y < vy ? lower.y : vy;
       upper.x = upper.x > vx ? upper.x : vx;
@@ -384,23 +383,23 @@ class PolygonShape extends Shape {
 
   double computeDistanceToOut(
       Transform xf, Vector2 p, int childIndex, Vector2 normalOut) {
-    double xfqc = xf.q.c;
-    double xfqs = xf.q.s;
+    final double xfqc = xf.q.c;
+    final double xfqs = xf.q.s;
     double tx = p.x - xf.p.x;
     double ty = p.y - xf.p.y;
-    double pLocalx = xfqc * tx + xfqs * ty;
-    double pLocaly = -xfqs * tx + xfqc * ty;
+    final double pLocalx = xfqc * tx + xfqs * ty;
+    final double pLocaly = -xfqs * tx + xfqc * ty;
 
     double maxDistance = -double.maxFinite;
     double normalForMaxDistanceX = pLocalx;
     double normalForMaxDistanceY = pLocaly;
 
     for (int i = 0; i < count; ++i) {
-      Vector2 vertex = vertices[i];
-      Vector2 normal = normals[i];
+      final Vector2 vertex = vertices[i];
+      final Vector2 normal = normals[i];
       tx = pLocalx - vertex.x;
       ty = pLocaly - vertex.y;
-      double dot = normal.x * tx + normal.y * ty;
+      final double dot = normal.x * tx + normal.y * ty;
       if (dot > maxDistance) {
         maxDistance = dot;
         normalForMaxDistanceX = normal.x;
@@ -414,10 +413,10 @@ class PolygonShape extends Shape {
       double minDistanceY = normalForMaxDistanceY;
       double minDistance2 = maxDistance * maxDistance;
       for (int i = 0; i < count; ++i) {
-        Vector2 vertex = vertices[i];
-        double distanceVecX = pLocalx - vertex.x;
-        double distanceVecY = pLocaly - vertex.y;
-        double distance2 =
+        final Vector2 vertex = vertices[i];
+        final double distanceVecX = pLocalx - vertex.x;
+        final double distanceVecY = pLocaly - vertex.y;
+        final double distance2 =
             distanceVecX * distanceVecX + distanceVecY * distanceVecY;
         if (minDistance2 > distance2) {
           minDistanceX = distanceVecX;
@@ -464,13 +463,13 @@ class PolygonShape extends Shape {
     int index = -1;
 
     for (int i = 0; i < count; ++i) {
-      Vector2 normal = normals[i];
-      Vector2 vertex = vertices[i];
+      final Vector2 normal = normals[i];
+      final Vector2 vertex = vertices[i];
       // p = p1 + a * d
       // dot(normal, p - v) = 0
       // dot(normal, p1 - v) + a * dot(normal, d) = 0
-      double tempxn = vertex.x - p1x;
-      double tempyn = vertex.y - p1y;
+      final double tempxn = vertex.x - p1x;
+      final double tempyn = vertex.y - p1y;
       final double numerator = normal.x * tempxn + normal.y * tempyn;
       final double denominator = normal.x * dx + normal.y * dy;
 
@@ -506,8 +505,8 @@ class PolygonShape extends Shape {
     if (index >= 0) {
       output.fraction = lower;
       // normal = Mul(xf.R, _normals[index]);
-      Vector2 normal = normals[index];
-      Vector2 out = output.normal;
+      final Vector2 normal = normals[index];
+      final Vector2 out = output.normal;
       out.x = xfqc * normal.x - xfqs * normal.y;
       out.y = xfqs * normal.x + xfqc * normal.y;
       return true;
@@ -530,7 +529,7 @@ class PolygonShape extends Shape {
     final Vector2 e1 = _pool2;
     final Vector2 e2 = _pool3;
 
-    final double inv3 = 1.0 / 3.0;
+    const double inv3 = 1.0 / 3.0;
 
     for (int i = 0; i < count; ++i) {
       // Triangle vertices.
@@ -633,8 +632,8 @@ class PolygonShape extends Shape {
       final double ex1 = e1.x, ey1 = e1.y;
       final double ex2 = e2.x, ey2 = e2.y;
 
-      double intx2 = ex1 * ex1 + ex2 * ex1 + ex2 * ex2;
-      double inty2 = ey1 * ey1 + ey2 * ey1 + ey2 * ey2;
+      final double intx2 = ex1 * ex1 + ex2 * ex1 + ex2 * ex2;
+      final double inty2 = ey1 * ey1 + ey2 * ey1 + ey2 * ey2;
 
       I += (0.25 * k_inv3 * D) * (intx2 + inty2);
     }
@@ -663,10 +662,10 @@ class PolygonShape extends Shape {
    */
   bool validate() {
     for (int i = 0; i < count; ++i) {
-      int i1 = i;
-      int i2 = i < count - 1 ? i1 + 1 : 0;
-      Vector2 p = vertices[i1];
-      Vector2 e = _pool1
+      final int i1 = i;
+      final int i2 = i < count - 1 ? i1 + 1 : 0;
+      final Vector2 p = vertices[i1];
+      final Vector2 e = _pool1
         ..setFrom(vertices[i2])
         ..sub(p);
 
@@ -675,10 +674,10 @@ class PolygonShape extends Shape {
           continue;
         }
 
-        Vector2 v = _pool2
+        final Vector2 v = _pool2
           ..setFrom(vertices[j])
           ..sub(p);
-        double c = e.cross(v);
+        final double c = e.cross(v);
         if (c < 0.0) {
           return false;
         }

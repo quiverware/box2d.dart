@@ -49,8 +49,10 @@ class SimplexCache {
   /** length or area */
   double metric = 0.0;
   int count = 0;
+
   /** vertices on shape A */
   final List<int> indexA = BufferUtils.allocClearIntList(3);
+
   /** vertices on shape B */
   final List<int> indexB = BufferUtils.allocClearIntList(3);
 
@@ -92,11 +94,11 @@ class _Simplex {
     count = cache.count;
 
     for (int i = 0; i < count; ++i) {
-      _SimplexVertex v = vertices[i];
-      v.indexA = cache.indexA[i];
-      v.indexB = cache.indexB[i];
-      Vector2 wALocal = proxyA.getVertex(v.indexA);
-      Vector2 wBLocal = proxyB.getVertex(v.indexB);
+      final _SimplexVertex v = vertices[i]
+        ..indexA = cache.indexA[i]
+        ..indexB = cache.indexB[i];
+      final Vector2 wALocal = proxyA.getVertex(v.indexA);
+      final Vector2 wBLocal = proxyB.getVertex(v.indexB);
       Transform.mulToOutUnsafeVec2(transformA, wALocal, v.wA);
       Transform.mulToOutUnsafeVec2(transformB, wBLocal, v.wB);
       v.w
@@ -108,8 +110,8 @@ class _Simplex {
     // Compute the new simplex metric, if it is substantially different than
     // old metric then flush the simplex.
     if (count > 1) {
-      double metric1 = cache.metric;
-      double metric2 = getMetric();
+      final double metric1 = cache.metric;
+      final double metric2 = getMetric();
       if (metric2 < 0.5 * metric1 ||
           2.0 * metric1 < metric2 ||
           metric2 < Settings.EPSILON) {
@@ -120,11 +122,11 @@ class _Simplex {
 
     // If the cache is empty or invalid ...
     if (count == 0) {
-      _SimplexVertex v = vertices[0];
-      v.indexA = 0;
-      v.indexB = 0;
-      Vector2 wALocal = proxyA.getVertex(0);
-      Vector2 wBLocal = proxyB.getVertex(0);
+      final _SimplexVertex v = vertices[0]
+        ..indexA = 0
+        ..indexB = 0;
+      final Vector2 wALocal = proxyA.getVertex(0);
+      final Vector2 wBLocal = proxyB.getVertex(0);
       Transform.mulToOutUnsafeVec2(transformA, wALocal, v.wA);
       Transform.mulToOutUnsafeVec2(transformB, wBLocal, v.wB);
       v.w
@@ -161,7 +163,7 @@ class _Simplex {
         out
           ..setFrom(v1.w)
           ..negate();
-        double sgn = _e12.cross(out);
+        final double sgn = _e12.cross(out);
 
         if (sgn > 0.0) {
           // Origin is left of e12.
@@ -337,7 +339,7 @@ class _Simplex {
       ..sub(w1);
 
     // w1 region
-    double d12_2 = -w1.dot(_e12);
+    final double d12_2 = -w1.dot(_e12);
     if (d12_2 <= 0.0) {
       // a2 <= 0, so we clamp it to 0
       v1.a = 1.0;
@@ -346,7 +348,7 @@ class _Simplex {
     }
 
     // w2 region
-    double d12_1 = w2.dot(_e12);
+    final double d12_1 = w2.dot(_e12);
     if (d12_1 <= 0.0) {
       // a1 <= 0, so we clamp it to 0
       v2.a = 1.0;
@@ -356,7 +358,7 @@ class _Simplex {
     }
 
     // Must be in e12 region.
-    double inv_d12 = 1.0 / (d12_1 + d12_2);
+    final double inv_d12 = 1.0 / (d12_1 + d12_2);
     v1.a = d12_1 * inv_d12;
     v2.a = d12_2 * inv_d12;
     count = 2;
@@ -389,10 +391,10 @@ class _Simplex {
     _e12
       ..setFrom(_w2)
       ..sub(_w1);
-    double w1e12 = _w1.dot(_e12);
-    double w2e12 = _w2.dot(_e12);
-    double d12_1 = w2e12;
-    double d12_2 = -w1e12;
+    final double w1e12 = _w1.dot(_e12);
+    final double w2e12 = _w2.dot(_e12);
+    final double d12_1 = w2e12;
+    final double d12_2 = -w1e12;
 
     // Edge13
     // [1 1 ][a1] = [1]
@@ -401,10 +403,10 @@ class _Simplex {
     _e13
       ..setFrom(_w3)
       ..sub(_w1);
-    double w1e13 = _w1.dot(_e13);
-    double w3e13 = _w3.dot(_e13);
-    double d13_1 = w3e13;
-    double d13_2 = -w1e13;
+    final double w1e13 = _w1.dot(_e13);
+    final double w3e13 = _w3.dot(_e13);
+    final double d13_1 = w3e13;
+    final double d13_2 = -w1e13;
 
     // Edge23
     // [1 1 ][a2] = [1]
@@ -413,17 +415,17 @@ class _Simplex {
     _e23
       ..setFrom(_w3)
       ..sub(_w2);
-    double w2e23 = _w2.dot(_e23);
-    double w3e23 = _w3.dot(_e23);
-    double d23_1 = w3e23;
-    double d23_2 = -w2e23;
+    final double w2e23 = _w2.dot(_e23);
+    final double w3e23 = _w3.dot(_e23);
+    final double d23_1 = w3e23;
+    final double d23_2 = -w2e23;
 
     // Triangle123
-    double n123 = _e12.cross(_e13);
+    final double n123 = _e12.cross(_e13);
 
-    double d123_1 = n123 * _w2.cross(_w3);
-    double d123_2 = n123 * _w3.cross(_w1);
-    double d123_3 = n123 * _w1.cross(_w2);
+    final double d123_1 = n123 * _w2.cross(_w3);
+    final double d123_2 = n123 * _w3.cross(_w1);
+    final double d123_3 = n123 * _w1.cross(_w2);
 
     // w1 region
     if (d12_2 <= 0.0 && d13_2 <= 0.0) {
@@ -434,7 +436,7 @@ class _Simplex {
 
     // e12
     if (d12_1 > 0.0 && d12_2 > 0.0 && d123_3 <= 0.0) {
-      double inv_d12 = 1.0 / (d12_1 + d12_2);
+      final double inv_d12 = 1.0 / (d12_1 + d12_2);
       v1.a = d12_1 * inv_d12;
       v2.a = d12_2 * inv_d12;
       count = 2;
@@ -443,7 +445,7 @@ class _Simplex {
 
     // e13
     if (d13_1 > 0.0 && d13_2 > 0.0 && d123_2 <= 0.0) {
-      double inv_d13 = 1.0 / (d13_1 + d13_2);
+      final double inv_d13 = 1.0 / (d13_1 + d13_2);
       v1.a = d13_1 * inv_d13;
       v3.a = d13_2 * inv_d13;
       count = 2;
@@ -469,7 +471,7 @@ class _Simplex {
 
     // e23
     if (d23_1 > 0.0 && d23_2 > 0.0 && d123_1 <= 0.0) {
-      double inv_d23 = 1.0 / (d23_1 + d23_2);
+      final double inv_d23 = 1.0 / (d23_1 + d23_2);
       v2.a = d23_1 * inv_d23;
       v3.a = d23_2 * inv_d23;
       count = 2;
@@ -478,7 +480,7 @@ class _Simplex {
     }
 
     // Must be in triangle123
-    double inv_d123 = 1.0 / (d123_1 + d123_2 + d123_3);
+    final double inv_d123 = 1.0 / (d123_1 + d123_2 + d123_3);
     v1.a = d123_1 * inv_d123;
     v2.a = d123_2 * inv_d123;
     v3.a = d123_3 * inv_d123;
@@ -561,7 +563,7 @@ class DistanceProxy {
     int bestIndex = 0;
     double bestValue = vertices[0].dot(d);
     for (int i = 1; i < _count; i++) {
-      double value = vertices[i].dot(d);
+      final double value = vertices[i].dot(d);
       if (value > bestValue) {
         bestIndex = i;
         bestValue = value;
@@ -581,7 +583,7 @@ class DistanceProxy {
     int bestIndex = 0;
     double bestValue = vertices[0].dot(d);
     for (int i = 1; i < _count; i++) {
-      double value = vertices[i].dot(d);
+      final double value = vertices[i].dot(d);
       if (value > bestValue) {
         bestIndex = i;
         bestValue = value;
@@ -643,14 +645,14 @@ class Distance {
     final DistanceProxy proxyA = input.proxyA;
     final DistanceProxy proxyB = input.proxyB;
 
-    Transform transformA = input.transformA;
-    Transform transformB = input.transformB;
+    final Transform transformA = input.transformA;
+    final Transform transformB = input.transformB;
 
     // Initialize the simplex.
     _simplex.readCache(cache, proxyA, transformA, proxyB, transformB);
 
     // Get simplex vertices as an array.
-    List<_SimplexVertex> vertices = _simplex.vertices;
+    final List<_SimplexVertex> vertices = _simplex.vertices;
 
     // These store the vertices of the last simplex so that we
     // can check for duplicates and prevent cycling.
@@ -721,7 +723,7 @@ class Distance {
        */
 
       // Compute a tentative new simplex vertex using support points.
-      _SimplexVertex vertex = vertices[_simplex.count];
+      final _SimplexVertex vertex = vertices[_simplex.count];
 
       Rot.mulTransUnsafeVec2(transformA.q, _d..negate(), _temp);
       vertex.indexA = proxyA.getSupport(_temp);
@@ -768,8 +770,8 @@ class Distance {
 
     // Apply radii if requested.
     if (input.useRadii) {
-      double rA = proxyA.radius;
-      double rB = proxyB.radius;
+      final double rA = proxyA.radius;
+      final double rB = proxyB.radius;
 
       if (output.distance > rA + rB && output.distance > Settings.EPSILON) {
         // Shapes are still no overlapped.

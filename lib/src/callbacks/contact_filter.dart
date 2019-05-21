@@ -37,14 +37,14 @@ class ContactFilter {
    * @return
    */
   bool shouldCollide(Fixture fixtureA, Fixture fixtureB) {
-    Filter filterA = fixtureA.getFilterData();
-    Filter filterB = fixtureB.getFilterData();
+    final Filter filterA = fixtureA.getFilterData();
+    final Filter filterB = fixtureB.getFilterData();
 
     if (filterA.groupIndex == filterB.groupIndex && filterA.groupIndex != 0) {
       return filterA.groupIndex > 0;
     }
 
-    bool collide = ((filterA.maskBits & filterB.categoryBits) != 0) &&
+    final bool collide = ((filterA.maskBits & filterB.categoryBits) != 0) &&
         ((filterA.categoryBits & filterB.maskBits) != 0);
     return collide;
   }

@@ -183,19 +183,19 @@ class MotorJoint extends Joint {
     _invIB = _bodyB._invI;
 
     final Vector2 cA = data.positions[_indexA].c;
-    double aA = data.positions[_indexA].a;
+    final double aA = data.positions[_indexA].a;
     final Vector2 vA = data.velocities[_indexA].v;
     double wA = data.velocities[_indexA].w;
 
     final Vector2 cB = data.positions[_indexB].c;
-    double aB = data.positions[_indexB].a;
+    final double aB = data.positions[_indexB].a;
     final Vector2 vB = data.velocities[_indexB].v;
     double wB = data.velocities[_indexB].w;
 
     final Rot qA = pool.popRot();
     final Rot qB = pool.popRot();
     final Vector2 temp = pool.popVec2();
-    Matrix2 K = pool.popMat22();
+    final Matrix2 K = pool.popMat22();
 
     qA.setAngle(aA);
     qB.setAngle(aB);
@@ -216,13 +216,13 @@ class MotorJoint extends Joint {
     // K = [ mA+r1y^2*iA+mB+r2y^2*iB, -r1y*iA*r1x-r2y*iB*r2x, -r1y*iA-r2y*iB]
     // [ -r1y*iA*r1x-r2y*iB*r2x, mA+r1x^2*iA+mB+r2x^2*iB, r1x*iA+r2x*iB]
     // [ -r1y*iA-r2y*iB, r1x*iA+r2x*iB, iA+iB]
-    double mA = _invMassA, mB = _invMassB;
-    double iA = _invIA, iB = _invIB;
+    final double mA = _invMassA, mB = _invMassB;
+    final double iA = _invIA, iB = _invIB;
 
-    double a11 = mA + mB + iA * _rA.y * _rA.y + iB * _rB.y * _rB.y;
-    double a21 = -iA * _rA.x * _rA.y - iB * _rB.x * _rB.y;
-    double a12 = a21;
-    double a22 = mA + mB + iA * _rA.x * _rA.x + iB * _rB.x * _rB.x;
+    final double a11 = mA + mB + iA * _rA.y * _rA.y + iB * _rB.y * _rB.y;
+    final double a21 = -iA * _rA.x * _rA.y - iB * _rB.x * _rB.y;
+    final double a12 = a21;
+    final double a22 = mA + mB + iA * _rA.x * _rA.x + iB * _rB.x * _rB.x;
 
     K.setValues(a11, a21, a12, a22);
     _linearMass.setFrom(K);
@@ -273,21 +273,21 @@ class MotorJoint extends Joint {
     final Vector2 vB = data.velocities[_indexB].v;
     double wB = data.velocities[_indexB].w;
 
-    double mA = _invMassA, mB = _invMassB;
-    double iA = _invIA, iB = _invIB;
+    final double mA = _invMassA, mB = _invMassB;
+    final double iA = _invIA, iB = _invIB;
 
-    double h = data.step.dt;
-    double inv_h = data.step.inv_dt;
+    final double h = data.step.dt;
+    final double inv_h = data.step.inv_dt;
 
     final Vector2 temp = pool.popVec2();
 
     // Solve angular friction
     {
-      double Cdot = wB - wA + inv_h * _correctionFactor * _angularError;
+      final double Cdot = wB - wA + inv_h * _correctionFactor * _angularError;
       double impulse = -_angularMass * Cdot;
 
-      double oldImpulse = _angularImpulse;
-      double maxImpulse = h * _maxTorque;
+      final double oldImpulse = _angularImpulse;
+      final double maxImpulse = h * _maxTorque;
       _angularImpulse = MathUtils.clampDouble(
           _angularImpulse + impulse, -maxImpulse, maxImpulse);
       impulse = _angularImpulse - oldImpulse;
@@ -320,7 +320,7 @@ class MotorJoint extends Joint {
       oldImpulse.setFrom(_linearImpulse);
       _linearImpulse.add(impulse);
 
-      double maxImpulse = h * _maxForce;
+      final double maxImpulse = h * _maxForce;
 
       if (_linearImpulse.length2 > maxImpulse * maxImpulse) {
         _linearImpulse.normalize();

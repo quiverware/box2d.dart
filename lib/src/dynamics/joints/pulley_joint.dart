@@ -92,7 +92,7 @@ class PulleyJoint extends Joint {
     final Vector2 p = pool.popVec2();
     _bodyA.getWorldPointToOut(_localAnchorA, p);
     p.sub(_groundAnchorA);
-    double length = p.length;
+    final double length = p.length;
     pool.pushVec2(1);
     return length;
   }
@@ -101,7 +101,7 @@ class PulleyJoint extends Joint {
     final Vector2 p = pool.popVec2();
     _bodyB.getWorldPointToOut(_localAnchorB, p);
     p.sub(_groundAnchorB);
-    double length = p.length;
+    final double length = p.length;
     pool.pushVec2(1);
     return length;
   }
@@ -146,7 +146,7 @@ class PulleyJoint extends Joint {
     _bodyA.getWorldPointToOut(_localAnchorA, p);
     p.sub(_groundAnchorA);
 
-    double len = p.length;
+    final double len = p.length;
     pool.pushVec2(1);
     return len;
   }
@@ -156,7 +156,7 @@ class PulleyJoint extends Joint {
     _bodyB.getWorldPointToOut(_localAnchorB, p);
     p.sub(_groundAnchorB);
 
-    double len = p.length;
+    final double len = p.length;
     pool.pushVec2(1);
     return len;
   }
@@ -175,14 +175,14 @@ class PulleyJoint extends Joint {
     _invIA = _bodyA._invI;
     _invIB = _bodyB._invI;
 
-    Vector2 cA = data.positions[_indexA].c;
-    double aA = data.positions[_indexA].a;
-    Vector2 vA = data.velocities[_indexA].v;
+    final Vector2 cA = data.positions[_indexA].c;
+    final double aA = data.positions[_indexA].a;
+    final Vector2 vA = data.velocities[_indexA].v;
     double wA = data.velocities[_indexA].w;
 
-    Vector2 cB = data.positions[_indexB].c;
-    double aB = data.positions[_indexB].a;
-    Vector2 vB = data.velocities[_indexB].v;
+    final Vector2 cB = data.positions[_indexB].c;
+    final double aB = data.positions[_indexB].a;
+    final Vector2 vB = data.velocities[_indexB].v;
     double wB = data.velocities[_indexB].w;
 
     final Rot qA = pool.popRot();
@@ -215,8 +215,8 @@ class PulleyJoint extends Joint {
       ..add(_rB)
       ..sub(_groundAnchorB);
 
-    double lengthA = _uA.length;
-    double lengthB = _uB.length;
+    final double lengthA = _uA.length;
+    final double lengthB = _uB.length;
 
     if (lengthA > 10.0 * Settings.linearSlop) {
       _uA.scale(1.0 / lengthA);
@@ -231,11 +231,11 @@ class PulleyJoint extends Joint {
     }
 
     // Compute effective mass.
-    double ruA = _rA.cross(_uA);
-    double ruB = _rB.cross(_uB);
+    final double ruA = _rA.cross(_uA);
+    final double ruB = _rB.cross(_uB);
 
-    double mA = _invMassA + _invIA * ruA * ruA;
-    double mB = _invMassB + _invIB * ruB * ruB;
+    final double mA = _invMassA + _invIA * ruA * ruA;
+    final double mB = _invMassB + _invIB * ruB * ruB;
 
     _mass = mA + _ratio * _ratio * mB;
 
@@ -279,9 +279,9 @@ class PulleyJoint extends Joint {
   }
 
   void solveVelocityConstraints(final SolverData data) {
-    Vector2 vA = data.velocities[_indexA].v;
+    final Vector2 vA = data.velocities[_indexA].v;
     double wA = data.velocities[_indexA].w;
-    Vector2 vB = data.velocities[_indexB].v;
+    final Vector2 vB = data.velocities[_indexB].v;
     double wB = data.velocities[_indexB].w;
 
     final Vector2 vpA = pool.popVec2();
@@ -294,8 +294,8 @@ class PulleyJoint extends Joint {
     _rB.scaleOrthogonalInto(wB, vpB);
     vpB.add(vB);
 
-    double Cdot = -_uA.dot(vpA) - _ratio * _uB.dot(vpB);
-    double impulse = -_mass * Cdot;
+    final double Cdot = -_uA.dot(vpA) - _ratio * _uB.dot(vpB);
+    final double impulse = -_mass * Cdot;
     _impulse += impulse;
 
     PA
@@ -330,9 +330,9 @@ class PulleyJoint extends Joint {
     final Vector2 PA = pool.popVec2();
     final Vector2 PB = pool.popVec2();
 
-    Vector2 cA = data.positions[_indexA].c;
+    final Vector2 cA = data.positions[_indexA].c;
     double aA = data.positions[_indexA].a;
-    Vector2 cB = data.positions[_indexB].c;
+    final Vector2 cB = data.positions[_indexB].c;
     double aB = data.positions[_indexB].a;
 
     qA.setAngle(aA);
@@ -360,8 +360,8 @@ class PulleyJoint extends Joint {
       ..add(rB)
       ..sub(_groundAnchorB);
 
-    double lengthA = uA.length;
-    double lengthB = uB.length;
+    final double lengthA = uA.length;
+    final double lengthB = uB.length;
 
     if (lengthA > 10.0 * Settings.linearSlop) {
       uA.scale(1.0 / lengthA);
@@ -376,11 +376,11 @@ class PulleyJoint extends Joint {
     }
 
     // Compute effective mass.
-    double ruA = rA.cross(uA);
-    double ruB = rB.cross(uB);
+    final double ruA = rA.cross(uA);
+    final double ruB = rB.cross(uB);
 
-    double mA = _invMassA + _invIA * ruA * ruA;
-    double mB = _invMassB + _invIB * ruB * ruB;
+    final double mA = _invMassA + _invIA * ruA * ruA;
+    final double mB = _invMassB + _invIB * ruB * ruB;
 
     double mass = mA + _ratio * _ratio * mB;
 
@@ -388,10 +388,10 @@ class PulleyJoint extends Joint {
       mass = 1.0 / mass;
     }
 
-    double C = _constant - lengthA - _ratio * lengthB;
-    double linearError = C.abs();
+    final double C = _constant - lengthA - _ratio * lengthB;
+    final double linearError = C.abs();
 
-    double impulse = -mass * C;
+    final double impulse = -mass * C;
 
     PA
       ..setFrom(uA)

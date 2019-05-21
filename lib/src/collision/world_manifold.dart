@@ -68,12 +68,12 @@ class WorldManifold {
 
           normal.x = 1.0;
           normal.y = 0.0;
-          Vector2 v = manifold.localPoint;
+          final Vector2 v = manifold.localPoint;
           // Transform.mulToOutUnsafe(xfA, manifold.localPoint, pointA);
           // Transform.mulToOutUnsafe(xfB, manifold.points[0].localPoint, pointB);
           pointA.x = (xfA.q.c * v.x - xfA.q.s * v.y) + xfA.p.x;
           pointA.y = (xfA.q.s * v.x + xfA.q.c * v.y) + xfA.p.y;
-          Vector2 mp0p = manifold.points[0].localPoint;
+          final Vector2 mp0p = manifold.points[0].localPoint;
           pointB.x = (xfB.q.c * mp0p.x - xfB.q.s * mp0p.y) + xfB.p.x;
           pointB.y = (xfB.q.s * mp0p.x + xfB.q.c * mp0p.y) + xfB.p.y;
 

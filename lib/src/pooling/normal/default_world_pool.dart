@@ -298,7 +298,7 @@ class DefaultWorldPool implements IWorldPool {
 
   List<Vector2> getVec2Array(int argLength) {
     if (!_avecs.containsKey(argLength)) {
-      List<Vector2> ray = List<Vector2>(argLength);
+      final List<Vector2> ray = List<Vector2>(argLength);
       for (int i = 0; i < argLength; i++) {
         ray[i] = Vector2.zero();
       }

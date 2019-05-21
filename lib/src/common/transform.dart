@@ -117,7 +117,7 @@ class Transform {
   }
 
   static Transform mul(final Transform A, final Transform B) {
-    Transform C = Transform.zero();
+    final Transform C = Transform.zero();
     Rot.mulUnsafe(A.q, B.q, C.q);
     Rot.mulToOutUnsafe(A.q, B.p, C.p);
     C.p.add(A.p);
@@ -144,7 +144,7 @@ class Transform {
   static Vector2 _pool = Vector2.zero();
 
   static Transform mulTrans(final Transform A, final Transform B) {
-    Transform C = Transform.zero();
+    final Transform C = Transform.zero();
     Rot.mulTransUnsafe(A.q, B.q, C.q);
     (_pool..setFrom(B.p)).sub(A.p);
     Rot.mulTransUnsafeVec2(A.q, _pool, C.p);

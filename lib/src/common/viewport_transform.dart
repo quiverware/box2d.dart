@@ -68,8 +68,7 @@ class ViewportTransform {
    * (6, 6), the translation is (1, 1).
    */
   Vector2 get translation {
-    Vector2 result = Vector2.copy(extents);
-    return result..sub(center);
+    return Vector2.copy(extents)..sub(center);
   }
 
   void set translation(Vector2 translation) {
@@ -85,10 +84,10 @@ class ViewportTransform {
   void getWorldToScreen(Vector2 argWorld, Vector2 argScreen) {
     // Correct for canvas considering the upper-left corner, rather than the
     // center, to be the origin.
-    double gridCorrectedX = (argWorld.x * scale) + extents.x;
-    double gridCorrectedY = extents.y - (argWorld.y * scale);
+    final double gridCorrectedX = (argWorld.x * scale) + extents.x;
+    final double gridCorrectedY = extents.y - (argWorld.y * scale);
 
-    Vector2 translationTemp = translation;
+    final Vector2 translationTemp = translation;
     argScreen.setValues(gridCorrectedX + translationTemp.x,
         gridCorrectedY + -translationTemp.y);
   }
@@ -99,11 +98,11 @@ class ViewportTransform {
    * to give the same object as both parameters.
    */
   void getScreenToWorld(Vector2 argScreen, Vector2 argWorld) {
-    double translationCorrectedX = argScreen.x - translation.x;
-    double translationCorrectedY = argScreen.y + translation.y;
+    final double translationCorrectedX = argScreen.x - translation.x;
+    final double translationCorrectedY = argScreen.y + translation.y;
 
-    double gridCorrectedX = (translationCorrectedX - extents.x) / scale;
-    double gridCorrectedY = ((translationCorrectedY - extents.y) * -1) / scale;
+    final double gridCorrectedX = (translationCorrectedX - extents.x) / scale;
+    final double gridCorrectedY = ((translationCorrectedY - extents.y) * -1) / scale;
     argWorld.setValues(gridCorrectedX, gridCorrectedY);
   }
 }

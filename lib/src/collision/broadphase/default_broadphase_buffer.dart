@@ -55,7 +55,7 @@ class DefaultBroadPhaseBuffer implements TreeCallback, BroadPhase {
   }
 
   int createProxy(final AABB aabb, Object userData) {
-    int proxyId = _tree.createProxy(aabb, userData);
+    final int proxyId = _tree.createProxy(aabb, userData);
     ++_proxyCount;
     bufferMove(proxyId);
     return proxyId;
@@ -68,7 +68,7 @@ class DefaultBroadPhaseBuffer implements TreeCallback, BroadPhase {
   }
 
   void moveProxy(int proxyId, final AABB aabb, final Vector2 displacement) {
-    bool buffer = _tree.moveProxy(proxyId, aabb, displacement);
+    final bool buffer = _tree.moveProxy(proxyId, aabb, displacement);
     if (buffer) {
       bufferMove(proxyId);
     }
@@ -142,9 +142,9 @@ class DefaultBroadPhaseBuffer implements TreeCallback, BroadPhase {
     // Send the pairs back to the client.
     int i = 0;
     while (i < _pairCount) {
-      Pair primaryPair = _pairBuffer[i];
-      Object userDataA = _tree.getUserData(primaryPair.proxyIdA);
-      Object userDataB = _tree.getUserData(primaryPair.proxyIdB);
+      final Pair primaryPair = _pairBuffer[i];
+      final Object userDataA = _tree.getUserData(primaryPair.proxyIdA);
+      final Object userDataB = _tree.getUserData(primaryPair.proxyIdB);
 
       // log.debug("returning pair: "+userDataA+", "+userDataB);
       callback.addPair(userDataA, userDataB);
@@ -152,7 +152,7 @@ class DefaultBroadPhaseBuffer implements TreeCallback, BroadPhase {
 
       // Skip any duplicate pairs.
       while (i < _pairCount) {
-        Pair pair = _pairBuffer[i];
+        final Pair pair = _pairBuffer[i];
         if (pair.proxyIdA != primaryPair.proxyIdA ||
             pair.proxyIdB != primaryPair.proxyIdB) {
           break;
@@ -184,7 +184,7 @@ class DefaultBroadPhaseBuffer implements TreeCallback, BroadPhase {
 
   void bufferMove(int proxyId) {
     if (_moveCount == _moveCapacity) {
-      List<int> old = _moveBuffer;
+      final List<int> old = _moveBuffer;
       _moveCapacity *= 2;
       _moveBuffer = List<int>(_moveCapacity);
       BufferUtils.arraycopy(old, 0, _moveBuffer, 0, old.length);
@@ -213,7 +213,7 @@ class DefaultBroadPhaseBuffer implements TreeCallback, BroadPhase {
 
     // Grow the pair buffer as needed.
     if (_pairCount == _pairCapacity) {
-      List<Pair> oldBuffer = _pairBuffer;
+      final List<Pair> oldBuffer = _pairBuffer;
       _pairCapacity *= 2;
       _pairBuffer = List<Pair>(_pairCapacity);
       BufferUtils.arraycopy(oldBuffer, 0, _pairBuffer, 0, oldBuffer.length);

@@ -35,6 +35,7 @@ class EdgeShape extends Shape {
    * edge vertex 1
    */
   final Vector2 vertex1 = Vector2.zero();
+
   /**
    * edge vertex 2
    */
@@ -44,6 +45,7 @@ class EdgeShape extends Shape {
    * optional adjacent vertex 1. Used for smooth collision
    */
   final Vector2 vertex0 = Vector2.zero();
+
   /**
    * optional adjacent vertex 2. Used for smooth collision
    */
@@ -73,22 +75,22 @@ class EdgeShape extends Shape {
 
   double computeDistanceToOut(
       Transform xf, Vector2 p, int childIndex, Vector2 normalOut) {
-    double xfqc = xf.q.c;
-    double xfqs = xf.q.s;
-    double xfpx = xf.p.x;
-    double xfpy = xf.p.y;
-    double v1x = (xfqc * vertex1.x - xfqs * vertex1.y) + xfpx;
-    double v1y = (xfqs * vertex1.x + xfqc * vertex1.y) + xfpy;
-    double v2x = (xfqc * vertex2.x - xfqs * vertex2.y) + xfpx;
-    double v2y = (xfqs * vertex2.x + xfqc * vertex2.y) + xfpy;
+    final double xfqc = xf.q.c;
+    final double xfqs = xf.q.s;
+    final double xfpx = xf.p.x;
+    final double xfpy = xf.p.y;
+    final double v1x = (xfqc * vertex1.x - xfqs * vertex1.y) + xfpx;
+    final double v1y = (xfqs * vertex1.x + xfqc * vertex1.y) + xfpy;
+    final double v2x = (xfqc * vertex2.x - xfqs * vertex2.y) + xfpx;
+    final double v2y = (xfqs * vertex2.x + xfqc * vertex2.y) + xfpy;
 
     double dx = p.x - v1x;
     double dy = p.y - v1y;
-    double sx = v2x - v1x;
-    double sy = v2y - v1y;
-    double ds = dx * sx + dy * sy;
+    final double sx = v2x - v1x;
+    final double sy = v2y - v1y;
+    final double ds = dx * sx + dy * sy;
     if (ds > 0) {
-      double s2 = sx * sx + sy * sy;
+      final double s2 = sx * sx + sy * sy;
       if (ds > s2) {
         dx = p.x - v2x;
         dy = p.y - v2y;
@@ -98,7 +100,7 @@ class EdgeShape extends Shape {
       }
     }
 
-    double d1 = Math.sqrt(dx * dx + dy * dy);
+    final double d1 = Math.sqrt(dx * dx + dy * dy);
     if (d1 > 0) {
       normalOut.x = 1 / d1 * dx;
       normalOut.y = 1 / d1 * dy;
@@ -150,14 +152,14 @@ class EdgeShape extends Shape {
     // dot(normal, p1 - v1) + t * dot(normal, d) = 0
     tempx = v1.x - p1x;
     tempy = v1.y - p1y;
-    double numerator = normalx * tempx + normaly * tempy;
-    double denominator = normalx * dx + normaly * dy;
+    final double numerator = normalx * tempx + normaly * tempy;
+    final double denominator = normalx * dx + normaly * dy;
 
     if (denominator == 0.0) {
       return false;
     }
 
-    double t = numerator / denominator;
+    final double t = numerator / denominator;
     if (t < 0.0 || 1.0 < t) {
       return false;
     }
@@ -178,7 +180,7 @@ class EdgeShape extends Shape {
     tempx = qx - v1.x;
     tempy = qy - v1.y;
     // double s = Vec2.dot(pool5, r) / rr;
-    double s = (tempx * rx + tempy * ry) / rr;
+    final double s = (tempx * rx + tempy * ry) / rr;
     if (s < 0.0 || 1.0 < s) {
       return false;
     }
@@ -227,14 +229,13 @@ class EdgeShape extends Shape {
   }
 
   Shape clone() {
-    EdgeShape edge = EdgeShape();
-    edge.radius = this.radius;
-    edge.hasVertex0 = this.hasVertex0;
-    edge.hasVertex3 = this.hasVertex3;
-    edge.vertex0.setFrom(this.vertex0);
-    edge.vertex1.setFrom(this.vertex1);
-    edge.vertex2.setFrom(this.vertex2);
-    edge.vertex3.setFrom(this.vertex3);
-    return edge;
+    return EdgeShape()
+      ..radius = this.radius
+      ..hasVertex0 = this.hasVertex0
+      ..hasVertex3 = this.hasVertex3
+      ..vertex0.setFrom(this.vertex0)
+      ..vertex1.setFrom(this.vertex1)
+      ..vertex2.setFrom(this.vertex2)
+      ..vertex3.setFrom(this.vertex3);
   }
 }

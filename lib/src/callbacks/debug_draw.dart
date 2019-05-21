@@ -222,7 +222,7 @@ abstract class DebugDraw {
    * @param argWorld
    */
   Vector2 getWorldToScreen(Vector2 argWorld) {
-    Vector2 screen = Vector2.zero();
+    final Vector2 screen = Vector2.zero();
     viewportTransform.getWorldToScreen(argWorld, screen);
     return screen;
   }
@@ -234,7 +234,7 @@ abstract class DebugDraw {
    * @param worldY
    */
   Vector2 getWorldToScreenXY(double worldX, double worldY) {
-    Vector2 argScreen = Vector2(worldX, worldY);
+    final Vector2 argScreen = Vector2(worldX, worldY);
     viewportTransform.getWorldToScreen(argScreen, argScreen);
     return argScreen;
   }
@@ -258,7 +258,7 @@ abstract class DebugDraw {
    * @param argScreen
    */
   Vector2 getScreenToWorld(Vector2 argScreen) {
-    Vector2 world = Vector2.zero();
+    final Vector2 world = Vector2.zero();
     viewportTransform.getScreenToWorld(argScreen, world);
     return world;
   }
@@ -270,7 +270,7 @@ abstract class DebugDraw {
    * @param screenY
    */
   Vector2 getScreenToWorldXY(double screenX, double screenY) {
-    Vector2 screen = Vector2(screenX, screenY);
+    final Vector2 screen = Vector2(screenX, screenY);
     viewportTransform.getScreenToWorld(screen, screen);
     return screen;
   }

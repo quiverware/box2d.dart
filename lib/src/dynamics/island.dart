@@ -220,14 +220,14 @@ class Island {
 
   void solve(Profile profile, TimeStep step, Vector2 gravity, bool allowSleep) {
     // System.out.println("Solving Island");
-    double h = step.dt;
+    final double h = step.dt;
 
     // Integrate velocities and apply damping. Initialize the body state.
     for (int i = 0; i < _bodyCount; ++i) {
       final Body b = _bodies[i];
       final Sweep bm_sweep = b._sweep;
       final Vector2 c = bm_sweep.c;
-      double a = bm_sweep.a;
+      final double a = bm_sweep.a;
       final Vector2 v = b._linearVelocity;
       double w = b._angularVelocity;
 
@@ -308,21 +308,21 @@ class Island {
       double w = _velocities[i].w;
 
       // Check for large velocities
-      double translationx = v.x * h;
-      double translationy = v.y * h;
+      final double translationx = v.x * h;
+      final double translationy = v.y * h;
 
       if (translationx * translationx + translationy * translationy >
           Settings.maxTranslationSquared) {
-        double ratio = Settings.maxTranslation /
+        final double ratio = Settings.maxTranslation /
             Math.sqrt(
                 translationx * translationx + translationy * translationy);
         v.x *= ratio;
         v.y *= ratio;
       }
 
-      double rotation = h * w;
+      final double rotation = h * w;
       if (rotation * rotation > Settings.maxRotationSquared) {
-        double ratio = Settings.maxRotation / rotation.abs();
+        final double ratio = Settings.maxRotation / rotation.abs();
         w *= ratio;
       }
 
@@ -338,11 +338,11 @@ class Island {
     // Solve position constraints
     bool positionSolved = false;
     for (int i = 0; i < step.positionIterations; ++i) {
-      bool contactsOkay = _contactSolver.solvePositionConstraints();
+      final bool contactsOkay = _contactSolver.solvePositionConstraints();
 
       bool jointsOkay = true;
       for (int j = 0; j < _jointCount; ++j) {
-        bool jointOkay = _joints[j].solvePositionConstraints(_solverData);
+        final bool jointOkay = _joints[j].solvePositionConstraints(_solverData);
         jointsOkay = jointsOkay && jointOkay;
       }
 
@@ -355,14 +355,14 @@ class Island {
 
     // Copy state buffers back to the bodies
     for (int i = 0; i < _bodyCount; ++i) {
-      Body body = _bodies[i];
-      body._sweep.c.x = _positions[i].c.x;
-      body._sweep.c.y = _positions[i].c.y;
-      body._sweep.a = _positions[i].a;
-      body._linearVelocity.x = _velocities[i].v.x;
-      body._linearVelocity.y = _velocities[i].v.y;
-      body._angularVelocity = _velocities[i].w;
-      body.synchronizeTransform();
+      _bodies[i]
+        .._sweep.c.x = _positions[i].c.x
+        .._sweep.c.y = _positions[i].c.y
+        .._sweep.a = _positions[i].a
+        .._linearVelocity.x = _velocities[i].v.x
+        .._linearVelocity.y = _velocities[i].v.y
+        .._angularVelocity = _velocities[i].w
+        ..synchronizeTransform();
     }
 
     report(_contactSolver._velocityConstraints);
@@ -370,13 +370,13 @@ class Island {
     if (allowSleep) {
       double minSleepTime = double.maxFinite;
 
-      final double linTolSqr =
+      const double linTolSqr =
           Settings.linearSleepTolerance * Settings.linearSleepTolerance;
-      final double angTolSqr =
+      const double angTolSqr =
           Settings.angularSleepTolerance * Settings.angularSleepTolerance;
 
       for (int i = 0; i < _bodyCount; ++i) {
-        Body b = _bodies[i];
+        final Body b = _bodies[i];
         if (b.getType() == BodyType.STATIC) {
           continue;
         }
@@ -394,8 +394,7 @@ class Island {
 
       if (minSleepTime >= Settings.timeToSleep && positionSolved) {
         for (int i = 0; i < _bodyCount; ++i) {
-          Body b = _bodies[i];
-          b.setAwake(false);
+          final Body b = _bodies[i]..setAwake(false);
         }
       }
     }
@@ -427,7 +426,7 @@ class Island {
 
     // Solve position constraints.
     for (int i = 0; i < subStep.positionIterations; ++i) {
-      bool contactsOkay =
+      final bool contactsOkay =
           _toiContactSolver.solveTOIPositionConstraints(toiIndexA, toiIndexB);
       if (contactsOkay) {
         break;
@@ -485,29 +484,29 @@ class Island {
     // Don't store the TOI contact forces for warm starting
     // because they can be quite large.
 
-    double h = subStep.dt;
+    final double h = subStep.dt;
 
     // Integrate positions
     for (int i = 0; i < _bodyCount; ++i) {
-      Vector2 c = _positions[i].c;
+      final Vector2 c = _positions[i].c;
       double a = _positions[i].a;
-      Vector2 v = _velocities[i].v;
+      final Vector2 v = _velocities[i].v;
       double w = _velocities[i].w;
 
       // Check for large velocities
-      double translationx = v.x * h;
-      double translationy = v.y * h;
+      final double translationx = v.x * h;
+      final double translationy = v.y * h;
       if (translationx * translationx + translationy * translationy >
           Settings.maxTranslationSquared) {
-        double ratio = Settings.maxTranslation /
+        final double ratio = Settings.maxTranslation /
             Math.sqrt(
                 translationx * translationx + translationy * translationy);
         v.scale(ratio);
       }
 
-      double rotation = h * w;
+      final double rotation = h * w;
       if (rotation * rotation > Settings.maxRotationSquared) {
-        double ratio = Settings.maxRotation / rotation.abs();
+        final double ratio = Settings.maxRotation / rotation.abs();
         w *= ratio;
       }
 
@@ -524,14 +523,14 @@ class Island {
       _velocities[i].w = w;
 
       // Sync bodies
-      Body body = _bodies[i];
-      body._sweep.c.x = c.x;
-      body._sweep.c.y = c.y;
-      body._sweep.a = a;
-      body._linearVelocity.x = v.x;
-      body._linearVelocity.y = v.y;
-      body._angularVelocity = w;
-      body.synchronizeTransform();
+      final Body body = _bodies[i]
+        .._sweep.c.x = c.x
+        .._sweep.c.y = c.y
+        .._sweep.a = a
+        .._linearVelocity.x = v.x
+        .._linearVelocity.y = v.y
+        .._angularVelocity = w
+        ..synchronizeTransform();
     }
 
     report(_toiContactSolver._velocityConstraints);
@@ -562,9 +561,9 @@ class Island {
     }
 
     for (int i = 0; i < _contactCount; ++i) {
-      Contact c = _contacts[i];
+      final Contact c = _contacts[i];
 
-      ContactVelocityConstraint vc = constraints[i];
+      final ContactVelocityConstraint vc = constraints[i];
       _impulse.count = vc.pointCount;
       for (int j = 0; j < vc.pointCount; ++j) {
         _impulse.normalImpulses[j] = vc.points[j].normalImpulse;

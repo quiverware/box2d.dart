@@ -121,7 +121,7 @@ abstract class Demo {
     ctx = canvas.context2D;
 
     // Create the viewport transform with the center at extents.
-    var extents = Vector2(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+    final Vector2 extents = Vector2(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
     viewport = CanvasViewportTransform(extents, extents)
       ..scale = _viewportScale;
 

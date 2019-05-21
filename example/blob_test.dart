@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright (c) 2015, Daniel Murphy, Google
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  *  * Redistributions of source code must retain the above copyright notice,
@@ -9,7 +9,7 @@
  *  * Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
  *    and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -44,10 +44,10 @@ class BlobTest extends Demo {
   void initialize() {
     Body ground;
     {
-      PolygonShape sd = PolygonShape();
+      final PolygonShape sd = PolygonShape();
       sd.setAsBoxXY(50.0, 0.4);
 
-      BodyDef bd = BodyDef();
+      final BodyDef bd = BodyDef();
       bd.position.setValues(0.0, 0.0);
       assert(world != null);
       ground = world.createBody(bd);
@@ -59,32 +59,31 @@ class BlobTest extends Demo {
       ground.createFixtureFromShape(sd);
     }
 
-    ConstantVolumeJointDef cvjd = ConstantVolumeJointDef();
+    final ConstantVolumeJointDef cvjd = ConstantVolumeJointDef();
 
-    double cx = 0.0;
-    double cy = 10.0;
-    double rx = 5.0;
-    double ry = 5.0;
-    double nBodies = 20.0;
-    double bodyRadius = 0.5;
+    const double cx = 0.0;
+    const double cy = 10.0;
+    const double rx = 5.0;
+    const double ry = 5.0;
+    const double nBodies = 20.0;
+    const double bodyRadius = 0.5;
     for (int i = 0; i < nBodies; ++i) {
-      double angle = MathUtils.translateAndScale(
+      final double angle = MathUtils.translateAndScale(
           i.toDouble(), 0.0, nBodies, 0.0, Math.pi * 2);
-      BodyDef bd = BodyDef();
+      final BodyDef bd = BodyDef();
       bd.fixedRotation = true;
 
-      double x = cx + rx * Math.sin(angle);
-      double y = cy + ry * Math.cos(angle);
+      final double x = cx + rx * Math.sin(angle);
+      final double y = cy + ry * Math.cos(angle);
       bd.position.setFrom(Vector2(x, y));
       bd.type = BodyType.DYNAMIC;
-      Body body = world.createBody(bd);
+      final Body body = world.createBody(bd);
 
-      FixtureDef fd = FixtureDef();
-      CircleShape cd = CircleShape();
-      cd.radius = bodyRadius;
-      fd.shape = cd;
-      fd.density = 1.0;
-      fd.filter.groupIndex = -2;
+      final CircleShape cd = CircleShape()..radius = bodyRadius;
+      final FixtureDef fd = FixtureDef()
+        ..shape = cd
+        ..density = 1.0
+        ..filter.groupIndex = -2;
       body.createFixtureFromFixtureDef(fd);
       cvjd.addBody(body);
     }
@@ -94,12 +93,12 @@ class BlobTest extends Demo {
     cvjd.collideConnected = false;
     world.createJoint(cvjd);
 
-    BodyDef bd2 = BodyDef();
-    bd2.type = BodyType.DYNAMIC;
-    PolygonShape psd = PolygonShape();
-    psd.setAsBox(3.0, 1.5, Vector2(cx, cy + 15.0), 0.0);
-    bd2.position = Vector2(cx, cy + 15.0);
-    Body fallingBox = world.createBody(bd2);
+    final BodyDef bd2 = BodyDef()
+      ..type = BodyType.DYNAMIC
+      ..position = Vector2(cx, cy + 15.0);
+    final PolygonShape psd = PolygonShape()
+      ..setAsBox(3.0, 1.5, Vector2(cx, cy + 15.0), 0.0);
+    final Body fallingBox = world.createBody(bd2);
     fallingBox.createFixtureFromShape(psd, 1.0);
   }
 }

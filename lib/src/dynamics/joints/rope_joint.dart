@@ -73,14 +73,14 @@ class RopeJoint extends Joint {
     _invIA = _bodyA._invI;
     _invIB = _bodyB._invI;
 
-    Vector2 cA = data.positions[_indexA].c;
-    double aA = data.positions[_indexA].a;
-    Vector2 vA = data.velocities[_indexA].v;
+    final Vector2 cA = data.positions[_indexA].c;
+    final double aA = data.positions[_indexA].a;
+    final Vector2 vA = data.velocities[_indexA].v;
     double wA = data.velocities[_indexA].w;
 
-    Vector2 cB = data.positions[_indexB].c;
-    double aB = data.positions[_indexB].a;
-    Vector2 vB = data.velocities[_indexB].v;
+    final Vector2 cB = data.positions[_indexB].c;
+    final double aB = data.positions[_indexB].a;
+    final Vector2 vB = data.velocities[_indexB].v;
     double wB = data.velocities[_indexB].w;
 
     final Rot qA = pool.popRot();
@@ -112,7 +112,7 @@ class RopeJoint extends Joint {
 
     _length = _u.length;
 
-    double C = _length - _maxLength;
+    final double C = _length - _maxLength;
     if (C > 0.0) {
       _state = LimitState.AT_UPPER;
     } else {
@@ -131,9 +131,9 @@ class RopeJoint extends Joint {
     }
 
     // Compute effective mass.
-    double crA = _rA.cross(_u);
-    double crB = _rB.cross(_u);
-    double invMass =
+    final double crA = _rA.cross(_u);
+    final double crB = _rB.cross(_u);
+    final double invMass =
         _invMassA + _invIA * crA * crA + _invMassB + _invIB * crB * crB;
 
     _mass = invMass != 0.0 ? 1.0 / invMass : 0.0;
@@ -142,8 +142,8 @@ class RopeJoint extends Joint {
       // Scale the impulse to support a variable time step.
       _impulse *= data.step.dtRatio;
 
-      double Px = _impulse * _u.x;
-      double Py = _impulse * _u.y;
+      final double Px = _impulse * _u.x;
+      final double Py = _impulse * _u.y;
       vA.x -= _invMassA * Px;
       vA.y -= _invMassA * Py;
       wA -= _invIA * (_rA.x * Py - _rA.y * Px);
@@ -165,22 +165,22 @@ class RopeJoint extends Joint {
   }
 
   void solveVelocityConstraints(final SolverData data) {
-    Vector2 vA = data.velocities[_indexA].v;
+    final Vector2 vA = data.velocities[_indexA].v;
     double wA = data.velocities[_indexA].w;
-    Vector2 vB = data.velocities[_indexB].v;
+    final Vector2 vB = data.velocities[_indexB].v;
     double wB = data.velocities[_indexB].w;
 
     // Cdot = dot(u, v + cross(w, r))
-    Vector2 vpA = pool.popVec2();
-    Vector2 vpB = pool.popVec2();
-    Vector2 temp = pool.popVec2();
+    final Vector2 vpA = pool.popVec2();
+    final Vector2 vpB = pool.popVec2();
+    final Vector2 temp = pool.popVec2();
 
     _rA.scaleOrthogonalInto(wA, vpA);
     vpA.add(vA);
     _rB.scaleOrthogonalInto(wB, vpB);
     vpB.add(vB);
 
-    double C = _length - _maxLength;
+    final double C = _length - _maxLength;
     double Cdot = _u.dot(temp
       ..setFrom(vpB)
       ..sub(vpA));
@@ -191,12 +191,12 @@ class RopeJoint extends Joint {
     }
 
     double impulse = -_mass * Cdot;
-    double oldImpulse = _impulse;
+    final double oldImpulse = _impulse;
     _impulse = Math.min(0.0, _impulse + impulse);
     impulse = _impulse - oldImpulse;
 
-    double Px = impulse * _u.x;
-    double Py = impulse * _u.y;
+    final double Px = impulse * _u.x;
+    final double Py = impulse * _u.y;
     vA.x -= _invMassA * Px;
     vA.y -= _invMassA * Py;
     wA -= _invIA * (_rA.x * Py - _rA.y * Px);
@@ -213,9 +213,9 @@ class RopeJoint extends Joint {
   }
 
   bool solvePositionConstraints(final SolverData data) {
-    Vector2 cA = data.positions[_indexA].c;
+    final Vector2 cA = data.positions[_indexA].c;
     double aA = data.positions[_indexA].a;
-    Vector2 cB = data.positions[_indexB].c;
+    final Vector2 cB = data.positions[_indexB].c;
     double aB = data.positions[_indexB].a;
 
     final Rot qA = pool.popRot();
@@ -247,14 +247,14 @@ class RopeJoint extends Joint {
       ..sub(cA)
       ..sub(rA);
 
-    double length = u.normalize();
+    final double length = u.normalize();
     double C = length - _maxLength;
 
     C = MathUtils.clampDouble(C, 0.0, Settings.maxLinearCorrection);
 
-    double impulse = -_mass * C;
-    double Px = impulse * u.x;
-    double Py = impulse * u.y;
+    final double impulse = -_mass * C;
+    final double Px = impulse * u.x;
+    final double Py = impulse * u.y;
 
     cA.x -= _invMassA * Px;
     cA.y -= _invMassA * Py;

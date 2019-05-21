@@ -68,7 +68,7 @@ class ChainShape extends Shape {
     edge.vertex2.y = v1.y;
 
     if (index > 0) {
-      Vector2 v = _vertices[index - 1];
+      final Vector2 v = _vertices[index - 1];
       edge.vertex0.x = v.x;
       edge.vertex0.y = v.y;
       edge.hasVertex0 = true;
@@ -79,7 +79,7 @@ class ChainShape extends Shape {
     }
 
     if (index < _count - 2) {
-      Vector2 v = _vertices[index + 2];
+      final Vector2 v = _vertices[index + 2];
       edge.vertex3.x = v.x;
       edge.vertex3.y = v.y;
       edge.hasVertex3 = true;
@@ -107,15 +107,12 @@ class ChainShape extends Shape {
 
     final EdgeShape edgeShape = _pool0;
 
-    int i1 = childIndex;
-    int i2 = childIndex + 1;
-    if (i2 == _count) {
-      i2 = 0;
-    }
-    Vector2 v = _vertices[i1];
+    final int i1 = childIndex;
+    final int i2 = childIndex + 1 == _count ? childIndex + 1 : 0;
+    final Vector2 v = _vertices[i1];
     edgeShape.vertex1.x = v.x;
     edgeShape.vertex1.y = v.y;
-    Vector2 v1 = _vertices[i2];
+    final Vector2 v1 = _vertices[i2];
     edgeShape.vertex2.x = v1.x;
     edgeShape.vertex2.y = v1.y;
 
@@ -127,20 +124,17 @@ class ChainShape extends Shape {
     final Vector2 lower = aabb.lowerBound;
     final Vector2 upper = aabb.upperBound;
 
-    int i1 = childIndex;
-    int i2 = childIndex + 1;
-    if (i2 == _count) {
-      i2 = 0;
-    }
+    final int i1 = childIndex;
+    final int i2 = childIndex + 1 == _count ? childIndex + 1 : 0;
 
     final Vector2 vi1 = _vertices[i1];
     final Vector2 vi2 = _vertices[i2];
     final Rot xfq = xf.q;
     final Vector2 xfp = xf.p;
-    double v1x = (xfq.c * vi1.x - xfq.s * vi1.y) + xfp.x;
-    double v1y = (xfq.s * vi1.x + xfq.c * vi1.y) + xfp.y;
-    double v2x = (xfq.c * vi2.x - xfq.s * vi2.y) + xfp.x;
-    double v2y = (xfq.s * vi2.x + xfq.c * vi2.y) + xfp.y;
+    final double v1x = (xfq.c * vi1.x - xfq.s * vi1.y) + xfp.x;
+    final double v1y = (xfq.s * vi1.x + xfq.c * vi1.y) + xfp.y;
+    final double v2x = (xfq.c * vi2.x - xfq.s * vi2.y) + xfp.x;
+    final double v2y = (xfq.s * vi2.x + xfq.c * vi2.y) + xfp.y;
 
     lower.x = v1x < v2x ? v1x : v2x;
     lower.y = v1y < v2y ? v1y : v2y;
@@ -155,13 +149,12 @@ class ChainShape extends Shape {
   }
 
   Shape clone() {
-    ChainShape clone = ChainShape();
-    clone.createChain(_vertices, _count);
-    clone._prevVertex.setFrom(_prevVertex);
-    clone._nextVertex.setFrom(_nextVertex);
-    clone._hasPrevVertex = _hasPrevVertex;
-    clone._hasNextVertex = _hasNextVertex;
-    return clone;
+    return ChainShape()
+      ..createChain(_vertices, _count)
+      .._prevVertex.setFrom(_prevVertex)
+      .._nextVertex.setFrom(_nextVertex)
+      .._hasPrevVertex = _hasPrevVertex
+      .._hasNextVertex = _hasNextVertex;
   }
 
   /**
@@ -191,8 +184,8 @@ class ChainShape extends Shape {
     _count = count + 1;
     _vertices = List<Vector2>(_count);
     for (int i = 1; i < count; i++) {
-      Vector2 v1 = vertices[i - 1];
-      Vector2 v2 = vertices[i];
+      final Vector2 v1 = vertices[i - 1];
+      final Vector2 v2 = vertices[i];
       // If the code crashes here, it means your vertices are too close together.
       if (MathUtils.distanceSquared(v1, v2) <
           Settings.linearSlop * Settings.linearSlop) {
@@ -221,8 +214,8 @@ class ChainShape extends Shape {
     _count = count;
     _vertices = List<Vector2>(_count);
     for (int i = 1; i < _count; i++) {
-      Vector2 v1 = vertices[i - 1];
-      Vector2 v2 = vertices[i];
+      final Vector2 v1 = vertices[i - 1];
+      final Vector2 v2 = vertices[i];
       // If the code crashes here, it means your vertices are too close together.
       if (MathUtils.distanceSquared(v1, v2) <
           Settings.linearSlop * Settings.linearSlop) {

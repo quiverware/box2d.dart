@@ -35,14 +35,10 @@ class DominoTest extends Demo {
   void initialize() {
     {
       // Floor
-      FixtureDef fd = FixtureDef();
-      PolygonShape sd = PolygonShape();
-      sd.setAsBoxXY(50.0, 10.0);
-      fd.shape = sd;
-
-      BodyDef bd = BodyDef();
-      bd.position = Vector2(0.0, -10.0);
-      final body = world.createBody(bd);
+      final PolygonShape sd = PolygonShape()..setAsBoxXY(50.0, 10.0);
+      final FixtureDef fd = FixtureDef()..shape = sd;
+      final BodyDef bd = BodyDef()..position = Vector2(0.0, -10.0);
+      final Body body = world.createBody(bd);
       body.createFixtureFromFixtureDef(fd);
       bodies.add(body);
     }
@@ -50,14 +46,11 @@ class DominoTest extends Demo {
     {
       // Platforms
       for (int i = 0; i < 4; i++) {
-        FixtureDef fd = FixtureDef();
-        PolygonShape sd = PolygonShape();
-        sd.setAsBoxXY(15.0, 0.125);
-        fd.shape = sd;
+        final PolygonShape sd = PolygonShape()..setAsBoxXY(15.0, 0.125);
+        final FixtureDef fd = FixtureDef()..shape = sd;
 
-        BodyDef bd = BodyDef();
-        bd.position = Vector2(0.0, 5.0 + 5 * i);
-        final body = world.createBody(bd);
+        final BodyDef bd = BodyDef()..position = Vector2(0.0, 5.0 + 5 * i);
+        final Body body = world.createBody(bd);
         body.createFixtureFromFixtureDef(fd);
         bodies.add(body);
       }
@@ -65,17 +58,15 @@ class DominoTest extends Demo {
 
     // Dominoes
     {
-      FixtureDef fd = FixtureDef();
-      PolygonShape sd = PolygonShape();
-      sd.setAsBoxXY(0.125, 2.0);
-      fd.shape = sd;
-      fd.density = 25.0;
+      final PolygonShape sd = PolygonShape()..setAsBoxXY(0.125, 2.0);
+      final FixtureDef fd = FixtureDef()
+        ..shape = sd
+        ..density = 25.0;
 
-      BodyDef bd = BodyDef();
-      bd.type = BodyType.DYNAMIC;
+      final BodyDef bd = BodyDef()..type = BodyType.DYNAMIC;
 
-      double friction = .5;
-      int numPerRow = 25;
+      const double friction = .5;
+      const int numPerRow = 25;
 
       for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < numPerRow; j++) {
@@ -91,7 +82,7 @@ class DominoTest extends Demo {
           } else {
             bd.angle = 0.0;
           }
-          Body myBody = world.createBody(bd);
+          final Body myBody = world.createBody(bd);
           myBody.createFixtureFromFixtureDef(fd);
           bodies.add(myBody);
         }

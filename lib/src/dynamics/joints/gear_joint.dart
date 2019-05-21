@@ -113,10 +113,10 @@ class GearJoint extends Joint {
     _bodyA = _joint1.getBodyB();
 
     // Get geometry of joint1
-    Transform xfA = _bodyA._transform;
-    double aA = _bodyA._sweep.a;
-    Transform xfC = _bodyC._transform;
-    double aC = _bodyC._sweep.a;
+    final Transform xfA = _bodyA._transform;
+    final double aA = _bodyA._sweep.a;
+    final Transform xfC = _bodyC._transform;
+    final double aC = _bodyC._sweep.a;
 
     if (_typeA == JointType.REVOLUTE) {
       final revolute = def.joint1 as RevoluteJoint;
@@ -127,15 +127,15 @@ class GearJoint extends Joint {
 
       coordinateA = aA - aC - _referenceAngleA;
     } else {
-      Vector2 pA = pool.popVec2();
-      Vector2 temp = pool.popVec2();
+      final Vector2 pA = pool.popVec2();
+      final Vector2 temp = pool.popVec2();
       final prismatic = def.joint1 as PrismaticJoint;
       _localAnchorC.setFrom(prismatic._localAnchorA);
       _localAnchorA.setFrom(prismatic._localAnchorB);
       _referenceAngleA = prismatic._referenceAngle;
       _localAxisC.setFrom(prismatic._localXAxisA);
 
-      Vector2 pC = _localAnchorC;
+      final Vector2 pC = _localAnchorC;
       Rot.mulToOutUnsafe(xfA.q, _localAnchorA, temp);
       temp
         ..add(xfA.p)
@@ -148,10 +148,10 @@ class GearJoint extends Joint {
     _bodyB = _joint2.getBodyB();
 
     // Get geometry of joint2
-    Transform xfB = _bodyB._transform;
-    double aB = _bodyB._sweep.a;
-    Transform xfD = _bodyD._transform;
-    double aD = _bodyD._sweep.a;
+    final Transform xfB = _bodyB._transform;
+    final double aB = _bodyB._sweep.a;
+    final Transform xfD = _bodyD._transform;
+    final double aD = _bodyD._sweep.a;
 
     if (_typeB == JointType.REVOLUTE) {
       final revolute = def.joint2 as RevoluteJoint;
@@ -162,15 +162,15 @@ class GearJoint extends Joint {
 
       coordinateB = aB - aD - _referenceAngleB;
     } else {
-      Vector2 pB = pool.popVec2();
-      Vector2 temp = pool.popVec2();
+      final Vector2 pB = pool.popVec2();
+      final Vector2 temp = pool.popVec2();
       final prismatic = def.joint2 as PrismaticJoint;
       _localAnchorD.setFrom(prismatic._localAnchorA);
       _localAnchorB.setFrom(prismatic._localAnchorB);
       _referenceAngleB = prismatic._referenceAngle;
       _localAxisD.setFrom(prismatic._localXAxisA);
 
-      Vector2 pD = _localAnchorD;
+      final Vector2 pD = _localAnchorD;
       Rot.mulToOutUnsafe(xfB.q, _localAnchorB, temp);
       temp
         ..add(xfB.p)
@@ -203,7 +203,7 @@ class GearJoint extends Joint {
   }
 
   double getReactionTorque(double inv_dt) {
-    double L = _impulse * _JwA;
+    final double L = _impulse * _JwA;
     return inv_dt * L;
   }
 
@@ -234,26 +234,26 @@ class GearJoint extends Joint {
     _iD = _bodyD._invI;
 
     // Vec2 cA = data.positions[_indexA].c;
-    double aA = data.positions[_indexA].a;
-    Vector2 vA = data.velocities[_indexA].v;
+    final double aA = data.positions[_indexA].a;
+    final Vector2 vA = data.velocities[_indexA].v;
     double wA = data.velocities[_indexA].w;
 
     // Vec2 cB = data.positions[_indexB].c;
-    double aB = data.positions[_indexB].a;
-    Vector2 vB = data.velocities[_indexB].v;
+    final double aB = data.positions[_indexB].a;
+    final Vector2 vB = data.velocities[_indexB].v;
     double wB = data.velocities[_indexB].w;
 
     // Vec2 cC = data.positions[_indexC].c;
-    double aC = data.positions[_indexC].a;
-    Vector2 vC = data.velocities[_indexC].v;
+    final double aC = data.positions[_indexC].a;
+    final Vector2 vC = data.velocities[_indexC].v;
     double wC = data.velocities[_indexC].w;
 
     // Vec2 cD = data.positions[_indexD].c;
-    double aD = data.positions[_indexD].a;
-    Vector2 vD = data.velocities[_indexD].v;
+    final double aD = data.positions[_indexD].a;
+    final Vector2 vD = data.velocities[_indexD].v;
     double wD = data.velocities[_indexD].w;
 
-    Rot qA = pool.popRot(),
+    final Rot qA = pool.popRot(),
         qB = pool.popRot(),
         qC = pool.popRot(),
         qD = pool.popRot();
@@ -264,7 +264,7 @@ class GearJoint extends Joint {
 
     _mass = 0.0;
 
-    Vector2 temp = pool.popVec2();
+    final Vector2 temp = pool.popVec2();
 
     if (_typeA == JointType.REVOLUTE) {
       _JvAC.setZero();
@@ -272,8 +272,8 @@ class GearJoint extends Joint {
       _JwC = 1.0;
       _mass += _iA + _iC;
     } else {
-      Vector2 rC = pool.popVec2();
-      Vector2 rA = pool.popVec2();
+      final Vector2 rC = pool.popVec2();
+      final Vector2 rA = pool.popVec2();
       Rot.mulToOutUnsafe(qC, _localAxisC, _JvAC);
       Rot.mulToOutUnsafe(
           qC,
@@ -299,9 +299,9 @@ class GearJoint extends Joint {
       _JwD = _ratio;
       _mass += _ratio * _ratio * (_iB + _iD);
     } else {
-      Vector2 u = pool.popVec2();
-      Vector2 rD = pool.popVec2();
-      Vector2 rB = pool.popVec2();
+      final Vector2 u = pool.popVec2();
+      final Vector2 rD = pool.popVec2();
+      final Vector2 rB = pool.popVec2();
       Rot.mulToOutUnsafe(qD, _localAxisD, u);
       Rot.mulToOutUnsafe(
           qD,
@@ -361,17 +361,17 @@ class GearJoint extends Joint {
   }
 
   void solveVelocityConstraints(SolverData data) {
-    Vector2 vA = data.velocities[_indexA].v;
+    final Vector2 vA = data.velocities[_indexA].v;
     double wA = data.velocities[_indexA].w;
-    Vector2 vB = data.velocities[_indexB].v;
+    final Vector2 vB = data.velocities[_indexB].v;
     double wB = data.velocities[_indexB].w;
-    Vector2 vC = data.velocities[_indexC].v;
+    final Vector2 vC = data.velocities[_indexC].v;
     double wC = data.velocities[_indexC].w;
-    Vector2 vD = data.velocities[_indexD].v;
+    final Vector2 vD = data.velocities[_indexD].v;
     double wD = data.velocities[_indexD].w;
 
-    Vector2 temp1 = pool.popVec2();
-    Vector2 temp2 = pool.popVec2();
+    final Vector2 temp1 = pool.popVec2();
+    final Vector2 temp2 = pool.popVec2();
     double Cdot = _JvAC.dot(temp1
           ..setFrom(vA)
           ..sub(vC)) +
@@ -381,7 +381,7 @@ class GearJoint extends Joint {
     Cdot += (_JwA * wA - _JwC * wC) + (_JwB * wB - _JwD * wD);
     pool.pushVec2(2);
 
-    double impulse = -_mass * Cdot;
+    final double impulse = -_mass * Cdot;
     _impulse += impulse;
 
     vA.x += (_mA * impulse) * _JvAC.x;
@@ -419,16 +419,16 @@ class GearJoint extends Joint {
   }
 
   bool solvePositionConstraints(SolverData data) {
-    Vector2 cA = data.positions[_indexA].c;
+    final Vector2 cA = data.positions[_indexA].c;
     double aA = data.positions[_indexA].a;
-    Vector2 cB = data.positions[_indexB].c;
+    final Vector2 cB = data.positions[_indexB].c;
     double aB = data.positions[_indexB].a;
-    Vector2 cC = data.positions[_indexC].c;
+    final Vector2 cC = data.positions[_indexC].c;
     double aC = data.positions[_indexC].a;
-    Vector2 cD = data.positions[_indexD].c;
+    final Vector2 cD = data.positions[_indexD].c;
     double aD = data.positions[_indexD].a;
 
-    Rot qA = pool.popRot(),
+    final Rot qA = pool.popRot(),
         qB = pool.popRot(),
         qC = pool.popRot(),
         qD = pool.popRot();
@@ -437,13 +437,13 @@ class GearJoint extends Joint {
     qC.setAngle(aC);
     qD.setAngle(aD);
 
-    double linearError = 0.0;
+    const double linearError = 0.0;
 
     double coordinateA, coordinateB;
 
-    Vector2 temp = pool.popVec2();
-    Vector2 JvAC = pool.popVec2();
-    Vector2 JvBD = pool.popVec2();
+    final Vector2 temp = pool.popVec2();
+    final Vector2 JvAC = pool.popVec2();
+    final Vector2 JvBD = pool.popVec2();
     double JwA, JwB, JwC, JwD;
     double mass = 0.0;
 
@@ -455,10 +455,10 @@ class GearJoint extends Joint {
 
       coordinateA = aA - aC - _referenceAngleA;
     } else {
-      Vector2 rC = pool.popVec2();
-      Vector2 rA = pool.popVec2();
-      Vector2 pC = pool.popVec2();
-      Vector2 pA = pool.popVec2();
+      final Vector2 rC = pool.popVec2();
+      final Vector2 rA = pool.popVec2();
+      final Vector2 pC = pool.popVec2();
+      final Vector2 pA = pool.popVec2();
       Rot.mulToOutUnsafe(qC, _localAxisC, JvAC);
       Rot.mulToOutUnsafe(
           qC,
@@ -498,11 +498,11 @@ class GearJoint extends Joint {
 
       coordinateB = aB - aD - _referenceAngleB;
     } else {
-      Vector2 u = pool.popVec2();
-      Vector2 rD = pool.popVec2();
-      Vector2 rB = pool.popVec2();
-      Vector2 pD = pool.popVec2();
-      Vector2 pB = pool.popVec2();
+      final Vector2 u = pool.popVec2();
+      final Vector2 rD = pool.popVec2();
+      final Vector2 rB = pool.popVec2();
+      final Vector2 pD = pool.popVec2();
+      final Vector2 pB = pool.popVec2();
       Rot.mulToOutUnsafe(qD, _localAxisD, u);
       Rot.mulToOutUnsafe(
           qD,
@@ -537,7 +537,7 @@ class GearJoint extends Joint {
       pool.pushVec2(5);
     }
 
-    double C = (coordinateA + _ratio * coordinateB) - _constant;
+    final double C = (coordinateA + _ratio * coordinateB) - _constant;
 
     double impulse = 0.0;
     if (mass > 0.0) {

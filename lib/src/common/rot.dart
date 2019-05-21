@@ -70,14 +70,14 @@ class Rot {
   }
 
   Rot clone() {
-    Rot copy = Rot();
+    final Rot copy = Rot();
     copy.s = s;
     copy.c = c;
     return copy;
   }
 
   static void mul(Rot q, Rot r, Rot out) {
-    double tempc = q.c * r.c - q.s * r.s;
+    final double tempc = q.c * r.c - q.s * r.s;
     out.s = q.s * r.c + q.c * r.s;
     out.c = tempc;
   }
@@ -109,7 +109,7 @@ class Rot {
   }
 
   static void mulToOut(Rot q, Vector2 v, Vector2 out) {
-    double tempy = q.s * v.x + q.c * v.y;
+    final double tempy = q.s * v.x + q.c * v.y;
     out.x = q.c * v.x - q.s * v.y;
     out.y = tempy;
   }

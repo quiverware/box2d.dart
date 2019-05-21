@@ -32,8 +32,11 @@ import 'package:box2d_flame/src/math_utils.dart' as MathUtils;
 import 'demo.dart';
 
 part 'racer/car.dart';
+
 part 'racer/control_state.dart';
+
 part 'racer/ground_area.dart';
+
 part 'racer/tire.dart';
 
 class Racer extends Demo implements ContactListener {
@@ -79,23 +82,24 @@ class Racer extends Demo implements ContactListener {
   }
 
   void preSolve(Contact contact, Manifold oldManifold) {}
+
   void postSolve(Contact contact, ContactImpulse impulse) {}
 
   double radians(double deg) => deg * (pi / 180.0);
 
   void _createGround() {
-    BodyDef def = BodyDef();
+    final BodyDef def = BodyDef();
     _groundBody = world.createBody(def);
     _groundBody.userData = "Ground";
 
-    PolygonShape shape = PolygonShape();
+    final PolygonShape shape = PolygonShape()
+      ..setAsBox(27.0, 21.0, Vector2(-30.0, 30.0), radians(20.0));
 
-    FixtureDef fixtureDef = FixtureDef();
-    fixtureDef.shape = shape;
-    fixtureDef.isSensor = true;
+    final FixtureDef fixtureDef = FixtureDef()
+      ..shape = shape
+      ..isSensor = true
+      ..userData = GroundArea(0.001, false);
 
-    fixtureDef.userData = GroundArea(0.001, false);
-    shape.setAsBox(27.0, 21.0, Vector2(-30.0, 30.0), radians(20.0));
     _groundBody.createFixtureFromFixtureDef(fixtureDef);
 
     fixtureDef.userData = GroundArea(0.2, false);
@@ -104,20 +108,20 @@ class Racer extends Demo implements ContactListener {
   }
 
   void _createBoundary() {
-    BodyDef def = BodyDef();
-    Body boundaryBody = world.createBody(def);
+    final BodyDef def = BodyDef();
+    final Body boundaryBody = world.createBody(def);
     boundaryBody.userData = "Boundary";
 
-    PolygonShape shape = PolygonShape();
+    final PolygonShape shape = PolygonShape();
 
-    FixtureDef fixtureDef = FixtureDef();
+    final FixtureDef fixtureDef = FixtureDef();
     fixtureDef.shape = shape;
 
-    final double boundaryX = 150.0;
-    final double boundaryY = 100.0;
+    const double boundaryX = 150.0;
+    const double boundaryY = 100.0;
 
-    shape.setAsEdge(Vector2(-boundaryX, -boundaryY),
-        Vector2(boundaryX, -boundaryY));
+    shape.setAsEdge(
+        Vector2(-boundaryX, -boundaryY), Vector2(boundaryX, -boundaryY));
 
     boundaryBody.createFixtureFromFixtureDef(fixtureDef);
 
@@ -129,8 +133,8 @@ class Racer extends Demo implements ContactListener {
         Vector2(boundaryX, boundaryY), Vector2(-boundaryX, boundaryY));
     boundaryBody.createFixtureFromFixtureDef(fixtureDef);
 
-    shape.setAsEdge(Vector2(-boundaryX, boundaryY),
-        Vector2(-boundaryX, -boundaryY));
+    shape.setAsEdge(
+        Vector2(-boundaryX, boundaryY), Vector2(-boundaryX, -boundaryY));
     boundaryBody.createFixtureFromFixtureDef(fixtureDef);
   }
 

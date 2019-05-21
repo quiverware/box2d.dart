@@ -175,11 +175,10 @@ class Body {
       return null;
     }
 
-    Fixture fixture = Fixture();
-    fixture.create(this, def);
+    final Fixture fixture = Fixture()..create(this, def);
 
     if ((_flags & ACTIVE_FLAG) == ACTIVE_FLAG) {
-      BroadPhase broadPhase = world._contactManager.broadPhase;
+      final BroadPhase broadPhase = world._contactManager.broadPhase;
       fixture.createProxies(broadPhase, _transform);
     }
 
@@ -264,11 +263,11 @@ class Body {
     // Destroy any contacts associated with the fixture.
     ContactEdge edge = _contactList;
     while (edge != null) {
-      Contact c = edge.contact;
+      final Contact c = edge.contact;
       edge = edge.next;
 
-      Fixture fixtureA = c.fixtureA;
-      Fixture fixtureB = c.fixtureB;
+      final Fixture fixtureA = c.fixtureA;
+      final Fixture fixtureB = c.fixtureB;
 
       if (fixture == fixtureA || fixture == fixtureB) {
         // This destroys the contact and removes it from
@@ -278,7 +277,7 @@ class Body {
     }
 
     if ((_flags & ACTIVE_FLAG) == ACTIVE_FLAG) {
-      BroadPhase broadPhase = world._contactManager.broadPhase;
+      final BroadPhase broadPhase = world._contactManager.broadPhase;
       fixture.destroyProxies(broadPhase);
     }
 
@@ -317,7 +316,7 @@ class Body {
     _sweep.c0.setFrom(_sweep.c);
     _sweep.a0 = _sweep.a;
 
-    BroadPhase broadPhase = world._contactManager.broadPhase;
+    final BroadPhase broadPhase = world._contactManager.broadPhase;
     for (Fixture f = _fixtureList; f != null; f = f._next) {
       f.synchronize(broadPhase, _transform, _transform);
     }
@@ -667,7 +666,7 @@ class Body {
       _invI = 0.0;
     }
 
-    Vector2 oldCenter = world.getPool().popVec2();
+    final Vector2 oldCenter = world.getPool().popVec2();
     // Move center of mass.
     oldCenter.setFrom(_sweep.c);
     _sweep.localCenter.setFrom(localCenter);
@@ -693,7 +692,7 @@ class Body {
    * @return the same point expressed in world coordinates.
    */
   Vector2 getWorldPoint(Vector2 localPoint) {
-    Vector2 v = Vector2.zero();
+    final Vector2 v = Vector2.zero();
     getWorldPointToOut(localPoint, v);
     return v;
   }
@@ -709,7 +708,7 @@ class Body {
    * @return the same vector expressed in world coordinates.
    */
   Vector2 getWorldVector(Vector2 localVector) {
-    Vector2 out = Vector2.zero();
+    final Vector2 out = Vector2.zero();
     getWorldVectorToOut(localVector, out);
     return out;
   }
@@ -729,7 +728,7 @@ class Body {
    * @return the corresponding local point relative to the body's origin.
    */
   Vector2 getLocalPoint(Vector2 worldPoint) {
-    Vector2 out = Vector2.zero();
+    final Vector2 out = Vector2.zero();
     getLocalPointToOut(worldPoint, out);
     return out;
   }
@@ -745,7 +744,7 @@ class Body {
    * @return the corresponding local vector.
    */
   Vector2 getLocalVector(Vector2 worldVector) {
-    Vector2 out = Vector2.zero();
+    final Vector2 out = Vector2.zero();
     getLocalVectorToOut(worldVector, out);
     return out;
   }
@@ -765,7 +764,7 @@ class Body {
    * @return the world velocity of a point.
    */
   Vector2 getLinearVelocityFromWorldPoint(Vector2 worldPoint) {
-    Vector2 out = Vector2.zero();
+    final Vector2 out = Vector2.zero();
     getLinearVelocityFromWorldPointToOut(worldPoint, out);
     return out;
   }
@@ -784,7 +783,7 @@ class Body {
    * @return the world velocity of a point.
    */
   Vector2 getLinearVelocityFromLocalPoint(Vector2 localPoint) {
-    Vector2 out = Vector2.zero();
+    final Vector2 out = Vector2.zero();
     getLinearVelocityFromLocalPointToOut(localPoint, out);
     return out;
   }
@@ -833,16 +832,16 @@ class Body {
     // Delete the attached contacts.
     ContactEdge ce = _contactList;
     while (ce != null) {
-      ContactEdge ce0 = ce;
+      final ContactEdge ce0 = ce;
       ce = ce.next;
       world._contactManager.destroy(ce0.contact);
     }
     _contactList = null;
 
     // Touch the proxies so that new contacts will be created (when appropriate)
-    BroadPhase broadPhase = world._contactManager.broadPhase;
+    final BroadPhase broadPhase = world._contactManager.broadPhase;
     for (Fixture f = _fixtureList; f != null; f = f._next) {
-      int proxyCount = f._proxyCount;
+      final int proxyCount = f._proxyCount;
       for (int i = 0; i < proxyCount; ++i) {
         broadPhase.touchProxy(f._proxies[i].proxyId);
       }
@@ -940,7 +939,7 @@ class Body {
       _flags |= ACTIVE_FLAG;
 
       // Create all proxies.
-      BroadPhase broadPhase = world._contactManager.broadPhase;
+      final BroadPhase broadPhase = world._contactManager.broadPhase;
       for (Fixture f = _fixtureList; f != null; f = f._next) {
         f.createProxies(broadPhase, _transform);
       }
@@ -950,7 +949,7 @@ class Body {
       _flags &= ~ACTIVE_FLAG;
 
       // Destroy all proxies.
-      BroadPhase broadPhase = world._contactManager.broadPhase;
+      final BroadPhase broadPhase = world._contactManager.broadPhase;
       for (Fixture f = _fixtureList; f != null; f = f._next) {
         f.destroyProxies(broadPhase);
       }
@@ -958,7 +957,7 @@ class Body {
       // Destroy the attached contacts.
       ContactEdge ce = _contactList;
       while (ce != null) {
-        ContactEdge ce0 = ce;
+        final ContactEdge ce0 = ce;
         ce = ce.next;
         world._contactManager.destroy(ce0.contact);
       }
@@ -1059,8 +1058,8 @@ class Body {
     //
     _transform.q.s = Math.sin(_sweep.a);
     _transform.q.c = Math.cos(_sweep.a);
-    Rot q = _transform.q;
-    Vector2 v = _sweep.localCenter;
+    final Rot q = _transform.q;
+    final Vector2 v = _sweep.localCenter;
     _transform.p.x = _sweep.c.x - q.c * v.x + q.s * v.y;
     _transform.p.y = _sweep.c.y - q.s * v.x - q.c * v.y;
   }

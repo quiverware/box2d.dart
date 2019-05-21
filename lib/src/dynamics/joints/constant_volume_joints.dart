@@ -59,7 +59,7 @@ class ConstantVolumeJoint extends Joint {
     _targetLengths = Float64List(_bodies.length);
     for (int i = 0; i < _targetLengths.length; ++i) {
       final int next = (i == _targetLengths.length - 1) ? 0 : i + 1;
-      double dist = (_bodies[i].worldCenter - _bodies[next].worldCenter).length;
+      final double dist = (_bodies[i].worldCenter - _bodies[next].worldCenter).length;
       _targetLengths[i] = dist;
     }
     _targetVolume = getBodyArea();
@@ -123,9 +123,9 @@ class ConstantVolumeJoint extends Joint {
     double perimeter = 0.0;
     for (int i = 0; i < _bodies.length; ++i) {
       final int next = (i == _bodies.length - 1) ? 0 : i + 1;
-      double dx = positions[_bodies[next]._islandIndex].c.x -
+      final double dx = positions[_bodies[next]._islandIndex].c.x -
           positions[_bodies[i]._islandIndex].c.x;
-      double dy = positions[_bodies[next]._islandIndex].c.y -
+      final double dy = positions[_bodies[next]._islandIndex].c.y -
           positions[_bodies[i]._islandIndex].c.y;
       double dist = Math.sqrt(dx * dx + dy * dy);
       if (dist < Settings.EPSILON) {
@@ -138,8 +138,8 @@ class ConstantVolumeJoint extends Joint {
 
     final Vector2 delta = pool.popVec2();
 
-    double deltaArea = _targetVolume - getSolverArea(positions);
-    double toExtrude = 0.5 * deltaArea / perimeter; // *relaxationFactor
+    final double deltaArea = _targetVolume - getSolverArea(positions);
+    final double toExtrude = 0.5 * deltaArea / perimeter; // *relaxationFactor
     // double sumdeltax = 0.0f;
     bool done = true;
     for (int i = 0; i < _bodies.length; ++i) {
@@ -147,7 +147,7 @@ class ConstantVolumeJoint extends Joint {
       delta.setValues(toExtrude * (_normals[i].x + _normals[next].x),
           toExtrude * (_normals[i].y + _normals[next].y));
       // sumdeltax += dx;
-      double normSqrd = delta.length2;
+      final double normSqrd = delta.length2;
       if (normSqrd >
           Settings.maxLinearCorrection * Settings.maxLinearCorrection) {
         delta.scale(Settings.maxLinearCorrection / Math.sqrt(normSqrd));
@@ -167,8 +167,8 @@ class ConstantVolumeJoint extends Joint {
   }
 
   void initVelocityConstraints(final SolverData step) {
-    List<Velocity> velocities = step.velocities;
-    List<Position> positions = step.positions;
+    final List<Velocity> velocities = step.velocities;
+    final List<Position> positions = step.positions;
     final List<Vector2> d = pool.getVec2Array(_bodies.length);
 
     for (int i = 0; i < _bodies.length; ++i) {
@@ -204,8 +204,8 @@ class ConstantVolumeJoint extends Joint {
     double crossMassSum = 0.0;
     double dotMassSum = 0.0;
 
-    List<Velocity> velocities = step.velocities;
-    List<Position> positions = step.positions;
+    final List<Velocity> velocities = step.velocities;
+    final List<Position> positions = step.positions;
     final List<Vector2> d = pool.getVec2Array(_bodies.length);
 
     for (int i = 0; i < _bodies.length; ++i) {
@@ -216,7 +216,7 @@ class ConstantVolumeJoint extends Joint {
       dotMassSum += (d[i].length2) / _bodies[i].mass;
       crossMassSum += velocities[_bodies[i]._islandIndex].v.cross(d[i]);
     }
-    double lambda = -2.0 * crossMassSum / dotMassSum;
+    final double lambda = -2.0 * crossMassSum / dotMassSum;
     // System.out.println(crossMassSum + " " +dotMassSum);
     // lambda = MathUtils.clamp(lambda, -Settings.maxLinearCorrection,
     // Settings.maxLinearCorrection);

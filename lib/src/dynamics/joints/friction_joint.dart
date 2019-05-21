@@ -115,12 +115,12 @@ class FrictionJoint extends Joint {
     _invIA = _bodyA._invI;
     _invIB = _bodyB._invI;
 
-    double aA = data.positions[_indexA].a;
-    Vector2 vA = data.velocities[_indexA].v;
+    final double aA = data.positions[_indexA].a;
+    final Vector2 vA = data.velocities[_indexA].v;
     double wA = data.velocities[_indexA].w;
 
-    double aB = data.positions[_indexB].a;
-    Vector2 vB = data.velocities[_indexB].v;
+    final double aB = data.positions[_indexB].a;
+    final Vector2 vB = data.velocities[_indexB].v;
     double wB = data.velocities[_indexB].w;
 
     final Vector2 temp = pool.popVec2();
@@ -153,14 +153,14 @@ class FrictionJoint extends Joint {
     // [ -r1y*iA*r1x-r2y*iB*r2x, mA+r1x^2*iA+mB+r2x^2*iB, r1x*iA+r2x*iB]
     // [ -r1y*iA-r2y*iB, r1x*iA+r2x*iB, iA+iB]
 
-    double mA = _invMassA, mB = _invMassB;
-    double iA = _invIA, iB = _invIB;
+    final double mA = _invMassA, mB = _invMassB;
+    final double iA = _invIA, iB = _invIB;
 
     final Matrix2 K = pool.popMat22();
-    double a11 = mA + mB + iA * _rA.y * _rA.y + iB * _rB.y * _rB.y;
-    double a21 = -iA * _rA.x * _rA.y - iB * _rB.x * _rB.y;
-    double a12 = a21;
-    double a22 = mA + mB + iA * _rA.x * _rA.x + iB * _rB.x * _rB.x;
+    final double a11 = mA + mB + iA * _rA.y * _rA.y + iB * _rB.y * _rB.y;
+    final double a21 = -iA * _rA.x * _rA.y - iB * _rB.x * _rB.y;
+    final double a12 = a21;
+    final double a22 = mA + mB + iA * _rA.x * _rA.x + iB * _rB.x * _rB.x;
 
     K.setValues(a11, a12, a21, a22);
     _linearMass.setFrom(K);
@@ -210,23 +210,23 @@ class FrictionJoint extends Joint {
   }
 
   void solveVelocityConstraints(final SolverData data) {
-    Vector2 vA = data.velocities[_indexA].v;
+    final Vector2 vA = data.velocities[_indexA].v;
     double wA = data.velocities[_indexA].w;
-    Vector2 vB = data.velocities[_indexB].v;
+    final Vector2 vB = data.velocities[_indexB].v;
     double wB = data.velocities[_indexB].w;
 
-    double mA = _invMassA, mB = _invMassB;
-    double iA = _invIA, iB = _invIB;
+    final double mA = _invMassA, mB = _invMassB;
+    final double iA = _invIA, iB = _invIB;
 
-    double h = data.step.dt;
+    final double h = data.step.dt;
 
     // Solve angular friction
     {
-      double Cdot = wB - wA;
+      final double Cdot = wB - wA;
       double impulse = -_angularMass * Cdot;
 
-      double oldImpulse = _angularImpulse;
-      double maxImpulse = h * _maxTorque;
+      final double oldImpulse = _angularImpulse;
+      final double maxImpulse = h * _maxTorque;
       _angularImpulse = MathUtils.clampDouble(
           _angularImpulse + impulse, -maxImpulse, maxImpulse);
       impulse = _angularImpulse - oldImpulse;
@@ -255,7 +255,7 @@ class FrictionJoint extends Joint {
       oldImpulse.setFrom(_linearImpulse);
       _linearImpulse.add(impulse);
 
-      double maxImpulse = h * _maxForce;
+      final double maxImpulse = h * _maxForce;
 
       if (_linearImpulse.length2 > maxImpulse * maxImpulse) {
         _linearImpulse.normalize();

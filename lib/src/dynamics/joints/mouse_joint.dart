@@ -105,30 +105,30 @@ class MouseJoint extends Joint {
     _invMassB = _bodyB._invMass;
     _invIB = _bodyB._invI;
 
-    Vector2 cB = data.positions[_indexB].c;
-    double aB = data.positions[_indexB].a;
-    Vector2 vB = data.velocities[_indexB].v;
+    final Vector2 cB = data.positions[_indexB].c;
+    final double aB = data.positions[_indexB].a;
+    final Vector2 vB = data.velocities[_indexB].v;
     double wB = data.velocities[_indexB].w;
 
     final Rot qB = pool.popRot();
 
     qB.setAngle(aB);
 
-    double mass = _bodyB.mass;
+    final double mass = _bodyB.mass;
 
     // Frequency
-    double omega = 2.0 * Math.pi * _frequencyHz;
+    final double omega = 2.0 * Math.pi * _frequencyHz;
 
     // Damping coefficient
-    double d = 2.0 * mass * _dampingRatio * omega;
+    final double d = 2.0 * mass * _dampingRatio * omega;
 
     // Spring stiffness
-    double k = mass * (omega * omega);
+    final double k = mass * (omega * omega);
 
     // magic formulas
     // gamma has units of inverse mass.
     // beta has units of inverse time.
-    double h = data.step.dt;
+    final double h = data.step.dt;
     assert(d + h * k > Settings.EPSILON);
     _gamma = h * (d + h * k);
     if (_gamma != 0.0) {
@@ -136,7 +136,7 @@ class MouseJoint extends Joint {
     }
     _beta = h * k * _gamma;
 
-    Vector2 temp = pool.popVec2();
+    final Vector2 temp = pool.popVec2();
 
     // Compute the effective mass matrix.
     Rot.mulToOutUnsafe(
@@ -150,10 +150,10 @@ class MouseJoint extends Joint {
     // = [1/m1+1/m2 0 ] + invI1 * [r1.y*r1.y -r1.x*r1.y] + invI2 * [r1.y*r1.y -r1.x*r1.y]
     // [ 0 1/m1+1/m2] [-r1.x*r1.y r1.x*r1.x] [-r1.x*r1.y r1.x*r1.x]
     final Matrix2 K = pool.popMat22();
-    double a11 = _invMassB + _invIB * _rB.y * _rB.y + _gamma;
-    double a21 = -_invIB * _rB.x * _rB.y;
-    double a12 = a21;
-    double a22 = _invMassB + _invIB * _rB.x * _rB.x + _gamma;
+    final double a11 = _invMassB + _invIB * _rB.y * _rB.y + _gamma;
+    final double a21 = -_invIB * _rB.x * _rB.y;
+    final double a12 = a21;
+    final double a22 = _invMassB + _invIB * _rB.x * _rB.x + _gamma;
 
     K.setValues(a11, a21, a12, a22);
     _mass.setFrom(K);
@@ -190,7 +190,7 @@ class MouseJoint extends Joint {
   }
 
   void solveVelocityConstraints(final SolverData data) {
-    Vector2 vB = data.velocities[_indexB].v;
+    final Vector2 vB = data.velocities[_indexB].v;
     double wB = data.velocities[_indexB].w;
 
     // Cdot = v + cross(w, r)
@@ -209,10 +209,10 @@ class MouseJoint extends Joint {
       ..negate();
     _mass.transformed(temp, impulse);
 
-    Vector2 oldImpulse = temp;
+    final Vector2 oldImpulse = temp;
     oldImpulse.setFrom(_impulse);
     _impulse.add(impulse);
-    double maxImpulse = data.step.dt * _maxForce;
+    final double maxImpulse = data.step.dt * _maxForce;
     if (_impulse.length2 > maxImpulse * maxImpulse) {
       _impulse.scale(maxImpulse / _impulse.length);
     }

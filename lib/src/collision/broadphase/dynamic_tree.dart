@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright (c) 2015, Daniel Murphy, Google
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  *  * Redistributions of source code must retain the above copyright notice,
@@ -9,7 +9,7 @@
  *  * Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
  *    and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -29,7 +29,7 @@ part of box2d;
  * ray casts. Leafs are proxies with an AABB. In the tree we expand the proxy AABB by _fatAABBFactor
  * so that the proxy AABB is bigger than the client object. This allows the client object to move by
  * small amounts without triggering a tree update.
- * 
+ *
  * @author daniel
  */
 class DynamicTree implements BroadPhaseStrategy {
@@ -63,7 +63,7 @@ class DynamicTree implements BroadPhaseStrategy {
   int createProxy(final AABB aabb, Object userData) {
     assert(aabb.isValid());
     final DynamicTreeNode node = _allocateNode();
-    int proxyId = node.id;
+    final int proxyId = node.id;
     // Fatten the aabb
     final AABB nodeAABB = node.aabb;
     nodeAABB.lowerBound.x = aabb.lowerBound.x - Settings.aabbExtension;
@@ -79,7 +79,7 @@ class DynamicTree implements BroadPhaseStrategy {
 
   void destroyProxy(int proxyId) {
     assert(0 <= proxyId && proxyId < _nodeCapacity);
-    DynamicTreeNode node = _nodes[proxyId];
+    final DynamicTreeNode node = _nodes[proxyId];
     assert(node.child1 == null);
 
     _removeLeaf(node);
@@ -146,20 +146,20 @@ class DynamicTree implements BroadPhaseStrategy {
     nodeStack[nodeStackIndex++] = _root;
 
     while (nodeStackIndex > 0) {
-      DynamicTreeNode node = nodeStack[--nodeStackIndex];
+      final DynamicTreeNode node = nodeStack[--nodeStackIndex];
       if (node == null) {
         continue;
       }
 
       if (AABB.testOverlap(node.aabb, aabb)) {
         if (node.child1 == null) {
-          bool proceed = callback.treeCallback(node.id);
+          final bool proceed = callback.treeCallback(node.id);
           if (!proceed) {
             return;
           }
         } else {
           if (nodeStack.length - nodeStackIndex - 2 <= 0) {
-            List<DynamicTreeNode> newBuffer =
+            final List<DynamicTreeNode> newBuffer =
                 List<DynamicTreeNode>(nodeStack.length * 2);
             BufferUtils.arraycopy(nodeStack, 0, newBuffer, 0, nodeStack.length);
             nodeStack = newBuffer;
@@ -178,7 +178,7 @@ class DynamicTree implements BroadPhaseStrategy {
   void raycast(TreeRayCastCallback callback, RayCastInput input) {
     final Vector2 p1 = input.p1;
     final Vector2 p2 = input.p2;
-    double p1x = p1.x, p2x = p2.x, p1y = p1.y, p2y = p2.y;
+    final double p1x = p1.x, p2x = p2.x, p1y = p1.y, p2y = p2.y;
     double vx, vy;
     double rx, ry;
     double absVx, absVy;
@@ -241,7 +241,7 @@ class DynamicTree implements BroadPhaseStrategy {
       hy = (nodeAABB.upperBound.y - nodeAABB.lowerBound.y) * .5;
       tempx = p1x - cx;
       tempy = p1y - cy;
-      double separation =
+      final double separation =
           (vx * tempx + vy * tempy).abs() - (absVx * hx + absVy * hy);
       if (separation > 0.0) {
         continue;
@@ -254,7 +254,7 @@ class DynamicTree implements BroadPhaseStrategy {
         _subInput.p2.y = p2y;
         _subInput.maxFraction = maxFraction;
 
-        double value = callback.raycastCallback(_subInput, node.id);
+        final double value = callback.raycastCallback(_subInput, node.id);
 
         if (value == 0.0) {
           // The client has terminated the ray cast.
@@ -276,7 +276,7 @@ class DynamicTree implements BroadPhaseStrategy {
         }
       } else {
         if (nodeStack.length - nodeStackIndex - 2 <= 0) {
-          List<DynamicTreeNode> newBuffer =
+          final List<DynamicTreeNode> newBuffer =
               List<DynamicTreeNode>(nodeStack.length * 2);
           BufferUtils.arraycopy(nodeStack, 0, newBuffer, 0, nodeStack.length);
           nodeStack = newBuffer;
@@ -297,8 +297,8 @@ class DynamicTree implements BroadPhaseStrategy {
     if (node.child1 == null) {
       return 0;
     }
-    int height1 = _computeHeight(node.child1);
-    int height2 = _computeHeight(node.child2);
+    final int height1 = _computeHeight(node.child1);
+    final int height2 = _computeHeight(node.child2);
     return 1 + Math.max<int>(height1, height2);
   }
 
@@ -341,9 +341,9 @@ class DynamicTree implements BroadPhaseStrategy {
 
       assert((node.child1 == null) == false);
 
-      DynamicTreeNode child1 = node.child1;
-      DynamicTreeNode child2 = node.child2;
-      int balance = (child2.height - child1.height).abs();
+      final DynamicTreeNode child1 = node.child1;
+      final DynamicTreeNode child2 = node.child2;
+      final int balance = (child2.height - child1.height).abs();
       maxBalance = Math.max(maxBalance, balance);
     }
 
@@ -356,7 +356,7 @@ class DynamicTree implements BroadPhaseStrategy {
     }
 
     final DynamicTreeNode root = _root;
-    double rootArea = root.aabb.getPerimeter();
+    final double rootArea = root.aabb.getPerimeter();
 
     double totalArea = 0.0;
     for (int i = 0; i < _nodeCapacity; ++i) {
@@ -376,7 +376,7 @@ class DynamicTree implements BroadPhaseStrategy {
    * Build an optimal tree. Very expensive. For testing.
    */
   void rebuildBottomUp() {
-    List<int> nodes = BufferUtils.allocClearIntList(_nodeCount);
+    final List<int> nodes = BufferUtils.allocClearIntList(_nodeCount);
     int count = 0;
 
     // Build array of leaves. Free the rest.
@@ -386,7 +386,7 @@ class DynamicTree implements BroadPhaseStrategy {
         continue;
       }
 
-      DynamicTreeNode node = _nodes[i];
+      final DynamicTreeNode node = _nodes[i];
       if (node.child1 == null) {
         node.parent = null;
         nodes[count] = i;
@@ -396,17 +396,17 @@ class DynamicTree implements BroadPhaseStrategy {
       }
     }
 
-    AABB b = AABB();
+    final AABB b = AABB();
     while (count > 1) {
       double minCost = double.maxFinite;
       int iMin = -1, jMin = -1;
       for (int i = 0; i < count; ++i) {
-        AABB aabbi = _nodes[nodes[i]].aabb;
+        final AABB aabbi = _nodes[nodes[i]].aabb;
 
         for (int j = i + 1; j < count; ++j) {
-          AABB aabbj = _nodes[nodes[j]].aabb;
+          final AABB aabbj = _nodes[nodes[j]].aabb;
           b.combine2(aabbi, aabbj);
-          double cost = b.getPerimeter();
+          final double cost = b.getPerimeter();
           if (cost < minCost) {
             iMin = i;
             jMin = j;
@@ -415,17 +415,17 @@ class DynamicTree implements BroadPhaseStrategy {
         }
       }
 
-      int index1 = nodes[iMin];
-      int index2 = nodes[jMin];
-      DynamicTreeNode child1 = _nodes[index1];
-      DynamicTreeNode child2 = _nodes[index2];
+      final int index1 = nodes[iMin];
+      final int index2 = nodes[jMin];
+      final DynamicTreeNode child1 = _nodes[index1];
+      final DynamicTreeNode child2 = _nodes[index2];
 
-      DynamicTreeNode parent = _allocateNode();
-      parent.child1 = child1;
-      parent.child2 = child2;
-      parent.height = 1 + Math.max<int>(child1.height, child2.height);
-      parent.aabb.combine2(child1.aabb, child2.aabb);
-      parent.parent = null;
+      final DynamicTreeNode parent = _allocateNode()
+        ..child1 = child1
+        ..child2 = child2
+        ..height = 1 + Math.max<int>(child1.height, child2.height)
+        ..aabb.combine2(child1.aabb, child2.aabb)
+        ..parent = null;
 
       child1.parent = parent;
       child2.parent = parent;
@@ -444,7 +444,7 @@ class DynamicTree implements BroadPhaseStrategy {
     if (_freeList == NULL_NODE) {
       assert(_nodeCount == _nodeCapacity);
 
-      List<DynamicTreeNode> old = _nodes;
+      final List<DynamicTreeNode> old = _nodes;
       _nodeCapacity *= 2;
       _nodes = List<DynamicTreeNode>(_nodeCapacity);
       BufferUtils.arraycopy(old, 0, _nodes, 0, old.length);
@@ -457,7 +457,7 @@ class DynamicTree implements BroadPhaseStrategy {
       }
       _freeList = _nodeCount;
     }
-    int nodeId = _freeList;
+    final int nodeId = _freeList;
     final DynamicTreeNode treeNode = _nodes[nodeId];
     _freeList = treeNode.parent != null ? treeNode.parent.id : NULL_NODE;
 
@@ -485,7 +485,7 @@ class DynamicTree implements BroadPhaseStrategy {
   final AABB _combinedAABB = AABB();
 
   void _insertLeaf(int leaf_index) {
-    DynamicTreeNode leaf = _nodes[leaf_index];
+    final DynamicTreeNode leaf = _nodes[leaf_index];
     if (_root == null) {
       _root = leaf;
       _root.parent = null;
@@ -493,23 +493,23 @@ class DynamicTree implements BroadPhaseStrategy {
     }
 
     // find the best sibling
-    AABB leafAABB = leaf.aabb;
+    final AABB leafAABB = leaf.aabb;
     DynamicTreeNode index = _root;
     while (index.child1 != null) {
       final DynamicTreeNode node = index;
-      DynamicTreeNode child1 = node.child1;
-      DynamicTreeNode child2 = node.child2;
+      final DynamicTreeNode child1 = node.child1;
+      final DynamicTreeNode child2 = node.child2;
 
-      double area = node.aabb.getPerimeter();
+      final double area = node.aabb.getPerimeter();
 
       _combinedAABB.combine2(node.aabb, leafAABB);
-      double combinedArea = _combinedAABB.getPerimeter();
+      final double combinedArea = _combinedAABB.getPerimeter();
 
       // Cost of creating a new parent for this node and the new leaf
-      double cost = 2.0 * combinedArea;
+      final double cost = 2.0 * combinedArea;
 
       // Minimum cost of pushing the leaf further down the tree
-      double inheritanceCost = 2.0 * (combinedArea - area);
+      final double inheritanceCost = 2.0 * (combinedArea - area);
 
       // Cost of descending into child1
       double cost1;
@@ -518,8 +518,8 @@ class DynamicTree implements BroadPhaseStrategy {
         cost1 = _combinedAABB.getPerimeter() + inheritanceCost;
       } else {
         _combinedAABB.combine2(leafAABB, child1.aabb);
-        double oldArea = child1.aabb.getPerimeter();
-        double newArea = _combinedAABB.getPerimeter();
+        final double oldArea = child1.aabb.getPerimeter();
+        final double newArea = _combinedAABB.getPerimeter();
         cost1 = (newArea - oldArea) + inheritanceCost;
       }
 
@@ -530,8 +530,8 @@ class DynamicTree implements BroadPhaseStrategy {
         cost2 = _combinedAABB.getPerimeter() + inheritanceCost;
       } else {
         _combinedAABB.combine2(leafAABB, child2.aabb);
-        double oldArea = child2.aabb.getPerimeter();
-        double newArea = _combinedAABB.getPerimeter();
+        final double oldArea = child2.aabb.getPerimeter();
+        final double newArea = _combinedAABB.getPerimeter();
         cost2 = newArea - oldArea + inheritanceCost;
       }
 
@@ -548,8 +548,8 @@ class DynamicTree implements BroadPhaseStrategy {
       }
     }
 
-    DynamicTreeNode sibling = index;
-    DynamicTreeNode oldParent = _nodes[sibling.id].parent;
+    final DynamicTreeNode sibling = index;
+    final DynamicTreeNode oldParent = _nodes[sibling.id].parent;
     final DynamicTreeNode newParent = _allocateNode();
     newParent.parent = oldParent;
     newParent.userData = null;
@@ -582,8 +582,8 @@ class DynamicTree implements BroadPhaseStrategy {
     while (index != null) {
       index = _balance(index);
 
-      DynamicTreeNode child1 = index.child1;
-      DynamicTreeNode child2 = index.child2;
+      final DynamicTreeNode child1 = index.child1;
+      final DynamicTreeNode child2 = index.child2;
 
       assert(child1 != null);
       assert(child2 != null);
@@ -602,8 +602,8 @@ class DynamicTree implements BroadPhaseStrategy {
       return;
     }
 
-    DynamicTreeNode parent = leaf.parent;
-    DynamicTreeNode grandParent = parent.parent;
+    final DynamicTreeNode parent = leaf.parent;
+    final DynamicTreeNode grandParent = parent.parent;
     DynamicTreeNode sibling;
     if (parent.child1 == leaf) {
       sibling = parent.child2;
@@ -626,8 +626,8 @@ class DynamicTree implements BroadPhaseStrategy {
       while (index != null) {
         index = _balance(index);
 
-        DynamicTreeNode child1 = index.child1;
-        DynamicTreeNode child2 = index.child2;
+        final DynamicTreeNode child1 = index.child1;
+        final DynamicTreeNode child2 = index.child2;
 
         index.aabb.combine2(child1.aabb, child2.aabb);
         index.height = 1 + Math.max<int>(child1.height, child2.height);
@@ -648,27 +648,27 @@ class DynamicTree implements BroadPhaseStrategy {
   DynamicTreeNode _balance(DynamicTreeNode iA) {
     assert(iA != null);
 
-    DynamicTreeNode A = iA;
+    final DynamicTreeNode A = iA;
     if (A.child1 == null || A.height < 2) {
       return iA;
     }
 
-    DynamicTreeNode iB = A.child1;
-    DynamicTreeNode iC = A.child2;
+    final DynamicTreeNode iB = A.child1;
+    final DynamicTreeNode iC = A.child2;
     assert(0 <= iB.id && iB.id < _nodeCapacity);
     assert(0 <= iC.id && iC.id < _nodeCapacity);
 
-    DynamicTreeNode B = iB;
-    DynamicTreeNode C = iC;
+    final DynamicTreeNode B = iB;
+    final DynamicTreeNode C = iC;
 
-    int balance = C.height - B.height;
+    final int balance = C.height - B.height;
 
     // Rotate C up
     if (balance > 1) {
-      DynamicTreeNode iF = C.child1;
-      DynamicTreeNode iG = C.child2;
-      DynamicTreeNode F = iF;
-      DynamicTreeNode G = iG;
+      final DynamicTreeNode iF = C.child1;
+      final DynamicTreeNode iG = C.child2;
+      final DynamicTreeNode F = iF;
+      final DynamicTreeNode G = iG;
       assert(F != null);
       assert(G != null);
       assert(0 <= iF.id && iF.id < _nodeCapacity);
@@ -717,10 +717,10 @@ class DynamicTree implements BroadPhaseStrategy {
 
     // Rotate B up
     if (balance < -1) {
-      DynamicTreeNode iD = B.child1;
-      DynamicTreeNode iE = B.child2;
-      DynamicTreeNode D = iD;
-      DynamicTreeNode E = iE;
+      final DynamicTreeNode iD = B.child1;
+      final DynamicTreeNode iE = B.child2;
+      final DynamicTreeNode D = iD;
+      final DynamicTreeNode E = iE;
       assert(0 <= iD.id && iD.id < _nodeCapacity);
       assert(0 <= iE.id && iE.id < _nodeCapacity);
 
@@ -778,8 +778,8 @@ class DynamicTree implements BroadPhaseStrategy {
       assert(node.parent == null);
     }
 
-    DynamicTreeNode child1 = node.child1;
-    DynamicTreeNode child2 = node.child2;
+    final DynamicTreeNode child1 = node.child1;
+    final DynamicTreeNode child2 = node.child2;
 
     if (node.child1 == null) {
       assert(child1 == null);
@@ -803,8 +803,8 @@ class DynamicTree implements BroadPhaseStrategy {
       return;
     }
 
-    DynamicTreeNode child1 = node.child1;
-    DynamicTreeNode child2 = node.child2;
+    final DynamicTreeNode child1 = node.child1;
+    final DynamicTreeNode child2 = node.child2;
 
     if (node.child1 == null) {
       assert(child1 == null);
@@ -816,13 +816,12 @@ class DynamicTree implements BroadPhaseStrategy {
     assert(child1 != null && 0 <= child1.id && child1.id < _nodeCapacity);
     assert(child2 != null && 0 <= child2.id && child2.id < _nodeCapacity);
 
-    int height1 = child1.height;
-    int height2 = child2.height;
-    int height;
-    height = 1 + Math.max<int>(height1, height2);
+    final int height1 = child1.height;
+    final int height2 = child2.height;
+    final int height = 1 + Math.max<int>(height1, height2);
     assert(node.height == height);
 
-    AABB aabb = AABB();
+    final AABB aabb = AABB();
     aabb.combine2(child1.aabb, child2.aabb);
 
     assert(MathUtils.vector2Equals(aabb.lowerBound, node.aabb.lowerBound));
@@ -836,7 +835,7 @@ class DynamicTree implements BroadPhaseStrategy {
     if (_root == null) {
       return;
     }
-    int height = computeHeight();
+    final int height = computeHeight();
     drawTreeX(argDraw, _root, 0, height);
   }
 
