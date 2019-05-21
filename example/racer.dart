@@ -26,8 +26,8 @@ library racer;
 
 import 'dart:html' hide Body;
 import 'dart:math';
-import 'package:box2d/box2d.dart';
-import 'package:box2d/src/math_utils.dart' as MathUtils;
+import 'package:box2d_flame/box2d.dart';
+import 'package:box2d_flame/src/math_utils.dart' as MathUtils;
 
 import 'demo.dart';
 
@@ -81,7 +81,7 @@ class Racer extends Demo implements ContactListener {
   void preSolve(Contact contact, Manifold oldManifold) {}
   void postSolve(Contact contact, ContactImpulse impulse) {}
 
-  double radians(double deg) => deg * (PI / 180.0);
+  double radians(double deg) => deg * (pi / 180.0);
 
   void _createGround() {
     BodyDef def = new BodyDef();
