@@ -418,7 +418,7 @@ class PolygonShape extends Shape {
         double distanceVecX = pLocalx - vertex.x;
         double distanceVecY = pLocaly - vertex.y;
         double distance2 =
-            (distanceVecX * distanceVecX + distanceVecY * distanceVecY);
+            distanceVecX * distanceVecX + distanceVecY * distanceVecY;
         if (minDistance2 > distance2) {
           minDistanceX = distanceVecX;
           minDistanceY = distanceVecY;

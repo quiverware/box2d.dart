@@ -143,7 +143,7 @@ class RevoluteJoint extends Joint {
     double mA = _invMassA, mB = _invMassB;
     double iA = _invIA, iB = _invIB;
 
-    bool fixedRotation = (iA + iB == 0.0);
+    bool fixedRotation = iA + iB == 0.0;
 
     double ex_x = mA + mB + _rA.y * _rA.y * iA + _rB.y * _rB.y * iB;
     double ey_x = -_rA.y * _rA.x * iA - _rB.y * _rB.x * iB;
@@ -228,7 +228,7 @@ class RevoluteJoint extends Joint {
     double mA = _invMassA, mB = _invMassB;
     double iA = _invIA, iB = _invIB;
 
-    bool fixedRotation = (iA + iB == 0.0);
+    bool fixedRotation = iA + iB == 0.0;
 
     // Solve motor constraint.
     if (_enableMotor &&
@@ -372,7 +372,7 @@ class RevoluteJoint extends Joint {
     double angularError = 0.0;
     double positionError = 0.0;
 
-    bool fixedRotation = (_invIA + _invIB == 0.0);
+    bool fixedRotation = _invIA + _invIB == 0.0;
 
     // Solve angular limit constraint.
     if (_enableLimit &&

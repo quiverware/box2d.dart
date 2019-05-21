@@ -132,7 +132,7 @@ class Tire {
   final double _maxDriveForce;
   final double _maxLateralImpulse;
   double _currentTraction;
-  final Set<GroundArea> _groundAreas = Set<GroundArea>();
+  final Set<GroundArea> _groundAreas = <GroundArea>{};
 
   // Cached Vectors to reduce unnecessary object creation.
   final Vector2 _worldLeft = Vector2(1.0, 0.0);

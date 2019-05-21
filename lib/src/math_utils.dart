@@ -64,7 +64,7 @@ bool approxEquals(num expected, num actual, [num tolerance = null]) {
   if (tolerance == null) {
     tolerance = (expected / 1e4).abs();
   }
-  return ((expected - actual).abs() <= tolerance);
+  return (expected - actual).abs() <= tolerance;
 }
 
 Vector2 crossDblVec2(double s, Vector2 a) {
@@ -75,7 +75,7 @@ bool vector2Equals(Vector2 a, Vector2 b) {
   if ((a == null) || (b == null)) return false;
   if (identical(a, b)) return true;
   if (a is! Vector2 || b is! Vector2) return false;
-  return ((a.x == b.x) && (a.y == b.y));
+  return (a.x == b.x) && (a.y == b.y);
 }
 
 bool vector2IsValid(Vector2 v) {

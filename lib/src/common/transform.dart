@@ -95,15 +95,15 @@ class Transform {
   static Vector2 mulTransVec2(final Transform T, final Vector2 v) {
     final double px = v.x - T.p.x;
     final double py = v.y - T.p.y;
-    return Vector2((T.q.c * px + T.q.s * py), (-T.q.s * px + T.q.c * py));
+    return Vector2(T.q.c * px + T.q.s * py, -T.q.s * px + T.q.c * py);
   }
 
   static void mulTransToOutVec2(
       final Transform T, final Vector2 v, final Vector2 out) {
     final double px = v.x - T.p.x;
     final double py = v.y - T.p.y;
-    final double tempy = (-T.q.s * px + T.q.c * py);
-    out.x = (T.q.c * px + T.q.s * py);
+    final double tempy = -T.q.s * px + T.q.c * py;
+    out.x = T.q.c * px + T.q.s * py;
     out.y = tempy;
   }
 
@@ -112,8 +112,8 @@ class Transform {
     assert(v != out);
     final double px = v.x - T.p.x;
     final double py = v.y - T.p.y;
-    out.x = (T.q.c * px + T.q.s * py);
-    out.y = (-T.q.s * px + T.q.c * py);
+    out.x = T.q.c * px + T.q.s * py;
+    out.y = -T.q.s * px + T.q.c * py;
   }
 
   static Transform mul(final Transform A, final Transform B) {

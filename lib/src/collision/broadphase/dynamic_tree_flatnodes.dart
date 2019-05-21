@@ -776,7 +776,7 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
 
     argDraw.getViewportTranform().getWorldToScreen(a.upperBound, _textVec);
     argDraw.drawStringXY(
-        _textVec.x, _textVec.y, "$node-${(spot + 1)}/$height", _color);
+        _textVec.x, _textVec.y, "$node-${spot + 1}/$height", _color);
 
     int c1 = _child1[node];
     int c2 = _child2[node];

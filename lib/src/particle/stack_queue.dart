@@ -25,12 +25,12 @@
 part of box2d;
 
 class StackQueue<T> {
+  StackQueue();
+
   List<T> _buffer;
   int _front = 0;
   int _back = 0;
   int _end = 0;
-
-  StackQueue() {}
 
   void reset(List<T> buffer) {
     _buffer = buffer;

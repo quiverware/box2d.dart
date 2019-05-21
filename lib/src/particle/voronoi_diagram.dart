@@ -34,17 +34,18 @@ class VoronoiGenerator {
 }
 
 class VoronoiDiagramTask {
-  int _x = 0, _y = 0, _i = 0;
-  VoronoiGenerator _generator;
-
-  VoronoiDiagramTask.zero() {}
-
   VoronoiDiagramTask(int x, int y, int i, VoronoiGenerator g) {
     _x = x;
     _y = y;
     _i = i;
     _generator = g;
   }
+
+  VoronoiDiagramTask.zero();
+
+  int _x = 0, _y = 0, _i = 0;
+
+  VoronoiGenerator _generator;
 
   VoronoiDiagramTask set(int x, int y, int i, VoronoiGenerator g) {
     _x = x;

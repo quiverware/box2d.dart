@@ -29,8 +29,7 @@ part of box2d;
  * @author Daniel Murphy
  */
 class JointDef {
-  JointDef(JointType type) {
-    this.type = type;
+  JointDef(this.type) {
     collideConnected = false;
   }
   /**

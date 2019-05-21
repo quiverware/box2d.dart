@@ -349,8 +349,8 @@ class Collision {
     final double cy = (xfBq.s * circlep.x + xfBq.c * circlep.y) + xfB.p.y;
     final double px = cx - xfA.p.x;
     final double py = cy - xfA.p.y;
-    final double cLocalx = (xfAq.c * px + xfAq.s * py);
-    final double cLocaly = (-xfAq.s * px + xfAq.c * py);
+    final double cLocalx = xfAq.c * px + xfAq.s * py;
+    final double cLocaly = -xfAq.s * px + xfAq.c * py;
     // end inline
 
     // Find the min separating edge.
@@ -792,8 +792,8 @@ class Collision {
         Vector2 out = cp.localPoint;
         final double px = _clipPoints2[i].v.x - xf2.p.x;
         final double py = _clipPoints2[i].v.y - xf2.p.y;
-        out.x = (xf2.q.c * px + xf2.q.s * py);
-        out.y = (-xf2.q.s * px + xf2.q.c * py);
+        out.x = xf2.q.c * px + xf2.q.s * py;
+        out.y = -xf2.q.s * px + xf2.q.c * py;
         cp.id.set(_clipPoints2[i].id);
         if (flip) {
           // Swap features

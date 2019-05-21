@@ -52,7 +52,7 @@ class ContactID implements Comparable<ContactID> {
   int get typeB => _data[3];
 
   int getKey() {
-    return (indexA << 24) | (indexB << 16) | (typeA << 8) | (typeB);
+    return (indexA << 24) | (indexB << 16) | (typeA << 8) | typeB;
   }
 
   bool isEqual(final ContactID cid) {

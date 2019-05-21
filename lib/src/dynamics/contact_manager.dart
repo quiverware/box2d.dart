@@ -31,20 +31,19 @@ part of box2d;
  */
 
 class ContactManager implements PairCallback {
+  ContactManager(this._pool, this.broadPhase) {
+    contactList = null;
+    contactFilter = ContactFilter();
+    contactListener = null;
+  }
+
+  final World _pool;
   BroadPhase broadPhase;
+
   Contact contactList;
   int contactCount = 0;
   ContactFilter contactFilter;
   ContactListener contactListener;
-
-  final World _pool;
-
-  ContactManager(this._pool, BroadPhase broadPhase_) {
-    contactList = null;
-    contactFilter = ContactFilter();
-    contactListener = null;
-    broadPhase = broadPhase_;
-  }
 
   /**
    * Broad-phase callback.

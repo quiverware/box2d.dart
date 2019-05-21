@@ -88,10 +88,9 @@ abstract class Joint {
   // double _invMassA, _invIA;
   // double _invMassB, _invIB;
 
-  Joint(IWorldPool worldPool, JointDef def) : _type = def.type {
+  Joint(this.pool, JointDef def) : _type = def.type {
     assert(def.bodyA != def.bodyB);
 
-    pool = worldPool;
     _prev = null;
     _next = null;
     _bodyA = def.bodyA;

@@ -82,12 +82,12 @@ class CircleStress extends Demo {
       // Corners
       final cornerDef = BodyDef();
       sd.setAsBoxXY(20.0, 3.0);
-      cornerDef.angle = (-Math.pi / 4.0);
+      cornerDef.angle = -Math.pi / 4.0;
       cornerDef.position = Vector2(-35.0, 8.0);
       Body myBod = world.createBody(cornerDef);
       bodies.add(myBod);
       myBod.createFixtureFromShape(sd);
-      cornerDef.angle = (Math.pi / 4.0);
+      cornerDef.angle = Math.pi / 4.0;
       cornerDef.position = Vector2(35.0, 8.0);
       myBod = world.createBody(cornerDef);
       bodies.add(myBod);

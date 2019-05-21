@@ -404,7 +404,7 @@ class ContactSolver {
 
         // Clamp the accumulated impulse
         double a = vcp.normalImpulse + lambda;
-        final double newImpulse = (a > 0.0 ? a : 0.0);
+        final double newImpulse = a > 0.0 ? a : 0.0;
         lambda = newImpulse - vcp.normalImpulse;
         vcp.normalImpulse = newImpulse;
 

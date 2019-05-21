@@ -195,7 +195,7 @@ class WeldJoint extends Joint {
       _bias = C * h * k * _gamma;
 
       invM += _gamma;
-      _mass.setEntry(2, 2, (invM != 0.0 ? 1.0 / invM : 0.0));
+      _mass.setEntry(2, 2, invM != 0.0 ? 1.0 / invM : 0.0);
     } else {
       MathUtils.matrix3GetSymInverse33(K, _mass);
       _gamma = 0.0;

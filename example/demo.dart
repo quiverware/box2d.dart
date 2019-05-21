@@ -36,7 +36,7 @@ abstract class Demo {
   static const int WORLD_POOL_CONTAINER_SIZE = 10;
 
   /** All of the bodies in a simulation. */
-  List<Body> bodies = List<Body>();
+  List<Body> bodies = <Body>[];
 
   /** The default canvas width and height. */
   static const int CANVAS_WIDTH = 900;
