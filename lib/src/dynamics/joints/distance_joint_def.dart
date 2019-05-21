@@ -34,10 +34,10 @@ part of box2d;
 
 class DistanceJointDef extends JointDef {
   /** The local anchor point relative to body1's origin. */
-  final Vector2 localAnchorA = new Vector2.zero();
+  final Vector2 localAnchorA = Vector2.zero();
 
   /** The local anchor point relative to body2's origin. */
-  final Vector2 localAnchorB = new Vector2.zero();
+  final Vector2 localAnchorB = Vector2.zero();
 
   /** The equilibrium length between the anchor points. */
   double length = 1.0;

@@ -50,8 +50,8 @@ class ManifoldPoint {
    * Blank manifold point with everything zeroed out.
    */
   ManifoldPoint()
-      : localPoint = new Vector2.zero(),
-        id = new ContactID();
+      : localPoint = Vector2.zero(),
+        id = ContactID();
 
   /**
    * Creates a manifold point as a copy of the given point
@@ -61,7 +61,7 @@ class ManifoldPoint {
       : localPoint = cp.localPoint.clone(),
         normalImpulse = cp.normalImpulse,
         tangentImpulse = cp.tangentImpulse,
-        id = new ContactID.copy(cp.id);
+        id = ContactID.copy(cp.id);
 
   /**
    * Sets this manifold point form the given one

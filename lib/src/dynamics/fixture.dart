@@ -47,7 +47,7 @@ class Fixture {
   List<FixtureProxy> _proxies;
   int _proxyCount = 0;
 
-  final Filter _filter = new Filter();
+  final Filter _filter = Filter();
 
   bool _isSensor = false;
 
@@ -291,9 +291,9 @@ class Fixture {
     // Reserve proxy space
     int childCount = _shape.getChildCount();
     if (_proxies == null) {
-      _proxies = new List<FixtureProxy>(childCount);
+      _proxies = List<FixtureProxy>(childCount);
       for (int i = 0; i < childCount; i++) {
-        _proxies[i] = new FixtureProxy();
+        _proxies[i] = FixtureProxy();
         _proxies[i].fixture = null;
         _proxies[i].proxyId = BroadPhase.NULL_PROXY;
       }
@@ -302,11 +302,11 @@ class Fixture {
     if (_proxies.length < childCount) {
       List<FixtureProxy> old = _proxies;
       int newLen = Math.max(old.length * 2, childCount);
-      _proxies = new List<FixtureProxy>(newLen);
+      _proxies = List<FixtureProxy>(newLen);
       BufferUtils.arraycopy(old, 0, _proxies, 0, old.length);
       for (int i = 0; i < newLen; i++) {
         if (i >= old.length) {
-          _proxies[i] = new FixtureProxy();
+          _proxies[i] = FixtureProxy();
         }
         _proxies[i].fixture = null;
         _proxies[i].proxyId = BroadPhase.NULL_PROXY;
@@ -362,9 +362,9 @@ class Fixture {
     _proxyCount = 0;
   }
 
-  final AABB _pool1 = new AABB();
-  final AABB _pool2 = new AABB();
-  final Vector2 _displacement = new Vector2.zero();
+  final AABB _pool1 = AABB();
+  final AABB _pool2 = AABB();
+  final Vector2 _displacement = Vector2.zero();
 
   /**
    * Internal method

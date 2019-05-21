@@ -59,20 +59,20 @@ class WeldJoint extends Joint {
   // Solver temp
   int _indexA = 0;
   int _indexB = 0;
-  final Vector2 _rA = new Vector2.zero();
-  final Vector2 _rB = new Vector2.zero();
-  final Vector2 _localCenterA = new Vector2.zero();
-  final Vector2 _localCenterB = new Vector2.zero();
+  final Vector2 _rA = Vector2.zero();
+  final Vector2 _rB = Vector2.zero();
+  final Vector2 _localCenterA = Vector2.zero();
+  final Vector2 _localCenterB = Vector2.zero();
   double _invMassA = 0.0;
   double _invMassB = 0.0;
   double _invIA = 0.0;
   double _invIB = 0.0;
-  final Matrix3 _mass = new Matrix3.zero();
+  final Matrix3 _mass = Matrix3.zero();
 
   WeldJoint(IWorldPool argWorld, WeldJointDef def)
-      : _localAnchorA = new Vector2.copy(def.localAnchorA),
-        _localAnchorB = new Vector2.copy(def.localAnchorB),
-        _impulse = new Vector3.zero(),
+      : _localAnchorA = Vector2.copy(def.localAnchorA),
+        _localAnchorB = Vector2.copy(def.localAnchorB),
+        _impulse = Vector3.zero(),
         super(argWorld, def) {
     _referenceAngle = def.referenceAngle;
     _frequencyHz = def.frequencyHz;

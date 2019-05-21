@@ -34,12 +34,12 @@ class RopeJointDef extends JointDef {
   /**
    * The local anchor point relative to bodyA's origin.
    */
-  final Vector2 localAnchorA = new Vector2.zero();
+  final Vector2 localAnchorA = Vector2.zero();
 
   /**
    * The local anchor point relative to bodyB's origin.
    */
-  final Vector2 localAnchorB = new Vector2.zero();
+  final Vector2 localAnchorB = Vector2.zero();
 
   /**
    * The maximum length of the rope. Warning: this must be larger than b2_linearSlop or the joint

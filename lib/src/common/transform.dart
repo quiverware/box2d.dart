@@ -37,8 +37,8 @@ class Transform {
 
   /** The default constructor. */
   Transform.zero()
-      : p = new Vector2.zero(),
-        q = new Rot();
+      : p = Vector2.zero(),
+        q = Rot();
 
   /** Initialize as a copy of another transform. */
   Transform.clone(final Transform xf)
@@ -75,7 +75,7 @@ class Transform {
   }
 
   static Vector2 mulVec2(final Transform T, final Vector2 v) {
-    return new Vector2((T.q.c * v.x - T.q.s * v.y) + T.p.x,
+    return Vector2((T.q.c * v.x - T.q.s * v.y) + T.p.x,
         (T.q.s * v.x + T.q.c * v.y) + T.p.y);
   }
 
@@ -95,7 +95,7 @@ class Transform {
   static Vector2 mulTransVec2(final Transform T, final Vector2 v) {
     final double px = v.x - T.p.x;
     final double py = v.y - T.p.y;
-    return new Vector2((T.q.c * px + T.q.s * py), (-T.q.s * px + T.q.c * py));
+    return Vector2((T.q.c * px + T.q.s * py), (-T.q.s * px + T.q.c * py));
   }
 
   static void mulTransToOutVec2(
@@ -117,7 +117,7 @@ class Transform {
   }
 
   static Transform mul(final Transform A, final Transform B) {
-    Transform C = new Transform.zero();
+    Transform C = Transform.zero();
     Rot.mulUnsafe(A.q, B.q, C.q);
     Rot.mulToOutUnsafe(A.q, B.p, C.p);
     C.p.add(A.p);
@@ -141,10 +141,10 @@ class Transform {
     out.p.add(A.p);
   }
 
-  static Vector2 _pool = new Vector2.zero();
+  static Vector2 _pool = Vector2.zero();
 
   static Transform mulTrans(final Transform A, final Transform B) {
-    Transform C = new Transform.zero();
+    Transform C = Transform.zero();
     Rot.mulTransUnsafe(A.q, B.q, C.q);
     (_pool..setFrom(B.p)).sub(A.p);
     Rot.mulTransUnsafeVec2(A.q, _pool, C.p);

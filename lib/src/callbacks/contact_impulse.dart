@@ -30,7 +30,7 @@ part of box2d;
  * b2Manifold.
  */
 class ContactImpulse {
-  Float64List normalImpulses = new Float64List(Settings.maxManifoldPoints);
-  Float64List tangentImpulses = new Float64List(Settings.maxManifoldPoints);
+  Float64List normalImpulses = Float64List(Settings.maxManifoldPoints);
+  Float64List tangentImpulses = Float64List(Settings.maxManifoldPoints);
   int count = 0;
 }

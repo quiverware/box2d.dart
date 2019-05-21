@@ -33,7 +33,7 @@ class ConstantVolumeJointDef extends JointDef {
   double frequencyHz = 0.0;
   double dampingRatio = 0.0;
 
-  List<Body> bodies = new List<Body>();
+  List<Body> bodies = List<Body>();
   List<DistanceJoint> joints;
 
   ConstantVolumeJointDef() : super(JointType.CONSTANT_VOLUME) {
@@ -61,7 +61,7 @@ class ConstantVolumeJointDef extends JointDef {
   void addBodyAndJoint(Body argBody, DistanceJoint argJoint) {
     addBody(argBody);
     if (joints == null) {
-      joints = new List<DistanceJoint>();
+      joints = List<DistanceJoint>();
     }
     joints.add(argJoint);
   }

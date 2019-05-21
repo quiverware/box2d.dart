@@ -70,7 +70,7 @@ class Rot {
   }
 
   Rot clone() {
-    Rot copy = new Rot();
+    Rot copy = Rot();
     copy.s = s;
     copy.c = c;
     return copy;

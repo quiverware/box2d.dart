@@ -51,8 +51,8 @@ class FrictionJointDef extends JointDef {
   double maxTorque = 0.0;
 
   FrictionJointDef()
-      : localAnchorA = new Vector2.zero(),
-        localAnchorB = new Vector2.zero(),
+      : localAnchorA = Vector2.zero(),
+        localAnchorB = Vector2.zero(),
         super(JointType.FRICTION);
 
   /**
