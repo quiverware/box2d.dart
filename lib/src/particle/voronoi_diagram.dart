@@ -139,8 +139,8 @@ class VoronoiDiagram {
       final VoronoiGenerator g = _generatorBuffer[k];
       g.center.x = inverseRadius * (g.center.x - _lower.x);
       g.center.y = inverseRadius * (g.center.y - _lower.y);
-      final int x = Math.max(0, Math.min(g.center.x.toInt(), _countX - 1));
-      final int y = Math.max(0, Math.min(g.center.y.toInt(), _countY - 1));
+      final int x = math.max(0, math.min(g.center.x.toInt(), _countX - 1));
+      final int y = math.max(0, math.min(g.center.y.toInt(), _countY - 1));
       _queue.push(_taskPool.pop().set(x, y, x + y * _countX, g));
     }
     while (!_queue.empty()) {

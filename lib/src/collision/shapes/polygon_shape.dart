@@ -41,13 +41,13 @@ class PolygonShape extends Shape {
    * The vertices of the shape. Note: use getVertexCount(), not _vertices.length, to get number of
    * active vertices.
    */
-  final List<Vector2> vertices = List<Vector2>(Settings.maxPolygonVertices);
+  final List<Vector2> vertices = List<Vector2>(settings.maxPolygonVertices);
 
   /**
    * The normals of the shape. Note: use getVertexCount(), not _normals.length, to get number of
    * active normals.
    */
-  final List<Vector2> normals = List<Vector2>(Settings.maxPolygonVertices);
+  final List<Vector2> normals = List<Vector2>(settings.maxPolygonVertices);
 
   /**
    * Number of active vertices in the shape.
@@ -69,7 +69,7 @@ class PolygonShape extends Shape {
     for (int i = 0; i < normals.length; i++) {
       normals[i] = Vector2.zero();
     }
-    radius = Settings.polygonRadius;
+    radius = settings.polygonRadius;
   }
 
   @override
@@ -86,7 +86,7 @@ class PolygonShape extends Shape {
 
   /**
    * Create a convex hull from the given array of points. The count must be in the range [3,
-   * Settings.maxPolygonVertices].
+   * settings.maxPolygonVertices].
    *
    * @warning the points may be re-ordered, even if they form a convex polygon.
    * @warning collinear points are removed.
@@ -97,31 +97,31 @@ class PolygonShape extends Shape {
 
   /**
    * Create a convex hull from the given array of points. The count must be in the range [3,
-   * Settings.maxPolygonVertices]. This method takes an arraypool for pooling.
+   * settings.maxPolygonVertices]. This method takes an arraypool for pooling.
    *
    * @warning the points may be re-ordered, even if they form a convex polygon.
    * @warning collinear points are removed.
    */
   void setWithPools(final List<Vector2> verts, final int num,
       final Vec2Array vecPool, final IntArray intPool) {
-    assert(3 <= num && num <= Settings.maxPolygonVertices);
+    assert(3 <= num && num <= settings.maxPolygonVertices);
     if (num < 3) {
       setAsBoxXY(1.0, 1.0);
       return;
     }
 
-    int n = Math.min(num, Settings.maxPolygonVertices);
+    int n = math.min(num, settings.maxPolygonVertices);
 
     // Perform welding and copy vertices into local buffer.
     final List<Vector2> ps = (vecPool != null)
-        ? vecPool.get(Settings.maxPolygonVertices)
-        : List<Vector2>(Settings.maxPolygonVertices);
+        ? vecPool.get(settings.maxPolygonVertices)
+        : List<Vector2>(settings.maxPolygonVertices);
     int tempCount = 0;
     for (int i = 0; i < n; ++i) {
       final Vector2 v = verts[i];
       bool unique = true;
       for (int j = 0; j < tempCount; ++j) {
-        if (MathUtils.distanceSquared(v, ps[j]) < 0.5 * Settings.linearSlop) {
+        if (math_utils.distanceSquared(v, ps[j]) < 0.5 * settings.linearSlop) {
           unique = false;
           break;
         }
@@ -155,8 +155,8 @@ class PolygonShape extends Shape {
     }
 
     final List<int> hull = (intPool != null)
-        ? intPool.get(Settings.maxPolygonVertices)
-        : BufferUtils.allocClearIntList(Settings.maxPolygonVertices);
+        ? intPool.get(settings.maxPolygonVertices)
+        : buffer_utils.allocClearIntList(settings.maxPolygonVertices);
     int m = 0;
     int ih = i0;
 
@@ -215,7 +215,7 @@ class PolygonShape extends Shape {
         ..setFrom(vertices[i2])
         ..sub(vertices[i1]);
 
-      assert(edge.length2 > Settings.EPSILON * Settings.EPSILON);
+      assert(edge.length2 > settings.EPSILON * settings.EPSILON);
       edge.scaleOrthogonalInto(-1.0, normals[i]);
       normals[i].normalize();
     }
@@ -429,7 +429,7 @@ class PolygonShape extends Shape {
           minDistance2 = distance2;
         }
       }
-      distance = Math.sqrt(minDistance2);
+      distance = math.sqrt(minDistance2);
       normalOut.x = xfqc * minDistanceX - xfqs * minDistanceY;
       normalOut.y = xfqs * minDistanceX + xfqc * minDistanceY;
       normalOut.normalize();
@@ -565,7 +565,7 @@ class PolygonShape extends Shape {
     }
 
     // Centroid
-    assert(area > Settings.EPSILON);
+    assert(area > settings.EPSILON);
     out.scale(1.0 / area);
   }
 
@@ -649,7 +649,7 @@ class PolygonShape extends Shape {
     massData.mass = density * area;
 
     // Center of mass
-    assert(area > Settings.EPSILON);
+    assert(area > settings.EPSILON);
     center.scale(1.0 / area);
     massData.center
       ..setFrom(center)

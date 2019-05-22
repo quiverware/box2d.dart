@@ -151,7 +151,7 @@ class DistanceJoint extends Joint {
 
     // Handle singularity.
     final double length = _u.length;
-    if (length > Settings.linearSlop) {
+    if (length > settings.linearSlop) {
       _u.x *= 1.0 / length;
       _u.y *= 1.0 / length;
     } else {
@@ -170,7 +170,7 @@ class DistanceJoint extends Joint {
       final double C = length - _length;
 
       // Frequency
-      final double omega = 2.0 * Math.pi * _frequencyHz;
+      final double omega = 2.0 * math.pi * _frequencyHz;
 
       // Damping coefficient
       final double d = 2.0 * _mass * _dampingRatio * omega;
@@ -293,8 +293,8 @@ class DistanceJoint extends Joint {
 
     final double length = u.normalize();
     double C = length - _length;
-    C = MathUtils.clampDouble(
-        C, -Settings.maxLinearCorrection, Settings.maxLinearCorrection);
+    C = math_utils.clampDouble(
+        C, -settings.maxLinearCorrection, settings.maxLinearCorrection);
 
     final double impulse = -_mass * C;
     final double Px = impulse * u.x;
@@ -315,6 +315,6 @@ class DistanceJoint extends Joint {
     pool.pushVec2(3);
     pool.pushRot(2);
 
-    return C.abs() < Settings.linearSlop;
+    return C.abs() < settings.linearSlop;
   }
 }

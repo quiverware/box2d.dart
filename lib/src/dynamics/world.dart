@@ -567,9 +567,9 @@ class World {
     step.velocityIterations = velocityIterations;
     step.positionIterations = positionIterations;
     if (dt > 0.0) {
-      step.inv_dt = 1.0 / dt;
+      step.inverseDt = 1.0 / dt;
     } else {
-      step.inv_dt = 0.0;
+      step.inverseDt = 0.0;
     }
 
     step.dtRatio = _inv_dt0 * dt;
@@ -600,7 +600,7 @@ class World {
     }
 
     if (step.dt > 0.0) {
-      _inv_dt0 = step.inv_dt;
+      _inv_dt0 = step.inverseDt;
     }
 
     if ((_flags & CLEAR_FORCES) == CLEAR_FORCES) {
@@ -1111,7 +1111,7 @@ class World {
 
   void solveTOI(final TimeStep step) {
     final Island island = toiIsland;
-    island.init(2 * Settings.maxTOIContacts, Settings.maxTOIContacts, 0,
+    island.init(2 * settings.maxTOIContacts, settings.maxTOIContacts, 0,
         _contactManager.contactListener);
     if (_stepComplete) {
       for (Body b = bodyList; b != null; b = b._next) {
@@ -1140,7 +1140,7 @@ class World {
         }
 
         // Prevent excessive sub-stepping.
-        if (c._toiCount > Settings.maxSubSteps) {
+        if (c._toiCount > settings.maxSubSteps) {
           continue;
         }
 
@@ -1210,7 +1210,7 @@ class World {
           // Beta is the fraction of the remaining portion of the .
           final double beta = toiOutput.t;
           if (toiOutput.state == TOIOutputState.TOUCHING) {
-            alpha = Math.min(alpha0 + (1.0 - alpha0) * beta, 1.0);
+            alpha = math.min(alpha0 + (1.0 - alpha0) * beta, 1.0);
           } else {
             alpha = 1.0;
           }
@@ -1226,7 +1226,7 @@ class World {
         }
       }
 
-      if (minContact == null || 1.0 - 10.0 * Settings.EPSILON < minAlpha) {
+      if (minContact == null || 1.0 - 10.0 * settings.EPSILON < minAlpha) {
         // No more TOI events. Done!
         _stepComplete = true;
         break;
@@ -1355,7 +1355,7 @@ class World {
       }
 
       subStep.dt = (1.0 - minAlpha) * step.dt;
-      subStep.inv_dt = 1.0 / subStep.dt;
+      subStep.inverseDt = 1.0 / subStep.dt;
       subStep.dtRatio = 1.0;
       subStep.positionIterations = 20;
       subStep.velocityIterations = step.velocityIterations;
@@ -1492,9 +1492,9 @@ class World {
         {
           final PolygonShape poly = fixture.getShape();
           final int vertexCount = poly.count;
-          assert(vertexCount <= Settings.maxPolygonVertices);
+          assert(vertexCount <= settings.maxPolygonVertices);
           final List<Vector2> vertices =
-              tlvertices.get(Settings.maxPolygonVertices);
+              tlvertices.get(settings.maxPolygonVertices);
 
           for (int i = 0; i < vertexCount; ++i) {
             // vertices[i] = Mul(xf, poly.m_vertices[i]);

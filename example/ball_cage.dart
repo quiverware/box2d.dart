@@ -22,7 +22,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-library BallCage;
+library ball_cage;
 
 import 'package:box2d_flame/box2d.dart';
 

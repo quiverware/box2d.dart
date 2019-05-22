@@ -1,8 +1,8 @@
 library box2d.common;
 
-import 'dart:math' as Math;
+import 'dart:math' as math;
 
-import 'math_utils.dart' as MathUtils;
+import 'math_utils.dart' as math_utils;
 import 'vector_math.dart';
 
 part 'common/color3i.dart';

@@ -81,8 +81,8 @@ class AABB {
     if (dy < 0) {
       return false;
     }
-    return MathUtils.vector2IsValid(lowerBound) &&
-        MathUtils.vector2IsValid(upperBound);
+    return math_utils.vector2IsValid(lowerBound) &&
+        math_utils.vector2IsValid(upperBound);
   }
 
   /**
@@ -229,7 +229,7 @@ class AABB {
       ..absolute();
 
     // x then y
-    if (absD.x < Settings.EPSILON) {
+    if (absD.x < settings.EPSILON) {
       // Parallel.
       if (p.x < lowerBound.x || upperBound.x < p.x) {
         argPool.pushVec2(4);
@@ -258,7 +258,7 @@ class AABB {
       }
 
       // Pull the max down
-      tmax = Math.min(tmax, t2);
+      tmax = math.min(tmax, t2);
 
       if (tmin > tmax) {
         argPool.pushVec2(4);
@@ -266,7 +266,7 @@ class AABB {
       }
     }
 
-    if (absD.y < Settings.EPSILON) {
+    if (absD.y < settings.EPSILON) {
       // Parallel.
       if (p.y < lowerBound.y || upperBound.y < p.y) {
         argPool.pushVec2(4);
@@ -295,7 +295,7 @@ class AABB {
       }
 
       // Pull the max down
-      tmax = Math.min(tmax, t2);
+      tmax = math.min(tmax, t2);
 
       if (tmin > tmax) {
         argPool.pushVec2(4);

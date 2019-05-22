@@ -56,14 +56,14 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
   static Object allocObject() => Object();
 
   void _expandBuffers(int oldSize, int newSize) {
-    _aabb = BufferUtils.reallocateBufferWithAlloc(
+    _aabb = buffer_utils.reallocateBufferWithAlloc(
         _aabb, oldSize, newSize, allocAABB);
-    _userData = BufferUtils.reallocateBufferWithAlloc(
+    _userData = buffer_utils.reallocateBufferWithAlloc(
         _userData, oldSize, newSize, allocObject);
-    _parent = BufferUtils.reallocateBufferInt(_parent, oldSize, newSize);
-    _child1 = BufferUtils.reallocateBufferInt(_child1, oldSize, newSize);
-    _child2 = BufferUtils.reallocateBufferInt(_child2, oldSize, newSize);
-    _height = BufferUtils.reallocateBufferInt(_height, oldSize, newSize);
+    _parent = buffer_utils.reallocateBufferInt(_parent, oldSize, newSize);
+    _child1 = buffer_utils.reallocateBufferInt(_child1, oldSize, newSize);
+    _child2 = buffer_utils.reallocateBufferInt(_child2, oldSize, newSize);
+    _height = buffer_utils.reallocateBufferInt(_height, oldSize, newSize);
 
     // Build a linked list for the free list.
     for (int i = oldSize; i < newSize; i++) {
@@ -81,10 +81,10 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
     final int node = _allocateNode();
     // Fatten the aabb
     final AABB nodeAABB = _aabb[node];
-    nodeAABB.lowerBound.x = aabb.lowerBound.x - Settings.aabbExtension;
-    nodeAABB.lowerBound.y = aabb.lowerBound.y - Settings.aabbExtension;
-    nodeAABB.upperBound.x = aabb.upperBound.x + Settings.aabbExtension;
-    nodeAABB.upperBound.y = aabb.upperBound.y + Settings.aabbExtension;
+    nodeAABB.lowerBound.x = aabb.lowerBound.x - settings.aabbExtension;
+    nodeAABB.lowerBound.y = aabb.lowerBound.y - settings.aabbExtension;
+    nodeAABB.upperBound.x = aabb.upperBound.x + settings.aabbExtension;
+    nodeAABB.upperBound.y = aabb.upperBound.y + settings.aabbExtension;
     _userData[node] = userData;
 
     _insertLeaf(node);
@@ -121,14 +121,14 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
     // Extend AABB
     final Vector2 lowerBound = nodeAABB.lowerBound;
     final Vector2 upperBound = nodeAABB.upperBound;
-    lowerBound.x = aabb.lowerBound.x - Settings.aabbExtension;
-    lowerBound.y = aabb.lowerBound.y - Settings.aabbExtension;
-    upperBound.x = aabb.upperBound.x + Settings.aabbExtension;
-    upperBound.y = aabb.upperBound.y + Settings.aabbExtension;
+    lowerBound.x = aabb.lowerBound.x - settings.aabbExtension;
+    lowerBound.y = aabb.lowerBound.y - settings.aabbExtension;
+    upperBound.x = aabb.upperBound.x + settings.aabbExtension;
+    upperBound.y = aabb.upperBound.y + settings.aabbExtension;
 
     // Predict AABB displacement.
-    final double dx = displacement.x * Settings.aabbMultiplier;
-    final double dy = displacement.y * Settings.aabbMultiplier;
+    final double dx = displacement.x * settings.aabbMultiplier;
+    final double dy = displacement.y * settings.aabbMultiplier;
     if (dx < 0.0) {
       lowerBound.x += dx;
     } else {
@@ -157,7 +157,7 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
     return _aabb[proxyId];
   }
 
-  List<int> _nodeStack = BufferUtils.allocClearIntList(20);
+  List<int> _nodeStack = buffer_utils.allocClearIntList(20);
   int _nodeStackIndex = 0;
 
   @override
@@ -180,7 +180,7 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
           }
         } else {
           if (_nodeStack.length - _nodeStackIndex - 2 <= 0) {
-            _nodeStack = BufferUtils.reallocateBufferInt(
+            _nodeStack = buffer_utils.reallocateBufferInt(
                 _nodeStack, _nodeStack.length, _nodeStack.length * 2);
           }
           _nodeStack[_nodeStackIndex++] = child1;
@@ -315,7 +315,7 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
     }
     final int height1 = _computeHeight(_child1[node]);
     final int height2 = _computeHeight(_child2[node]);
-    return 1 + Math.max<int>(height1, height2);
+    return 1 + math.max<int>(height1, height2);
   }
 
   /**
@@ -358,7 +358,7 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
       final int child1 = _child1[i];
       final int child2 = _child2[i];
       final int balance = (_height[child2] - _height[child1]).abs();
-      maxBalance = Math.max(maxBalance, balance);
+      maxBalance = math.max(maxBalance, balance);
     }
 
     return maxBalance;
@@ -521,7 +521,7 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
       assert(child1 != NULL_NODE);
       assert(child2 != NULL_NODE);
 
-      _height[index] = 1 + Math.max<int>(_height[child1], _height[child2]);
+      _height[index] = 1 + math.max<int>(_height[child1], _height[child2]);
       _aabb[index].combine2(_aabb[child1], _aabb[child2]);
 
       index = _parent[index];
@@ -565,7 +565,7 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
         final int child2 = _child2[index];
 
         _aabb[index].combine2(_aabb[child1], _aabb[child2]);
-        _height[index] = 1 + Math.max<int>(_height[child1], _height[child2]);
+        _height[index] = 1 + math.max<int>(_height[child1], _height[child2]);
 
         index = _parent[index];
       }
@@ -634,8 +634,8 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
         _aabb[A].combine2(_aabb[B], _aabb[G]);
         _aabb[C].combine2(_aabb[A], _aabb[F]);
 
-        _height[A] = 1 + Math.max<int>(_height[B], _height[G]);
-        _height[C] = 1 + Math.max<int>(_height[A], _height[F]);
+        _height[A] = 1 + math.max<int>(_height[B], _height[G]);
+        _height[C] = 1 + math.max<int>(_height[A], _height[F]);
       } else {
         _child2[C] = iG;
         _child2[A] = iF;
@@ -643,8 +643,8 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
         _aabb[A].combine2(_aabb[B], _aabb[F]);
         _aabb[C].combine2(_aabb[A], _aabb[G]);
 
-        _height[A] = 1 + Math.max<int>(_height[B], _height[F]);
-        _height[C] = 1 + Math.max<int>(_height[A], _height[G]);
+        _height[A] = 1 + math.max<int>(_height[B], _height[F]);
+        _height[C] = 1 + math.max<int>(_height[A], _height[G]);
       }
 
       return iC;
@@ -684,8 +684,8 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
         _aabb[A].combine2(_aabb[C], _aabb[E]);
         _aabb[B].combine2(_aabb[A], _aabb[D]);
 
-        _height[A] = 1 + Math.max<int>(_height[C], _height[E]);
-        _height[B] = 1 + Math.max<int>(_height[A], _height[D]);
+        _height[A] = 1 + math.max<int>(_height[C], _height[E]);
+        _height[B] = 1 + math.max<int>(_height[A], _height[D]);
       } else {
         _child2[B] = iE;
         _child1[A] = iD;
@@ -693,8 +693,8 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
         _aabb[A].combine2(_aabb[C], _aabb[D]);
         _aabb[B].combine2(_aabb[A], _aabb[E]);
 
-        _height[A] = 1 + Math.max<int>(_height[C], _height[D]);
-        _height[B] = 1 + Math.max<int>(_height[A], _height[E]);
+        _height[A] = 1 + math.max<int>(_height[C], _height[D]);
+        _height[B] = 1 + math.max<int>(_height[A], _height[E]);
       }
 
       return iB;
@@ -752,14 +752,14 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
 
     final int height1 = _height[child1];
     final int height2 = _height[child2];
-    final int height = 1 + Math.max<int>(height1, height2);
+    final int height = 1 + math.max<int>(height1, height2);
     assert(_height[node] == height);
 
     final AABB aabb = AABB();
     aabb.combine2(_aabb[child1], _aabb[child2]);
 
-    assert(MathUtils.vector2Equals(aabb.lowerBound, _aabb[node].lowerBound));
-    assert(MathUtils.vector2Equals(aabb.upperBound, _aabb[node].upperBound));
+    assert(math_utils.vector2Equals(aabb.lowerBound, _aabb[node].lowerBound));
+    assert(math_utils.vector2Equals(aabb.upperBound, _aabb[node].upperBound));
 
     _validateMetrics(child1);
     _validateMetrics(child2);

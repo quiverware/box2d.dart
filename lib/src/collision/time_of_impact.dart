@@ -75,7 +75,7 @@ class TimeOfImpact {
   final Transform _xfB = Transform.zero();
   final DistanceOutput _distanceOutput = DistanceOutput();
   final SeparationFunction _fcn = SeparationFunction();
-  final List<int> _indexes = BufferUtils.allocClearIntList(2);
+  final List<int> _indexes = buffer_utils.allocClearIntList(2);
   final Sweep _sweepA = Sweep();
   final Sweep _sweepB = Sweep();
 
@@ -117,8 +117,8 @@ class TimeOfImpact {
     final double totalRadius = proxyA.radius + proxyB.radius;
     // djm: whats with all these constants?
     final double target =
-        Math.max(Settings.linearSlop, totalRadius - 3.0 * Settings.linearSlop);
-    const double tolerance = 0.25 * Settings.linearSlop;
+        math.max(settings.linearSlop, totalRadius - 3.0 * settings.linearSlop);
+    const double tolerance = 0.25 * settings.linearSlop;
 
     assert(target > tolerance);
 
@@ -253,11 +253,11 @@ class TimeOfImpact {
           }
         }
 
-        toiMaxRootIters = Math.max(toiMaxRootIters, rootIterCount);
+        toiMaxRootIters = math.max(toiMaxRootIters, rootIterCount);
 
         ++pushBackIter;
 
-        if (pushBackIter == Settings.maxPolygonVertices ||
+        if (pushBackIter == settings.maxPolygonVertices ||
             rootIterCount == MAX_ROOT_ITERATIONS) {
           break;
         }
@@ -281,7 +281,7 @@ class TimeOfImpact {
     }
 
     // System.out.printf("final sweeps: %f, %f, %f; %f, %f, %f", input.s)
-    toiMaxIters = Math.max(toiMaxIters, iter);
+    toiMaxIters = math.max(toiMaxIters, iter);
   }
 } // Class TimeOfImpact.
 

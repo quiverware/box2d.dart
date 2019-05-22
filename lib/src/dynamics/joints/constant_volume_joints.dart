@@ -128,8 +128,8 @@ class ConstantVolumeJoint extends Joint {
           positions[_bodies[i]._islandIndex].c.x;
       final double dy = positions[_bodies[next]._islandIndex].c.y -
           positions[_bodies[i]._islandIndex].c.y;
-      double dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < Settings.EPSILON) {
+      double dist = math.sqrt(dx * dx + dy * dy);
+      if (dist < settings.EPSILON) {
         dist = 1.0;
       }
       _normals[i].x = dy / dist;
@@ -150,10 +150,10 @@ class ConstantVolumeJoint extends Joint {
       // sumdeltax += dx;
       final double normSqrd = delta.length2;
       if (normSqrd >
-          Settings.maxLinearCorrection * Settings.maxLinearCorrection) {
-        delta.scale(Settings.maxLinearCorrection / Math.sqrt(normSqrd));
+          settings.maxLinearCorrection * settings.maxLinearCorrection) {
+        delta.scale(settings.maxLinearCorrection / math.sqrt(normSqrd));
       }
-      if (normSqrd > Settings.linearSlop * Settings.linearSlop) {
+      if (normSqrd > settings.linearSlop * settings.linearSlop) {
         done = false;
       }
       positions[_bodies[next]._islandIndex].c.x += delta.x;
@@ -184,8 +184,8 @@ class ConstantVolumeJoint extends Joint {
       _impulse *= data.step.dtRatio;
       // double lambda = -2.0f * crossMassSum / dotMassSum;
       // System.out.println(crossMassSum + " " +dotMassSum);
-      // lambda = MathUtils.clamp(lambda, -Settings.maxLinearCorrection,
-      // Settings.maxLinearCorrection);
+      // lambda = math_utils.clamp(lambda, -settings.maxLinearCorrection,
+      // settings.maxLinearCorrection);
       // _impulse = lambda;
       for (int i = 0; i < _bodies.length; ++i) {
         velocities[_bodies[i]._islandIndex].v.x +=
@@ -222,8 +222,8 @@ class ConstantVolumeJoint extends Joint {
     }
     final double lambda = -2.0 * crossMassSum / dotMassSum;
     // System.out.println(crossMassSum + " " +dotMassSum);
-    // lambda = MathUtils.clamp(lambda, -Settings.maxLinearCorrection,
-    // Settings.maxLinearCorrection);
+    // lambda = math_utils.clamp(lambda, -settings.maxLinearCorrection,
+    // settings.maxLinearCorrection);
     _impulse += lambda;
     // System.out.println(_impulse);
     for (int i = 0; i < _bodies.length; ++i) {

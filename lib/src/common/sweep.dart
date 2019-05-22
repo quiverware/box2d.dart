@@ -50,7 +50,7 @@ class Sweep {
   }
 
   void normalize() {
-    final double d = MathUtils.TWOPI * (a0 / MathUtils.TWOPI).floor();
+    final double d = math_utils.TWOPI * (a0 / math_utils.TWOPI).floor();
     a0 -= d;
     a -= d;
   }

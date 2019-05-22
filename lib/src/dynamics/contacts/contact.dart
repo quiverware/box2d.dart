@@ -297,7 +297,7 @@ abstract class Contact {
    * @return
    */
   static double mixFriction(double friction1, double friction2) {
-    return Math.sqrt(friction1 * friction2);
+    return math.sqrt(friction1 * friction2);
   }
 
   /**

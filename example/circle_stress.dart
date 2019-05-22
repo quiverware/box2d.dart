@@ -22,9 +22,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-library CircleStress;
+library circle_stress;
 
-import 'dart:math' as Math;
+import 'dart:math' as math;
 import 'package:box2d_flame/box2d.dart';
 import 'demo.dart';
 
@@ -83,12 +83,12 @@ class CircleStress extends Demo {
       // Corners
       final BodyDef cornerDef = BodyDef();
       sd.setAsBoxXY(20.0, 3.0);
-      cornerDef.angle = -Math.pi / 4.0;
+      cornerDef.angle = -math.pi / 4.0;
       cornerDef.position = Vector2(-35.0, 8.0);
       Body myBod = world.createBody(cornerDef);
       bodies.add(myBod);
       myBod.createFixtureFromShape(sd);
-      cornerDef.angle = Math.pi / 4.0;
+      cornerDef.angle = math.pi / 4.0;
       cornerDef.position = Vector2(35.0, 8.0);
       myBod = world.createBody(cornerDef);
       bodies.add(myBod);
@@ -118,9 +118,9 @@ class CircleStress extends Demo {
 
       for (int i = 0; i < numPieces; i++) {
         final double xPos =
-            radius * Math.cos(2 * Math.pi * (i / numPieces.toDouble()));
+            radius * math.cos(2 * math.pi * (i / numPieces.toDouble()));
         final double yPos =
-            radius * Math.sin(2 * Math.pi * (i / numPieces.toDouble()));
+            radius * math.sin(2 * math.pi * (i / numPieces.toDouble()));
 
         final CircleShape cd = CircleShape()
           ..radius = 1.2
@@ -143,7 +143,7 @@ class CircleStress extends Demo {
 
       final RevoluteJointDef rjd = RevoluteJointDef()
         ..initialize(body, groundBody, body.position)
-        ..motorSpeed = Math.pi
+        ..motorSpeed = math.pi
         ..maxMotorTorque = 1000000.0
         ..enableMotor = true;
 

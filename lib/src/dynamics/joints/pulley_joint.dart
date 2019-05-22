@@ -223,13 +223,13 @@ class PulleyJoint extends Joint {
     final double lengthA = _uA.length;
     final double lengthB = _uB.length;
 
-    if (lengthA > 10.0 * Settings.linearSlop) {
+    if (lengthA > 10.0 * settings.linearSlop) {
       _uA.scale(1.0 / lengthA);
     } else {
       _uA.setZero();
     }
 
-    if (lengthB > 10.0 * Settings.linearSlop) {
+    if (lengthB > 10.0 * settings.linearSlop) {
       _uB.scale(1.0 / lengthB);
     } else {
       _uB.setZero();
@@ -370,13 +370,13 @@ class PulleyJoint extends Joint {
     final double lengthA = uA.length;
     final double lengthB = uB.length;
 
-    if (lengthA > 10.0 * Settings.linearSlop) {
+    if (lengthA > 10.0 * settings.linearSlop) {
       uA.scale(1.0 / lengthA);
     } else {
       uA.setZero();
     }
 
-    if (lengthB > 10.0 * Settings.linearSlop) {
+    if (lengthB > 10.0 * settings.linearSlop) {
       uB.scale(1.0 / lengthB);
     } else {
       uB.setZero();
@@ -422,6 +422,6 @@ class PulleyJoint extends Joint {
     pool.pushRot(2);
     pool.pushVec2(7);
 
-    return linearError < Settings.linearSlop;
+    return linearError < settings.linearSlop;
   }
 }

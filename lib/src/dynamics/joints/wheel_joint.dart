@@ -295,7 +295,7 @@ class WheelJoint extends Joint {
         final double C = d.dot(_ax);
 
         // Frequency
-        final double omega = 2.0 * Math.pi * _frequencyHz;
+        final double omega = 2.0 * math.pi * _frequencyHz;
 
         // Damping coefficient
         final double dd = 2.0 * _springMass * _dampingRatio * omega;
@@ -410,7 +410,7 @@ class WheelJoint extends Joint {
 
       final double oldImpulse = _motorImpulse;
       final double maxImpulse = data.step.dt * _maxMotorTorque;
-      _motorImpulse = MathUtils.clampDouble(
+      _motorImpulse = math_utils.clampDouble(
           _motorImpulse + impulse, -maxImpulse, maxImpulse);
       impulse = _motorImpulse - oldImpulse;
 
@@ -517,6 +517,6 @@ class WheelJoint extends Joint {
     // data.positions[_indexB].c = cB;
     data.positions[_indexB].a = aB;
 
-    return C.abs() <= Settings.linearSlop;
+    return C.abs() <= settings.linearSlop;
   }
 }

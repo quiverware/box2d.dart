@@ -160,7 +160,7 @@ abstract class Joint {
    * @param inv_dt
    * @return
    */
-  void getReactionForce(double inv_dt, Vector2 out);
+  void getReactionForce(double inverseDt, Vector2 out);
 
   /**
    * get the reaction torque on body2 in N*m.
@@ -168,7 +168,7 @@ abstract class Joint {
    * @param inv_dt
    * @return
    */
-  double getReactionTorque(double inv_dt);
+  double getReactionTorque(double inverseDt);
 
   /**
    * get the next joint the world joint list.

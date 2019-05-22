@@ -90,8 +90,8 @@ class Body {
   Object userData;
 
   Body(final BodyDef bd, this.world) {
-    assert(MathUtils.vector2IsValid(bd.position));
-    assert(MathUtils.vector2IsValid(bd.linearVelocity));
+    assert(math_utils.vector2IsValid(bd.position));
+    assert(math_utils.vector2IsValid(bd.linearVelocity));
     assert(bd.gravityScale >= 0.0);
     assert(bd.angularDamping >= 0.0);
     assert(bd.linearDamping >= 0.0);
@@ -1034,8 +1034,8 @@ class Body {
     // Rot.mulToOutUnsafe(xf1.q, _sweep.localCenter, xf1.p);
     // xf1.p.mulLocal(-1).addLocal(_sweep.c0);
     // inlined:
-    xf1.q.s = Math.sin(_sweep.a0);
-    xf1.q.c = Math.cos(_sweep.a0);
+    xf1.q.s = math.sin(_sweep.a0);
+    xf1.q.c = math.cos(_sweep.a0);
     xf1.p.x = _sweep.c0.x -
         xf1.q.c * _sweep.localCenter.x +
         xf1.q.s * _sweep.localCenter.y;
@@ -1056,8 +1056,8 @@ class Body {
     // Rot.mulToOutUnsafe(_xf.q, _sweep.localCenter, _xf.p);
     // _xf.p.mulLocal(-1).addLocal(_sweep.c);
     //
-    _transform.q.s = Math.sin(_sweep.a);
-    _transform.q.c = Math.cos(_sweep.a);
+    _transform.q.s = math.sin(_sweep.a);
+    _transform.q.c = math.cos(_sweep.a);
     final Rot q = _transform.q;
     final Vector2 v = _sweep.localCenter;
     _transform.p.x = _sweep.c.x - q.c * v.x + q.s * v.y;

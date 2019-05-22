@@ -27,7 +27,7 @@ library racer;
 import 'dart:html' hide Body;
 import 'dart:math';
 import 'package:box2d_flame/box2d.dart';
-import 'package:box2d_flame/src/math_utils.dart' as MathUtils;
+import 'package:box2d_flame/src/math_utils.dart' as math_utils;
 
 import 'demo.dart';
 

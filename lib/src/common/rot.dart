@@ -30,12 +30,12 @@ class Rot {
   Rot();
 
   Rot.withAngle(double angle)
-      : s = Math.sin(angle),
-        c = Math.cos(angle);
+      : s = math.sin(angle),
+        c = math.cos(angle);
 
   Rot setAngle(double angle) {
-    s = Math.sin(angle);
-    c = Math.cos(angle);
+    s = math.sin(angle);
+    c = math.cos(angle);
     return this;
   }
 
@@ -60,7 +60,7 @@ class Rot {
 
   double getCos() => c;
 
-  double getAngle() => Math.atan2(s, c);
+  double getAngle() => math.atan2(s, c);
 
   void getXAxis(Vector2 xAxis) {
     xAxis.setValues(c, s);

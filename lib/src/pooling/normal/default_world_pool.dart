@@ -180,19 +180,19 @@ class DefaultWorldPool implements IWorldPool {
         _mat33s = OrderedStackMat33(argSize, argContainerSize),
         _dist = Distance() {
     _pcstack =
-        MutableStackPolygonContact(this, Settings.CONTACT_STACK_INIT_SIZE);
+        MutableStackPolygonContact(this, settings.CONTACT_STACK_INIT_SIZE);
     _ccstack =
-        MutableStackCircleContact(this, Settings.CONTACT_STACK_INIT_SIZE);
+        MutableStackCircleContact(this, settings.CONTACT_STACK_INIT_SIZE);
     _cpstack = MutableStackPolygonAndCircleContact(
-        this, Settings.CONTACT_STACK_INIT_SIZE);
+        this, settings.CONTACT_STACK_INIT_SIZE);
     _ecstack = MutableStackEdgeAndCircleContact(
-        this, Settings.CONTACT_STACK_INIT_SIZE);
+        this, settings.CONTACT_STACK_INIT_SIZE);
     _epstack = MutableStackEdgeAndPolygonContact(
-        this, Settings.CONTACT_STACK_INIT_SIZE);
+        this, settings.CONTACT_STACK_INIT_SIZE);
     _chcstack = MutableStackChainAndCircleContact(
-        this, Settings.CONTACT_STACK_INIT_SIZE);
+        this, settings.CONTACT_STACK_INIT_SIZE);
     _chpstack = MutableStackChainAndPolygonContact(
-        this, Settings.CONTACT_STACK_INIT_SIZE);
+        this, settings.CONTACT_STACK_INIT_SIZE);
     _collision = Collision(this);
     _toi = TimeOfImpact(this);
     _world = this;
@@ -342,7 +342,7 @@ class DefaultWorldPool implements IWorldPool {
   @override
   List<int> getIntArray(int argLength) {
     if (!_aints.containsKey(argLength)) {
-      _aints[argLength] = BufferUtils.allocClearIntList(argLength);
+      _aints[argLength] = buffer_utils.allocClearIntList(argLength);
     }
 
     assert(_aints[argLength].length ==

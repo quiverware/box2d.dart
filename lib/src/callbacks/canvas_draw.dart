@@ -27,7 +27,7 @@ library box2d.callbacks.canvas_draw;
 import 'dart:html';
 
 import 'package:box2d_flame/box2d.dart';
-import 'package:box2d_flame/src/math_utils.dart' as MathUtils;
+import 'package:box2d_flame/src/math_utils.dart' as math_utils;
 
 class CanvasDraw extends DebugDraw {
   /** The canvas rendering context with which to draw. */
@@ -127,7 +127,7 @@ class CanvasDraw extends DebugDraw {
     getWorldToScreenToOut(center, center);
 
     ctx.beginPath();
-    ctx.arc(center.x, center.y, radius, 0, MathUtils.TWOPI, true);
+    ctx.arc(center.x, center.y, radius, 0, math_utils.TWOPI, true);
     ctx.closePath();
   }
 

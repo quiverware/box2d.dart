@@ -53,7 +53,7 @@ class EdgeShape extends Shape {
   bool hasVertex0 = false, hasVertex3 = false;
 
   EdgeShape() : super(ShapeType.EDGE) {
-    radius = Settings.polygonRadius;
+    radius = settings.polygonRadius;
   }
 
   @override
@@ -103,7 +103,7 @@ class EdgeShape extends Shape {
       }
     }
 
-    final double d1 = Math.sqrt(dx * dx + dy * dy);
+    final double d1 = math.sqrt(dx * dx + dy * dy);
     if (d1 > 0) {
       normalOut.x = 1 / d1 * dx;
       normalOut.y = 1 / d1 * dy;

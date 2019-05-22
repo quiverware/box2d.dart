@@ -32,7 +32,7 @@ class TimeStep {
   double dt = 0.0;
 
   /** inverse time step (0 if dt == 0). */
-  double inv_dt = 0.0;
+  double inverseDt = 0.0;
 
   /** dt * inv_dt0 */
   double dtRatio = 0.0;

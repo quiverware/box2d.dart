@@ -22,7 +22,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-library DominoTest;
+library domino_test;
 
 import 'package:box2d_flame/box2d.dart';
 

@@ -101,7 +101,7 @@ class Car {
     final double angleNow = _flJoint.getJointAngle();
     double angleToTurn = desiredAngle - angleNow;
     angleToTurn =
-        MathUtils.clampDouble(angleToTurn, -turnPerTimeStep, turnPerTimeStep);
+        math_utils.clampDouble(angleToTurn, -turnPerTimeStep, turnPerTimeStep);
     final double angle = angleNow + angleToTurn;
     _flJoint.setLimits(angle, angle);
     _frJoint.setLimits(angle, angle);

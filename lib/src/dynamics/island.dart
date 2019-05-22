@@ -52,7 +52,7 @@ part of box2d;
  re-computed too (otherwise the algorithm has horrible instability). The pseudo
  velocity states are not needed because they are effectively zero at the beginning
  of each iteration. Since we have the current position error, we allow the
- iterations to terminate early if the error becomes smaller than Settings.linearSlop.
+ iterations to terminate early if the error becomes smaller than settings.linearSlop.
 
  Full NGS or just NGS - Like Modified NGS except the effective mass are re-computed
  each time a raint is solved.
@@ -190,7 +190,7 @@ class Island {
       final List<Velocity> old =
           _velocities == null ? List<Velocity>(0) : _velocities;
       _velocities = List<Velocity>(_bodyCapacity);
-      BufferUtils.arraycopy(old, 0, _velocities, 0, old.length);
+      buffer_utils.arraycopy(old, 0, _velocities, 0, old.length);
       for (int i = old.length; i < _velocities.length; i++) {
         _velocities[i] = Velocity();
       }
@@ -201,7 +201,7 @@ class Island {
       final List<Position> old =
           _positions == null ? List<Position>(0) : _positions;
       _positions = List<Position>(_bodyCapacity);
-      BufferUtils.arraycopy(old, 0, _positions, 0, old.length);
+      buffer_utils.arraycopy(old, 0, _positions, 0, old.length);
       for (int i = old.length; i < _positions.length; i++) {
         _positions[i] = Position();
       }
@@ -312,17 +312,17 @@ class Island {
       final double translationy = v.y * h;
 
       if (translationx * translationx + translationy * translationy >
-          Settings.maxTranslationSquared) {
-        final double ratio = Settings.maxTranslation /
-            Math.sqrt(
+          settings.maxTranslationSquared) {
+        final double ratio = settings.maxTranslation /
+            math.sqrt(
                 translationx * translationx + translationy * translationy);
         v.x *= ratio;
         v.y *= ratio;
       }
 
       final double rotation = h * w;
-      if (rotation * rotation > Settings.maxRotationSquared) {
-        final double ratio = Settings.maxRotation / rotation.abs();
+      if (rotation * rotation > settings.maxRotationSquared) {
+        final double ratio = settings.maxRotation / rotation.abs();
         w *= ratio;
       }
 
@@ -371,9 +371,9 @@ class Island {
       double minSleepTime = double.maxFinite;
 
       const double linTolSqr =
-          Settings.linearSleepTolerance * Settings.linearSleepTolerance;
+          settings.linearSleepTolerance * settings.linearSleepTolerance;
       const double angTolSqr =
-          Settings.angularSleepTolerance * Settings.angularSleepTolerance;
+          settings.angularSleepTolerance * settings.angularSleepTolerance;
 
       for (int i = 0; i < _bodyCount; ++i) {
         final Body b = _bodies[i];
@@ -388,11 +388,11 @@ class Island {
           minSleepTime = 0.0;
         } else {
           b._sleepTime += h;
-          minSleepTime = Math.min(minSleepTime, b._sleepTime);
+          minSleepTime = math.min(minSleepTime, b._sleepTime);
         }
       }
 
-      if (minSleepTime >= Settings.timeToSleep && positionSolved) {
+      if (minSleepTime >= settings.timeToSleep && positionSolved) {
         for (int i = 0; i < _bodyCount; ++i) {
           final Body b = _bodies[i]..setAwake(false);
         }
@@ -497,16 +497,16 @@ class Island {
       final double translationx = v.x * h;
       final double translationy = v.y * h;
       if (translationx * translationx + translationy * translationy >
-          Settings.maxTranslationSquared) {
-        final double ratio = Settings.maxTranslation /
-            Math.sqrt(
+          settings.maxTranslationSquared) {
+        final double ratio = settings.maxTranslation /
+            math.sqrt(
                 translationx * translationx + translationy * translationy);
         v.scale(ratio);
       }
 
       final double rotation = h * w;
-      if (rotation * rotation > Settings.maxRotationSquared) {
-        final double ratio = Settings.maxRotation / rotation.abs();
+      if (rotation * rotation > settings.maxRotationSquared) {
+        final double ratio = settings.maxRotation / rotation.abs();
         w *= ratio;
       }
 

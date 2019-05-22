@@ -24,11 +24,11 @@
 
 library box2d.math_utils;
 
-import 'dart:math' as Math;
+import 'dart:math' as math;
 
 import 'vector_math.dart';
 
-const double TWOPI = Math.pi * 2.0;
+const double TWOPI = math.pi * 2.0;
 
 double distanceSquared(Vector2 v1, Vector2 v2) => v1.distanceToSquared(v2);
 
@@ -36,7 +36,7 @@ double distance(Vector2 v1, Vector2 v2) => v1.distanceTo(v2);
 
 /** Returns the closest value to 'a' that is in between 'low' and 'high' */
 double clampDouble(final double a, final double low, final double high) =>
-    Math.max(low, Math.min(a, high));
+    math.max(low, math.min(a, high));
 
 Vector2 clampVec2(final Vector2 a, final Vector2 low, final Vector2 high) {
   final Vector2 min = Vector2.zero();

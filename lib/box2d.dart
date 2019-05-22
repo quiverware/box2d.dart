@@ -25,13 +25,13 @@
 library box2d;
 
 import 'dart:collection';
-import 'dart:math' as Math;
+import 'dart:math' as math;
 import 'dart:typed_data';
 
-import 'src/buffer_utils.dart' as BufferUtils;
+import 'src/buffer_utils.dart' as buffer_utils;
 import 'src/common.dart';
-import 'src/math_utils.dart' as MathUtils;
-import 'src/settings.dart' as Settings;
+import 'src/math_utils.dart' as math_utils;
+import 'src/settings.dart' as settings;
 import 'src/vector_math.dart';
 
 export 'src/common.dart';

@@ -41,7 +41,7 @@ class ChainShape extends Shape {
   final EdgeShape _pool0 = EdgeShape();
 
   ChainShape() : super(ShapeType.CHAIN) {
-    radius = Settings.polygonRadius;
+    radius = settings.polygonRadius;
   }
 
   void clear() {
@@ -194,8 +194,8 @@ class ChainShape extends Shape {
       final Vector2 v1 = vertices[i - 1];
       final Vector2 v2 = vertices[i];
       // If the code crashes here, it means your vertices are too close together.
-      if (MathUtils.distanceSquared(v1, v2) <
-          Settings.linearSlop * Settings.linearSlop) {
+      if (math_utils.distanceSquared(v1, v2) <
+          settings.linearSlop * settings.linearSlop) {
         throw "Vertices of chain shape are too close together";
       }
     }
@@ -224,8 +224,8 @@ class ChainShape extends Shape {
       final Vector2 v1 = vertices[i - 1];
       final Vector2 v2 = vertices[i];
       // If the code crashes here, it means your vertices are too close together.
-      if (MathUtils.distanceSquared(v1, v2) <
-          Settings.linearSlop * Settings.linearSlop) {
+      if (math_utils.distanceSquared(v1, v2) <
+          settings.linearSlop * settings.linearSlop) {
         throw "Vertices of chain shape are too close together";
       }
     }

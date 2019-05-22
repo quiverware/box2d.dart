@@ -233,7 +233,7 @@ class FrictionJoint extends Joint {
 
       final double oldImpulse = _angularImpulse;
       final double maxImpulse = h * _maxTorque;
-      _angularImpulse = MathUtils.clampDouble(
+      _angularImpulse = math_utils.clampDouble(
           _angularImpulse + impulse, -maxImpulse, maxImpulse);
       impulse = _angularImpulse - oldImpulse;
 

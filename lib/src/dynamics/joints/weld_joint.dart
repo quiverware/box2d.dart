@@ -177,7 +177,7 @@ class WeldJoint extends Joint {
     K.setValues(ex_x, ex_y, ex_z, ey_x, ey_y, ey_z, ez_x, ez_y, ez_z);
 
     if (_frequencyHz > 0.0) {
-      MathUtils.matrix3GetInverse22(K, _mass);
+      math_utils.matrix3GetInverse22(K, _mass);
 
       double invM = iA + iB;
       final double m = invM > 0.0 ? 1.0 / invM : 0.0;
@@ -185,7 +185,7 @@ class WeldJoint extends Joint {
       final double C = aB - aA - _referenceAngle;
 
       // Frequency
-      final double omega = 2.0 * Math.pi * _frequencyHz;
+      final double omega = 2.0 * math.pi * _frequencyHz;
 
       // Damping coefficient
       final double d = 2.0 * m * _dampingRatio * omega;
@@ -202,7 +202,7 @@ class WeldJoint extends Joint {
       invM += _gamma;
       _mass.setEntry(2, 2, invM != 0.0 ? 1.0 / invM : 0.0);
     } else {
-      MathUtils.matrix3GetSymInverse33(K, _mass);
+      math_utils.matrix3GetSymInverse33(K, _mass);
       _gamma = 0.0;
       _bias = 0.0;
     }
@@ -267,7 +267,7 @@ class WeldJoint extends Joint {
         ..sub(temp);
 
       final Vector2 impulse1 = P;
-      MathUtils.matrix3Mul22ToOutUnsafe(_mass, Cdot1, impulse1);
+      math_utils.matrix3Mul22ToOutUnsafe(_mass, Cdot1, impulse1);
       impulse1.negate();
 
       _impulse.x += impulse1.x;
@@ -293,7 +293,7 @@ class WeldJoint extends Joint {
       Cdot.setValues(Cdot1.x, Cdot1.y, Cdot2);
 
       final Vector3 impulse = pool.popVec3();
-      MathUtils.matrix3MulToOutUnsafe(_mass, Cdot, impulse);
+      math_utils.matrix3MulToOutUnsafe(_mass, Cdot, impulse);
 
       impulse.negate();
       _impulse.add(impulse);
@@ -419,7 +419,7 @@ class WeldJoint extends Joint {
     pool.pushRot(2);
     pool.pushMat33(1);
 
-    return positionError <= Settings.linearSlop &&
-        angularError <= Settings.angularSlop;
+    return positionError <= settings.linearSlop &&
+        angularError <= settings.angularSlop;
   }
 }

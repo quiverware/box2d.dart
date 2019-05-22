@@ -74,8 +74,8 @@ class ContactSolver {
     if (_positionConstraints.length < _count) {
       final List<ContactPositionConstraint> old = _positionConstraints;
       _positionConstraints =
-          List<ContactPositionConstraint>(Math.max(old.length * 2, _count));
-      BufferUtils.arraycopy(old, 0, _positionConstraints, 0, old.length);
+          List<ContactPositionConstraint>(math.max(old.length * 2, _count));
+      buffer_utils.arraycopy(old, 0, _positionConstraints, 0, old.length);
       for (int i = old.length; i < _positionConstraints.length; i++) {
         _positionConstraints[i] = ContactPositionConstraint();
       }
@@ -84,8 +84,8 @@ class ContactSolver {
     if (_velocityConstraints.length < _count) {
       final List<ContactVelocityConstraint> old = _velocityConstraints;
       _velocityConstraints =
-          List<ContactVelocityConstraint>(Math.max(old.length * 2, _count));
-      BufferUtils.arraycopy(old, 0, _velocityConstraints, 0, old.length);
+          List<ContactVelocityConstraint>(math.max(old.length * 2, _count));
+      buffer_utils.arraycopy(old, 0, _velocityConstraints, 0, old.length);
       for (int i = old.length; i < _velocityConstraints.length; i++) {
         _velocityConstraints[i] = ContactVelocityConstraint();
       }
@@ -296,7 +296,7 @@ class ContactSolver {
         final double tempx = vB.x + -wB * vcprB.y - vA.x - (-wA * vcprA.y);
         final double tempy = vB.y + wB * vcprB.x - vA.y - (wA * vcprA.x);
         final double vRel = vcnormal.x * tempx + vcnormal.y * tempy;
-        if (vRel < -Settings.velocityThreshold) {
+        if (vRel < -settings.velocityThreshold) {
           vcp.velocityBias = -vc.restitution * vRel;
         }
       }
@@ -367,7 +367,7 @@ class ContactSolver {
 
         // Clamp the accumulated force
         final double maxFriction = friction * vcp.normalImpulse;
-        final double newImpulse = MathUtils.clampDouble(
+        final double newImpulse = math_utils.clampDouble(
             vcp.tangentImpulse + lambda, -maxFriction, maxFriction);
         lambda = newImpulse - vcp.tangentImpulse;
         vcp.tangentImpulse = newImpulse;
@@ -561,12 +561,12 @@ class ContactSolver {
              */
             if (DEBUG_SOLVER) {
               // Postconditions
-              final Vector2 dv1 = vB + MathUtils.crossDblVec2(wB, cp1rB)
+              final Vector2 dv1 = vB + math_utils.crossDblVec2(wB, cp1rB)
                 ..sub(vA)
-                ..sub(MathUtils.crossDblVec2(wA, cp1rA));
-              final Vector2 dv2 = vB + MathUtils.crossDblVec2(wB, cp2rB)
+                ..sub(math_utils.crossDblVec2(wA, cp1rA));
+              final Vector2 dv2 = vB + math_utils.crossDblVec2(wB, cp2rB)
                 ..sub(vA)
-                ..sub(MathUtils.crossDblVec2(wA, cp2rA));
+                ..sub(math_utils.crossDblVec2(wA, cp2rA));
               // Compute normal velocity
               vn1 = dv1.dot(normal);
               vn2 = dv2.dot(normal);
@@ -636,9 +636,9 @@ class ContactSolver {
              */
             if (DEBUG_SOLVER) {
               // Postconditions
-              final Vector2 dv1 = vB + MathUtils.crossDblVec2(wB, cp1rB)
+              final Vector2 dv1 = vB + math_utils.crossDblVec2(wB, cp1rB)
                 ..sub(vA)
-                ..sub(MathUtils.crossDblVec2(wA, cp1rA));
+                ..sub(math_utils.crossDblVec2(wA, cp1rA));
               // Compute normal velocity
               vn1 = dv1.dot(normal);
 
@@ -704,9 +704,9 @@ class ContactSolver {
              */
             if (DEBUG_SOLVER) {
               // Postconditions
-              final Vector2 dv2 = vB + MathUtils.crossDblVec2(wB, cp2rB)
+              final Vector2 dv2 = vB + math_utils.crossDblVec2(wB, cp2rB)
                 ..sub(vA)
-                ..sub(MathUtils.crossDblVec2(wA, cp2rA));
+                ..sub(math_utils.crossDblVec2(wA, cp2rA));
               // Compute normal velocity
               vn2 = dv2.dot(normal);
 
@@ -882,12 +882,12 @@ class ContactSolver {
         final double rBy = point.y - cB.y;
 
         // Track max constraint error.
-        minSeparation = Math.min(minSeparation, separation);
+        minSeparation = math.min(minSeparation, separation);
 
         // Prevent large corrections and allow slop.
-        final double C = MathUtils.clampDouble(
-            Settings.baumgarte * (separation + Settings.linearSlop),
-            -Settings.maxLinearCorrection,
+        final double C = math_utils.clampDouble(
+            settings.baumgarte * (separation + settings.linearSlop),
+            -settings.maxLinearCorrection,
             0.0);
 
         // Compute the effective mass.
@@ -919,7 +919,7 @@ class ContactSolver {
 
     // We can't expect minSpeparation >= -linearSlop because we don't
     // push the separation above -linearSlop.
-    return minSeparation >= -3.0 * Settings.linearSlop;
+    return minSeparation >= -3.0 * settings.linearSlop;
   }
 
   // Sequential position solver for position constraints.
@@ -983,12 +983,12 @@ class ContactSolver {
         final double rBy = point.y - cB.y;
 
         // Track max constraint error.
-        minSeparation = Math.min(minSeparation, separation);
+        minSeparation = math.min(minSeparation, separation);
 
         // Prevent large corrections and allow slop.
-        final double C = MathUtils.clampDouble(
-            Settings.toiBaugarte * (separation + Settings.linearSlop),
-            -Settings.maxLinearCorrection,
+        final double C = math_utils.clampDouble(
+            settings.toiBaugarte * (separation + settings.linearSlop),
+            -settings.maxLinearCorrection,
             0.0);
 
         // Compute the effective mass.
@@ -1020,7 +1020,7 @@ class ContactSolver {
 
     // We can't expect minSpeparation >= -_linearSlop because we don't
     // push the separation above -_linearSlop.
-    return minSeparation >= -1.5 * Settings.linearSlop;
+    return minSeparation >= -1.5 * settings.linearSlop;
   }
 }
 

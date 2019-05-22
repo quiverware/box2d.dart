@@ -22,11 +22,11 @@
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-library BlobTest;
+library blob_test;
 
-import 'dart:math' as Math;
+import 'dart:math' as math;
 import 'package:box2d_flame/box2d.dart';
-import 'package:box2d_flame/src/math_utils.dart' as MathUtils;
+import 'package:box2d_flame/src/math_utils.dart' as math_utils;
 import 'demo.dart';
 
 class BlobTest extends Demo {
@@ -69,13 +69,13 @@ class BlobTest extends Demo {
     const double nBodies = 20.0;
     const double bodyRadius = 0.5;
     for (int i = 0; i < nBodies; ++i) {
-      final double angle = MathUtils.translateAndScale(
-          i.toDouble(), 0.0, nBodies, 0.0, Math.pi * 2);
+      final double angle = math_utils.translateAndScale(
+          i.toDouble(), 0.0, nBodies, 0.0, math.pi * 2);
       final BodyDef bd = BodyDef();
       bd.fixedRotation = true;
 
-      final double x = cx + rx * Math.sin(angle);
-      final double y = cy + ry * Math.cos(angle);
+      final double x = cx + rx * math.sin(angle);
+      final double y = cy + ry * math.cos(angle);
       bd.position.setFrom(Vector2(x, y));
       bd.type = BodyType.DYNAMIC;
       final Body body = world.createBody(bd);

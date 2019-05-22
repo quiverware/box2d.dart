@@ -120,7 +120,7 @@ class RopeJoint extends Joint {
       _state = LimitState.INACTIVE;
     }
 
-    if (_length > Settings.linearSlop) {
+    if (_length > settings.linearSlop) {
       _u.scale(1.0 / _length);
     } else {
       _u.setZero();
@@ -189,12 +189,12 @@ class RopeJoint extends Joint {
 
     // Predictive constraint.
     if (C < 0.0) {
-      Cdot += data.step.inv_dt * C;
+      Cdot += data.step.inverseDt * C;
     }
 
     double impulse = -_mass * Cdot;
     final double oldImpulse = _impulse;
-    _impulse = Math.min(0.0, _impulse + impulse);
+    _impulse = math.min(0.0, _impulse + impulse);
     impulse = _impulse - oldImpulse;
 
     final double Px = impulse * _u.x;
@@ -253,7 +253,7 @@ class RopeJoint extends Joint {
     final double length = u.normalize();
     double C = length - _maxLength;
 
-    C = MathUtils.clampDouble(C, 0.0, Settings.maxLinearCorrection);
+    C = math_utils.clampDouble(C, 0.0, settings.maxLinearCorrection);
 
     final double impulse = -_mass * C;
     final double Px = impulse * u.x;
@@ -274,7 +274,7 @@ class RopeJoint extends Joint {
     // data.positions[_indexB].c = cB;
     data.positions[_indexB].a = aB;
 
-    return length - _maxLength < Settings.linearSlop;
+    return length - _maxLength < settings.linearSlop;
   }
 
   @override

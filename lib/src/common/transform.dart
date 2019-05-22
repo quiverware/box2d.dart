@@ -46,9 +46,9 @@ class Transform {
         q = xf.q.clone();
 
   /** Initialize using a position vector and a rotation matrix. */
-  Transform.from(final Vector2 _position, final Rot _R)
-      : p = _position.clone(),
-        q = _R.clone();
+  Transform.from(final Vector2 position, final Rot rotationMatrix)
+      : p = position.clone(),
+        q = rotationMatrix.clone();
 
   /** Set this to equal another transform. */
   Transform set(final Transform xf) {

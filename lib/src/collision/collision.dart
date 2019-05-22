@@ -91,8 +91,8 @@ class EPAxis {
  * This holds polygon B expressed in frame A.
  */
 class TempPolygon {
-  final List<Vector2> vertices = List<Vector2>(Settings.maxPolygonVertices);
-  final List<Vector2> normals = List<Vector2>(Settings.maxPolygonVertices);
+  final List<Vector2> vertices = List<Vector2>(settings.maxPolygonVertices);
+  final List<Vector2> normals = List<Vector2>(settings.maxPolygonVertices);
   int count = 0;
 
   TempPolygon() {
@@ -163,7 +163,7 @@ class Collision {
 
     _pool.getDistance().distance(_output, _cache, _input);
     // djm note: anything significant about 10.0f?
-    return _output.distance < 10.0 * Settings.EPSILON;
+    return _output.distance < 10.0 * settings.EPSILON;
   }
 
   /**
@@ -181,7 +181,7 @@ class Collision {
       final List<PointState> state2,
       final Manifold manifold1,
       final Manifold manifold2) {
-    for (int i = 0; i < Settings.maxManifoldPoints; i++) {
+    for (int i = 0; i < settings.maxManifoldPoints; i++) {
       state1[i] = PointState.NULL_STATE;
       state2[i] = PointState.NULL_STATE;
     }
@@ -390,7 +390,7 @@ class Collision {
     final Vector2 v2 = vertices[vertIndex2];
 
     // If the center is inside the polygon ...
-    if (separation < Settings.EPSILON) {
+    if (separation < settings.EPSILON) {
       manifold.pointCount = 1;
       manifold.type = ManifoldType.FACE_A;
 
@@ -684,7 +684,7 @@ class Collision {
     Transform xf1, xf2;
     int edge1; // reference edge
     bool flip;
-    const double k_tol = 0.1 * Settings.linearSlop;
+    const double k_tol = 0.1 * settings.linearSlop;
 
     if (results2.separation > _results1.separation + k_tol) {
       poly1 = polyB;
@@ -780,7 +780,7 @@ class Collision {
     manifold.localPoint.setFrom(_planePoint);
 
     int pointCount = 0;
-    for (int i = 0; i < Settings.maxManifoldPoints; ++i) {
+    for (int i = 0; i < settings.maxManifoldPoints; ++i) {
       // double separation = Vec2.dot(normal, _clipPoints2[i].v) - frontOffset;
       final double separation = normalx * _clipPoints2[i].v.x +
           normaly * _clipPoints2[i].v.y -
@@ -1239,7 +1239,7 @@ class EPCollider {
       Rot.mulToOutUnsafe(xf.q, polygonB_.normals[i], polygonB.normals[i]);
     }
 
-    radius = 2.0 * Settings.polygonRadius;
+    radius = 2.0 * settings.polygonRadius;
 
     manifold.pointCount = 0;
 
@@ -1357,7 +1357,7 @@ class EPCollider {
     np = Collision.clipSegmentToLine(
         _clipPoints1, _ie, _rf.sideNormal1, _rf.sideOffset1, _rf.i1);
 
-    if (np < Settings.maxManifoldPoints) {
+    if (np < settings.maxManifoldPoints) {
       return;
     }
 
@@ -1365,7 +1365,7 @@ class EPCollider {
     np = Collision.clipSegmentToLine(
         _clipPoints2, _clipPoints1, _rf.sideNormal2, _rf.sideOffset2, _rf.i2);
 
-    if (np < Settings.maxManifoldPoints) {
+    if (np < settings.maxManifoldPoints) {
       return;
     }
 
@@ -1379,7 +1379,7 @@ class EPCollider {
     }
 
     int pointCount = 0;
-    for (int i = 0; i < Settings.maxManifoldPoints; ++i) {
+    for (int i = 0; i < settings.maxManifoldPoints; ++i) {
       double separation;
 
       separation = _rf.normal.dot(_temp
@@ -1452,7 +1452,7 @@ class EPCollider {
       tempx = vB.x - v2.x;
       tempy = vB.y - v2.y;
       final double s2 = _n.x * tempx + _n.y * tempy;
-      final double s = Math.min(s1, s2);
+      final double s = math.min(s1, s2);
 
       if (s > radius) {
         // No collision
@@ -1468,7 +1468,7 @@ class EPCollider {
                   ..setFrom(_n)
                   ..sub(upperLimit))
                 .dot(normal) <
-            -Settings.angularSlop) {
+            -settings.angularSlop) {
           continue;
         }
       } else {
@@ -1476,7 +1476,7 @@ class EPCollider {
                   ..setFrom(_n)
                   ..sub(lowerLimit))
                 .dot(normal) <
-            -Settings.angularSlop) {
+            -settings.angularSlop) {
           continue;
         }
       }

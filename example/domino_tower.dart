@@ -22,9 +22,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-library DominoTower;
+library domino_tower;
 
-import 'dart:math' as Math;
+import 'dart:math' as math;
 import 'package:box2d_flame/box2d.dart';
 
 import 'demo.dart';
@@ -63,7 +63,7 @@ class DominoTower extends Demo {
     final BodyDef bd = BodyDef()
       ..type = BodyType.DYNAMIC
       ..position = Vector2(x, y)
-      ..angle = horizontal ? (Math.pi / 2.0) : 0.0;
+      ..angle = horizontal ? (math.pi / 2.0) : 0.0;
     final Body myBody = world.createBody(bd);
     myBody.createFixtureFromFixtureDef(fd);
     bodies.add(myBody);

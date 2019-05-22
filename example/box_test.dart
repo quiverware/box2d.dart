@@ -22,9 +22,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-library BoxTest;
+library box_test;
 
-import 'dart:math' as Math;
+import 'dart:math' as math;
 import 'package:box2d_flame/box2d.dart';
 import 'demo.dart';
 
@@ -73,7 +73,7 @@ class BoxTest extends Demo {
   void _createBox() {
     // Create shape
     final PolygonShape shape = PolygonShape();
-    shape.setAsBox(3.0, 1.5, Vector2.zero(), Math.pi / 2);
+    shape.setAsBox(3.0, 1.5, Vector2.zero(), math.pi / 2);
 
     // Define fixture (links body and shape)
     final FixtureDef activeFixtureDef = FixtureDef();

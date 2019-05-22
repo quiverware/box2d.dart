@@ -40,6 +40,6 @@ class IntArray {
   }
 
   List<int> getInitializedArray(int argLength) {
-    return BufferUtils.allocClearIntList(argLength);
+    return buffer_utils.allocClearIntList(argLength);
   }
 }

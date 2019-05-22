@@ -283,7 +283,7 @@ class MotorJoint extends Joint {
     final double iA = _invIA, iB = _invIB;
 
     final double h = data.step.dt;
-    final double inv_h = data.step.inv_dt;
+    final double inv_h = data.step.inverseDt;
 
     final Vector2 temp = pool.popVec2();
 
@@ -294,7 +294,7 @@ class MotorJoint extends Joint {
 
       final double oldImpulse = _angularImpulse;
       final double maxImpulse = h * _maxTorque;
-      _angularImpulse = MathUtils.clampDouble(
+      _angularImpulse = math_utils.clampDouble(
           _angularImpulse + impulse, -maxImpulse, maxImpulse);
       impulse = _angularImpulse - oldImpulse;
 

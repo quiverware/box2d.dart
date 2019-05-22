@@ -22,9 +22,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-library FrictionJointTest;
+library friction_joint_test;
 
-import 'dart:math' as Math;
+import 'dart:math' as math;
 import 'package:box2d_flame/box2d.dart';
 
 import 'demo.dart';
@@ -76,7 +76,7 @@ class FrictionJointTest extends Demo {
 
   void _createBoxShapeAndFixture() {
     final PolygonShape boxShape = PolygonShape();
-    boxShape.setAsBox(3.0, 1.5, Vector2.zero(), Math.pi / 2);
+    boxShape.setAsBox(3.0, 1.5, Vector2.zero(), math.pi / 2);
 
     // Define fixture (links body and shape)
     _boxFixture = FixtureDef();

@@ -54,7 +54,7 @@ class MouseJoint extends Joint {
   final Vector2 _C = Vector2.zero();
 
   MouseJoint(IWorldPool argWorld, MouseJointDef def) : super(argWorld, def) {
-    assert(MathUtils.vector2IsValid(def.target));
+    assert(math_utils.vector2IsValid(def.target));
     assert(def.maxForce >= 0);
     assert(def.frequencyHz >= 0);
     assert(def.dampingRatio >= 0);
@@ -122,7 +122,7 @@ class MouseJoint extends Joint {
     final double mass = _bodyB.mass;
 
     // Frequency
-    final double omega = 2.0 * Math.pi * _frequencyHz;
+    final double omega = 2.0 * math.pi * _frequencyHz;
 
     // Damping coefficient
     final double d = 2.0 * mass * _dampingRatio * omega;
@@ -134,7 +134,7 @@ class MouseJoint extends Joint {
     // gamma has units of inverse mass.
     // beta has units of inverse time.
     final double h = data.step.dt;
-    assert(d + h * k > Settings.EPSILON);
+    assert(d + h * k > settings.EPSILON);
     _gamma = h * (d + h * k);
     if (_gamma != 0.0) {
       _gamma = 1.0 / _gamma;

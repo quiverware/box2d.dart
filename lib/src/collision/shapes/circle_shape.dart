@@ -103,7 +103,7 @@ class CircleShape extends Shape {
     final double centery = xfq.s * p.x + xfq.c * p.y + transform.p.y;
     final double dx = p.x - centerx;
     final double dy = p.y - centery;
-    final double d1 = Math.sqrt(dx * dx + dy * dy);
+    final double d1 = math.sqrt(dx * dx + dy * dy);
     normalOut.x = dx * 1 / d1;
     normalOut.y = dy * 1 / d1;
     return d1 - radius;
@@ -141,12 +141,12 @@ class CircleShape extends Shape {
     final double sigma = c * c - rr * b;
 
     // Check for negative discriminant and short segment.
-    if (sigma < 0.0 || rr < Settings.EPSILON) {
+    if (sigma < 0.0 || rr < settings.EPSILON) {
       return false;
     }
 
     // Find the point of intersection of the line with the circle.
-    double a = -(c + Math.sqrt(sigma));
+    double a = -(c + math.sqrt(sigma));
 
     // Is the intersection point on the segment?
     if (0.0 <= a && a <= input.maxFraction * rr) {
@@ -176,7 +176,7 @@ class CircleShape extends Shape {
 
   @override
   void computeMass(final MassData massData, final double density) {
-    massData.mass = density * Math.pi * radius * radius;
+    massData.mass = density * math.pi * radius * radius;
     massData.center.x = p.x;
     massData.center.y = p.y;
 
