@@ -669,7 +669,7 @@ class ParticleSystem {
         try {
           buffer[i] = allocClosure();
         } catch (e) {
-          throw "Exception $e";
+          throw 'Exception $e';
         }
       }
     }

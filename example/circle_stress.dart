@@ -39,7 +39,7 @@ class CircleStress extends Demo {
   static const int LOAD_SIZE = 20;
 
   /** Construct a new Circle Stress Demo. */
-  CircleStress() : super("Circle stress");
+  CircleStress() : super('Circle stress');
 
   /** Creates all bodies. */
   @override

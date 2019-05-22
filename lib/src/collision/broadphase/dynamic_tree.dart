@@ -866,7 +866,7 @@ class DynamicTree implements BroadPhaseStrategy {
         .getViewportTranform()
         .getWorldToScreen(node.aabb.upperBound, _textVec);
     argDraw.drawStringXY(
-        _textVec.x, _textVec.y, "$node.id-${spot + 1}/$height", _color);
+        _textVec.x, _textVec.y, '$node.id-${spot + 1}/$height', _color);
 
     if (node.child1 != null) {
       drawTreeX(argDraw, node.child1, spot + 1, height);

@@ -30,7 +30,7 @@ import 'demo.dart';
 
 class BoxTest extends Demo {
   /** Constructs a new BoxTest. */
-  BoxTest() : super("Box test");
+  BoxTest() : super('Box test');
 
   /** Entrypoint. */
   static void main() {

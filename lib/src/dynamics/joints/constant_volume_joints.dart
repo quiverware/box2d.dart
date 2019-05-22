@@ -53,7 +53,7 @@ class ConstantVolumeJoint extends Joint {
         super(argWorld.getPool(), def) {
     _world = argWorld;
     if (def.bodies.length <= 2) {
-      throw "You cannot create a constant volume joint with less than three _bodies.";
+      throw 'You cannot create a constant volume joint with less than three _bodies.';
     }
 
     _targetLengths = Float64List(_bodies.length);
@@ -65,7 +65,7 @@ class ConstantVolumeJoint extends Joint {
     _targetVolume = getBodyArea();
 
     if (def.joints != null && def.joints.length != def.bodies.length) {
-      throw "Incorrect joint definition.  Joints have to correspond to the _bodies";
+      throw 'Incorrect joint definition.  Joints have to correspond to the _bodies';
     }
     if (def.joints == null) {
       final DistanceJointDef distanceJointDef = DistanceJointDef();

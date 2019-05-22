@@ -45,11 +45,11 @@ class Racer extends Demo implements ContactListener {
     racer.initialize();
     racer.initializeAnimation();
     document.body.nodes
-        .add(Element.html("<p>Use the arrow keys to drive the car.</p>"));
+        .add(Element.html('<p>Use the arrow keys to drive the car.</p>'));
     racer.runAnimation();
   }
 
-  Racer() : super("Racer", Vector2.zero(), 2.5);
+  Racer() : super('Racer', Vector2.zero(), 2.5);
 
   @override
   void initialize() {
@@ -96,7 +96,7 @@ class Racer extends Demo implements ContactListener {
   void _createGround() {
     final BodyDef def = BodyDef();
     _groundBody = world.createBody(def);
-    _groundBody.userData = "Ground";
+    _groundBody.userData = 'Ground';
 
     final PolygonShape shape = PolygonShape()
       ..setAsBox(27.0, 21.0, Vector2(-30.0, 30.0), radians(20.0));
@@ -116,7 +116,7 @@ class Racer extends Demo implements ContactListener {
   void _createBoundary() {
     final BodyDef def = BodyDef();
     final Body boundaryBody = world.createBody(def);
-    boundaryBody.userData = "Boundary";
+    boundaryBody.userData = 'Boundary';
 
     final PolygonShape shape = PolygonShape();
 

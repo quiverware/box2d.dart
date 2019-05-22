@@ -312,12 +312,12 @@ class PolygonShape extends Shape {
     final double pLocaly = -xfq.s * tempx + xfq.c * tempy;
 
     if (_debug) {
-      print("--testPoint debug--");
-      print("Vertices: ");
+      print('--testPoint debug--');
+      print('Vertices: ');
       for (int i = 0; i < count; ++i) {
         print(vertices[i]);
       }
-      print("pLocal: $pLocalx, $pLocaly");
+      print('pLocal: $pLocalx, $pLocaly');
     }
 
     for (int i = 0; i < count; ++i) {

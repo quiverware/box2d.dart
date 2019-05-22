@@ -55,7 +55,7 @@ class Rot {
 
   @override
   String toString() {
-    return "Rot(s:$s, c:$c)";
+    return 'Rot(s:$s, c:$c)';
   }
 
   double getCos() => c;

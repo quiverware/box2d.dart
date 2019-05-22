@@ -196,7 +196,7 @@ class ChainShape extends Shape {
       // If the code crashes here, it means your vertices are too close together.
       if (math_utils.distanceSquared(v1, v2) <
           settings.linearSlop * settings.linearSlop) {
-        throw "Vertices of chain shape are too close together";
+        throw 'Vertices of chain shape are too close together';
       }
     }
     for (int i = 0; i < count; i++) {
@@ -226,7 +226,7 @@ class ChainShape extends Shape {
       // If the code crashes here, it means your vertices are too close together.
       if (math_utils.distanceSquared(v1, v2) <
           settings.linearSlop * settings.linearSlop) {
-        throw "Vertices of chain shape are too close together";
+        throw 'Vertices of chain shape are too close together';
       }
     }
     for (int i = 0; i < _count; i++) {

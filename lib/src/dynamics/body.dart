@@ -1102,6 +1102,6 @@ class Body {
 
   @override
   String toString() {
-    return "Body[pos: $position linVel: $linearVelocity angVel: $angularVelocity]";
+    return 'Body[pos: $position linVel: $linearVelocity angVel: $angularVelocity]';
   }
 }

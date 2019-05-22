@@ -30,7 +30,7 @@ import 'package:box2d_flame/box2d.dart';
 import 'demo.dart';
 
 class FrictionJointTest extends Demo {
-  FrictionJointTest() : super("FrictionJoint test");
+  FrictionJointTest() : super('FrictionJoint test');
 
   /** Entrypoint. */
   static void main() {

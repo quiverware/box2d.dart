@@ -170,9 +170,9 @@ class Transform {
 
   @override
   String toString() {
-    String s = "XForm:\n";
-    s += "Position: $p\n";
-    s += "R: \t$q\n";
+    String s = 'XForm:\n';
+    s += 'Position: $p\n';
+    s += 'R: \t$q\n';
     return s;
   }
 }

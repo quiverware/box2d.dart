@@ -91,7 +91,7 @@ abstract class Demo {
             (gravity == null) ? Vector2(0.0, GRAVITY) : gravity,
             DefaultWorldPool(WORLD_POOL_SIZE, WORLD_POOL_CONTAINER_SIZE)),
         _stopwatch = Stopwatch()..start() {
-    querySelector("#title").innerHtml = name;
+    querySelector('#title').innerHtml = name;
   }
 
   /** Advances the world forward by timestep seconds. */
@@ -133,15 +133,15 @@ abstract class Demo {
     world.debugDraw = debugDraw;
 
     frameCount = 0;
-    fpsCounter = querySelector("#fps-counter");
-    worldStepTime = querySelector("#world-step-time");
+    fpsCounter = querySelector('#fps-counter');
+    worldStepTime = querySelector('#world-step-time');
     Timer.periodic(Duration(seconds: 1), (Timer t) {
       fpsCounter.innerHtml = frameCount.toString();
       frameCount = 0;
     });
     Timer.periodic(Duration(milliseconds: 200), (Timer t) {
       if (elapsedUs == null) return;
-      worldStepTime.innerHtml = "${elapsedUs / 1000} ms";
+      worldStepTime.innerHtml = '${elapsedUs / 1000} ms';
     });
   }
 

@@ -19,7 +19,7 @@ class Tire {
       this._maxDriveForce, this._maxLateralImpulse) {
     final BodyDef def = BodyDef()..type = BodyType.DYNAMIC;
     _body = world.createBody(def);
-    _body.userData = "Tire";
+    _body.userData = 'Tire';
 
     final PolygonShape polygonShape = PolygonShape()..setAsBoxXY(0.5, 1.25);
     final Fixture fixture = _body.createFixtureFromShape(polygonShape, 1.0);
