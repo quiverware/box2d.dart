@@ -60,7 +60,7 @@ double translateAndScale(
   return res;
 }
 
-bool approxEquals(num expected, num actual, [num tolerance = null]) {
+bool approxEquals(num expected, num actual, [num tolerance]) {
   if (tolerance == null) {
     tolerance = (expected / 1e4).abs();
   }

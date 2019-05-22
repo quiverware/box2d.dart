@@ -1261,8 +1261,8 @@ class EPCollider {
     }
 
     // Use hysteresis for jitter reduction.
-    final double k_relativeTol = 0.98;
-    final double k_absoluteTol = 0.001;
+    const double k_relativeTol = 0.98;
+    const double k_absoluteTol = 0.001;
 
     EPAxis primaryAxis;
     if (_polygonAxis.type == EPAxisType.UNKNOWN) {

@@ -93,20 +93,20 @@ class ChainShape extends Shape {
 
   @override
   double computeDistanceToOut(
-      Transform xf, Vector2 p, int childIndex, Vector2 normalOut) {
+      Transform transform, Vector2 p, int childIndex, Vector2 normalOut) {
     final EdgeShape edge = _pool0;
     getChildEdge(edge, childIndex);
-    return edge.computeDistanceToOut(xf, p, 0, normalOut);
+    return edge.computeDistanceToOut(transform, p, 0, normalOut);
   }
 
   @override
-  bool testPoint(Transform xf, Vector2 p) {
+  bool testPoint(Transform transform, Vector2 p) {
     return false;
   }
 
   @override
   bool raycast(
-      RayCastOutput output, RayCastInput input, Transform xf, int childIndex) {
+      RayCastOutput output, RayCastInput input, Transform transform, int childIndex) {
     assert(childIndex < _count);
 
     final EdgeShape edgeShape = _pool0;
@@ -120,11 +120,11 @@ class ChainShape extends Shape {
     edgeShape.vertex2.x = v1.x;
     edgeShape.vertex2.y = v1.y;
 
-    return edgeShape.raycast(output, input, xf, 0);
+    return edgeShape.raycast(output, input, transform, 0);
   }
 
   @override
-  void computeAABB(AABB aabb, Transform xf, int childIndex) {
+  void computeAABB(AABB aabb, Transform transform, int childIndex) {
     assert(childIndex < _count);
     final Vector2 lower = aabb.lowerBound;
     final Vector2 upper = aabb.upperBound;
@@ -134,8 +134,8 @@ class ChainShape extends Shape {
 
     final Vector2 vi1 = _vertices[i1];
     final Vector2 vi2 = _vertices[i2];
-    final Rot xfq = xf.q;
-    final Vector2 xfp = xf.p;
+    final Rot xfq = transform.q;
+    final Vector2 xfp = transform.p;
     final double v1x = (xfq.c * vi1.x - xfq.s * vi1.y) + xfp.x;
     final double v1y = (xfq.s * vi1.x + xfq.c * vi1.y) + xfp.y;
     final double v2x = (xfq.c * vi2.x - xfq.s * vi2.y) + xfp.x;

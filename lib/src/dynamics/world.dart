@@ -151,7 +151,7 @@ class World {
   }
 
   void setSubStepping(bool subStepping) {
-    this._subStepping = subStepping;
+    _subStepping = subStepping;
   }
 
   bool isSubStepping() {
@@ -1130,7 +1130,7 @@ class World {
     // Find TOI events and solve them.
     for (;;) {
       // Find the first TOI.
-      Contact minContact = null;
+      Contact minContact;
       double minAlpha = 1.0;
 
       for (Contact c = _contactManager.contactList; c != null; c = c._next) {
@@ -1542,7 +1542,7 @@ class World {
     if (particleCount != 0) {
       final double particleRadius = system.getParticleRadius();
       final List<Vector2> positionBuffer = system.getParticlePositionBuffer();
-      List<ParticleColor> colorBuffer = null;
+      List<ParticleColor> colorBuffer;
       if (system.colorBuffer.data != null) {
         colorBuffer = system.getParticleColorBuffer();
       }

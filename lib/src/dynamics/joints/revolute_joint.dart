@@ -488,18 +488,18 @@ class RevoluteJoint extends Joint {
   }
 
   @override
-  void getAnchorA(Vector2 argOut) {
-    _bodyA.getWorldPointToOut(_localAnchorA, argOut);
+  void getAnchorA(Vector2 out) {
+    _bodyA.getWorldPointToOut(_localAnchorA, out);
   }
 
   @override
-  void getAnchorB(Vector2 argOut) {
-    _bodyB.getWorldPointToOut(_localAnchorB, argOut);
+  void getAnchorB(Vector2 out) {
+    _bodyB.getWorldPointToOut(_localAnchorB, out);
   }
 
   @override
-  void getReactionForce(double inv_dt, Vector2 argOut) {
-    argOut
+  void getReactionForce(double inv_dt, Vector2 out) {
+    out
       ..setValues(_impulse.x, _impulse.y)
       ..scale(inv_dt);
   }

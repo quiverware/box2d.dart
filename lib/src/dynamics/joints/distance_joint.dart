@@ -72,13 +72,13 @@ class DistanceJoint extends Joint {
   }
 
   @override
-  void getAnchorA(Vector2 argOut) {
-    _bodyA.getWorldPointToOut(_localAnchorA, argOut);
+  void getAnchorA(Vector2 out) {
+    _bodyA.getWorldPointToOut(_localAnchorA, out);
   }
 
   @override
-  void getAnchorB(Vector2 argOut) {
-    _bodyB.getWorldPointToOut(_localAnchorB, argOut);
+  void getAnchorB(Vector2 out) {
+    _bodyB.getWorldPointToOut(_localAnchorB, out);
   }
 
   /**
@@ -86,9 +86,9 @@ class DistanceJoint extends Joint {
    */
 
   @override
-  void getReactionForce(double inv_dt, Vector2 argOut) {
-    argOut.x = _impulse * _u.x * inv_dt;
-    argOut.y = _impulse * _u.y * inv_dt;
+  void getReactionForce(double inv_dt, Vector2 out) {
+    out.x = _impulse * _u.x * inv_dt;
+    out.y = _impulse * _u.y * inv_dt;
   }
 
   /**

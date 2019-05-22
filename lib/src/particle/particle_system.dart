@@ -109,7 +109,7 @@ class DestroyParticlesInShapeCallback implements ParticleQueryCallback {
     this.system = system;
     this.shape = shape;
     this.xf = xf;
-    this.destroyed = 0;
+    destroyed = 0;
     this.callDestructionListener = callDestructionListener;
   }
 
@@ -1575,7 +1575,7 @@ class ParticleSystem {
 
   void solvePowder(final TimeStep step) {
     final double powderStrength_ = powderStrength * getCriticalVelocity(step);
-    final double minWeight = 1.0 - Settings.particleStride;
+    const double minWeight = 1.0 - Settings.particleStride;
     for (int k = 0; k < bodyContactCount; k++) {
       final ParticleBodyContact contact = bodyContactBuffer[k];
       final int a = contact.index;

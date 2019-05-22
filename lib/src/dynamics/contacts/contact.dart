@@ -32,21 +32,21 @@ part of box2d;
 abstract class Contact {
   // Flags stored in _flags
   // Used when crawling contact graph when forming islands.
-  static final int ISLAND_FLAG = 0x0001;
+  static const int ISLAND_FLAG = 0x0001;
 
   // Set when the shapes are touching.
-  static final int TOUCHING_FLAG = 0x0002;
+  static const int TOUCHING_FLAG = 0x0002;
 
   // This contact can be disabled (by user)
-  static final int ENABLED_FLAG = 0x0004;
+  static const int ENABLED_FLAG = 0x0004;
 
   // This contact needs filtering because a fixture filter was changed.
-  static final int FILTER_FLAG = 0x0008;
+  static const int FILTER_FLAG = 0x0008;
 
   // This bullet contact had a TOI event
-  static final int BULLET_HIT_FLAG = 0x0010;
+  static const int BULLET_HIT_FLAG = 0x0010;
 
-  static final int TOI_FLAG = 0x0020;
+  static const int TOI_FLAG = 0x0020;
 
   int _flags = 0;
 

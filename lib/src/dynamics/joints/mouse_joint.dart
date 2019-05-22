@@ -71,25 +71,25 @@ class MouseJoint extends Joint {
   }
 
   @override
-  void getAnchorA(Vector2 argOut) {
-    argOut.setFrom(_targetA);
+  void getAnchorA(Vector2 out) {
+    out.setFrom(_targetA);
   }
 
   @override
-  void getAnchorB(Vector2 argOut) {
-    _bodyB.getWorldPointToOut(_localAnchorB, argOut);
+  void getAnchorB(Vector2 out) {
+    _bodyB.getWorldPointToOut(_localAnchorB, out);
   }
 
   @override
-  void getReactionForce(double invDt, Vector2 argOut) {
-    argOut
+  void getReactionForce(double inv_dt, Vector2 out) {
+    out
       ..setFrom(_impulse)
-      ..scale(invDt);
+      ..scale(inv_dt);
   }
 
   @override
-  double getReactionTorque(double invDt) {
-    return invDt * 0.0;
+  double getReactionTorque(double inv_dt) {
+    return inv_dt * 0.0;
   }
 
   void setTarget(Vector2 target) {

@@ -74,13 +74,13 @@ class PolygonShape extends Shape {
 
   @override
   Shape clone() {
-    final PolygonShape shape = PolygonShape()..centroid.setFrom(this.centroid);
+    final PolygonShape shape = PolygonShape()..centroid.setFrom(centroid);
     for (int i = 0; i < shape.normals.length; i++) {
       shape.normals[i].setFrom(normals[i]);
       shape.vertices[i].setFrom(vertices[i]);
     }
-    shape.radius = this.radius;
-    shape.count = this.count;
+    shape.radius = radius;
+    shape.count = count;
     return shape;
   }
 
@@ -195,7 +195,7 @@ class PolygonShape extends Shape {
       }
     }
 
-    this.count = m;
+    count = m;
 
     // Copy vertices.
     for (int i = 0; i < count; ++i) {
@@ -302,12 +302,12 @@ class PolygonShape extends Shape {
   }
 
   @override
-  bool testPoint(final Transform xf, final Vector2 p) {
+  bool testPoint(final Transform transform, final Vector2 p) {
     double tempx, tempy;
-    final Rot xfq = xf.q;
+    final Rot xfq = transform.q;
 
-    tempx = p.x - xf.p.x;
-    tempy = p.y - xf.p.y;
+    tempx = p.x - transform.p.x;
+    tempy = p.y - transform.p.y;
     final double pLocalx = xfq.c * tempx + xfq.s * tempy;
     final double pLocaly = -xfq.s * tempx + xfq.c * tempy;
 
@@ -335,14 +335,14 @@ class PolygonShape extends Shape {
   }
 
   @override
-  void computeAABB(final AABB aabb, final Transform xf, int childIndex) {
+  void computeAABB(final AABB aabb, final Transform transform, int childIndex) {
     final Vector2 lower = aabb.lowerBound;
     final Vector2 upper = aabb.upperBound;
     final Vector2 v1 = vertices[0];
-    final double xfqc = xf.q.c;
-    final double xfqs = xf.q.s;
-    final double xfpx = xf.p.x;
-    final double xfpy = xf.p.y;
+    final double xfqc = transform.q.c;
+    final double xfqs = transform.q.s;
+    final double xfpx = transform.p.x;
+    final double xfpy = transform.p.y;
     lower.x = (xfqc * v1.x - xfqs * v1.y) + xfpx;
     lower.y = (xfqs * v1.x + xfqc * v1.y) + xfpy;
     upper.x = lower.x;
@@ -387,11 +387,11 @@ class PolygonShape extends Shape {
 
   @override
   double computeDistanceToOut(
-      Transform xf, Vector2 p, int childIndex, Vector2 normalOut) {
-    final double xfqc = xf.q.c;
-    final double xfqs = xf.q.s;
-    double tx = p.x - xf.p.x;
-    double ty = p.y - xf.p.y;
+      Transform transform, Vector2 p, int childIndex, Vector2 normalOut) {
+    final double xfqc = transform.q.c;
+    final double xfqs = transform.q.s;
+    double tx = p.x - transform.p.x;
+    double ty = p.y - transform.p.y;
     final double pLocalx = xfqc * tx + xfqs * ty;
     final double pLocaly = -xfqs * tx + xfqc * ty;
 
@@ -444,10 +444,10 @@ class PolygonShape extends Shape {
 
   @override
   bool raycast(
-      RayCastOutput output, RayCastInput input, Transform xf, int childIndex) {
-    final double xfqc = xf.q.c;
-    final double xfqs = xf.q.s;
-    final Vector2 xfp = xf.p;
+      RayCastOutput output, RayCastInput input, Transform transform, int childIndex) {
+    final double xfqc = transform.q.c;
+    final double xfqs = transform.q.s;
+    final Vector2 xfp = transform.p;
     double tempx, tempy;
     // b2Vec2 p1 = b2MulT(xf.q, input.p1 - xf.p);
     // b2Vec2 p2 = b2MulT(xf.q, input.p2 - xf.p);
@@ -612,7 +612,7 @@ class PolygonShape extends Shape {
     }
     s.scale(1.0 / count.toDouble());
 
-    final double k_inv3 = 1.0 / 3.0;
+    const double k_inv3 = 1.0 / 3.0;
 
     final Vector2 e1 = _pool3;
     final Vector2 e2 = _pool4;

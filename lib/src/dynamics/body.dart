@@ -238,7 +238,7 @@ class Body {
     // Remove the fixture from this body's singly linked list.
     assert(_fixtureCount > 0);
     Fixture node = _fixtureList;
-    Fixture last = null; // java change
+    Fixture last; // java change
     bool found = false;
     while (node != null) {
       if (node == fixture) {
@@ -1102,6 +1102,6 @@ class Body {
 
   @override
   String toString() {
-    return "Body[pos: ${position} linVel: ${linearVelocity} angVel: ${angularVelocity}]";
+    return "Body[pos: $position linVel: $linearVelocity angVel: $angularVelocity]";
   }
 }

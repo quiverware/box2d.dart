@@ -160,22 +160,22 @@ class PrismaticJoint extends Joint {
   }
 
   @override
-  void getAnchorA(Vector2 argOut) {
-    _bodyA.getWorldPointToOut(_localAnchorA, argOut);
+  void getAnchorA(Vector2 out) {
+    _bodyA.getWorldPointToOut(_localAnchorA, out);
   }
 
   @override
-  void getAnchorB(Vector2 argOut) {
-    _bodyB.getWorldPointToOut(_localAnchorB, argOut);
+  void getAnchorB(Vector2 out) {
+    _bodyB.getWorldPointToOut(_localAnchorB, out);
   }
 
   @override
-  void getReactionForce(double inv_dt, Vector2 argOut) {
+  void getReactionForce(double inv_dt, Vector2 out) {
     final Vector2 temp = pool.popVec2();
     temp
       ..setFrom(_axis)
       ..scale(_motorImpulse + _impulse.z);
-    argOut
+    out
       ..setFrom(_perp)
       ..scale(_impulse.x)
       ..add(temp)

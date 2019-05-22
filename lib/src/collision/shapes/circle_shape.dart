@@ -97,10 +97,10 @@ class CircleShape extends Shape {
 
   @override
   double computeDistanceToOut(
-      Transform xf, Vector2 p, int childIndex, Vector2 normalOut) {
-    final Rot xfq = xf.q;
-    final double centerx = xfq.c * p.x - xfq.s * p.y + xf.p.x;
-    final double centery = xfq.s * p.x + xfq.c * p.y + xf.p.y;
+      Transform transform, Vector2 p, int childIndex, Vector2 normalOut) {
+    final Rot xfq = transform.q;
+    final double centerx = xfq.c * p.x - xfq.s * p.y + transform.p.x;
+    final double centery = xfq.s * p.x + xfq.c * p.y + transform.p.y;
     final double dx = p.x - centerx;
     final double dy = p.y - centery;
     final double d1 = Math.sqrt(dx * dx + dy * dy);

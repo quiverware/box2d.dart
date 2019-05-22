@@ -45,7 +45,7 @@ class ContactSolver {
   /**
    * Ensure a reasonable condition number. for the block solver
    */
-  static final double k_maxConditionNumber = 100.0;
+  static const double k_maxConditionNumber = 100.0;
 
   TimeStep _step;
   List<Position> _positions;

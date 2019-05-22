@@ -168,9 +168,9 @@ class ConstantVolumeJoint extends Joint {
   }
 
   @override
-  void initVelocityConstraints(final SolverData step) {
-    final List<Velocity> velocities = step.velocities;
-    final List<Position> positions = step.positions;
+  void initVelocityConstraints(final SolverData data) {
+    final List<Velocity> velocities = data.velocities;
+    final List<Position> positions = data.positions;
     final List<Vector2> d = pool.getVec2Array(_bodies.length);
 
     for (int i = 0; i < _bodies.length; ++i) {
@@ -180,8 +180,8 @@ class ConstantVolumeJoint extends Joint {
       d[i].sub(positions[_bodies[prev]._islandIndex].c);
     }
 
-    if (step.step.warmStarting) {
-      _impulse *= step.step.dtRatio;
+    if (data.step.warmStarting) {
+      _impulse *= data.step.dtRatio;
       // double lambda = -2.0f * crossMassSum / dotMassSum;
       // System.out.println(crossMassSum + " " +dotMassSum);
       // lambda = MathUtils.clamp(lambda, -Settings.maxLinearCorrection,
@@ -199,17 +199,17 @@ class ConstantVolumeJoint extends Joint {
   }
 
   @override
-  bool solvePositionConstraints(SolverData step) {
-    return _constrainEdges(step.positions);
+  bool solvePositionConstraints(SolverData data) {
+    return _constrainEdges(data.positions);
   }
 
   @override
-  void solveVelocityConstraints(final SolverData step) {
+  void solveVelocityConstraints(final SolverData data) {
     double crossMassSum = 0.0;
     double dotMassSum = 0.0;
 
-    final List<Velocity> velocities = step.velocities;
-    final List<Position> positions = step.positions;
+    final List<Velocity> velocities = data.velocities;
+    final List<Position> positions = data.positions;
     final List<Vector2> d = pool.getVec2Array(_bodies.length);
 
     for (int i = 0; i < _bodies.length; ++i) {

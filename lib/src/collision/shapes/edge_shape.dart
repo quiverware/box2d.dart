@@ -68,7 +68,7 @@ class EdgeShape extends Shape {
   }
 
   @override
-  bool testPoint(Transform xf, Vector2 p) {
+  bool testPoint(Transform transform, Vector2 p) {
     return false;
   }
 
@@ -77,11 +77,11 @@ class EdgeShape extends Shape {
 
   @override
   double computeDistanceToOut(
-      Transform xf, Vector2 p, int childIndex, Vector2 normalOut) {
-    final double xfqc = xf.q.c;
-    final double xfqs = xf.q.s;
-    final double xfpx = xf.p.x;
-    final double xfpy = xf.p.y;
+      Transform transform, Vector2 p, int childIndex, Vector2 normalOut) {
+    final double xfqc = transform.q.c;
+    final double xfqs = transform.q.s;
+    final double xfpx = transform.p.x;
+    final double xfpy = transform.p.y;
     final double v1x = (xfqc * vertex1.x - xfqs * vertex1.y) + xfpx;
     final double v1y = (xfqs * vertex1.x + xfqc * vertex1.y) + xfpy;
     final double v2x = (xfqc * vertex2.x - xfqs * vertex2.y) + xfpx;
@@ -120,12 +120,12 @@ class EdgeShape extends Shape {
   // s * e - t * d = p1 - v1
   @override
   bool raycast(
-      RayCastOutput output, RayCastInput input, Transform xf, int childIndex) {
+      RayCastOutput output, RayCastInput input, Transform transform, int childIndex) {
     double tempx, tempy;
     final Vector2 v1 = vertex1;
     final Vector2 v2 = vertex2;
-    final Rot xfq = xf.q;
-    final Vector2 xfp = xf.p;
+    final Rot xfq = transform.q;
+    final Vector2 xfp = transform.p;
 
     // Put the ray into the edge's frame of reference.
     // b2Vec2 p1 = b2MulT(xf.q, input.p1 - xf.p);
@@ -203,15 +203,15 @@ class EdgeShape extends Shape {
   }
 
   @override
-  void computeAABB(AABB aabb, Transform xf, int childIndex) {
+  void computeAABB(AABB aabb, Transform transform, int childIndex) {
     final Vector2 lowerBound = aabb.lowerBound;
     final Vector2 upperBound = aabb.upperBound;
-    final Rot xfq = xf.q;
+    final Rot xfq = transform.q;
 
-    final double v1x = (xfq.c * vertex1.x - xfq.s * vertex1.y) + xf.p.x;
-    final double v1y = (xfq.s * vertex1.x + xfq.c * vertex1.y) + xf.p.y;
-    final double v2x = (xfq.c * vertex2.x - xfq.s * vertex2.y) + xf.p.x;
-    final double v2y = (xfq.s * vertex2.x + xfq.c * vertex2.y) + xf.p.y;
+    final double v1x = (xfq.c * vertex1.x - xfq.s * vertex1.y) + transform.p.x;
+    final double v1y = (xfq.s * vertex1.x + xfq.c * vertex1.y) + transform.p.y;
+    final double v2x = (xfq.c * vertex2.x - xfq.s * vertex2.y) + transform.p.x;
+    final double v2y = (xfq.s * vertex2.x + xfq.c * vertex2.y) + transform.p.y;
 
     lowerBound.x = v1x < v2x ? v1x : v2x;
     lowerBound.y = v1y < v2y ? v1y : v2y;
@@ -237,12 +237,12 @@ class EdgeShape extends Shape {
   @override
   Shape clone() {
     return EdgeShape()
-      ..radius = this.radius
-      ..hasVertex0 = this.hasVertex0
-      ..hasVertex3 = this.hasVertex3
-      ..vertex0.setFrom(this.vertex0)
-      ..vertex1.setFrom(this.vertex1)
-      ..vertex2.setFrom(this.vertex2)
-      ..vertex3.setFrom(this.vertex3);
+      ..radius = radius
+      ..hasVertex0 = hasVertex0
+      ..hasVertex3 = hasVertex3
+      ..vertex0.setFrom(vertex0)
+      ..vertex1.setFrom(vertex1)
+      ..vertex2.setFrom(vertex2)
+      ..vertex3.setFrom(vertex3);
   }
 }

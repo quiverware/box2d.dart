@@ -48,7 +48,7 @@ abstract class Shape {
    * @param xf the shape world transform.
    * @param p a point in world coordinates.
    */
-  bool testPoint(final Transform xf, final Vector2 p);
+  bool testPoint(final Transform transform, final Vector2 p);
 
   /**
    * Cast a ray against a child shape.
@@ -68,7 +68,7 @@ abstract class Shape {
    * @param argAabb returns the axis aligned box.
    * @param argXf the world transform of the shape.
    */
-  void computeAABB(final AABB aabb, final Transform xf, int childIndex);
+  void computeAABB(final AABB aabb, final Transform transform, int childIndex);
 
   /**
    * Compute the mass properties of this shape using its dimensions and density. The inertia tensor
@@ -89,7 +89,7 @@ abstract class Shape {
    * @return distance returns the distance from the current shape.
    */
   double computeDistanceToOut(
-      Transform xf, Vector2 p, int childIndex, Vector2 normalOut);
+      Transform transform, Vector2 p, int childIndex, Vector2 normalOut);
 
   Shape clone();
 }

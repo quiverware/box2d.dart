@@ -278,18 +278,18 @@ class RopeJoint extends Joint {
   }
 
   @override
-  void getAnchorA(Vector2 argOut) {
-    _bodyA.getWorldPointToOut(_localAnchorA, argOut);
+  void getAnchorA(Vector2 out) {
+    _bodyA.getWorldPointToOut(_localAnchorA, out);
   }
 
   @override
-  void getAnchorB(Vector2 argOut) {
-    _bodyB.getWorldPointToOut(_localAnchorB, argOut);
+  void getAnchorB(Vector2 out) {
+    _bodyB.getWorldPointToOut(_localAnchorB, out);
   }
 
   @override
-  void getReactionForce(double inv_dt, Vector2 argOut) {
-    argOut
+  void getReactionForce(double inv_dt, Vector2 out) {
+    out
       ..setFrom(_u)
       ..scale(inv_dt)
       ..scale(_impulse);
@@ -313,7 +313,7 @@ class RopeJoint extends Joint {
   }
 
   void setMaxLength(double maxLength) {
-    this._maxLength = maxLength;
+    _maxLength = maxLength;
   }
 
   LimitState getLimitState() {
