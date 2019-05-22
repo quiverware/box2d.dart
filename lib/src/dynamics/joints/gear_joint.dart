@@ -56,46 +56,6 @@ part of box2d;
  */
 
 class GearJoint extends Joint {
-  final Joint _joint1;
-  final Joint _joint2;
-
-  final JointType _typeA;
-  final JointType _typeB;
-
-  // Body A is connected to body C
-  // Body B is connected to body D
-  final Body _bodyC;
-  final Body _bodyD;
-
-  // Solver shared
-  final Vector2 _localAnchorA = Vector2.zero();
-  final Vector2 _localAnchorB = Vector2.zero();
-  final Vector2 _localAnchorC = Vector2.zero();
-  final Vector2 _localAnchorD = Vector2.zero();
-
-  final Vector2 _localAxisC = Vector2.zero();
-  final Vector2 _localAxisD = Vector2.zero();
-
-  double _referenceAngleA = 0.0;
-  double _referenceAngleB = 0.0;
-
-  double _constant = 0.0;
-  double _ratio = 0.0;
-
-  double _impulse = 0.0;
-
-  // Solver temp
-  int _indexA = 0, _indexB = 0, _indexC = 0, _indexD = 0;
-  final Vector2 _lcA = Vector2.zero(),
-      _lcB = Vector2.zero(),
-      _lcC = Vector2.zero(),
-      _lcD = Vector2.zero();
-  double _mA = 0.0, _mB = 0.0, _mC = 0.0, _mD = 0.0;
-  double _iA = 0.0, _iB = 0.0, _iC = 0.0, _iD = 0.0;
-  final Vector2 _JvAC = Vector2.zero(), _JvBD = Vector2.zero();
-  double _JwA = 0.0, _JwB = 0.0, _JwC = 0.0, _JwD = 0.0;
-  double _mass = 0.0;
-
   GearJoint(IWorldPool argWorldPool, GearJointDef def)
       : _joint1 = def.joint1,
         _joint2 = def.joint2,
@@ -186,6 +146,46 @@ class GearJoint extends Joint {
 
     _impulse = 0.0;
   }
+
+  final Joint _joint1;
+  final Joint _joint2;
+
+  final JointType _typeA;
+  final JointType _typeB;
+
+  // Body A is connected to body C
+  // Body B is connected to body D
+  final Body _bodyC;
+  final Body _bodyD;
+
+  // Solver shared
+  final Vector2 _localAnchorA = Vector2.zero();
+  final Vector2 _localAnchorB = Vector2.zero();
+  final Vector2 _localAnchorC = Vector2.zero();
+  final Vector2 _localAnchorD = Vector2.zero();
+
+  final Vector2 _localAxisC = Vector2.zero();
+  final Vector2 _localAxisD = Vector2.zero();
+
+  double _referenceAngleA = 0.0;
+  double _referenceAngleB = 0.0;
+
+  double _constant = 0.0;
+  double _ratio = 0.0;
+
+  double _impulse = 0.0;
+
+  // Solver temp
+  int _indexA = 0, _indexB = 0, _indexC = 0, _indexD = 0;
+  final Vector2 _lcA = Vector2.zero(),
+      _lcB = Vector2.zero(),
+      _lcC = Vector2.zero(),
+      _lcD = Vector2.zero();
+  double _mA = 0.0, _mB = 0.0, _mC = 0.0, _mD = 0.0;
+  double _iA = 0.0, _iB = 0.0, _iC = 0.0, _iD = 0.0;
+  final Vector2 _JvAC = Vector2.zero(), _JvBD = Vector2.zero();
+  double _JwA = 0.0, _JwB = 0.0, _JwC = 0.0, _JwD = 0.0;
+  double _mass = 0.0;
 
   @override
   void getAnchorA(Vector2 out) {

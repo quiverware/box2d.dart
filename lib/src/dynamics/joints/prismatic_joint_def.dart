@@ -36,6 +36,8 @@ part of box2d;
  * 
  */
 class PrismaticJointDef extends JointDef {
+  PrismaticJointDef() : super(JointType.PRISMATIC);
+
   /**
    * The local anchor point relative to body1's origin.
    */
@@ -85,8 +87,6 @@ class PrismaticJointDef extends JointDef {
    * The desired motor speed in radians per second.
    */
   double motorSpeed = 0.0;
-
-  PrismaticJointDef() : super(JointType.PRISMATIC);
 
   /**
    * Initialize the bodies, anchors, axis, and reference angle using the world anchor and world

@@ -34,7 +34,7 @@ class BoxTest extends Demo {
 
   /** Entrypoint. */
   static void main() {
-    final boxTest = BoxTest();
+    final BoxTest boxTest = BoxTest();
     boxTest.initialize();
     boxTest.initializeAnimation();
     boxTest.runAnimation();

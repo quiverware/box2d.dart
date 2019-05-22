@@ -45,6 +45,16 @@ part of box2d;
  * @author Daniel Murphy
  */
 class WeldJoint extends Joint {
+  WeldJoint(IWorldPool argWorld, WeldJointDef def)
+      : _localAnchorA = Vector2.copy(def.localAnchorA),
+        _localAnchorB = Vector2.copy(def.localAnchorB),
+        _impulse = Vector3.zero(),
+        super(argWorld, def) {
+    _referenceAngle = def.referenceAngle;
+    _frequencyHz = def.frequencyHz;
+    _dampingRatio = def.dampingRatio;
+  }
+
   double _frequencyHz = 0.0;
   double _dampingRatio = 0.0;
   double _bias = 0.0;
@@ -68,16 +78,6 @@ class WeldJoint extends Joint {
   double _invIA = 0.0;
   double _invIB = 0.0;
   final Matrix3 _mass = Matrix3.zero();
-
-  WeldJoint(IWorldPool argWorld, WeldJointDef def)
-      : _localAnchorA = Vector2.copy(def.localAnchorA),
-        _localAnchorB = Vector2.copy(def.localAnchorB),
-        _impulse = Vector3.zero(),
-        super(argWorld, def) {
-    _referenceAngle = def.referenceAngle;
-    _frequencyHz = def.frequencyHz;
-    _dampingRatio = def.dampingRatio;
-  }
 
   double getReferenceAngle() {
     return _referenceAngle;

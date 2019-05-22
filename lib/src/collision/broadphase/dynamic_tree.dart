@@ -33,6 +33,19 @@ part of box2d;
  * @author daniel
  */
 class DynamicTree implements BroadPhaseStrategy {
+  DynamicTree() {
+    // Build a linked list for the free list.
+    for (int i = _nodeCapacity - 1; i >= 0; i--) {
+      _nodes[i] = DynamicTreeNode(i);
+      _nodes[i].parent = (i == _nodeCapacity - 1) ? null : _nodes[i + 1];
+      _nodes[i].height = -1;
+    }
+
+    for (int i = 0; i < drawVecs.length; i++) {
+      drawVecs[i] = Vector2.zero();
+    }
+  }
+
   static const int MAX_STACK_SIZE = 64;
   static const int NULL_NODE = -1;
 
@@ -46,19 +59,6 @@ class DynamicTree implements BroadPhaseStrategy {
   final List<Vector2> drawVecs = List<Vector2>(4);
   List<DynamicTreeNode> nodeStack = List<DynamicTreeNode>(20);
   int nodeStackIndex = 0;
-
-  DynamicTree() {
-    // Build a linked list for the free list.
-    for (int i = _nodeCapacity - 1; i >= 0; i--) {
-      _nodes[i] = DynamicTreeNode(i);
-      _nodes[i].parent = (i == _nodeCapacity - 1) ? null : _nodes[i + 1];
-      _nodes[i].height = -1;
-    }
-
-    for (int i = 0; i < drawVecs.length; i++) {
-      drawVecs[i] = Vector2.zero();
-    }
-  }
 
   @override
   int createProxy(final AABB aabb, Object userData) {

@@ -91,16 +91,16 @@ class EPAxis {
  * This holds polygon B expressed in frame A.
  */
 class TempPolygon {
-  final List<Vector2> vertices = List<Vector2>(settings.maxPolygonVertices);
-  final List<Vector2> normals = List<Vector2>(settings.maxPolygonVertices);
-  int count = 0;
-
   TempPolygon() {
     for (int i = 0; i < vertices.length; i++) {
       vertices[i] = Vector2.zero();
       normals[i] = Vector2.zero();
     }
   }
+  final List<Vector2> vertices = List<Vector2>(settings.maxPolygonVertices);
+  final List<Vector2> normals = List<Vector2>(settings.maxPolygonVertices);
+  int count = 0;
+
 }
 
 /**
@@ -125,10 +125,6 @@ class _ReferenceFace {
  * Should not be finalructed.
  */
 class Collision {
-  static const int NULL_FEATURE = 0x3FFFFFFF; // Integer.MAX_VALUE;
-
-  final IWorldPool _pool;
-
   Collision(this._pool) {
     _incidentEdge[0] = ClipVertex();
     _incidentEdge[1] = ClipVertex();
@@ -137,6 +133,10 @@ class Collision {
     _clipPoints2[0] = ClipVertex();
     _clipPoints2[1] = ClipVertex();
   }
+
+  static const int NULL_FEATURE = 0x3FFFFFFF; // Integer.MAX_VALUE;
+
+  final IWorldPool _pool;
 
   final DistanceInput _input = DistanceInput();
   final SimplexCache _cache = SimplexCache();
@@ -980,6 +980,14 @@ class Collision {
 enum VertexType { ISOLATED, CONCAVE, CONVEX }
 
 class EPCollider {
+  EPCollider() {
+    for (int i = 0; i < 2; i++) {
+      _ie[i] = ClipVertex();
+      _clipPoints1[i] = ClipVertex();
+      _clipPoints2[i] = ClipVertex();
+    }
+  }
+
   final TempPolygon polygonB = TempPolygon();
 
   final Transform xf = Transform.zero();
@@ -999,14 +1007,6 @@ class EPCollider {
   final Vector2 upperLimit = Vector2.zero();
   double radius = 0.0;
   bool front = false;
-
-  EPCollider() {
-    for (int i = 0; i < 2; i++) {
-      _ie[i] = ClipVertex();
-      _clipPoints1[i] = ClipVertex();
-      _clipPoints2[i] = ClipVertex();
-    }
-  }
 
   final Vector2 _edge1 = Vector2.zero();
   final Vector2 _temp = Vector2.zero();

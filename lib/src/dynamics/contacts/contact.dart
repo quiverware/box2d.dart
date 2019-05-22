@@ -30,6 +30,8 @@ part of box2d;
  *
  */
 abstract class Contact {
+  Contact(this._pool);
+
   // Flags stored in _flags
   // Used when crawling contact graph when forming islands.
   static const int ISLAND_FLAG = 0x0001;
@@ -75,8 +77,6 @@ abstract class Contact {
   double _tangentSpeed = 0.0;
 
   final IWorldPool _pool;
-
-  Contact(this._pool);
 
   /** initialization for pooling */
   void init(Fixture fA, int indexA, Fixture fB, int indexB) {

@@ -36,6 +36,8 @@ part of box2d;
  * </ul>
  */
 class RevoluteJointDef extends JointDef {
+  RevoluteJointDef() : super(JointType.REVOLUTE);
+
   /**
    * The local anchor point relative to body1's origin.
    */
@@ -80,8 +82,6 @@ class RevoluteJointDef extends JointDef {
    * The maximum motor torque used to achieve the desired motor speed. Usually in N-m.
    */
   double maxMotorTorque = 0.0;
-
-  RevoluteJointDef() : super(JointType.REVOLUTE);
 
   /**
    * Initialize the bodies, anchors, and reference angle using the world anchor.

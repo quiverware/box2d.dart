@@ -30,15 +30,15 @@ part of box2d;
  */
 
 class ConstantVolumeJointDef extends JointDef {
+  ConstantVolumeJointDef() : super(JointType.CONSTANT_VOLUME) {
+    collideConnected = false;
+  }
+
   double frequencyHz = 0.0;
   double dampingRatio = 0.0;
 
   List<Body> bodies = <Body>[];
   List<DistanceJoint> joints;
-
-  ConstantVolumeJointDef() : super(JointType.CONSTANT_VOLUME) {
-    collideConnected = false;
-  }
 
   /**
    * Adds a body to the group

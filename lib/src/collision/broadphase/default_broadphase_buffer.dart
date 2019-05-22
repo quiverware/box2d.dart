@@ -32,6 +32,14 @@ part of box2d;
  * @author Daniel Murphy
  */
 class DefaultBroadPhaseBuffer implements TreeCallback, BroadPhase {
+  DefaultBroadPhaseBuffer(BroadPhaseStrategy strategy) : _tree = strategy {
+    _pairBuffer = List<Pair>(_pairCapacity);
+    for (int i = 0; i < _pairCapacity; i++) {
+      _pairBuffer[i] = Pair();
+    }
+    _moveBuffer = buffer_utils.allocClearIntList(_moveCapacity);
+  }
+
   final BroadPhaseStrategy _tree;
 
   int _proxyCount = 0;
@@ -45,14 +53,6 @@ class DefaultBroadPhaseBuffer implements TreeCallback, BroadPhase {
   int _pairCount = 0;
 
   int _queryProxyId = BroadPhase.NULL_PROXY;
-
-  DefaultBroadPhaseBuffer(BroadPhaseStrategy strategy) : _tree = strategy {
-    _pairBuffer = List<Pair>(_pairCapacity);
-    for (int i = 0; i < _pairCapacity; i++) {
-      _pairBuffer[i] = Pair();
-    }
-    _moveBuffer = buffer_utils.allocClearIntList(_moveCapacity);
-  }
 
   @override
   int createProxy(final AABB aabb, Object userData) {

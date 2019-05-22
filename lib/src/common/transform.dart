@@ -29,12 +29,6 @@ part of box2d.common;
  * orientation of rigid frames.
  */
 class Transform {
-  /** The translation caused by the transform */
-  final Vector2 p;
-
-  /** A matrix representing a rotation */
-  final Rot q;
-
   /** The default constructor. */
   Transform.zero()
       : p = Vector2.zero(),
@@ -49,6 +43,12 @@ class Transform {
   Transform.from(final Vector2 position, final Rot rotationMatrix)
       : p = position.clone(),
         q = rotationMatrix.clone();
+
+  /** The translation caused by the transform */
+  final Vector2 p;
+
+  /** A matrix representing a rotation */
+  final Rot q;
 
   /** Set this to equal another transform. */
   Transform set(final Transform xf) {

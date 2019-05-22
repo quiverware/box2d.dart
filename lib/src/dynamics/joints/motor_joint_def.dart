@@ -30,6 +30,8 @@ part of box2d;
  * @author dmurph
  */
 class MotorJointDef extends JointDef {
+  MotorJointDef() : super(JointType.MOTOR);
+
   /**
    * Position of bodyB minus the position of bodyA, in bodyA's frame, in meters.
    */
@@ -54,8 +56,6 @@ class MotorJointDef extends JointDef {
    * Position correction factor in the range [0,1].
    */
   double correctionFactor = 0.3;
-
-  MotorJointDef() : super(JointType.MOTOR);
 
   void initialize(Body bA, Body bB) {
     bodyA = bA;

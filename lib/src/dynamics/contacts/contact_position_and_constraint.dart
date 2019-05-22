@@ -25,6 +25,12 @@
 part of box2d;
 
 class ContactPositionConstraint {
+  ContactPositionConstraint() {
+    for (int i = 0; i < localPoints.length; i++) {
+      localPoints[i] = Vector2.zero();
+    }
+  }
+
   List<Vector2> localPoints = List<Vector2>(settings.maxManifoldPoints);
   final Vector2 localNormal = Vector2.zero();
   final Vector2 localPoint = Vector2.zero();
@@ -37,10 +43,4 @@ class ContactPositionConstraint {
   ManifoldType type;
   double radiusA = 0.0, radiusB = 0.0;
   int pointCount = 0;
-
-  ContactPositionConstraint() {
-    for (int i = 0; i < localPoints.length; i++) {
-      localPoints[i] = Vector2.zero();
-    }
-  }
 }

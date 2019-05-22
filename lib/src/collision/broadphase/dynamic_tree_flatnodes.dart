@@ -25,6 +25,14 @@
 part of box2d;
 
 class DynamicTreeFlatNodes implements BroadPhaseStrategy {
+  DynamicTreeFlatNodes() {
+    _expandBuffers(0, _nodeCapacity);
+
+    for (int i = 0; i < drawVecs.length; i++) {
+      drawVecs[i] = Vector2.zero();
+    }
+  }
+
   static const int MAX_STACK_SIZE = 64;
   static const int NULL_NODE = -1;
   static const int INITIAL_BUFFER_LENGTH = 16;
@@ -43,14 +51,6 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
   int _freeList;
 
   final List<Vector2> drawVecs = List<Vector2>(4);
-
-  DynamicTreeFlatNodes() {
-    _expandBuffers(0, _nodeCapacity);
-
-    for (int i = 0; i < drawVecs.length; i++) {
-      drawVecs[i] = Vector2.zero();
-    }
-  }
 
   static AABB allocAABB() => AABB();
   static Object allocObject() => Object();

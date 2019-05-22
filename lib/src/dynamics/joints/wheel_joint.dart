@@ -49,6 +49,23 @@ part of box2d;
  * @author Daniel Murphy
  */
 class WheelJoint extends Joint {
+  WheelJoint(IWorldPool argPool, WheelJointDef def) : super(argPool, def) {
+    _localAnchorA.setFrom(def.localAnchorA);
+    _localAnchorB.setFrom(def.localAnchorB);
+    _localXAxisA.setFrom(def.localAxisA);
+    _localXAxisA.scaleOrthogonalInto(1.0, _localYAxisA);
+
+    _motorMass = 0.0;
+    _motorImpulse = 0.0;
+
+    _maxMotorTorque = def.maxMotorTorque;
+    _motorSpeed = def.motorSpeed;
+    _enableMotor = def.enableMotor;
+
+    _frequencyHz = def.frequencyHz;
+    _dampingRatio = def.dampingRatio;
+  }
+
   // TODO(srdjan): make fields private.
   double _frequencyHz = 0.0;
   double _dampingRatio = 0.0;
@@ -88,23 +105,6 @@ class WheelJoint extends Joint {
 
   double _bias = 0.0;
   double _gamma = 0.0;
-
-  WheelJoint(IWorldPool argPool, WheelJointDef def) : super(argPool, def) {
-    _localAnchorA.setFrom(def.localAnchorA);
-    _localAnchorB.setFrom(def.localAnchorB);
-    _localXAxisA.setFrom(def.localAxisA);
-    _localXAxisA.scaleOrthogonalInto(1.0, _localYAxisA);
-
-    _motorMass = 0.0;
-    _motorImpulse = 0.0;
-
-    _maxMotorTorque = def.maxMotorTorque;
-    _motorSpeed = def.motorSpeed;
-    _enableMotor = def.enableMotor;
-
-    _frequencyHz = def.frequencyHz;
-    _dampingRatio = def.dampingRatio;
-  }
 
   Vector2 getLocalAnchorA() {
     return _localAnchorA;

@@ -30,6 +30,12 @@ part of box2d;
  * @author daniel
  */
 class WorldManifold {
+  WorldManifold() {
+    for (int i = 0; i < settings.maxManifoldPoints; i++) {
+      points[i] = Vector2.zero();
+    }
+  }
+
   /**
    * World vector pointing from A to B
    */
@@ -44,12 +50,6 @@ class WorldManifold {
    * A negative value indicates overlap, in meters.
    */
   final Float64List separations = Float64List(settings.maxManifoldPoints);
-
-  WorldManifold() {
-    for (int i = 0; i < settings.maxManifoldPoints; i++) {
-      points[i] = Vector2.zero();
-    }
-  }
 
   final Vector2 _pool3 = Vector2.zero();
   final Vector2 _pool4 = Vector2.zero();

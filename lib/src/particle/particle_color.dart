@@ -30,6 +30,21 @@ part of box2d;
  * @author dmurph
  */
 class ParticleColor {
+  ParticleColor() {
+    _data[0] = 127;
+    _data[1] = 127;
+    _data[2] = 127;
+    _data[3] = 50;
+  }
+
+  ParticleColor.rgba(int r, int g, int b, int a) {
+    setRGBA(r, g, b, a);
+  }
+
+  ParticleColor.color3i(Color3i color) {
+    setColor3i(color);
+  }
+
   Int8List _data = Int8List(4);
 
   set r(int v) {
@@ -52,21 +67,6 @@ class ParticleColor {
   int get g => _data[1];
   int get b => _data[2];
   int get a => _data[3];
-
-  ParticleColor() {
-    _data[0] = 127;
-    _data[1] = 127;
-    _data[2] = 127;
-    _data[3] = 50;
-  }
-
-  ParticleColor.rgba(int r, int g, int b, int a) {
-    setRGBA(r, g, b, a);
-  }
-
-  ParticleColor.color3i(Color3i color) {
-    setColor3i(color);
-  }
 
   void setColor3i(Color3i color) {
     r = color.x;

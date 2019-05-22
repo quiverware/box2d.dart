@@ -31,6 +31,10 @@ part of box2d;
  * @author Daniel
  */
 class EdgeShape extends Shape {
+  EdgeShape() : super(ShapeType.EDGE) {
+    radius = settings.polygonRadius;
+  }
+
   /**
    * edge vertex 1
    */
@@ -51,10 +55,6 @@ class EdgeShape extends Shape {
    */
   final Vector2 vertex3 = Vector2.zero();
   bool hasVertex0 = false, hasVertex3 = false;
-
-  EdgeShape() : super(ShapeType.EDGE) {
-    radius = settings.polygonRadius;
-  }
 
   @override
   int getChildCount() {

@@ -37,15 +37,6 @@ part of box2d;
  * provide reliable contact forces, especially for high speed collisions.
  */
 class ManifoldPoint {
-  /** usage depends on manifold type */
-  final Vector2 localPoint;
-  /** the non-penetration impulse */
-  double normalImpulse = 0.0;
-  /** the friction impulse */
-  double tangentImpulse = 0.0;
-  /** uniquely identifies a contact point between two shapes */
-  final ContactID id;
-
   /**
    * Blank manifold point with everything zeroed out.
    */
@@ -62,6 +53,15 @@ class ManifoldPoint {
         normalImpulse = cp.normalImpulse,
         tangentImpulse = cp.tangentImpulse,
         id = ContactID.copy(cp.id);
+
+  /** usage depends on manifold type */
+  final Vector2 localPoint;
+  /** the non-penetration impulse */
+  double normalImpulse = 0.0;
+  /** the friction impulse */
+  double tangentImpulse = 0.0;
+  /** uniquely identifies a contact point between two shapes */
+  final ContactID id;
 
   /**
    * Sets this manifold point form the given one

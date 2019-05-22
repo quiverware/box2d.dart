@@ -30,12 +30,12 @@ import 'package:box2d_flame/box2d.dart';
 import 'package:box2d_flame/src/math_utils.dart' as math_utils;
 
 class CanvasDraw extends DebugDraw {
-  /** The canvas rendering context with which to draw. */
-  final CanvasRenderingContext2D ctx;
-
   CanvasDraw(ViewportTransform viewport, this.ctx) : super(viewport) {
     assert(null != viewport && null != ctx);
   }
+
+  /** The canvas rendering context with which to draw. */
+  final CanvasRenderingContext2D ctx;
 
   /**
    * Draw a closed polygon provided in CCW order. WARNING: This mutates

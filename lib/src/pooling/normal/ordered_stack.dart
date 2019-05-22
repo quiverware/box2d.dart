@@ -25,11 +25,6 @@
 part of box2d;
 
 abstract class OrderedStack<E> {
-  final List<E> _pool;
-  int _index;
-  final int _size;
-  final List<E> _container;
-
   OrderedStack(int argStackSize, int argContainerSize)
       : _pool = List<E>(argStackSize),
         _index = 0,
@@ -40,6 +35,11 @@ abstract class OrderedStack<E> {
       _pool[i] = newInstance();
     }
   }
+
+  final List<E> _pool;
+  int _index;
+  final int _size;
+  final List<E> _container;
 
   E pop() {
     assert(_index <

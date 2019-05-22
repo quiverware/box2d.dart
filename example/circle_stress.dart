@@ -32,21 +32,21 @@ import 'demo.dart';
 const double _MY_VIEWPORT_SCALE = 4.0;
 
 class CircleStress extends Demo {
+  /** Construct a new Circle Stress Demo. */
+  CircleStress() : super('Circle stress');
+
   /** The number of columns of balls in the pen. */
   static const int COLUMNS = 8;
 
   /** This number of balls will be created on each layer. */
   static const int LOAD_SIZE = 20;
 
-  /** Construct a new Circle Stress Demo. */
-  CircleStress() : super('Circle stress');
-
   /** Creates all bodies. */
   @override
   void initialize() {
     {
-      final bd = BodyDef();
-      final ground = world.createBody(bd);
+      final BodyDef bd = BodyDef();
+      final Body ground = world.createBody(bd);
       bodies.add(ground);
 
       final PolygonShape shape = PolygonShape();
@@ -56,14 +56,14 @@ class CircleStress extends Demo {
 
     {
       // Ground
-      final sd = PolygonShape();
+      final PolygonShape sd = PolygonShape();
       sd.setAsBoxXY(50.0, 10.0);
-      final bd = BodyDef();
+      final BodyDef bd = BodyDef();
       bd.type = BodyType.STATIC;
       bd.position = Vector2(0.0, -10.0);
-      final b = world.createBody(bd);
+      final Body b = world.createBody(bd);
       bodies.add(b);
-      final fd = FixtureDef();
+      final FixtureDef fd = FixtureDef();
       fd.shape = sd;
       fd.friction = 1.0;
       b.createFixtureFromFixtureDef(fd);

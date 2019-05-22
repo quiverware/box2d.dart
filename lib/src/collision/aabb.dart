@@ -26,11 +26,6 @@ part of box2d;
 
 /** An axis-aligned bounding box. */
 class AABB {
-  /** Bottom left vertex of bounding box. */
-  final Vector2 lowerBound;
-  /** Top right vertex of bounding box. */
-  final Vector2 upperBound;
-
   /**
    * Creates the default object, with vertices at 0,0 and 0,0.
    */
@@ -56,6 +51,11 @@ class AABB {
   AABB.withVec2(final Vector2 lowerVertex, final Vector2 upperVertex)
       : lowerBound = Vector2.copy(lowerVertex),
         upperBound = Vector2.copy(upperVertex);
+
+  /** Bottom left vertex of bounding box. */
+  final Vector2 lowerBound;
+  /** Top right vertex of bounding box. */
+  final Vector2 upperBound;
 
   /**
    * Sets this object from the given object

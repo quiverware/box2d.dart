@@ -32,6 +32,8 @@ part of box2d;
  */
 
 class GearJointDef extends JointDef {
+  GearJointDef() : super(JointType.GEAR);
+
   /**
    * The first revolute/prismatic joint attached to the gear joint.
    */
@@ -44,10 +46,8 @@ class GearJointDef extends JointDef {
 
   /**
    * Gear ratio.
-   * 
+   *
    * @see GearJoint
    */
   double ratio = 0.0;
-
-  GearJointDef() : super(JointType.GEAR);
 }

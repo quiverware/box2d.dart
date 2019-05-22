@@ -35,7 +35,7 @@ class BlobTest extends Demo {
 
   /** Entrypoint. */
   static void main() {
-    final blob = BlobTest();
+    final BlobTest blob = BlobTest();
     blob.initialize();
     blob.initializeAnimation();
     blob.runAnimation();

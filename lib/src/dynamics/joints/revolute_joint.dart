@@ -46,6 +46,20 @@ part of box2d;
  * @author Daniel Murphy
  */
 class RevoluteJoint extends Joint {
+  RevoluteJoint(IWorldPool argWorld, RevoluteJointDef def)
+      : super(argWorld, def) {
+    _localAnchorA.setFrom(def.localAnchorA);
+    _localAnchorB.setFrom(def.localAnchorB);
+    _referenceAngle = def.referenceAngle;
+
+    _lowerAngle = def.lowerAngle;
+    _upperAngle = def.upperAngle;
+    _maxMotorTorque = def.maxMotorTorque;
+    _motorSpeed = def.motorSpeed;
+    _enableLimit = def.enableLimit;
+    _enableMotor = def.enableMotor;
+  }
+
   // Solver shared
   final Vector2 _localAnchorA = Vector2.zero();
   final Vector2 _localAnchorB = Vector2.zero();
@@ -76,20 +90,6 @@ class RevoluteJoint extends Joint {
       Matrix3.zero(); // effective mass for point-to-point constraint.
   double _motorMass = 0.0; // effective mass for motor/limit angular constraint.
   LimitState _limitState = LimitState.INACTIVE;
-
-  RevoluteJoint(IWorldPool argWorld, RevoluteJointDef def)
-      : super(argWorld, def) {
-    _localAnchorA.setFrom(def.localAnchorA);
-    _localAnchorB.setFrom(def.localAnchorB);
-    _referenceAngle = def.referenceAngle;
-
-    _lowerAngle = def.lowerAngle;
-    _upperAngle = def.upperAngle;
-    _maxMotorTorque = def.maxMotorTorque;
-    _motorSpeed = def.motorSpeed;
-    _enableLimit = def.enableLimit;
-    _enableMotor = def.enableMotor;
-  }
 
   @override
   void initVelocityConstraints(final SolverData data) {

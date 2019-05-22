@@ -27,6 +27,12 @@ part of box2d;
 enum ContactIDType { VERTEX, FACE }
 
 class ContactID implements Comparable<ContactID> {
+  ContactID();
+
+  ContactID.copy(final ContactID c) {
+    set(c);
+  }
+
   Int8List _data = Int8List(4);
 
   set indexA(int v) {
@@ -56,12 +62,6 @@ class ContactID implements Comparable<ContactID> {
 
   bool isEqual(final ContactID cid) {
     return getKey() == cid.getKey();
-  }
-
-  ContactID();
-
-  ContactID.copy(final ContactID c) {
-    set(c);
   }
 
   void set(final ContactID c) {

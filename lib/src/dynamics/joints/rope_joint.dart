@@ -34,6 +34,13 @@ part of box2d;
  * @author Daniel Murphy
  */
 class RopeJoint extends Joint {
+  RopeJoint(IWorldPool worldPool, RopeJointDef def) : super(worldPool, def) {
+    _localAnchorA.setFrom(def.localAnchorA);
+    _localAnchorB.setFrom(def.localAnchorB);
+
+    _maxLength = def.maxLength;
+  }
+
   // Solver shared
   final Vector2 _localAnchorA = Vector2.zero();
   final Vector2 _localAnchorB = Vector2.zero();
@@ -55,13 +62,6 @@ class RopeJoint extends Joint {
   double _invIB = 0.0;
   double _mass = 0.0;
   LimitState _state = LimitState.INACTIVE;
-
-  RopeJoint(IWorldPool worldPool, RopeJointDef def) : super(worldPool, def) {
-    _localAnchorA.setFrom(def.localAnchorA);
-    _localAnchorB.setFrom(def.localAnchorB);
-
-    _maxLength = def.maxLength;
-  }
 
   @override
   void initVelocityConstraints(final SolverData data) {

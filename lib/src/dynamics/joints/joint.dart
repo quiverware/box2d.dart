@@ -31,6 +31,33 @@ part of box2d;
  * @author Daniel Murphy
  */
 abstract class Joint {
+  Joint(this.pool, JointDef def) : _type = def.type {
+    assert(def.bodyA != def.bodyB);
+
+    _prev = null;
+    _next = null;
+    _bodyA = def.bodyA;
+    _bodyB = def.bodyB;
+    _collideConnected = def.collideConnected;
+    _islandFlag = false;
+    _userData = def.userData;
+
+    _edgeA = JointEdge();
+    _edgeA.joint = null;
+    _edgeA.other = null;
+    _edgeA.prev = null;
+    _edgeA.next = null;
+
+    _edgeB = JointEdge();
+    _edgeB.joint = null;
+    _edgeB.other = null;
+    _edgeB.prev = null;
+    _edgeB.next = null;
+
+    // _localCenterA = Vec2();
+    // _localCenterB = Vec2();
+  }
+
   static Joint create(World world, JointDef jointDef) {
     // Joint joint = null;
     switch (jointDef.type) {
@@ -87,33 +114,6 @@ abstract class Joint {
   // final Vec2 _localCenterA, _localCenterB;
   // double _invMassA, _invIA;
   // double _invMassB, _invIB;
-
-  Joint(this.pool, JointDef def) : _type = def.type {
-    assert(def.bodyA != def.bodyB);
-
-    _prev = null;
-    _next = null;
-    _bodyA = def.bodyA;
-    _bodyB = def.bodyB;
-    _collideConnected = def.collideConnected;
-    _islandFlag = false;
-    _userData = def.userData;
-
-    _edgeA = JointEdge();
-    _edgeA.joint = null;
-    _edgeA.other = null;
-    _edgeA.prev = null;
-    _edgeA.next = null;
-
-    _edgeB = JointEdge();
-    _edgeB.joint = null;
-    _edgeB.other = null;
-    _edgeB.prev = null;
-    _edgeB.next = null;
-
-    // _localCenterA = Vec2();
-    // _localCenterB = Vec2();
-  }
 
   /**
    * get the type of the concrete joint.

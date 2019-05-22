@@ -98,6 +98,24 @@ part of box2d;
  * @author Daniel
  */
 class PrismaticJoint extends Joint {
+  PrismaticJoint(IWorldPool argWorld, PrismaticJointDef def)
+      : _localAnchorA = Vector2.copy(def.localAnchorA),
+        _localAnchorB = Vector2.copy(def.localAnchorB),
+        _localXAxisA = Vector2.copy(def.localAxisA)..normalize(),
+        _localYAxisA = Vector2.zero(),
+        super(argWorld, def) {
+    _localXAxisA.scaleOrthogonalInto(1.0, _localYAxisA);
+    _referenceAngle = def.referenceAngle;
+
+    _lowerTranslation = def.lowerTranslation;
+    _upperTranslation = def.upperTranslation;
+    _maxMotorForce = def.maxMotorForce;
+    _motorSpeed = def.motorSpeed;
+    _enableLimit = def.enableLimit;
+    _enableMotor = def.enableMotor;
+    _limitState = LimitState.INACTIVE;
+  }
+
   // Solver shared
   final Vector2 _localAnchorA;
   final Vector2 _localAnchorB;
@@ -132,24 +150,6 @@ class PrismaticJoint extends Joint {
   final Matrix3 _K = Matrix3.zero();
   double _motorMass =
       0.0; // effective mass for motor/limit translational constraint.
-
-  PrismaticJoint(IWorldPool argWorld, PrismaticJointDef def)
-      : _localAnchorA = Vector2.copy(def.localAnchorA),
-        _localAnchorB = Vector2.copy(def.localAnchorB),
-        _localXAxisA = Vector2.copy(def.localAxisA)..normalize(),
-        _localYAxisA = Vector2.zero(),
-        super(argWorld, def) {
-    _localXAxisA.scaleOrthogonalInto(1.0, _localYAxisA);
-    _referenceAngle = def.referenceAngle;
-
-    _lowerTranslation = def.lowerTranslation;
-    _upperTranslation = def.upperTranslation;
-    _maxMotorForce = def.maxMotorForce;
-    _motorSpeed = def.motorSpeed;
-    _enableLimit = def.enableLimit;
-    _enableMotor = def.enableMotor;
-    _limitState = LimitState.INACTIVE;
-  }
 
   Vector2 getLocalAnchorA() {
     return _localAnchorA;

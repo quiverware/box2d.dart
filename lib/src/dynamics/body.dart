@@ -30,65 +30,6 @@ part of box2d;
  * @author Daniel Murphy
  */
 class Body {
-  static const int ISLAND_FLAG = 0x0001;
-  static const int AWAKE_FLAG = 0x0002;
-  static const int AUTO_SLEEP_FLAG = 0x0004;
-  static const int BULLET_FLAG = 0x0008;
-  static const int FIXED_ROTATION_FLAG = 0x0010;
-  static const int ACTIVE_FLAG = 0x0020;
-  static const int TOI_FLAG = 0x0040;
-
-  BodyType _bodyType = BodyType.STATIC;
-
-  int _flags = 0;
-
-  int _islandIndex = 0;
-
-  /**
-   * The body origin transform.
-   */
-  final Transform _transform = Transform.zero();
-  /**
-   * The previous transform for particle simulation
-   */
-  final Transform _xf0 = Transform.zero();
-
-  /**
-   * The swept motion for CCD
-   */
-  final Sweep _sweep = Sweep();
-
-  /// the linear velocity of the center of mass
-  final Vector2 _linearVelocity = Vector2.zero();
-  double _angularVelocity = 0.0;
-
-  final Vector2 _force = Vector2.zero();
-  double _torque = 0.0;
-
-  final World world;
-  Body _prev;
-  Body _next;
-
-  Fixture _fixtureList;
-  int _fixtureCount = 0;
-
-  JointEdge _jointList;
-  ContactEdge _contactList;
-
-  double _mass = 0.0, _invMass = 0.0;
-
-  // Rotational inertia about the center of mass.
-  double _I = 0.0, _invI = 0.0;
-
-  double _linearDamping = 0.0;
-  double angularDamping = 0.0;
-  double _gravityScale = 0.0;
-
-  double _sleepTime = 0.0;
-
-  /// Use this to store your application specific data.
-  Object userData;
-
   Body(final BodyDef bd, this.world) {
     assert(math_utils.vector2IsValid(bd.position));
     assert(math_utils.vector2IsValid(bd.linearVelocity));
@@ -158,6 +99,65 @@ class Body {
     _fixtureList = null;
     _fixtureCount = 0;
   }
+
+  static const int ISLAND_FLAG = 0x0001;
+  static const int AWAKE_FLAG = 0x0002;
+  static const int AUTO_SLEEP_FLAG = 0x0004;
+  static const int BULLET_FLAG = 0x0008;
+  static const int FIXED_ROTATION_FLAG = 0x0010;
+  static const int ACTIVE_FLAG = 0x0020;
+  static const int TOI_FLAG = 0x0040;
+
+  BodyType _bodyType = BodyType.STATIC;
+
+  int _flags = 0;
+
+  int _islandIndex = 0;
+
+  /**
+   * The body origin transform.
+   */
+  final Transform _transform = Transform.zero();
+  /**
+   * The previous transform for particle simulation
+   */
+  final Transform _xf0 = Transform.zero();
+
+  /**
+   * The swept motion for CCD
+   */
+  final Sweep _sweep = Sweep();
+
+  /// the linear velocity of the center of mass
+  final Vector2 _linearVelocity = Vector2.zero();
+  double _angularVelocity = 0.0;
+
+  final Vector2 _force = Vector2.zero();
+  double _torque = 0.0;
+
+  final World world;
+  Body _prev;
+  Body _next;
+
+  Fixture _fixtureList;
+  int _fixtureCount = 0;
+
+  JointEdge _jointList;
+  ContactEdge _contactList;
+
+  double _mass = 0.0, _invMass = 0.0;
+
+  // Rotational inertia about the center of mass.
+  double _I = 0.0, _invI = 0.0;
+
+  double _linearDamping = 0.0;
+  double angularDamping = 0.0;
+  double _gravityScale = 0.0;
+
+  double _sleepTime = 0.0;
+
+  /// Use this to store your application specific data.
+  Object userData;
 
   /**
    * Creates a fixture and attach it to this body. Use this function if you need to set some fixture

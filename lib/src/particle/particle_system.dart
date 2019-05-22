@@ -25,11 +25,11 @@
 part of box2d;
 
 class ParticleBuffer<T> {
+  ParticleBuffer(this.allocClosure);
+
   List<T> data;
   final AllocClosure<T> allocClosure;
   int userSuppliedCapacity = 0;
-
-  ParticleBuffer(this.allocClosure);
 }
 
 typedef T AllocClosure<T>();
@@ -94,15 +94,15 @@ class NewIndices {
 }
 
 class DestroyParticlesInShapeCallback implements ParticleQueryCallback {
+  DestroyParticlesInShapeCallback() {
+    // TODO Auto-generated constructor stub
+  }
+
   ParticleSystem system;
   Shape shape;
   Transform xf;
   bool callDestructionListener = false;
   int destroyed = 0;
-
-  DestroyParticlesInShapeCallback() {
-    // TODO Auto-generated constructor stub
-  }
 
   void init(ParticleSystem system, Shape shape, Transform xf,
       bool callDestructionListener) {
@@ -312,7 +312,7 @@ class JoinParticleGroupsCallback implements VoronoiDiagramCallback {
           final double midPointx = 1.0 / 3.0 * (pa.x + pb.x + pc.x);
           final double midPointy = 1.0 / 3.0 * (pa.y + pb.y + pc.y);
 
-          final PsTriad triad = system.triadBuffer[system.triadCount]
+          system.triadBuffer[system.triadCount]
             ..indexA = a
             ..indexB = b
             ..indexC = c
@@ -444,6 +444,27 @@ class ParticleSystemTest {
 }
 
 class ParticleSystem {
+  ParticleSystem(World world) {
+    world = world;
+
+    pressureStrength = 0.05;
+    dampingStrength = 1.0;
+    elasticStrength = 0.25;
+    springStrength = 0.25;
+    viscousStrength = 0.25;
+    surfaceTensionStrengthA = 0.1;
+    surfaceTensionStrengthB = 0.2;
+    powderStrength = 0.5;
+    ejectionStrength = 0.5;
+    colorMixingStrength = 0.5;
+
+    flagsBuffer = ParticleBufferInt();
+    positionBuffer = ParticleBuffer<Vector2>(allocVec2);
+    velocityBuffer = ParticleBuffer<Vector2>(allocVec2);
+    colorBuffer = ParticleBuffer<ParticleColor>(allocParticleColor);
+    userDataBuffer = ParticleBuffer<Object>(allocObject);
+  }
+
   /** All particle types that require creating pairs */
   static const int k_pairFlags = ParticleType.b2_springParticle;
 
@@ -549,27 +570,6 @@ class ParticleSystem {
   static ParticleGroup allocParticleGroup() => ParticleGroup();
 
   static PsProxy allocPsProxy() => PsProxy();
-
-  ParticleSystem(World world) {
-    world = world;
-
-    pressureStrength = 0.05;
-    dampingStrength = 1.0;
-    elasticStrength = 0.25;
-    springStrength = 0.25;
-    viscousStrength = 0.25;
-    surfaceTensionStrengthA = 0.1;
-    surfaceTensionStrengthB = 0.2;
-    powderStrength = 0.5;
-    ejectionStrength = 0.5;
-    colorMixingStrength = 0.5;
-
-    flagsBuffer = ParticleBufferInt();
-    positionBuffer = ParticleBuffer<Vector2>(allocVec2);
-    velocityBuffer = ParticleBuffer<Vector2>(allocVec2);
-    colorBuffer = ParticleBuffer<ParticleColor>(allocParticleColor);
-    userDataBuffer = ParticleBuffer<Object>(allocObject);
-  }
 
   int createParticle(ParticleDef def) {
     if (count >= internalAllocatedCapacity) {
@@ -2041,7 +2041,7 @@ class ParticleSystem {
     buffer.userSuppliedCapacity = newCapacity;
   }
 
-  void setParticleBuffer(ParticleBuffer buffer, List newData, int newCapacity) {
+  void setParticleBuffer<T>(ParticleBuffer<T> buffer, List<T> newData, int newCapacity) {
     assert((newData != null && newCapacity != 0) ||
         (newData == null && newCapacity == 0));
     if (buffer.userSuppliedCapacity != 0) {

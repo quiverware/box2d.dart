@@ -31,6 +31,11 @@ part of box2d;
  * @author Daniel Murphy
  */
 class RopeJointDef extends JointDef {
+  RopeJointDef() : super(JointType.ROPE) {
+    localAnchorA.setValues(-1.0, 0.0);
+    localAnchorB.setValues(1.0, 0.0);
+  }
+
   /**
    * The local anchor point relative to bodyA's origin.
    */
@@ -46,9 +51,4 @@ class RopeJointDef extends JointDef {
    * will have no effect.
    */
   double maxLength = 0.0;
-
-  RopeJointDef() : super(JointType.ROPE) {
-    localAnchorA.setValues(-1.0, 0.0);
-    localAnchorB.setValues(1.0, 0.0);
-  }
 }

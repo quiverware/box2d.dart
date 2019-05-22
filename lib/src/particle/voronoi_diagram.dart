@@ -66,13 +66,6 @@ class VoronoiDiagramTaskMutableStack extends MutableStack<VoronoiDiagramTask> {
 }
 
 class VoronoiDiagram {
-  List<VoronoiGenerator> _generatorBuffer;
-  int _generatorCount = 0;
-  int _countX = 0, _countY = 0;
-
-  // The diagram is an array of "pointers".
-  List<VoronoiGenerator> _diagram;
-
   VoronoiDiagram(int generatorCapacity) {
     _generatorBuffer = List<VoronoiGenerator>(generatorCapacity);
     for (int i = 0; i < generatorCapacity; i++) {
@@ -83,6 +76,13 @@ class VoronoiDiagram {
     _countY = 0;
     _diagram = null;
   }
+
+  List<VoronoiGenerator> _generatorBuffer;
+  int _generatorCount = 0;
+  int _countX = 0, _countY = 0;
+
+  // The diagram is an array of "pointers".
+  List<VoronoiGenerator> _diagram;
 
   void getNodes(VoronoiDiagramCallback callback) {
     for (int y = 0; y < _countY - 1; y++) {
@@ -105,7 +105,7 @@ class VoronoiDiagram {
   }
 
   void addGenerator(Vector2 center, int tag) {
-    final VoronoiGenerator g = _generatorBuffer[_generatorCount++]
+    _generatorBuffer[_generatorCount++]
       ..center.x = center.x
       ..center.y = center.y
       ..tag = tag;
@@ -113,7 +113,7 @@ class VoronoiDiagram {
 
   final Vector2 _lower = Vector2.zero();
   final Vector2 _upper = Vector2.zero();
-  MutableStack<VoronoiDiagramTask> _taskPool =
+  final MutableStack<VoronoiDiagramTask> _taskPool =
       VoronoiDiagramTaskMutableStack(50);
 
   final StackQueue<VoronoiDiagramTask> _queue =

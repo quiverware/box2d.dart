@@ -59,7 +59,7 @@ class Bench2dWeb extends Bench2d {
     document.body.append(canvas);
 
     // Create the viewport transform with the center at extents.
-    final extents = Vector2(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+    final Vector2 extents = Vector2(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
     viewport = CanvasViewportTransform(extents, extents)
       ..scale = _VIEWPORT_SCALE;
 

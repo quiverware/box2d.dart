@@ -33,6 +33,23 @@ part of box2d;
  * @author Daniel
  */
 class MouseJoint extends Joint {
+  MouseJoint(IWorldPool argWorld, MouseJointDef def) : super(argWorld, def) {
+    assert(math_utils.vector2IsValid(def.target));
+    assert(def.maxForce >= 0);
+    assert(def.frequencyHz >= 0);
+    assert(def.dampingRatio >= 0);
+
+    _targetA.setFrom(def.target);
+    Transform.mulTransToOutUnsafeVec2(
+        _bodyB._transform, _targetA, _localAnchorB);
+
+    _maxForce = def.maxForce;
+    _impulse.setZero();
+
+    _frequencyHz = def.frequencyHz;
+    _dampingRatio = def.dampingRatio;
+  }
+
   final Vector2 _localAnchorB = Vector2.zero();
   final Vector2 _targetA = Vector2.zero();
   double _frequencyHz = 0.0;
@@ -52,23 +69,6 @@ class MouseJoint extends Joint {
   double _invIB = 0.0;
   final Matrix2 _mass = Matrix2.zero();
   final Vector2 _C = Vector2.zero();
-
-  MouseJoint(IWorldPool argWorld, MouseJointDef def) : super(argWorld, def) {
-    assert(math_utils.vector2IsValid(def.target));
-    assert(def.maxForce >= 0);
-    assert(def.frequencyHz >= 0);
-    assert(def.dampingRatio >= 0);
-
-    _targetA.setFrom(def.target);
-    Transform.mulTransToOutUnsafeVec2(
-        _bodyB._transform, _targetA, _localAnchorB);
-
-    _maxForce = def.maxForce;
-    _impulse.setZero();
-
-    _frequencyHz = def.frequencyHz;
-    _dampingRatio = def.dampingRatio;
-  }
 
   @override
   void getAnchorA(Vector2 out) {

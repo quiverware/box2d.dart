@@ -25,10 +25,6 @@
 part of box2d;
 
 abstract class MutableStack<E> implements IDynamicStack<E> {
-  List<E> _stack;
-  int _index;
-  int _size;
-
   MutableStack(int argInitSize) {
     _index = 0;
     _stack = null;
@@ -36,6 +32,10 @@ abstract class MutableStack<E> implements IDynamicStack<E> {
     _size = 0;
     extendStack(argInitSize);
   }
+
+  List<E> _stack;
+  int _index;
+  int _size;
 
   void extendStack(int argSize) {
     final List<E> newStack = newArray(argSize);

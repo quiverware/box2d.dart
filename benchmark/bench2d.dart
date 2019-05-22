@@ -134,7 +134,7 @@ class Bench2d {
     Vector2 positionSum = Vector2.zero();
     Vector2 linearVelocitySum = Vector2.zero();
     double angularVelocitySum = 0.0;
-    var checksum = (Body b) {
+    final Function checksum = (Body b) {
       positionSum = positionSum + b.position;
       linearVelocitySum = linearVelocitySum + b.linearVelocity;
       angularVelocitySum += b.angularVelocity;

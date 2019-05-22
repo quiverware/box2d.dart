@@ -29,6 +29,17 @@ part of box2d;
  * In most cases you should not need many vertices for a convex polygon.
  */
 class PolygonShape extends Shape {
+  PolygonShape() : super(ShapeType.POLYGON) {
+    for (int i = 0; i < vertices.length; i++) {
+      vertices[i] = Vector2.zero();
+    }
+
+    for (int i = 0; i < normals.length; i++) {
+      normals[i] = Vector2.zero();
+    }
+    radius = settings.polygonRadius;
+  }
+
   /** Dump lots of debug information. */
   static const bool _debug = false;
 
@@ -60,17 +71,6 @@ class PolygonShape extends Shape {
   final Vector2 _pool3 = Vector2.zero();
   final Vector2 _pool4 = Vector2.zero();
   Transform _poolt1 = Transform.zero();
-
-  PolygonShape() : super(ShapeType.POLYGON) {
-    for (int i = 0; i < vertices.length; i++) {
-      vertices[i] = Vector2.zero();
-    }
-
-    for (int i = 0; i < normals.length; i++) {
-      normals[i] = Vector2.zero();
-    }
-    radius = settings.polygonRadius;
-  }
 
   @override
   Shape clone() {

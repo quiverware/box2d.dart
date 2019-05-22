@@ -34,6 +34,23 @@ part of box2d;
  * @author Daniel Murphy
  */
 class PulleyJoint extends Joint {
+  PulleyJoint(IWorldPool argWorldPool, PulleyJointDef def)
+      : super(argWorldPool, def) {
+    _groundAnchorA.setFrom(def.groundAnchorA);
+    _groundAnchorB.setFrom(def.groundAnchorB);
+    _localAnchorA.setFrom(def.localAnchorA);
+    _localAnchorB.setFrom(def.localAnchorB);
+
+    assert(def.ratio != 0.0);
+    _ratio = def.ratio;
+
+    _lengthA = def.lengthA;
+    _lengthB = def.lengthB;
+
+    _constant = def.lengthA + _ratio * def.lengthB;
+    _impulse = 0.0;
+  }
+
   static const double MIN_PULLEY_LENGTH = 2.0;
 
   final Vector2 _groundAnchorA = Vector2.zero();
@@ -62,23 +79,6 @@ class PulleyJoint extends Joint {
   double _invIA = 0.0;
   double _invIB = 0.0;
   double _mass = 0.0;
-
-  PulleyJoint(IWorldPool argWorldPool, PulleyJointDef def)
-      : super(argWorldPool, def) {
-    _groundAnchorA.setFrom(def.groundAnchorA);
-    _groundAnchorB.setFrom(def.groundAnchorB);
-    _localAnchorA.setFrom(def.localAnchorA);
-    _localAnchorB.setFrom(def.localAnchorB);
-
-    assert(def.ratio != 0.0);
-    _ratio = def.ratio;
-
-    _lengthA = def.lengthA;
-    _lengthB = def.lengthB;
-
-    _constant = def.lengthA + _ratio * def.lengthB;
-    _impulse = 0.0;
-  }
 
   double getLengthA() {
     return _lengthA;

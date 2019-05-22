@@ -25,6 +25,8 @@
 part of box2d;
 
 class WeldJointDef extends JointDef {
+  WeldJointDef() : super(JointType.WELD);
+
   /**
    * The local anchor point relative to body1's origin.
    */
@@ -49,8 +51,6 @@ class WeldJointDef extends JointDef {
    * The damping ratio. 0 = no damping, 1 = critical damping.
    */
   double dampingRatio = 0.0;
-
-  WeldJointDef() : super(JointType.WELD);
 
   /**
    * Initialize the bodies, anchors, and reference angle using a world anchor point.

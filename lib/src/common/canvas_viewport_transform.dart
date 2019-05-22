@@ -33,8 +33,6 @@ import 'package:box2d_flame/box2d.dart';
  * to true.
  */
 class CanvasViewportTransform extends ViewportTransform {
-  static const double DEFAULT_DRAWING_SCALE = 20.0;
-
   /**
    * Constructs a new viewport transform with the default scale.
    */
@@ -42,6 +40,8 @@ class CanvasViewportTransform extends ViewportTransform {
       : super(_extents, _center, DEFAULT_DRAWING_SCALE) {
     yFlip = true;
   }
+
+  static const double DEFAULT_DRAWING_SCALE = 20.0;
 
   /**
    * Sets the rendering context such that all drawing commands given in terms

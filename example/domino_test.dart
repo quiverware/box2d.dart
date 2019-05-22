@@ -93,7 +93,7 @@ class DominoTest extends Demo {
 }
 
 void main() {
-  final domino = DominoTest();
+  final DominoTest domino = DominoTest();
   domino.initialize();
   domino.initializeAnimation();
   domino.runAnimation();

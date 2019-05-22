@@ -37,6 +37,15 @@ part of box2d;
  */
 
 class DistanceJoint extends Joint {
+  DistanceJoint(IWorldPool argWorld, final DistanceJointDef def)
+      : _localAnchorA = def.localAnchorA.clone(),
+        _localAnchorB = def.localAnchorB.clone(),
+        super(argWorld, def) {
+    _length = def.length;
+    _frequencyHz = def.frequencyHz;
+    _dampingRatio = def.dampingRatio;
+  }
+
   double _frequencyHz = 0.0;
   double _dampingRatio = 0.0;
   double _bias = 0.0;
@@ -61,15 +70,6 @@ class DistanceJoint extends Joint {
   double _invIA = 0.0;
   double _invIB = 0.0;
   double _mass = 0.0;
-
-  DistanceJoint(IWorldPool argWorld, final DistanceJointDef def)
-      : _localAnchorA = def.localAnchorA.clone(),
-        _localAnchorB = def.localAnchorB.clone(),
-        super(argWorld, def) {
-    _length = def.length;
-    _frequencyHz = def.frequencyHz;
-    _dampingRatio = def.dampingRatio;
-  }
 
   @override
   void getAnchorA(Vector2 out) {

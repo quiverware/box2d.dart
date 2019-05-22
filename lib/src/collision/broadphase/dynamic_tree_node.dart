@@ -25,6 +25,8 @@
 part of box2d;
 
 class DynamicTreeNode {
+  DynamicTreeNode(this.id);
+
   /**
    * Enlarged AABB
    */
@@ -38,6 +40,4 @@ class DynamicTreeNode {
   DynamicTreeNode child2;
   final int id;
   int height = 0;
-
-  DynamicTreeNode(this.id);
 }

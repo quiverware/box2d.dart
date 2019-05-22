@@ -394,7 +394,7 @@ class Island {
 
       if (minSleepTime >= settings.timeToSleep && positionSolved) {
         for (int i = 0; i < _bodyCount; ++i) {
-          final Body b = _bodies[i]..setAwake(false);
+          _bodies[i]..setAwake(false);
         }
       }
     }
@@ -515,15 +515,17 @@ class Island {
       c.y += v.y * h;
       a += h * w;
 
-      _positions[i].c.x = c.x;
-      _positions[i].c.y = c.y;
-      _positions[i].a = a;
-      _velocities[i].v.x = v.x;
-      _velocities[i].v.y = v.y;
-      _velocities[i].w = w;
+      _positions[i]
+        ..c.x = c.x
+        ..c.y = c.y
+        ..a = a;
+      _velocities[i]
+        ..v.x = v.x
+        ..v.y = v.y
+        ..w = w;
 
       // Sync bodies
-      final Body body = _bodies[i]
+      _bodies[i]
         .._sweep.c.x = c.x
         .._sweep.c.y = c.y
         .._sweep.a = a

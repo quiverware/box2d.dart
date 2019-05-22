@@ -32,6 +32,14 @@ import 'package:box2d_flame/box2d_browser.dart' hide Timer;
  * An abstract class for any Demo of the Box2D library.
  */
 abstract class Demo {
+  Demo(String name, [Vector2 gravity, this._viewportScale = _VIEWPORT_SCALE])
+      : world = World.withPool(
+            (gravity == null) ? Vector2(0.0, GRAVITY) : gravity,
+            DefaultWorldPool(WORLD_POOL_SIZE, WORLD_POOL_CONTAINER_SIZE)),
+        _stopwatch = Stopwatch()..start() {
+    querySelector('#title').innerHtml = name;
+  }
+
   static const int WORLD_POOL_SIZE = 100;
   static const int WORLD_POOL_CONTAINER_SIZE = 10;
 
@@ -85,14 +93,6 @@ abstract class Demo {
 
   /** HTML element used to display the world step time */
   Element worldStepTime;
-
-  Demo(String name, [Vector2 gravity, this._viewportScale = _VIEWPORT_SCALE])
-      : world = World.withPool(
-            (gravity == null) ? Vector2(0.0, GRAVITY) : gravity,
-            DefaultWorldPool(WORLD_POOL_SIZE, WORLD_POOL_CONTAINER_SIZE)),
-        _stopwatch = Stopwatch()..start() {
-    querySelector('#title').innerHtml = name;
-  }
 
   /** Advances the world forward by timestep seconds. */
   void step(num timestamp) {

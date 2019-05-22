@@ -34,7 +34,7 @@ class FrictionJointTest extends Demo {
 
   /** Entrypoint. */
   static void main() {
-    final test = FrictionJointTest();
+    final FrictionJointTest test = FrictionJointTest();
     test.initialize();
     test.initializeAnimation();
     test.debugDraw.appendFlags(DebugDraw.JOINT_BIT);

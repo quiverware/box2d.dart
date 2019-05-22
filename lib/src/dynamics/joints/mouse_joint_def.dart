@@ -30,6 +30,8 @@ part of box2d;
  * @author Daniel
  */
 class MouseJointDef extends JointDef {
+  MouseJointDef() : super(JointType.MOUSE);
+
   /**
    * The initial world target point. This is assumed to coincide with the body anchor initially.
    */
@@ -51,5 +53,4 @@ class MouseJointDef extends JointDef {
    */
   double dampingRatio = .7;
 
-  MouseJointDef() : super(JointType.MOUSE);
 }

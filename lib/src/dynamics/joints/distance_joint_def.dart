@@ -33,6 +33,8 @@ part of box2d;
  */
 
 class DistanceJointDef extends JointDef {
+  DistanceJointDef() : super(JointType.DISTANCE);
+
   /** The local anchor point relative to body1's origin. */
   final Vector2 localAnchorA = Vector2.zero();
 
@@ -51,8 +53,6 @@ class DistanceJointDef extends JointDef {
    * The damping ratio. 0 = no damping, 1 = critical damping.
    */
   double dampingRatio = 0.0;
-
-  DistanceJointDef() : super(JointType.DISTANCE);
 
   /**
    * Initialize the bodies, anchors, and length using the world anchors.

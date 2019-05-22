@@ -30,6 +30,11 @@ part of box2d;
  * @author Daniel Murphy
  */
 class FrictionJointDef extends JointDef {
+  FrictionJointDef()
+      : localAnchorA = Vector2.zero(),
+        localAnchorB = Vector2.zero(),
+        super(JointType.FRICTION);
+
   /**
    * The local anchor point relative to bodyA's origin.
    */
@@ -49,11 +54,6 @@ class FrictionJointDef extends JointDef {
    * The maximum friction torque in N-m.
    */
   double maxTorque = 0.0;
-
-  FrictionJointDef()
-      : localAnchorA = Vector2.zero(),
-        localAnchorB = Vector2.zero(),
-        super(JointType.FRICTION);
 
   /**
    * Initialize the bodies, anchors, axis, and reference angle using the world anchor and world

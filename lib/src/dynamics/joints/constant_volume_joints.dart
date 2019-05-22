@@ -25,29 +25,6 @@
 part of box2d;
 
 class ConstantVolumeJoint extends Joint {
-  final List<Body> _bodies;
-  Float64List _targetLengths;
-  double _targetVolume = 0.0;
-
-  List<Vector2> _normals;
-  double _impulse = 0.0;
-
-  World _world;
-
-  List<DistanceJoint> _distanceJoints;
-
-  List<Body> getBodies() {
-    return _bodies;
-  }
-
-  List<DistanceJoint> getJoints() {
-    return _distanceJoints;
-  }
-
-  void inflate(double factor) {
-    _targetVolume *= factor;
-  }
-
   ConstantVolumeJoint(World argWorld, ConstantVolumeJointDef def)
       : _bodies = def.bodies.toList(growable: false),
         super(argWorld.getPool(), def) {
@@ -87,6 +64,29 @@ class ConstantVolumeJoint extends Joint {
     for (int i = 0; i < _normals.length; ++i) {
       _normals[i] = Vector2.zero();
     }
+  }
+
+  final List<Body> _bodies;
+  Float64List _targetLengths;
+  double _targetVolume = 0.0;
+
+  List<Vector2> _normals;
+  double _impulse = 0.0;
+
+  World _world;
+
+  List<DistanceJoint> _distanceJoints;
+
+  List<Body> getBodies() {
+    return _bodies;
+  }
+
+  List<DistanceJoint> getJoints() {
+    return _distanceJoints;
+  }
+
+  void inflate(double factor) {
+    _targetVolume *= factor;
   }
 
   @override

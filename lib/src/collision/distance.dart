@@ -46,6 +46,15 @@ class _SimplexVertex {
 }
 
 class SimplexCache {
+  SimplexCache() {
+    indexA[0] = settings.INTEGER_MAX_VALUE;
+    indexA[1] = settings.INTEGER_MAX_VALUE;
+    indexA[2] = settings.INTEGER_MAX_VALUE;
+    indexB[0] = settings.INTEGER_MAX_VALUE;
+    indexB[1] = settings.INTEGER_MAX_VALUE;
+    indexB[2] = settings.INTEGER_MAX_VALUE;
+  }
+
   /** length or area */
   double metric = 0.0;
   int count = 0;
@@ -56,15 +65,6 @@ class SimplexCache {
   /** vertices on shape B */
   final List<int> indexB = buffer_utils.allocClearIntList(3);
 
-  SimplexCache() {
-    indexA[0] = settings.INTEGER_MAX_VALUE;
-    indexA[1] = settings.INTEGER_MAX_VALUE;
-    indexA[2] = settings.INTEGER_MAX_VALUE;
-    indexB[0] = settings.INTEGER_MAX_VALUE;
-    indexB[1] = settings.INTEGER_MAX_VALUE;
-    indexB[2] = settings.INTEGER_MAX_VALUE;
-  }
-
   void set(SimplexCache sc) {
     buffer_utils.arraycopy(sc.indexA, 0, indexA, 0, indexA.length);
     buffer_utils.arraycopy(sc.indexB, 0, indexB, 0, indexB.length);
@@ -74,17 +74,17 @@ class SimplexCache {
 }
 
 class _Simplex {
-  final _SimplexVertex v1 = _SimplexVertex();
-  final _SimplexVertex v2 = _SimplexVertex();
-  final _SimplexVertex v3 = _SimplexVertex();
-  final List<_SimplexVertex> vertices = List<_SimplexVertex>(3);
-  int count = 0;
-
   _Simplex() {
     vertices[0] = v1;
     vertices[1] = v2;
     vertices[2] = v3;
   }
+
+  final _SimplexVertex v1 = _SimplexVertex();
+  final _SimplexVertex v2 = _SimplexVertex();
+  final _SimplexVertex v3 = _SimplexVertex();
+  final List<_SimplexVertex> vertices = List<_SimplexVertex>(3);
+  int count = 0;
 
   void readCache(SimplexCache cache, DistanceProxy proxyA, Transform transformA,
       DistanceProxy proxyB, Transform transformB) {
@@ -489,11 +489,6 @@ class _Simplex {
 } // Class _Simplex
 
 class DistanceProxy {
-  final List<Vector2> vertices;
-  int _count;
-  double radius;
-  final List<Vector2> buffer;
-
   DistanceProxy()
       : vertices = List<Vector2>(settings.maxPolygonVertices),
         buffer = List<Vector2>(2) {
@@ -503,6 +498,11 @@ class DistanceProxy {
     _count = 0;
     radius = 0.0;
   }
+
+  final List<Vector2> vertices;
+  int _count;
+  double radius;
+  final List<Vector2> buffer;
 
   /**
    * Initialize the proxy using the given shape. The shape must remain in scope while the proxy is

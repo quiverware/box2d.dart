@@ -25,11 +25,11 @@
 part of box2d.common;
 
 class Timer {
-  final _stopWatch = Stopwatch();
-
   Timer() {
     _stopWatch.start();
   }
+
+  final Stopwatch _stopWatch = Stopwatch();
 
   void reset() {
     _stopWatch.reset();

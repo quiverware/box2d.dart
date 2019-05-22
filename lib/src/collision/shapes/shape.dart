@@ -30,10 +30,10 @@ part of box2d;
  * one or more child shapes.
  */
 abstract class Shape {
+  Shape(this.shapeType);
+
   final ShapeType shapeType;
   double radius = 0.0;
-
-  Shape(this.shapeType);
 
   /**
    * Get the number of child primitives

@@ -25,6 +25,24 @@
 part of box2d;
 
 class ParticleGroup {
+  ParticleGroup() {
+    // _system = null;
+    _firstIndex = 0;
+    _lastIndex = 0;
+    _groupFlags = 0;
+    _strength = 1.0;
+
+    _timestamp = -1;
+    _mass = 0.0;
+    _inertia = 0.0;
+    _angularVelocity = 0.0;
+    _transform.setIdentity();
+
+    _destroyAutomatically = true;
+    _toBeDestroyed = false;
+    _toBeSplit = false;
+  }
+
   ParticleSystem _system;
   int _firstIndex = 0;
   int _lastIndex = 0;
@@ -46,24 +64,6 @@ class ParticleGroup {
   bool _toBeSplit = false;
 
   Object _userData;
-
-  ParticleGroup() {
-    // _system = null;
-    _firstIndex = 0;
-    _lastIndex = 0;
-    _groupFlags = 0;
-    _strength = 1.0;
-
-    _timestamp = -1;
-    _mass = 0.0;
-    _inertia = 0.0;
-    _angularVelocity = 0.0;
-    _transform.setIdentity();
-
-    _destroyAutomatically = true;
-    _toBeDestroyed = false;
-    _toBeSplit = false;
-  }
 
   ParticleGroup getNext() {
     return _next;

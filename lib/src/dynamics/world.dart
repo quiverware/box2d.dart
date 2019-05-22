@@ -29,6 +29,60 @@ part of box2d;
  * world also contains efficient memory management facilities.
  */
 class World {
+  World(Vector2 gravity, this._pool, BroadPhase broadPhase)
+      : _gravity = Vector2.copy(gravity) {
+    _destructionListener = null;
+    debugDraw = null;
+
+    bodyList = null;
+    _jointList = null;
+
+    _bodyCount = 0;
+    _jointCount = 0;
+
+    _warmStarting = true;
+    _continuousPhysics = true;
+    _subStepping = false;
+    _stepComplete = true;
+
+    _allowSleep = true;
+
+    _flags = CLEAR_FORCES;
+
+    _inv_dt0 = 0.0;
+
+    _contactManager = ContactManager(this, broadPhase);
+    _profile = Profile();
+
+    _particleSystem = ParticleSystem(this);
+
+    _initializeRegisters();
+  }
+
+  /**
+   * Construct a world object.
+   *
+   * @param gravity the world gravity vector.
+   */
+  factory World.withGravity(Vector2 gravity) {
+    return World.withPool(
+        gravity, DefaultWorldPool(WORLD_POOL_SIZE, WORLD_POOL_CONTAINER_SIZE));
+  }
+
+  /**
+   * Construct a world object.
+   *
+   * @param gravity the world gravity vector.
+   */
+  factory World.withPool(Vector2 gravity, IWorldPool pool) {
+    return World.withPoolAndStrategy(gravity, pool, DynamicTree());
+  }
+
+  factory World.withPoolAndStrategy(
+      Vector2 gravity, IWorldPool pool, BroadPhaseStrategy strategy) {
+    return World(gravity, pool, DefaultBroadPhaseBuffer(strategy));
+  }
+
   static const int WORLD_POOL_SIZE = 100;
   static const int WORLD_POOL_CONTAINER_SIZE = 10;
 
@@ -82,60 +136,6 @@ class World {
 
   List<List<ContactRegister>> contactStacks =
       _create2D(ShapeType.values.length, ShapeType.values.length);
-
-  /**
-   * Construct a world object.
-   *
-   * @param gravity the world gravity vector.
-   */
-  factory World.withGravity(Vector2 gravity) {
-    return World.withPool(
-        gravity, DefaultWorldPool(WORLD_POOL_SIZE, WORLD_POOL_CONTAINER_SIZE));
-  }
-
-  /**
-   * Construct a world object.
-   *
-   * @param gravity the world gravity vector.
-   */
-  factory World.withPool(Vector2 gravity, IWorldPool pool) {
-    return World.withPoolAndStrategy(gravity, pool, DynamicTree());
-  }
-
-  factory World.withPoolAndStrategy(
-      Vector2 gravity, IWorldPool pool, BroadPhaseStrategy strategy) {
-    return World(gravity, pool, DefaultBroadPhaseBuffer(strategy));
-  }
-
-  World(Vector2 gravity, this._pool, BroadPhase broadPhase)
-      : _gravity = Vector2.copy(gravity) {
-    _destructionListener = null;
-    debugDraw = null;
-
-    bodyList = null;
-    _jointList = null;
-
-    _bodyCount = 0;
-    _jointCount = 0;
-
-    _warmStarting = true;
-    _continuousPhysics = true;
-    _subStepping = false;
-    _stepComplete = true;
-
-    _allowSleep = true;
-
-    _flags = CLEAR_FORCES;
-
-    _inv_dt0 = 0.0;
-
-    _contactManager = ContactManager(this, broadPhase);
-    _profile = Profile();
-
-    _particleSystem = ParticleSystem(this);
-
-    _initializeRegisters();
-  }
 
   void setAllowSleep(bool flag) {
     if (flag == _allowSleep) {

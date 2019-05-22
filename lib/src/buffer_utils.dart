@@ -28,7 +28,7 @@ import 'dart:typed_data';
 
 /** Reallocate a buffer. */
 List<T> reallocateBufferWithAlloc<T>(
-    List oldBuffer, int oldCapacity, int newCapacity, T alloc()) {
+    List<T> oldBuffer, int oldCapacity, int newCapacity, T alloc()) {
   assert(newCapacity > oldCapacity);
   final List<T> newBuffer = List<T>(newCapacity);
   if (oldBuffer != null) {
@@ -139,14 +139,14 @@ List<int> allocClearIntList(int size) => List<int>.filled(size, 0);
 /**
  * Helper function for ease of porting Java to Dart.
  */
-void arraycopy(List src, int srcPos, List dest, int destPos, int length) {
+void arraycopy<T>(List<T> src, int srcPos, List<T> dest, int destPos, int length) {
   dest.setRange(destPos, length + destPos, src, srcPos);
 }
 
 // Replace Java's Arrays::sort.
 // TODO(srdjan): Make a version that does not require copying.
 void sort<T>(List<T> list, int fromPos, int toPos) {
-  final List<T> temp = List.from(list.getRange(fromPos, toPos));
+  final List<T> temp = List<T>.from(list.getRange(fromPos, toPos));
   temp.sort();
   list.setRange(fromPos, toPos, temp);
 }

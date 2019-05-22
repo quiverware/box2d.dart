@@ -50,20 +50,6 @@ part of box2d;
 enum ManifoldType { CIRCLES, FACE_A, FACE_B }
 
 class Manifold {
-  /** The points of contact. */
-  final List<ManifoldPoint> points;
-
-  /** not use for Type::e_points */
-  final Vector2 localNormal;
-
-  /** usage depends on manifold type */
-  final Vector2 localPoint;
-
-  ManifoldType type = ManifoldType.CIRCLES;
-
-  /** The number of manifold points. */
-  int pointCount = 0;
-
   /**
    * creates a manifold with 0 points, with it's points array full of instantiated ManifoldPoints.
    */
@@ -78,7 +64,7 @@ class Manifold {
 
   /**
    * Creates this manifold as a copy of the other
-   * 
+   *
    * @param other
    */
   Manifold.copy(Manifold other)
@@ -92,6 +78,20 @@ class Manifold {
       points[i] = ManifoldPoint.copy(other.points[i]);
     }
   }
+
+  /** The points of contact. */
+  final List<ManifoldPoint> points;
+
+  /** not use for Type::e_points */
+  final Vector2 localNormal;
+
+  /** usage depends on manifold type */
+  final Vector2 localPoint;
+
+  ManifoldType type = ManifoldType.CIRCLES;
+
+  /** The number of manifold points. */
+  int pointCount = 0;
 
   /**
    * copies this manifold from the given one

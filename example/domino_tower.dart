@@ -30,6 +30,9 @@ import 'package:box2d_flame/box2d.dart';
 import 'demo.dart';
 
 class DominoTower extends Demo {
+  /** Construct a new DominoTower. */
+  DominoTower() : super('Domino tower');
+
   static const double DOMINO_WIDTH = .2;
   static const double DOMINO_FRICTION = 0.1;
   static const double DOMINO_HEIGHT = 1.0;
@@ -41,12 +44,9 @@ class DominoTower extends Demo {
    */
   double dominoDensity;
 
-  /** Construct a new DominoTower. */
-  DominoTower() : super('Domino tower');
-
   /** Entrypoint. */
   static void main() {
-    final tower = DominoTower();
+    final DominoTower tower = DominoTower();
     tower.initialize();
     tower.initializeAnimation();
     tower.runAnimation();

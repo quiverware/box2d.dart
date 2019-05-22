@@ -31,6 +31,10 @@ part of box2d;
  * @author Daniel Murphy
  */
 class PulleyJointDef extends JointDef {
+  PulleyJointDef() : super(JointType.PULLEY) {
+    collideConnected = true;
+  }
+
   /**
    * The first ground anchor in world coordinates. This point never moves.
    */
@@ -65,10 +69,6 @@ class PulleyJointDef extends JointDef {
    * The pulley ratio, used to simulate a block-and-tackle.
    */
   double ratio = 1.0;
-
-  PulleyJointDef() : super(JointType.PULLEY) {
-    collideConnected = true;
-  }
 
   /**
    * Initialize the bodies, anchors, lengths, max lengths, and ratio using the world anchors.

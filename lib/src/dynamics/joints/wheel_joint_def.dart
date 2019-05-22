@@ -34,6 +34,10 @@ part of box2d;
  * @author Daniel Murphy
  */
 class WheelJointDef extends JointDef {
+  WheelJointDef() : super(JointType.WHEEL) {
+    localAxisA.setValues(1.0, 0.0);
+  }
+
   /**
    * The local anchor point relative to body1's origin.
    */
@@ -73,10 +77,6 @@ class WheelJointDef extends JointDef {
    * Suspension damping ratio, one indicates critical damping
    */
   double dampingRatio = 0.0;
-
-  WheelJointDef() : super(JointType.WHEEL) {
-    localAxisA.setValues(1.0, 0.0);
-  }
 
   void initialize(Body b1, Body b2, Vector2 anchor, Vector2 axis) {
     bodyA = b1;

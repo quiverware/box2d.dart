@@ -28,11 +28,11 @@ part of box2d;
  * A circle shape.
  */
 class CircleShape extends Shape {
-  final Vector2 p = Vector2.zero();
-
   CircleShape() : super(ShapeType.CIRCLE) {
     radius = 0.0;
   }
+
+  final Vector2 p = Vector2.zero();
 
   @override
   Shape clone() {

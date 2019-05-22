@@ -78,8 +78,8 @@ class OrderedStackRot extends OrderedStack<Rot> {
 }
 
 abstract class MutableStackWithPool<T> extends MutableStack<T> {
-  IWorldPool _pool;
   MutableStackWithPool(this._pool, int argInitSize) : super(argInitSize);
+  IWorldPool _pool;
 }
 
 class MutableStackPolygonContact extends MutableStackWithPool<PolygonContact> {
@@ -144,33 +144,6 @@ class MutableStackChainAndPolygonContact
 }
 
 class DefaultWorldPool implements IWorldPool {
-  final OrderedStack<Vector2> _vecs;
-  final OrderedStack<Vector3> _vec3s;
-  final OrderedStack<Matrix2> _mats;
-  final OrderedStack<Matrix3> _mat33s;
-  final OrderedStack<AABB> _aabbs;
-  final OrderedStack<Rot> _rots;
-
-  final HashMap<int, Float64List> _afloats = HashMap<int, Float64List>();
-  final HashMap<int, List<int>> _aints = HashMap<int, List<int>>();
-  final HashMap<int, List<Vector2>> _avecs = HashMap<int, List<Vector2>>();
-
-  IWorldPool _world;
-
-  IWorldPool get world => _world;
-
-  MutableStackWithPool<PolygonContact> _pcstack;
-  MutableStackWithPool<CircleContact> _ccstack;
-  MutableStackWithPool<PolygonAndCircleContact> _cpstack;
-  MutableStackWithPool<EdgeAndCircleContact> _ecstack;
-  MutableStackWithPool<EdgeAndPolygonContact> _epstack;
-  MutableStackWithPool<ChainAndCircleContact> _chcstack;
-  MutableStackWithPool<ChainAndPolygonContact> _chpstack;
-
-  Collision _collision;
-  TimeOfImpact _toi;
-  final Distance _dist;
-
   DefaultWorldPool(int argSize, int argContainerSize)
       : _vecs = OrderedStackVec2(argSize, argContainerSize),
         _vec3s = OrderedStackVec3(argSize, argContainerSize),
@@ -197,6 +170,33 @@ class DefaultWorldPool implements IWorldPool {
     _toi = TimeOfImpact(this);
     _world = this;
   }
+
+  final OrderedStack<Vector2> _vecs;
+  final OrderedStack<Vector3> _vec3s;
+  final OrderedStack<Matrix2> _mats;
+  final OrderedStack<Matrix3> _mat33s;
+  final OrderedStack<AABB> _aabbs;
+  final OrderedStack<Rot> _rots;
+
+  final HashMap<int, Float64List> _afloats = HashMap<int, Float64List>();
+  final HashMap<int, List<int>> _aints = HashMap<int, List<int>>();
+  final HashMap<int, List<Vector2>> _avecs = HashMap<int, List<Vector2>>();
+
+  IWorldPool _world;
+
+  IWorldPool get world => _world;
+
+  MutableStackWithPool<PolygonContact> _pcstack;
+  MutableStackWithPool<CircleContact> _ccstack;
+  MutableStackWithPool<PolygonAndCircleContact> _cpstack;
+  MutableStackWithPool<EdgeAndCircleContact> _ecstack;
+  MutableStackWithPool<EdgeAndPolygonContact> _epstack;
+  MutableStackWithPool<ChainAndCircleContact> _chcstack;
+  MutableStackWithPool<ChainAndPolygonContact> _chpstack;
+
+  Collision _collision;
+  TimeOfImpact _toi;
+  final Distance _dist;
 
   @override
   IDynamicStack<Contact> getPolyContactStack() {

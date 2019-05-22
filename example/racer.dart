@@ -40,16 +40,16 @@ part 'racer/ground_area.dart';
 part 'racer/tire.dart';
 
 class Racer extends Demo implements ContactListener {
+  Racer() : super('Racer', Vector2.zero(), 2.5);
+
   static void main() {
-    final racer = Racer();
+    final Racer racer = Racer();
     racer.initialize();
     racer.initializeAnimation();
     document.body.nodes
         .add(Element.html('<p>Use the arrow keys to drive the car.</p>'));
     racer.runAnimation();
   }
-
-  Racer() : super('Racer', Vector2.zero(), 2.5);
 
   @override
   void initialize() {

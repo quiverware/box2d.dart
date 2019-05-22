@@ -29,6 +29,9 @@ import 'package:box2d_flame/box2d.dart';
 import 'demo.dart';
 
 class BallCage extends Demo {
+  /** Constructs a new BallCage. */
+  BallCage() : super('Ball cage');
+
   /** Starting position of ball cage in the world. */
   static const double START_X = -20.0;
   static const double START_Y = -20.0;
@@ -38,9 +41,6 @@ class BallCage extends Demo {
 
   /** Radius of the active ball. */
   static const double ACTIVE_BALL_RADIUS = 1.0;
-
-  /** Constructs a new BallCage. */
-  BallCage() : super('Ball cage');
 
   /** Entrypoint. */
   static void main() {
@@ -112,7 +112,7 @@ class BallCage extends Demo {
     activeBodyDef.position = Vector2(15.0, 15.0);
     activeBodyDef.type = BodyType.DYNAMIC;
     activeBodyDef.bullet = true;
-    final activeBody = world.createBody(activeBodyDef);
+    final Body activeBody = world.createBody(activeBodyDef);
     bodies.add(activeBody);
     activeBody.createFixtureFromFixtureDef(activeFixtureDef);
   }

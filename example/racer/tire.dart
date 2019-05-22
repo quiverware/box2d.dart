@@ -107,7 +107,7 @@ class Tire {
       _currentTraction = 1.0;
     } else {
       _currentTraction = 0.0;
-      _groundAreas.forEach((element) {
+      _groundAreas.forEach((GroundArea element) {
         _currentTraction = max(_currentTraction, element.frictionModifier);
       });
     }

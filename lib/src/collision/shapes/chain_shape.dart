@@ -32,6 +32,10 @@ part of box2d;
  */
 
 class ChainShape extends Shape {
+  ChainShape() : super(ShapeType.CHAIN) {
+    radius = settings.polygonRadius;
+  }
+
   List<Vector2> _vertices;
   int _count = 0;
   final Vector2 _prevVertex = Vector2.zero(),
@@ -39,10 +43,6 @@ class ChainShape extends Shape {
   bool _hasPrevVertex = false, _hasNextVertex = false;
 
   final EdgeShape _pool0 = EdgeShape();
-
-  ChainShape() : super(ShapeType.CHAIN) {
-    radius = settings.polygonRadius;
-  }
 
   void clear() {
     _vertices = null;

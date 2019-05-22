@@ -59,6 +59,8 @@ class TOIOutput {
  * @author daniel
  */
 class TimeOfImpact {
+  TimeOfImpact(this._pool);
+
   static const int MAX_ITERATIONS = 20;
   static const int MAX_ROOT_ITERATIONS = 50;
 
@@ -80,8 +82,6 @@ class TimeOfImpact {
   final Sweep _sweepB = Sweep();
 
   final IWorldPool _pool;
-
-  TimeOfImpact(this._pool);
 
   /**
    * Compute the upper bound on time before two shapes penetrate. Time is represented as a fraction

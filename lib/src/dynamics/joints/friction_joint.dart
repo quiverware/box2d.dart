@@ -25,6 +25,15 @@
 part of box2d;
 
 class FrictionJoint extends Joint {
+  FrictionJoint(IWorldPool argWorldPool, FrictionJointDef def)
+      : _localAnchorA = Vector2.copy(def.localAnchorA),
+        _localAnchorB = Vector2.copy(def.localAnchorB),
+        _linearImpulse = Vector2.zero(),
+        super(argWorldPool, def) {
+    _maxForce = def.maxForce;
+    _maxTorque = def.maxTorque;
+  }
+
   final Vector2 _localAnchorA;
   final Vector2 _localAnchorB;
 
@@ -47,15 +56,6 @@ class FrictionJoint extends Joint {
   double _invIB = 0.0;
   final Matrix2 _linearMass = Matrix2.zero();
   double _angularMass = 0.0;
-
-  FrictionJoint(IWorldPool argWorldPool, FrictionJointDef def)
-      : _localAnchorA = Vector2.copy(def.localAnchorA),
-        _localAnchorB = Vector2.copy(def.localAnchorB),
-        _linearImpulse = Vector2.zero(),
-        super(argWorldPool, def) {
-    _maxForce = def.maxForce;
-    _maxTorque = def.maxTorque;
-  }
 
   Vector2 getLocalAnchorA() {
     return _localAnchorA;

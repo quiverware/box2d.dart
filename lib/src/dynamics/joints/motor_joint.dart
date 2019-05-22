@@ -43,6 +43,17 @@ part of box2d;
  * @author dmurph
  */
 class MotorJoint extends Joint {
+  MotorJoint(IWorldPool pool, MotorJointDef def) : super(pool, def) {
+    _linearOffset.setFrom(def.linearOffset);
+    _angularOffset = def.angularOffset;
+
+    _angularImpulse = 0.0;
+
+    _maxForce = def.maxForce;
+    _maxTorque = def.maxTorque;
+    _correctionFactor = def.correctionFactor;
+  }
+
   // Solver shared
   final Vector2 _linearOffset = Vector2.zero();
   double _angularOffset = 0.0;
@@ -67,17 +78,6 @@ class MotorJoint extends Joint {
   double _invIB = 0.0;
   final Matrix2 _linearMass = Matrix2.zero();
   double _angularMass = 0.0;
-
-  MotorJoint(IWorldPool pool, MotorJointDef def) : super(pool, def) {
-    _linearOffset.setFrom(def.linearOffset);
-    _angularOffset = def.angularOffset;
-
-    _angularImpulse = 0.0;
-
-    _maxForce = def.maxForce;
-    _maxTorque = def.maxTorque;
-    _correctionFactor = def.correctionFactor;
-  }
 
   @override
   void getAnchorA(Vector2 out) {

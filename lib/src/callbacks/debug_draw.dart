@@ -31,26 +31,33 @@ part of box2d;
  * @author Daniel Murphy
  */
 abstract class DebugDraw {
+  DebugDraw(this.viewportTransform);
+
+  DebugDraw.zero();
+
   /** Draw shapes */
   static const int SHAPE_BIT = 1 << 1;
+
   /** Draw joint connections */
   static const int JOINT_BIT = 1 << 2;
+
   /** Draw axis aligned bounding boxes */
   static const int AABB_BIT = 1 << 3;
+
   /** Draw pairs of connected objects */
   static const int PAIR_BIT = 1 << 4;
+
   /** Draw center of mass frame */
   static const int CENTER_OF_MASS_BIT = 1 << 5;
+
   /** Draw dynamic tree */
   static const int DYNAMIC_TREE_BIT = 1 << 6;
+
   /** Draw only the wireframe for drawing performance */
   static const int WIREFRAME_DRAWING_BIT = 1 << 7;
 
   int drawFlags = SHAPE_BIT;
   ViewportTransform viewportTransform;
-
-  DebugDraw.zero();
-  DebugDraw(this.viewportTransform);
 
   void setViewportTransform(ViewportTransform viewportTransform) {
     this.viewportTransform = viewportTransform;

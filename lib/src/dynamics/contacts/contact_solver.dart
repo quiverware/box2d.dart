@@ -33,6 +33,17 @@ class ContactSolverDef {
 }
 
 class ContactSolver {
+  ContactSolver() {
+    _positionConstraints =
+        List<ContactPositionConstraint>(INITIAL_NUM_CONSTRAINTS);
+    _velocityConstraints =
+        List<ContactVelocityConstraint>(INITIAL_NUM_CONSTRAINTS);
+    for (int i = 0; i < INITIAL_NUM_CONSTRAINTS; i++) {
+      _positionConstraints[i] = ContactPositionConstraint();
+      _velocityConstraints[i] = ContactVelocityConstraint();
+    }
+  }
+
   static const bool DEBUG_SOLVER = false;
   static const double k_errorTol = 1e-3;
 
@@ -54,17 +65,6 @@ class ContactSolver {
   List<ContactVelocityConstraint> _velocityConstraints;
   List<Contact> _contacts;
   int _count = 0;
-
-  ContactSolver() {
-    _positionConstraints =
-        List<ContactPositionConstraint>(INITIAL_NUM_CONSTRAINTS);
-    _velocityConstraints =
-        List<ContactVelocityConstraint>(INITIAL_NUM_CONSTRAINTS);
-    for (int i = 0; i < INITIAL_NUM_CONSTRAINTS; i++) {
-      _positionConstraints[i] = ContactPositionConstraint();
-      _velocityConstraints[i] = ContactVelocityConstraint();
-    }
-  }
 
   void init(ContactSolverDef def) {
     // System.out.println("Initializing contact solver");
