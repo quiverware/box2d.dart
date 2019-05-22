@@ -35,11 +35,10 @@ class CircleContact extends Contact {
 
   @override
   void evaluate(Manifold manifold, Transform xfA, Transform xfB) {
-    _pool.getCollision().collideCircles(
-        manifold,
-        _fixtureA.getShape() as CircleShape,
-        xfA,
-        _fixtureB.getShape() as CircleShape,
-        xfB);
+    final CircleShape fixtureAShape = _fixtureA.getShape();
+    final CircleShape fixtureBShape = _fixtureB.getShape();
+    _pool
+        .getCollision()
+        .collideCircles(manifold, fixtureAShape, xfA, fixtureBShape, xfB);
   }
 }

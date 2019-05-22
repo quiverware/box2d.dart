@@ -114,7 +114,8 @@ abstract class Demo {
    */
   void initializeAnimation() {
     // Setup the canvas.
-    canvas = (Element.tag('canvas') as CanvasElement)
+    final CanvasElement canvasElement = Element.tag('canvas');
+    canvas = canvasElement
       ..width = CANVAS_WIDTH
       ..height = CANVAS_HEIGHT;
     document.body.nodes.add(canvas);

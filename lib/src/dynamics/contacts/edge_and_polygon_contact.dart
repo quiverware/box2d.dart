@@ -36,11 +36,10 @@ class EdgeAndPolygonContact extends Contact {
 
   @override
   void evaluate(Manifold manifold, Transform xfA, Transform xfB) {
-    _pool.getCollision().collideEdgeAndPolygon(
-        manifold,
-        _fixtureA.getShape() as EdgeShape,
-        xfA,
-        _fixtureB.getShape() as PolygonShape,
-        xfB);
+    final EdgeShape fixtureAShape = _fixtureA.getShape();
+    final PolygonShape fixtureBShape = _fixtureB.getShape();
+    _pool
+        .getCollision()
+        .collideEdgeAndPolygon(manifold, fixtureAShape, xfA, fixtureBShape, xfB);
   }
 }

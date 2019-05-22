@@ -36,11 +36,10 @@ class EdgeAndCircleContact extends Contact {
 
   @override
   void evaluate(Manifold manifold, Transform xfA, Transform xfB) {
-    _pool.getCollision().collideEdgeAndCircle(
-        manifold,
-        _fixtureA.getShape() as EdgeShape,
-        xfA,
-        _fixtureB.getShape() as CircleShape,
-        xfB);
+    final EdgeShape fixtureAShape = _fixtureA.getShape();
+    final CircleShape fixtureBShape = _fixtureB.getShape();
+    _pool
+        .getCollision()
+        .collideEdgeAndCircle(manifold, fixtureAShape, xfA, fixtureBShape, xfB);
   }
 }

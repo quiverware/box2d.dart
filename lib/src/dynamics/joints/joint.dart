@@ -31,33 +31,33 @@ part of box2d;
  * @author Daniel Murphy
  */
 abstract class Joint {
-  static Joint create(World world, JointDef def) {
+  static Joint create(World world, JointDef jointDef) {
     // Joint joint = null;
-    switch (def.type) {
+    switch (jointDef.type) {
       case JointType.MOUSE:
-        return MouseJoint(world.getPool(), def as MouseJointDef);
+        return MouseJoint(world.getPool(), jointDef);
       case JointType.DISTANCE:
-        return DistanceJoint(world.getPool(), def as DistanceJointDef);
+        return DistanceJoint(world.getPool(), jointDef);
       case JointType.PRISMATIC:
-        return PrismaticJoint(world.getPool(), def as PrismaticJointDef);
+        return PrismaticJoint(world.getPool(), jointDef);
       case JointType.REVOLUTE:
-        return RevoluteJoint(world.getPool(), def as RevoluteJointDef);
+        return RevoluteJoint(world.getPool(), jointDef);
       case JointType.WELD:
-        return WeldJoint(world.getPool(), def as WeldJointDef);
+        return WeldJoint(world.getPool(), jointDef);
       case JointType.FRICTION:
-        return FrictionJoint(world.getPool(), def as FrictionJointDef);
+        return FrictionJoint(world.getPool(), jointDef);
       case JointType.WHEEL:
-        return WheelJoint(world.getPool(), def as WheelJointDef);
+        return WheelJoint(world.getPool(), jointDef);
       case JointType.GEAR:
-        return GearJoint(world.getPool(), def as GearJointDef);
+        return GearJoint(world.getPool(), jointDef);
       case JointType.PULLEY:
-        return PulleyJoint(world.getPool(), def as PulleyJointDef);
+        return PulleyJoint(world.getPool(), jointDef);
       case JointType.CONSTANT_VOLUME:
-        return ConstantVolumeJoint(world, def as ConstantVolumeJointDef);
+        return ConstantVolumeJoint(world, jointDef);
       case JointType.ROPE:
-        return RopeJoint(world.getPool(), def as RopeJointDef);
+        return RopeJoint(world.getPool(), jointDef);
       case JointType.MOTOR:
-        return MotorJoint(world.getPool(), def as MotorJointDef);
+        return MotorJoint(world.getPool(), jointDef);
       case JointType.UNKNOWN:
       default:
         return null;

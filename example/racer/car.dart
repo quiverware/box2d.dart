@@ -37,36 +37,36 @@ class Car {
 
     _body.createFixtureFromShape(shape, 0.1);
 
-    final RevoluteJointDef jointDef = RevoluteJointDef();
-    jointDef.bodyA = _body;
-    jointDef.enableLimit = true;
-    jointDef.lowerAngle = 0.0;
-    jointDef.upperAngle = 0.0;
-    jointDef.localAnchorB.setZero();
+    final RevoluteJointDef revoluteJointDef = RevoluteJointDef()
+      ..bodyA = _body
+      ..enableLimit = true
+      ..lowerAngle = 0.0
+      ..upperAngle = 0.0
+      ..localAnchorB.setZero();
 
     _blTire = Tire(world, _maxForwardSpeed, _maxBackwardSpeed,
         _backTireMaxDriveForce, _backTireMaxLateralImpulse);
-    jointDef.bodyB = _blTire._body;
-    jointDef.localAnchorA.setValues(-3.0, 0.75);
-    world.createJoint(jointDef);
+    revoluteJointDef.bodyB = _blTire._body;
+    revoluteJointDef.localAnchorA.setValues(-3.0, 0.75);
+    world.createJoint(revoluteJointDef);
 
     _brTire = Tire(world, _maxForwardSpeed, _maxBackwardSpeed,
         _backTireMaxDriveForce, _backTireMaxLateralImpulse);
-    jointDef.bodyB = _brTire._body;
-    jointDef.localAnchorA.setValues(3.0, 0.75);
-    world.createJoint(jointDef);
+    revoluteJointDef.bodyB = _brTire._body;
+    revoluteJointDef.localAnchorA.setValues(3.0, 0.75);
+    world.createJoint(revoluteJointDef);
 
     _flTire = Tire(world, _maxForwardSpeed, _maxBackwardSpeed,
         _frontTireMaxDriveForce, _frontTireMaxLateralImpulse);
-    jointDef.bodyB = _flTire._body;
-    jointDef.localAnchorA.setValues(-3.0, 8.5);
-    _flJoint = world.createJoint(jointDef) as RevoluteJoint;
+    revoluteJointDef.bodyB = _flTire._body;
+    revoluteJointDef.localAnchorA.setValues(-3.0, 8.5);
+    _flJoint = world.createJoint(revoluteJointDef);
 
     _frTire = Tire(world, _maxForwardSpeed, _maxBackwardSpeed,
         _frontTireMaxDriveForce, _frontTireMaxLateralImpulse);
-    jointDef.bodyB = _frTire._body;
-    jointDef.localAnchorA.setValues(3.0, 8.5);
-    _frJoint = world.createJoint(jointDef) as RevoluteJoint;
+    revoluteJointDef.bodyB = _frTire._body;
+    revoluteJointDef.localAnchorA.setValues(3.0, 8.5);
+    _frJoint = world.createJoint(revoluteJointDef);
   }
 
   void _updateFriction() {

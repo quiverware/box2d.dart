@@ -71,7 +71,7 @@ class PsProxy implements Comparable<PsProxy> {
     if (this == obj) return true;
     if (obj == null) return false;
     if (obj is! PsProxy) return false;
-    final other = obj as PsProxy;
+    final PsProxy other = obj;
     if (tag != other.tag) return false;
     return true;
   }

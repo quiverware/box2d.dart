@@ -1412,7 +1412,7 @@ class World {
 
       case JointType.PULLEY:
         {
-          final pulley = joint as PulleyJoint;
+          final PulleyJoint pulley = joint;
           final Vector2 s1 = pulley.getGroundAnchorA();
           final Vector2 s2 = pulley.getGroundAnchorB();
           debugDraw.drawSegment(s1, p1, color);
@@ -1456,7 +1456,7 @@ class World {
     switch (fixture.getType()) {
       case ShapeType.CIRCLE:
         {
-          final CircleShape circle = fixture.getShape() as CircleShape;
+          final CircleShape circle = fixture.getShape();
 
           // Vec2 center = Mul(xf, circle.m_p);
           Transform.mulToOutUnsafeVec2(xf, circle.p, center);
@@ -1490,7 +1490,7 @@ class World {
 
       case ShapeType.POLYGON:
         {
-          final poly = fixture.getShape() as PolygonShape;
+          final PolygonShape poly = fixture.getShape();
           final int vertexCount = poly.count;
           assert(vertexCount <= Settings.maxPolygonVertices);
           final List<Vector2> vertices =
@@ -1509,7 +1509,7 @@ class World {
         break;
       case ShapeType.EDGE:
         {
-          final edge = fixture.getShape() as EdgeShape;
+          final EdgeShape edge = fixture.getShape();
           Transform.mulToOutUnsafeVec2(xf, edge.vertex1, v1);
           Transform.mulToOutUnsafeVec2(xf, edge.vertex2, v2);
           debugDraw.drawSegment(v1, v2, color);
@@ -1517,7 +1517,7 @@ class World {
         break;
       case ShapeType.CHAIN:
         {
-          final chain = fixture.getShape() as ChainShape;
+          final ChainShape chain = fixture.getShape();
           final int count = chain._count;
           final List<Vector2> vertices = chain._vertices;
 
@@ -1906,7 +1906,7 @@ class World {
 class WorldQueryWrapper implements TreeCallback {
   @override
   bool treeCallback(int nodeId) {
-    final proxy = broadPhase.getUserData(nodeId) as FixtureProxy;
+    final FixtureProxy proxy = broadPhase.getUserData(nodeId);
     return callback.reportFixture(proxy.fixture);
   }
 
@@ -1922,7 +1922,7 @@ class WorldRayCastWrapper implements TreeRayCastCallback {
 
   @override
   double raycastCallback(RayCastInput input, int nodeId) {
-    final userData = broadPhase.getUserData(nodeId) as FixtureProxy;
+    final FixtureProxy userData = broadPhase.getUserData(nodeId);
     final FixtureProxy proxy = userData;
     final Fixture fixture = proxy.fixture;
     final int index = proxy.childIndex;
