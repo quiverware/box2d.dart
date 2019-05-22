@@ -42,6 +42,7 @@ class CircleStress extends Demo {
   CircleStress() : super("Circle stress");
 
   /** Creates all bodies. */
+  @override
   void initialize() {
     {
       final bd = BodyDef();

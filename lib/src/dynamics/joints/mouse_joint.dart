@@ -70,20 +70,24 @@ class MouseJoint extends Joint {
     _dampingRatio = def.dampingRatio;
   }
 
+  @override
   void getAnchorA(Vector2 argOut) {
     argOut.setFrom(_targetA);
   }
 
+  @override
   void getAnchorB(Vector2 argOut) {
     _bodyB.getWorldPointToOut(_localAnchorB, argOut);
   }
 
+  @override
   void getReactionForce(double invDt, Vector2 argOut) {
     argOut
       ..setFrom(_impulse)
       ..scale(invDt);
   }
 
+  @override
   double getReactionTorque(double invDt) {
     return invDt * 0.0;
   }
@@ -99,6 +103,7 @@ class MouseJoint extends Joint {
     return _targetA;
   }
 
+  @override
   void initVelocityConstraints(final SolverData data) {
     _indexB = _bodyB._islandIndex;
     _localCenterB.setFrom(_bodyB._sweep.localCenter);
@@ -185,10 +190,12 @@ class MouseJoint extends Joint {
     pool.pushRot(1);
   }
 
+  @override
   bool solvePositionConstraints(final SolverData data) {
     return true;
   }
 
+  @override
   void solveVelocityConstraints(final SolverData data) {
     final Vector2 vB = data.velocities[_indexB].v;
     double wB = data.velocities[_indexB].w;

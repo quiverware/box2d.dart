@@ -50,6 +50,7 @@ class BallCage extends Demo {
     cage.runAnimation();
   }
 
+  @override
   void initialize() {
     // Define the circle shape.
     final CircleShape circleShape = CircleShape();

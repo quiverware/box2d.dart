@@ -71,7 +71,7 @@ class ViewportTransform {
     return Vector2.copy(extents)..sub(center);
   }
 
-  void set translation(Vector2 translation) {
+  set translation(Vector2 translation) {
     center.setFrom(extents);
     center.sub(translation);
   }

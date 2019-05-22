@@ -76,6 +76,7 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
     _freeList = oldSize;
   }
 
+  @override
   int createProxy(final AABB aabb, Object userData) {
     final int node = _allocateNode();
     // Fatten the aabb
@@ -91,6 +92,7 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
     return node;
   }
 
+  @override
   void destroyProxy(int proxyId) {
     assert(0 <= proxyId && proxyId < _nodeCapacity);
     assert(_child1[proxyId] == NULL_NODE);
@@ -99,6 +101,7 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
     _freeNode(proxyId);
   }
 
+  @override
   bool moveProxy(int proxyId, final AABB aabb, Vector2 displacement) {
     assert(0 <= proxyId && proxyId < _nodeCapacity);
     final int node = proxyId;
@@ -142,11 +145,13 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
     return true;
   }
 
+  @override
   Object getUserData(int proxyId) {
     assert(0 <= proxyId && proxyId < _nodeCount);
     return _userData[proxyId];
   }
 
+  @override
   AABB getFatAABB(int proxyId) {
     assert(0 <= proxyId && proxyId < _nodeCount);
     return _aabb[proxyId];
@@ -155,6 +160,7 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
   List<int> _nodeStack = BufferUtils.allocClearIntList(20);
   int _nodeStackIndex = 0;
 
+  @override
   void query(TreeCallback callback, AABB aabb) {
     _nodeStackIndex = 0;
     _nodeStack[_nodeStackIndex++] = _root;
@@ -188,6 +194,7 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
   final AABB _aabbTemp = AABB();
   final RayCastInput _subInput = RayCastInput();
 
+  @override
   void raycast(TreeRayCastCallback callback, RayCastInput input) {
     final Vector2 p1 = input.p1;
     final Vector2 p2 = input.p2;
@@ -295,6 +302,7 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
     }
   }
 
+  @override
   int computeHeight() {
     return _computeHeight(_root);
   }
@@ -329,6 +337,7 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
     assert(_nodeCount + freeCount == _nodeCapacity);
   }
 
+  @override
   int getHeight() {
     if (_root == NULL_NODE) {
       return 0;
@@ -336,6 +345,7 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
     return _height[_root];
   }
 
+  @override
   int getMaxBalance() {
     int maxBalance = 0;
     for (int i = 0; i < _nodeCapacity; ++i) {
@@ -354,6 +364,7 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
     return maxBalance;
   }
 
+  @override
   double getAreaRatio() {
     if (_root == NULL_NODE) {
       return 0.0;
@@ -754,6 +765,7 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
     _validateMetrics(child2);
   }
 
+  @override
   void drawTree(DebugDraw argDraw) {
     if (_root == NULL_NODE) {
       return;

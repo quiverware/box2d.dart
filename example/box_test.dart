@@ -40,6 +40,7 @@ class BoxTest extends Demo {
     boxTest.runAnimation();
   }
 
+  @override
   void initialize() {
     assert(null != world);
     _createGround();

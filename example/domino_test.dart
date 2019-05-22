@@ -32,6 +32,7 @@ import 'demo.dart';
 class DominoTest extends Demo {
   DominoTest() : super("Domino test");
 
+  @override
   void initialize() {
     {
       // Floor

@@ -62,6 +62,7 @@ class PsProxy implements Comparable<PsProxy> {
   int index = 0;
   int tag = 0;
 
+  @override
   int compareTo(PsProxy o) {
     return (tag - o.tag) < 0 ? -1 : (o.tag == tag ? 0 : 1);
   }
@@ -112,6 +113,7 @@ class DestroyParticlesInShapeCallback implements ParticleQueryCallback {
     this.callDestructionListener = callDestructionListener;
   }
 
+  @override
   bool reportParticle(int index) {
     assert(index >= 0 && index < system.count);
     if (shape.testPoint(xf, system.positionBuffer.data[index])) {
@@ -130,6 +132,7 @@ class UpdateBodyContactsCallback implements QueryCallback {
   static ParticleBodyContact allocParticleBodyContact() =>
       ParticleBodyContact();
 
+  @override
   bool reportFixture(Fixture fixture) {
     if (fixture.isSensor()) {
       return true;
@@ -213,6 +216,7 @@ PsTriad allocPsTriad() => PsTriad();
 
 // Callback used with VoronoiDiagram.
 class CreateParticleGroupCallback implements VoronoiDiagramCallback {
+  @override
   void callback(int a, int b, int c) {
     final Vector2 pa = system.positionBuffer.data[a];
     final Vector2 pb = system.positionBuffer.data[b];
@@ -270,6 +274,7 @@ class CreateParticleGroupCallback implements VoronoiDiagramCallback {
 
 // Callback used with VoronoiDiagram.
 class JoinParticleGroupsCallback implements VoronoiDiagramCallback {
+  @override
   void callback(int a, int b, int c) {
     // Create a triad if it will contain particles from both groups.
     final int countA = ((a < groupB._firstIndex) ? 1 : 0) +
@@ -343,6 +348,7 @@ class SolveCollisionCallback implements QueryCallback {
   final Vector2 tempVec = Vector2.zero();
   final Vector2 tempVec2 = Vector2.zero();
 
+  @override
   bool reportFixture(Fixture fixture) {
     if (fixture.isSensor()) {
       return true;

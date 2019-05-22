@@ -1904,6 +1904,7 @@ class World {
 } // class World.
 
 class WorldQueryWrapper implements TreeCallback {
+  @override
   bool treeCallback(int nodeId) {
     final proxy = broadPhase.getUserData(nodeId) as FixtureProxy;
     return callback.reportFixture(proxy.fixture);
@@ -1919,6 +1920,7 @@ class WorldRayCastWrapper implements TreeRayCastCallback {
   final Vector2 _temp = Vector2.zero();
   final Vector2 _point = Vector2.zero();
 
+  @override
   double raycastCallback(RayCastInput input, int nodeId) {
     final userData = broadPhase.getUserData(nodeId) as FixtureProxy;
     final FixtureProxy proxy = userData;

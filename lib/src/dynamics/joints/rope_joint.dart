@@ -63,6 +63,7 @@ class RopeJoint extends Joint {
     _maxLength = def.maxLength;
   }
 
+  @override
   void initVelocityConstraints(final SolverData data) {
     _indexA = _bodyA._islandIndex;
     _indexB = _bodyB._islandIndex;
@@ -164,6 +165,7 @@ class RopeJoint extends Joint {
     data.velocities[_indexB].w = wB;
   }
 
+  @override
   void solveVelocityConstraints(final SolverData data) {
     final Vector2 vA = data.velocities[_indexA].v;
     double wA = data.velocities[_indexA].w;
@@ -212,6 +214,7 @@ class RopeJoint extends Joint {
     data.velocities[_indexB].w = wB;
   }
 
+  @override
   bool solvePositionConstraints(final SolverData data) {
     final Vector2 cA = data.positions[_indexA].c;
     double aA = data.positions[_indexA].a;
@@ -274,14 +277,17 @@ class RopeJoint extends Joint {
     return length - _maxLength < Settings.linearSlop;
   }
 
+  @override
   void getAnchorA(Vector2 argOut) {
     _bodyA.getWorldPointToOut(_localAnchorA, argOut);
   }
 
+  @override
   void getAnchorB(Vector2 argOut) {
     _bodyB.getWorldPointToOut(_localAnchorB, argOut);
   }
 
+  @override
   void getReactionForce(double inv_dt, Vector2 argOut) {
     argOut
       ..setFrom(_u)
@@ -289,6 +295,7 @@ class RopeJoint extends Joint {
       ..scale(_impulse);
   }
 
+  @override
   double getReactionTorque(double inv_dt) {
     return 0.0;
   }

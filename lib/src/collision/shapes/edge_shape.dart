@@ -56,6 +56,7 @@ class EdgeShape extends Shape {
     radius = Settings.polygonRadius;
   }
 
+  @override
   int getChildCount() {
     return 1;
   }
@@ -66,6 +67,7 @@ class EdgeShape extends Shape {
     hasVertex0 = hasVertex3 = false;
   }
 
+  @override
   bool testPoint(Transform xf, Vector2 p) {
     return false;
   }
@@ -73,6 +75,7 @@ class EdgeShape extends Shape {
   // for pooling
   final Vector2 normal = Vector2.zero();
 
+  @override
   double computeDistanceToOut(
       Transform xf, Vector2 p, int childIndex, Vector2 normalOut) {
     final double xfqc = xf.q.c;
@@ -115,6 +118,7 @@ class EdgeShape extends Shape {
   // v = v1 + s * e
   // p1 + t * d = v1 + s * e
   // s * e - t * d = p1 - v1
+  @override
   bool raycast(
       RayCastOutput output, RayCastInput input, Transform xf, int childIndex) {
     double tempx, tempy;
@@ -198,6 +202,7 @@ class EdgeShape extends Shape {
     return true;
   }
 
+  @override
   void computeAABB(AABB aabb, Transform xf, int childIndex) {
     final Vector2 lowerBound = aabb.lowerBound;
     final Vector2 upperBound = aabb.upperBound;
@@ -219,6 +224,7 @@ class EdgeShape extends Shape {
     upperBound.y += radius;
   }
 
+  @override
   void computeMass(MassData massData, double density) {
     massData.mass = 0.0;
     massData.center
@@ -228,6 +234,7 @@ class EdgeShape extends Shape {
     massData.I = 0.0;
   }
 
+  @override
   Shape clone() {
     return EdgeShape()
       ..radius = this.radius

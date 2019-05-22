@@ -91,23 +91,28 @@ class WeldJoint extends Joint {
     return _localAnchorB;
   }
 
+  @override
   void getAnchorA(Vector2 argOut) {
     _bodyA.getWorldPointToOut(_localAnchorA, argOut);
   }
 
+  @override
   void getAnchorB(Vector2 argOut) {
     _bodyB.getWorldPointToOut(_localAnchorB, argOut);
   }
 
+  @override
   void getReactionForce(double inv_dt, Vector2 argOut) {
     argOut.setValues(_impulse.x, _impulse.y);
     argOut.scale(inv_dt);
   }
 
+  @override
   double getReactionTorque(double inv_dt) {
     return inv_dt * _impulse.z;
   }
 
+  @override
   void initVelocityConstraints(final SolverData data) {
     _indexA = _bodyA._islandIndex;
     _indexB = _bodyB._islandIndex;
@@ -231,6 +236,7 @@ class WeldJoint extends Joint {
     pool.pushMat33(1);
   }
 
+  @override
   void solveVelocityConstraints(final SolverData data) {
     final Vector2 vA = data.velocities[_indexA].v;
     double wA = data.velocities[_indexA].w;
@@ -313,6 +319,7 @@ class WeldJoint extends Joint {
     pool.pushVec2(3);
   }
 
+  @override
   bool solvePositionConstraints(final SolverData data) {
     final Vector2 cA = data.positions[_indexA].c;
     double aA = data.positions[_indexA].a;

@@ -59,6 +59,7 @@ class VoronoiDiagramTask {
 class VoronoiDiagramTaskMutableStack extends MutableStack<VoronoiDiagramTask> {
   VoronoiDiagramTaskMutableStack(int size) : super(size);
 
+  @override
   VoronoiDiagramTask newInstance() {
     return VoronoiDiagramTask.zero();
   }

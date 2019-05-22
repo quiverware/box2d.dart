@@ -49,6 +49,7 @@ abstract class MutableStack<E> implements IDynamicStack<E> {
     _size = newStack.length;
   }
 
+  @override
   E pop() {
     if (_index >= _size) {
       extendStack(_size * 2);
@@ -56,6 +57,7 @@ abstract class MutableStack<E> implements IDynamicStack<E> {
     return _stack[_index++];
   }
 
+  @override
   void push(E argObject) {
     assert(_index > 0);
     _stack[--_index] = argObject;

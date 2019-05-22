@@ -41,6 +41,7 @@ class BlobTest extends Demo {
     blob.runAnimation();
   }
 
+  @override
   void initialize() {
     Body ground;
     {

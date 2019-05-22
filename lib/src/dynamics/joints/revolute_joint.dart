@@ -91,6 +91,7 @@ class RevoluteJoint extends Joint {
     _enableMotor = def.enableMotor;
   }
 
+  @override
   void initVelocityConstraints(final SolverData data) {
     _indexA = _bodyA._islandIndex;
     _indexB = _bodyB._islandIndex;
@@ -219,6 +220,7 @@ class RevoluteJoint extends Joint {
     pool.pushRot(2);
   }
 
+  @override
   void solveVelocityConstraints(final SolverData data) {
     final Vector2 vA = data.velocities[_indexA].v;
     double wA = data.velocities[_indexA].w;
@@ -358,6 +360,7 @@ class RevoluteJoint extends Joint {
     pool.pushVec2(1);
   }
 
+  @override
   bool solvePositionConstraints(final SolverData data) {
     final Rot qA = pool.popRot();
     final Rot qB = pool.popRot();
@@ -484,20 +487,24 @@ class RevoluteJoint extends Joint {
     return _referenceAngle;
   }
 
+  @override
   void getAnchorA(Vector2 argOut) {
     _bodyA.getWorldPointToOut(_localAnchorA, argOut);
   }
 
+  @override
   void getAnchorB(Vector2 argOut) {
     _bodyB.getWorldPointToOut(_localAnchorB, argOut);
   }
 
+  @override
   void getReactionForce(double inv_dt, Vector2 argOut) {
     argOut
       ..setValues(_impulse.x, _impulse.y)
       ..scale(inv_dt);
   }
 
+  @override
   double getReactionTorque(double inv_dt) {
     return inv_dt * _impulse.z;
   }

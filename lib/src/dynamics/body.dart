@@ -355,7 +355,7 @@ class Body {
    *
    * @param v the new linear velocity of the center of mass.
    */
-  void set linearVelocity(Vector2 v) {
+  set linearVelocity(Vector2 v) {
     if (_bodyType == BodyType.STATIC) {
       return;
     }
@@ -380,7 +380,7 @@ class Body {
    *
    * @param omega the new angular velocity in radians/second.
    */
-  void set angularVelocity(double w) {
+  set angularVelocity(double w) {
     if (_bodyType == BodyType.STATIC) {
       return;
     }
@@ -1100,6 +1100,7 @@ class Body {
     (_transform.p..scale(-1.0)).add(_sweep.c);
   }
 
+  @override
   String toString() {
     return "Body[pos: ${position} linVel: ${linearVelocity} angVel: ${angularVelocity}]";
   }

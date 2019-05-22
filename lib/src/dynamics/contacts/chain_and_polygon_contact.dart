@@ -27,6 +27,7 @@ part of box2d;
 class ChainAndPolygonContact extends Contact {
   ChainAndPolygonContact(IWorldPool argPool) : super(argPool);
 
+  @override
   void init(Fixture fA, int indexA, Fixture fB, int indexB) {
     super.init(fA, indexA, fB, indexB);
     assert(_fixtureA.getType() == ShapeType.CHAIN);
@@ -35,6 +36,7 @@ class ChainAndPolygonContact extends Contact {
 
   final EdgeShape _edge = EdgeShape();
 
+  @override
   void evaluate(Manifold manifold, Transform xfA, Transform xfB) {
     final chain = _fixtureA.getShape() as ChainShape;
     chain.getChildEdge(_edge, _indexA);

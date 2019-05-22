@@ -72,6 +72,7 @@ class PolygonShape extends Shape {
     radius = Settings.polygonRadius;
   }
 
+  @override
   Shape clone() {
     final PolygonShape shape = PolygonShape()..centroid.setFrom(this.centroid);
     for (int i = 0; i < shape.normals.length; i++) {
@@ -295,10 +296,12 @@ class PolygonShape extends Shape {
       ..negate();
   }
 
+  @override
   int getChildCount() {
     return 1;
   }
 
+  @override
   bool testPoint(final Transform xf, final Vector2 p) {
     double tempx, tempy;
     final Rot xfq = xf.q;
@@ -331,6 +334,7 @@ class PolygonShape extends Shape {
     return true;
   }
 
+  @override
   void computeAABB(final AABB aabb, final Transform xf, int childIndex) {
     final Vector2 lower = aabb.lowerBound;
     final Vector2 upper = aabb.upperBound;
@@ -381,6 +385,7 @@ class PolygonShape extends Shape {
     return vertices[index];
   }
 
+  @override
   double computeDistanceToOut(
       Transform xf, Vector2 p, int childIndex, Vector2 normalOut) {
     final double xfqc = xf.q.c;
@@ -437,6 +442,7 @@ class PolygonShape extends Shape {
     return distance;
   }
 
+  @override
   bool raycast(
       RayCastOutput output, RayCastInput input, Transform xf, int childIndex) {
     final double xfqc = xf.q.c;
@@ -563,6 +569,7 @@ class PolygonShape extends Shape {
     out.scale(1.0 / area);
   }
 
+  @override
   void computeMass(final MassData massData, double density) {
     // Polygon mass, centroid, and inertia.
     // Let rho be the polygon density in mass per unit area.

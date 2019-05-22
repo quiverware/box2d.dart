@@ -71,10 +71,12 @@ class DistanceJoint extends Joint {
     _dampingRatio = def.dampingRatio;
   }
 
+  @override
   void getAnchorA(Vector2 argOut) {
     _bodyA.getWorldPointToOut(_localAnchorA, argOut);
   }
 
+  @override
   void getAnchorB(Vector2 argOut) {
     _bodyB.getWorldPointToOut(_localAnchorB, argOut);
   }
@@ -83,6 +85,7 @@ class DistanceJoint extends Joint {
    * Get the reaction force given the inverse time step. Unit is N.
    */
 
+  @override
   void getReactionForce(double inv_dt, Vector2 argOut) {
     argOut.x = _impulse * _u.x * inv_dt;
     argOut.y = _impulse * _u.y * inv_dt;
@@ -93,10 +96,12 @@ class DistanceJoint extends Joint {
    * distance joint.
    */
 
+  @override
   double getReactionTorque(double inv_dt) {
     return 0.0;
   }
 
+  @override
   void initVelocityConstraints(final SolverData data) {
     _indexA = _bodyA._islandIndex;
     _indexB = _bodyB._islandIndex;
@@ -211,6 +216,7 @@ class DistanceJoint extends Joint {
     data.velocities[_indexB].w = wB;
   }
 
+  @override
   void solveVelocityConstraints(final SolverData data) {
     final Vector2 vA = data.velocities[_indexA].v;
     double wA = data.velocities[_indexA].w;
@@ -248,6 +254,7 @@ class DistanceJoint extends Joint {
     pool.pushVec2(2);
   }
 
+  @override
   bool solvePositionConstraints(final SolverData data) {
     if (_frequencyHz > 0.0) {
       return true;

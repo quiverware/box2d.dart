@@ -40,6 +40,7 @@ class Sweep {
   /** Fraction of the current time step in the range [0,1] c0 and a0 are the positions at alpha0. */
   double alpha0 = 0.0;
 
+  @override
   String toString() {
     String s = "Sweep:\nlocalCenter: $localCenter\n";
     s += "c0: $c0, c: $c\n";

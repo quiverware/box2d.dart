@@ -79,20 +79,24 @@ class MotorJoint extends Joint {
     _correctionFactor = def.correctionFactor;
   }
 
+  @override
   void getAnchorA(Vector2 out) {
     out.setFrom(_bodyA.position);
   }
 
+  @override
   void getAnchorB(Vector2 out) {
     out.setFrom(_bodyB.position);
   }
 
+  @override
   void getReactionForce(double inv_dt, Vector2 out) {
     out
       ..setFrom(_linearImpulse)
       ..scale(inv_dt);
   }
 
+  @override
   double getReactionTorque(double inv_dt) {
     return _angularImpulse * inv_dt;
   }
@@ -172,6 +176,7 @@ class MotorJoint extends Joint {
     return _maxTorque;
   }
 
+  @override
   void initVelocityConstraints(SolverData data) {
     _indexA = _bodyA._islandIndex;
     _indexB = _bodyB._islandIndex;
@@ -267,6 +272,7 @@ class MotorJoint extends Joint {
     data.velocities[_indexB].w = wB;
   }
 
+  @override
   void solveVelocityConstraints(SolverData data) {
     final Vector2 vA = data.velocities[_indexA].v;
     double wA = data.velocities[_indexA].w;
@@ -347,6 +353,7 @@ class MotorJoint extends Joint {
     data.velocities[_indexB].w = wB;
   }
 
+  @override
   bool solvePositionConstraints(SolverData data) {
     return true;
   }

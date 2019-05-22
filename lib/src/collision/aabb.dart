@@ -332,6 +332,7 @@ class AABB {
     return true;
   }
 
+  @override
   String toString() {
     final String s = "AABB[$lowerBound . $upperBound]";
     return s;

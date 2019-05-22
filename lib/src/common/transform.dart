@@ -168,6 +168,7 @@ class Transform {
     Rot.mulTransUnsafeVec2(A.q, _pool, out.p);
   }
 
+  @override
   String toString() {
     String s = "XForm:\n";
     s += "Position: $p\n";

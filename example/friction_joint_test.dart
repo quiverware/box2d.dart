@@ -41,6 +41,7 @@ class FrictionJointTest extends Demo {
     test.runAnimation();
   }
 
+  @override
   void initialize() {
     assert(null != world);
 

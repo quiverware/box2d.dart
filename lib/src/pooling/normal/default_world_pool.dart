@@ -32,36 +32,48 @@ part of box2d;
 class OrderedStackVec2 extends OrderedStack<Vector2> {
   OrderedStackVec2(int argStackSize, int argContainerSize)
       : super(argStackSize, argContainerSize);
+
+  @override
   Vector2 newInstance() => Vector2.zero();
 }
 
 class OrderedStackVec3 extends OrderedStack<Vector3> {
   OrderedStackVec3(int argStackSize, int argContainerSize)
       : super(argStackSize, argContainerSize);
+
+  @override
   Vector3 newInstance() => Vector3.zero();
 }
 
 class OrderedStackMat22 extends OrderedStack<Matrix2> {
   OrderedStackMat22(int argStackSize, int argContainerSize)
       : super(argStackSize, argContainerSize);
+
+  @override
   Matrix2 newInstance() => Matrix2.zero();
 }
 
 class OrderedStackMat33 extends OrderedStack<Matrix3> {
   OrderedStackMat33(int argStackSize, int argContainerSize)
       : super(argStackSize, argContainerSize);
+
+  @override
   Matrix3 newInstance() => Matrix3.zero();
 }
 
 class OrderedStackAABB extends OrderedStack<AABB> {
   OrderedStackAABB(int argStackSize, int argContainerSize)
       : super(argStackSize, argContainerSize);
+
+  @override
   AABB newInstance() => AABB();
 }
 
 class OrderedStackRot extends OrderedStack<Rot> {
   OrderedStackRot(int argStackSize, int argContainerSize)
       : super(argStackSize, argContainerSize);
+
+  @override
   Rot newInstance() => Rot();
 }
 
@@ -73,12 +85,16 @@ abstract class MutableStackWithPool<T> extends MutableStack<T> {
 class MutableStackPolygonContact extends MutableStackWithPool<PolygonContact> {
   MutableStackPolygonContact(IWorldPool pool, int argInitSize)
       : super(pool, argInitSize);
+
+  @override
   PolygonContact newInstance() => PolygonContact(_pool);
 }
 
 class MutableStackCircleContact extends MutableStackWithPool<CircleContact> {
   MutableStackCircleContact(IWorldPool pool, int argInitSize)
       : super(pool, argInitSize);
+
+  @override
   CircleContact newInstance() => CircleContact(_pool);
 }
 
@@ -86,6 +102,8 @@ class MutableStackPolygonAndCircleContact
     extends MutableStackWithPool<PolygonAndCircleContact> {
   MutableStackPolygonAndCircleContact(IWorldPool pool, int argInitSize)
       : super(pool, argInitSize);
+
+  @override
   PolygonAndCircleContact newInstance() => PolygonAndCircleContact(_pool);
 }
 
@@ -93,6 +111,8 @@ class MutableStackEdgeAndCircleContact
     extends MutableStackWithPool<EdgeAndCircleContact> {
   MutableStackEdgeAndCircleContact(IWorldPool pool, int argInitSize)
       : super(pool, argInitSize);
+
+  @override
   EdgeAndCircleContact newInstance() => EdgeAndCircleContact(_pool);
 }
 
@@ -100,6 +120,8 @@ class MutableStackEdgeAndPolygonContact
     extends MutableStackWithPool<EdgeAndPolygonContact> {
   MutableStackEdgeAndPolygonContact(IWorldPool pool, int argInitSize)
       : super(pool, argInitSize);
+
+  @override
   EdgeAndPolygonContact newInstance() => EdgeAndPolygonContact(_pool);
 }
 
@@ -107,6 +129,8 @@ class MutableStackChainAndCircleContact
     extends MutableStackWithPool<ChainAndCircleContact> {
   MutableStackChainAndCircleContact(IWorldPool pool, int argInitSize)
       : super(pool, argInitSize);
+
+  @override
   ChainAndCircleContact newInstance() => ChainAndCircleContact(_pool);
 }
 
@@ -114,6 +138,8 @@ class MutableStackChainAndPolygonContact
     extends MutableStackWithPool<ChainAndPolygonContact> {
   MutableStackChainAndPolygonContact(IWorldPool pool, int argInitSize)
       : super(pool, argInitSize);
+
+  @override
   ChainAndPolygonContact newInstance() => ChainAndPolygonContact(_pool);
 }
 
@@ -172,110 +198,137 @@ class DefaultWorldPool implements IWorldPool {
     _world = this;
   }
 
+  @override
   IDynamicStack<Contact> getPolyContactStack() {
     return _pcstack;
   }
 
+  @override
   IDynamicStack<Contact> getCircleContactStack() {
     return _ccstack;
   }
 
+  @override
   IDynamicStack<Contact> getPolyCircleContactStack() {
     return _cpstack;
   }
 
+  @override
   IDynamicStack<Contact> getEdgeCircleContactStack() {
     return _ecstack;
   }
 
+  @override
   IDynamicStack<Contact> getEdgePolyContactStack() {
     return _epstack;
   }
 
+  @override
   IDynamicStack<Contact> getChainCircleContactStack() {
     return _chcstack;
   }
 
+  @override
   IDynamicStack<Contact> getChainPolyContactStack() {
     return _chpstack;
   }
 
+  @override
   Vector2 popVec2() {
     return _vecs.pop();
   }
 
+  @override
   List<Vector2> popVec2Some(int argNum) {
     return _vecs.popSome(argNum);
   }
 
+  @override
   void pushVec2(int argNum) {
     _vecs.push(argNum);
   }
 
+  @override
   Vector3 popVec3() {
     return _vec3s.pop();
   }
 
+  @override
   List<Vector3> popVec3Some(int argNum) {
     return _vec3s.popSome(argNum);
   }
 
+  @override
   void pushVec3(int argNum) {
     _vec3s.push(argNum);
   }
 
+  @override
   Matrix2 popMat22() {
     return _mats.pop();
   }
 
+  @override
   List<Matrix2> popMat22Some(int argNum) {
     return _mats.popSome(argNum);
   }
 
+  @override
   void pushMat22(int argNum) {
     _mats.push(argNum);
   }
 
+  @override
   Matrix3 popMat33() {
     return _mat33s.pop();
   }
 
+  @override
   void pushMat33(int argNum) {
     _mat33s.push(argNum);
   }
 
+  @override
   AABB popAABB() {
     return _aabbs.pop();
   }
 
+  @override
   List<AABB> popAABBSome(int argNum) {
     return _aabbs.popSome(argNum);
   }
 
+  @override
   void pushAABB(int argNum) {
     _aabbs.push(argNum);
   }
 
+  @override
   Rot popRot() {
     return _rots.pop();
   }
 
+  @override
   void pushRot(int num) {
     _rots.push(num);
   }
 
+  @override
   Collision getCollision() {
     return _collision;
   }
 
+  @override
   TimeOfImpact getTimeOfImpact() {
     return _toi;
   }
 
+  @override
   Distance getDistance() {
     return _dist;
   }
 
+  @override
   Float64List getFloatArray(int argLength) {
     if (!_afloats.containsKey(argLength)) {
       _afloats[argLength] = Float64List(argLength);
@@ -286,6 +339,7 @@ class DefaultWorldPool implements IWorldPool {
     return _afloats[argLength];
   }
 
+  @override
   List<int> getIntArray(int argLength) {
     if (!_aints.containsKey(argLength)) {
       _aints[argLength] = BufferUtils.allocClearIntList(argLength);
@@ -296,6 +350,7 @@ class DefaultWorldPool implements IWorldPool {
     return _aints[argLength];
   }
 
+  @override
   List<Vector2> getVec2Array(int argLength) {
     if (!_avecs.containsKey(argLength)) {
       final List<Vector2> ray = List<Vector2>(argLength);

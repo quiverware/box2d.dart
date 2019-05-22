@@ -55,6 +55,7 @@ class ProfileEntry {
     record(_accum);
   }
 
+  @override
   String toString() {
     return "$shortAvg ($longAvg) [$min,$max]";
   }

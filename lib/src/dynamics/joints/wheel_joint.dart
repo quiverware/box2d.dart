@@ -114,14 +114,17 @@ class WheelJoint extends Joint {
     return _localAnchorB;
   }
 
+  @override
   void getAnchorA(Vector2 argOut) {
     _bodyA.getWorldPointToOut(_localAnchorA, argOut);
   }
 
+  @override
   void getAnchorB(Vector2 argOut) {
     _bodyB.getWorldPointToOut(_localAnchorB, argOut);
   }
 
+  @override
   void getReactionForce(double inv_dt, Vector2 argOut) {
     final Vector2 temp = pool.popVec2();
     temp
@@ -135,6 +138,7 @@ class WheelJoint extends Joint {
     pool.pushVec2(1);
   }
 
+  @override
   double getReactionTorque(double inv_dt) {
     return inv_dt * _motorImpulse;
   }
@@ -205,6 +209,7 @@ class WheelJoint extends Joint {
   final Vector2 rB = Vector2.zero();
   final Vector2 d = Vector2.zero();
 
+  @override
   void initVelocityConstraints(SolverData data) {
     _indexA = _bodyA._islandIndex;
     _indexB = _bodyB._islandIndex;
@@ -361,6 +366,7 @@ class WheelJoint extends Joint {
     data.velocities[_indexB].w = wB;
   }
 
+  @override
   void solveVelocityConstraints(SolverData data) {
     final double mA = _invMassA, mB = _invMassB;
     final double iA = _invIA, iB = _invIB;
@@ -443,6 +449,7 @@ class WheelJoint extends Joint {
     data.velocities[_indexB].w = wB;
   }
 
+  @override
   bool solvePositionConstraints(SolverData data) {
     final Vector2 cA = data.positions[_indexA].c;
     double aA = data.positions[_indexA].a;

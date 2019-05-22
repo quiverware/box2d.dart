@@ -35,6 +35,7 @@ class PolygonContact extends Contact {
     assert(_fixtureB.getType() == ShapeType.POLYGON);
   }
 
+  @override
   void evaluate(Manifold manifold, Transform xfA, Transform xfB) {
     _pool.getCollision().collidePolygons(
         manifold,

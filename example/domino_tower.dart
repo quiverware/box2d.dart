@@ -72,6 +72,7 @@ class DominoTower extends Demo {
   /**
    * Sets up the dominoes.
    */
+  @override
   void initialize() {
     // Create the floor.
     {

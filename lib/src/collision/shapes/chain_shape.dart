@@ -49,6 +49,7 @@ class ChainShape extends Shape {
     _count = 0;
   }
 
+  @override
   int getChildCount() {
     return _count - 1;
   }
@@ -90,6 +91,7 @@ class ChainShape extends Shape {
     }
   }
 
+  @override
   double computeDistanceToOut(
       Transform xf, Vector2 p, int childIndex, Vector2 normalOut) {
     final EdgeShape edge = _pool0;
@@ -97,10 +99,12 @@ class ChainShape extends Shape {
     return edge.computeDistanceToOut(xf, p, 0, normalOut);
   }
 
+  @override
   bool testPoint(Transform xf, Vector2 p) {
     return false;
   }
 
+  @override
   bool raycast(
       RayCastOutput output, RayCastInput input, Transform xf, int childIndex) {
     assert(childIndex < _count);
@@ -119,6 +123,7 @@ class ChainShape extends Shape {
     return edgeShape.raycast(output, input, xf, 0);
   }
 
+  @override
   void computeAABB(AABB aabb, Transform xf, int childIndex) {
     assert(childIndex < _count);
     final Vector2 lower = aabb.lowerBound;
@@ -142,12 +147,14 @@ class ChainShape extends Shape {
     upper.y = v1y > v2y ? v1y : v2y;
   }
 
+  @override
   void computeMass(MassData massData, double density) {
     massData.mass = 0.0;
     massData.center.setZero();
     massData.I = 0.0;
   }
 
+  @override
   Shape clone() {
     return ChainShape()
       ..createChain(_vertices, _count)

@@ -60,6 +60,7 @@ class DynamicTree implements BroadPhaseStrategy {
     }
   }
 
+  @override
   int createProxy(final AABB aabb, Object userData) {
     assert(aabb.isValid());
     final DynamicTreeNode node = _allocateNode();
@@ -77,6 +78,7 @@ class DynamicTree implements BroadPhaseStrategy {
     return proxyId;
   }
 
+  @override
   void destroyProxy(int proxyId) {
     assert(0 <= proxyId && proxyId < _nodeCapacity);
     final DynamicTreeNode node = _nodes[proxyId];
@@ -86,6 +88,7 @@ class DynamicTree implements BroadPhaseStrategy {
     _freeNode(node);
   }
 
+  @override
   bool moveProxy(int proxyId, final AABB aabb, Vector2 displacement) {
     assert(aabb.isValid());
     assert(0 <= proxyId && proxyId < _nodeCapacity);
@@ -130,16 +133,19 @@ class DynamicTree implements BroadPhaseStrategy {
     return true;
   }
 
+  @override
   Object getUserData(int proxyId) {
     assert(0 <= proxyId && proxyId < _nodeCapacity);
     return _nodes[proxyId].userData;
   }
 
+  @override
   AABB getFatAABB(int proxyId) {
     assert(0 <= proxyId && proxyId < _nodeCapacity);
     return _nodes[proxyId].aabb;
   }
 
+  @override
   void query(TreeCallback callback, AABB aabb) {
     assert(aabb.isValid());
     nodeStackIndex = 0;
@@ -175,6 +181,7 @@ class DynamicTree implements BroadPhaseStrategy {
   final AABB _aabb = AABB();
   final RayCastInput _subInput = RayCastInput();
 
+  @override
   void raycast(TreeRayCastCallback callback, RayCastInput input) {
     final Vector2 p1 = input.p1;
     final Vector2 p2 = input.p2;
@@ -287,6 +294,7 @@ class DynamicTree implements BroadPhaseStrategy {
     }
   }
 
+  @override
   int computeHeight() {
     return _computeHeight(_root);
   }
@@ -324,6 +332,7 @@ class DynamicTree implements BroadPhaseStrategy {
     assert(_nodeCount + freeCount == _nodeCapacity);
   }
 
+  @override
   int getHeight() {
     if (_root == null) {
       return 0;
@@ -331,6 +340,7 @@ class DynamicTree implements BroadPhaseStrategy {
     return _root.height;
   }
 
+  @override
   int getMaxBalance() {
     int maxBalance = 0;
     for (int i = 0; i < _nodeCapacity; ++i) {
@@ -350,6 +360,7 @@ class DynamicTree implements BroadPhaseStrategy {
     return maxBalance;
   }
 
+  @override
   double getAreaRatio() {
     if (_root == null) {
       return 0.0;
@@ -831,6 +842,7 @@ class DynamicTree implements BroadPhaseStrategy {
     _validateMetrics(child2);
   }
 
+  @override
   void drawTree(DebugDraw argDraw) {
     if (_root == null) {
       return;

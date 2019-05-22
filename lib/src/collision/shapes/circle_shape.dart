@@ -34,6 +34,7 @@ class CircleShape extends Shape {
     radius = 0.0;
   }
 
+  @override
   Shape clone() {
     final CircleShape shape = CircleShape();
     shape.p.x = p.x;
@@ -42,6 +43,7 @@ class CircleShape extends Shape {
     return shape;
   }
 
+  @override
   int getChildCount() => 1;
 
   /**
@@ -78,6 +80,7 @@ class CircleShape extends Shape {
     return p;
   }
 
+  @override
   bool testPoint(final Transform transform, final Vector2 p) {
     // Rot.mulToOutUnsafe(transform.q, _p, center);
     // center.addLocal(transform.p);
@@ -92,6 +95,7 @@ class CircleShape extends Shape {
     return centerx * centerx + centery * centery <= radius * radius;
   }
 
+  @override
   double computeDistanceToOut(
       Transform xf, Vector2 p, int childIndex, Vector2 normalOut) {
     final Rot xfq = xf.q;
@@ -109,6 +113,7 @@ class CircleShape extends Shape {
   // From Section 3.1.2
   // x = s + a * r
   // norm(x) = radius
+  @override
   bool raycast(RayCastOutput output, RayCastInput input, Transform transform,
       int childIndex) {
     final Vector2 inputp1 = input.p1;
@@ -156,6 +161,7 @@ class CircleShape extends Shape {
     return false;
   }
 
+  @override
   void computeAABB(final AABB aabb, final Transform transform, int childIndex) {
     final Rot tq = transform.q;
     final Vector2 tp = transform.p;
@@ -168,6 +174,7 @@ class CircleShape extends Shape {
     aabb.upperBound.y = py + radius;
   }
 
+  @override
   void computeMass(final MassData massData, final double density) {
     massData.mass = density * Math.pi * radius * radius;
     massData.center.x = p.x;

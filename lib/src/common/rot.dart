@@ -53,6 +53,7 @@ class Rot {
 
   double getSin() => s;
 
+  @override
   String toString() {
     return "Rot(s:$s, c:$c)";
   }

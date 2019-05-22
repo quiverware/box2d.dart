@@ -65,20 +65,24 @@ class FrictionJoint extends Joint {
     return _localAnchorB;
   }
 
+  @override
   void getAnchorA(Vector2 argOut) {
     _bodyA.getWorldPointToOut(_localAnchorA, argOut);
   }
 
+  @override
   void getAnchorB(Vector2 argOut) {
     _bodyB.getWorldPointToOut(_localAnchorB, argOut);
   }
 
+  @override
   void getReactionForce(double inv_dt, Vector2 argOut) {
     argOut
       ..setFrom(_linearImpulse)
       ..scale(inv_dt);
   }
 
+  @override
   double getReactionTorque(double inv_dt) {
     return inv_dt * _angularImpulse;
   }
@@ -105,6 +109,7 @@ class FrictionJoint extends Joint {
    * @see org.jbox2d.dynamics.joints.Joint#initVelocityConstraints(org.jbox2d.dynamics.TimeStep)
    */
 
+  @override
   void initVelocityConstraints(final SolverData data) {
     _indexA = _bodyA._islandIndex;
     _indexB = _bodyB._islandIndex;
@@ -209,6 +214,7 @@ class FrictionJoint extends Joint {
     pool.pushMat22(1);
   }
 
+  @override
   void solveVelocityConstraints(final SolverData data) {
     final Vector2 vA = data.velocities[_indexA].v;
     double wA = data.velocities[_indexA].w;
@@ -291,6 +297,7 @@ class FrictionJoint extends Joint {
     pool.pushVec2(4);
   }
 
+  @override
   bool solvePositionConstraints(final SolverData data) {
     return true;
   }

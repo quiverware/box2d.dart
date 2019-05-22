@@ -187,14 +187,17 @@ class GearJoint extends Joint {
     _impulse = 0.0;
   }
 
+  @override
   void getAnchorA(Vector2 argOut) {
     _bodyA.getWorldPointToOut(_localAnchorA, argOut);
   }
 
+  @override
   void getAnchorB(Vector2 argOut) {
     _bodyB.getWorldPointToOut(_localAnchorB, argOut);
   }
 
+  @override
   void getReactionForce(double inv_dt, Vector2 argOut) {
     argOut
       ..setFrom(_JvAC)
@@ -202,6 +205,7 @@ class GearJoint extends Joint {
     argOut.scale(inv_dt);
   }
 
+  @override
   double getReactionTorque(double inv_dt) {
     final double L = _impulse * _JwA;
     return inv_dt * L;
@@ -215,6 +219,7 @@ class GearJoint extends Joint {
     return _ratio;
   }
 
+  @override
   void initVelocityConstraints(SolverData data) {
     _indexA = _bodyA._islandIndex;
     _indexB = _bodyB._islandIndex;
@@ -360,6 +365,7 @@ class GearJoint extends Joint {
     data.velocities[_indexD].w = wD;
   }
 
+  @override
   void solveVelocityConstraints(SolverData data) {
     final Vector2 vA = data.velocities[_indexA].v;
     double wA = data.velocities[_indexA].w;
@@ -418,6 +424,7 @@ class GearJoint extends Joint {
     return _joint2;
   }
 
+  @override
   bool solvePositionConstraints(SolverData data) {
     final Vector2 cA = data.positions[_indexA].c;
     double aA = data.positions[_indexA].a;

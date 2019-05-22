@@ -159,14 +159,17 @@ class PrismaticJoint extends Joint {
     return _localAnchorB;
   }
 
+  @override
   void getAnchorA(Vector2 argOut) {
     _bodyA.getWorldPointToOut(_localAnchorA, argOut);
   }
 
+  @override
   void getAnchorB(Vector2 argOut) {
     _bodyB.getWorldPointToOut(_localAnchorB, argOut);
   }
 
+  @override
   void getReactionForce(double inv_dt, Vector2 argOut) {
     final Vector2 temp = pool.popVec2();
     temp
@@ -180,6 +183,7 @@ class PrismaticJoint extends Joint {
     pool.pushVec2(1);
   }
 
+  @override
   double getReactionTorque(double inv_dt) {
     return inv_dt * _impulse.y;
   }
@@ -385,6 +389,7 @@ class PrismaticJoint extends Joint {
     return _localXAxisA;
   }
 
+  @override
   void initVelocityConstraints(final SolverData data) {
     _indexA = _bodyA._islandIndex;
     _indexB = _bodyB._islandIndex;
@@ -547,6 +552,7 @@ class PrismaticJoint extends Joint {
     pool.pushVec2(4);
   }
 
+  @override
   void solveVelocityConstraints(final SolverData data) {
     final Vector2 vA = data.velocities[_indexA].v;
     double wA = data.velocities[_indexA].w;
@@ -702,6 +708,7 @@ class PrismaticJoint extends Joint {
     pool.pushVec2(2);
   }
 
+  @override
   bool solvePositionConstraints(final SolverData data) {
     final Rot qA = pool.popRot();
     final Rot qB = pool.popRot();

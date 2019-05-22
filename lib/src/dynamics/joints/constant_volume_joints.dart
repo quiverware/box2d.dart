@@ -89,6 +89,7 @@ class ConstantVolumeJoint extends Joint {
     }
   }
 
+  @override
   void destructor() {
     for (int i = 0; i < _distanceJoints.length; ++i) {
       _world.destroyJoint(_distanceJoints[i]);
@@ -166,6 +167,7 @@ class ConstantVolumeJoint extends Joint {
     return done;
   }
 
+  @override
   void initVelocityConstraints(final SolverData step) {
     final List<Velocity> velocities = step.velocities;
     final List<Position> positions = step.positions;
@@ -196,10 +198,12 @@ class ConstantVolumeJoint extends Joint {
     }
   }
 
+  @override
   bool solvePositionConstraints(SolverData step) {
     return _constrainEdges(step.positions);
   }
 
+  @override
   void solveVelocityConstraints(final SolverData step) {
     double crossMassSum = 0.0;
     double dotMassSum = 0.0;
@@ -231,15 +235,19 @@ class ConstantVolumeJoint extends Joint {
   }
 
   /** No-op */
+  @override
   void getAnchorA(Vector2 argOut) {}
 
   /** No-op */
+  @override
   void getAnchorB(Vector2 argOut) {}
 
   /** No-op */
+  @override
   void getReactionForce(double inv_dt, Vector2 argOut) {}
 
   /** No-op */
+  @override
   double getReactionTorque(double inv_dt) {
     return 0.0;
   }

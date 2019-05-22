@@ -41,6 +41,7 @@ class CanvasDraw extends DebugDraw {
    * Draw a closed polygon provided in CCW order. WARNING: This mutates
    * [vertices].
    */
+  @override
   void drawPolygon(List<Vector2> vertices, int vertexCount, Color3i color) {
     _pathPolygon(vertices, vertexCount, color);
     ctx.stroke();
@@ -50,6 +51,7 @@ class CanvasDraw extends DebugDraw {
    * Draw a solid closed polygon provided in CCW order. WARNING: This mutates
    * [vertices].
    */
+  @override
   void drawSolidPolygon(
       List<Vector2> vertices, int vertexCount, Color3i color) {
     _pathPolygon(vertices, vertexCount, color);
@@ -81,6 +83,7 @@ class CanvasDraw extends DebugDraw {
   }
 
   /** Draw a line segment. WARNING: This mutates [p1] and [p2]. */
+  @override
   void drawSegment(Vector2 p1, Vector2 p2, Color3i color) {
     _setColor(color);
     getWorldToScreenToOut(p1, p1);
@@ -94,6 +97,7 @@ class CanvasDraw extends DebugDraw {
   }
 
   /** Draw a circle. WARNING: This mutates [center]. */
+  @override
   void drawCircle(Vector2 center, num radius, Color3i color, [Vector2 axis]) {
     radius *= viewportTransform.scale;
     _pathCircle(center, radius, color);
@@ -101,6 +105,7 @@ class CanvasDraw extends DebugDraw {
   }
 
   /** Draw a solid circle. WARNING: This mutates [center]. */
+  @override
   void drawSolidCircle(
       Vector2 center, num radius, Vector2 axis, Color3i color) {
     radius *= viewportTransform.scale;
@@ -111,6 +116,7 @@ class CanvasDraw extends DebugDraw {
    * Draws the given point with the given *unscaled* radius, in the given [color].
    * WARNING: This mutates [point].
    */
+  @override
   void drawPoint(Vector2 point, num radiusOnScreen, Color3i color) {
     _pathCircle(point, radiusOnScreen, color);
     ctx.fill();
@@ -129,12 +135,14 @@ class CanvasDraw extends DebugDraw {
    * Draw a transform. Choose your own length scale. WARNING: This mutates
    * [xf.position].
    */
+  @override
   void drawTransform(Transform xf, Color3i color) {
     drawCircle(xf.p, 0.1, color);
     // TODO(rupertk): Draw rotation representation (drawCircle axis parameter?)
   }
 
   /** Draw a string. */
+  @override
   void drawStringXY(num x, num y, String s, Color3i color) {
     _setColor(color);
     ctx.strokeText(s, x, y);
@@ -146,11 +154,13 @@ class CanvasDraw extends DebugDraw {
     ctx.setFillColorRgb(color.x, color.y, color.z, 0.8);
   }
 
+  @override
   void drawParticles(List<Vector2> centers, double radius,
       List<ParticleColor> colors, int count) {
     throw "Unimplemented";
   }
 
+  @override
   void drawParticlesWireframe(List<Vector2> centers, double radius,
       List<ParticleColor> colors, int count) {
     throw "Unimplemented";
