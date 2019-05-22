@@ -57,8 +57,8 @@ abstract class Contact {
   Contact _next;
 
   // Nodes for connecting bodies.
-  ContactEdge _nodeA = ContactEdge();
-  ContactEdge _nodeB = ContactEdge();
+  final ContactEdge _nodeA = ContactEdge();
+  final ContactEdge _nodeB = ContactEdge();
 
   Fixture _fixtureA;
   Fixture _fixtureB;
@@ -69,7 +69,7 @@ abstract class Contact {
   final Manifold _manifold = Manifold();
 
   int _toiCount = 0;
-  double _toi = 0.0;
+  double toi = 0.0;
 
   double _friction = 0.0;
   double _restitution = 0.0;

@@ -1123,7 +1123,7 @@ class World {
         // Invalidate TOI
         c._flags &= ~(Contact.TOI_FLAG | Contact.ISLAND_FLAG);
         c._toiCount = 0;
-        c._toi = 1.0;
+        c.toi = 1.0;
       }
     }
 
@@ -1147,7 +1147,7 @@ class World {
         double alpha = 1.0;
         if ((c._flags & Contact.TOI_FLAG) != 0) {
           // This contact has a valid cached TOI.
-          alpha = c._toi;
+          alpha = c.toi;
         } else {
           final Fixture fA = c.fixtureA;
           final Fixture fB = c.fixtureB;
@@ -1215,7 +1215,7 @@ class World {
             alpha = 1.0;
           }
 
-          c._toi = alpha;
+          c.toi = alpha;
           c._flags |= Contact.TOI_FLAG;
         }
 
@@ -1360,7 +1360,7 @@ class World {
       subStep.positionIterations = 20;
       subStep.velocityIterations = step.velocityIterations;
       subStep.warmStarting = false;
-      island.solveTOI(subStep, bA._islandIndex, bB._islandIndex);
+      island.solveTOI(subStep, bA.islandIndex, bB.islandIndex);
 
       // Reset island flags and synchronize broad-phase proxies.
       for (int i = 0; i < island._bodyCount; ++i) {

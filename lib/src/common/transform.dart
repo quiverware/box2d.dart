@@ -141,7 +141,7 @@ class Transform {
     out.p.add(A.p);
   }
 
-  static Vector2 _pool = Vector2.zero();
+  static final Vector2 _pool = Vector2.zero();
 
   static Transform mulTrans(final Transform A, final Transform B) {
     final Transform C = Transform.zero();

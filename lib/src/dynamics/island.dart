@@ -540,7 +540,7 @@ class Island {
 
   void addBody(Body body) {
     assert(_bodyCount < _bodyCapacity);
-    body._islandIndex = _bodyCount;
+    body.islandIndex = _bodyCount;
     _bodies[_bodyCount] = body;
     ++_bodyCount;
   }

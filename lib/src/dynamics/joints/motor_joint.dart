@@ -90,15 +90,15 @@ class MotorJoint extends Joint {
   }
 
   @override
-  void getReactionForce(double inv_dt, Vector2 out) {
+  void getReactionForce(double inverseDt, Vector2 out) {
     out
       ..setFrom(_linearImpulse)
-      ..scale(inv_dt);
+      ..scale(inverseDt);
   }
 
   @override
-  double getReactionTorque(double inv_dt) {
-    return _angularImpulse * inv_dt;
+  double getReactionTorque(double inverseDt) {
+    return _angularImpulse * inverseDt;
   }
 
   /**
@@ -178,8 +178,8 @@ class MotorJoint extends Joint {
 
   @override
   void initVelocityConstraints(SolverData data) {
-    _indexA = _bodyA._islandIndex;
-    _indexB = _bodyB._islandIndex;
+    _indexA = _bodyA.islandIndex;
+    _indexB = _bodyB.islandIndex;
     _localCenterA.setFrom(_bodyA._sweep.localCenter);
     _localCenterB.setFrom(_bodyB._sweep.localCenter);
     _invMassA = _bodyA._invMass;

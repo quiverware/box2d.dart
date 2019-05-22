@@ -125,7 +125,7 @@ class WheelJoint extends Joint {
   }
 
   @override
-  void getReactionForce(double inv_dt, Vector2 out) {
+  void getReactionForce(double inverseDt, Vector2 out) {
     final Vector2 temp = pool.popVec2();
     temp
       ..setFrom(_ay)
@@ -134,13 +134,13 @@ class WheelJoint extends Joint {
       ..setFrom(_ax)
       ..scale(_springImpulse)
       ..add(temp)
-      ..scale(inv_dt);
+      ..scale(inverseDt);
     pool.pushVec2(1);
   }
 
   @override
-  double getReactionTorque(double inv_dt) {
-    return inv_dt * _motorImpulse;
+  double getReactionTorque(double inverseDt) {
+    return inverseDt * _motorImpulse;
   }
 
   double getJointTranslation() {
@@ -211,8 +211,8 @@ class WheelJoint extends Joint {
 
   @override
   void initVelocityConstraints(SolverData data) {
-    _indexA = _bodyA._islandIndex;
-    _indexB = _bodyB._islandIndex;
+    _indexA = _bodyA.islandIndex;
+    _indexB = _bodyB.islandIndex;
     _localCenterA.setFrom(_bodyA._sweep.localCenter);
     _localCenterB.setFrom(_bodyB._sweep.localCenter);
     _invMassA = _bodyA._invMass;

@@ -68,12 +68,17 @@ class PsProxy implements Comparable<PsProxy> {
   }
 
   bool equals(Object obj) {
-    if (this == obj) return true;
-    if (obj == null) return false;
-    if (obj is! PsProxy) return false;
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (obj is! PsProxy) {
+      return false;
+    }
     final PsProxy other = obj;
-    if (tag != other.tag) return false;
-    return true;
+    return tag == other.tag;
   }
 }
 
@@ -601,8 +606,13 @@ class ParticleSystem {
             depthBuffer, 0, internalAllocatedCapacity, capacity, true);
         colorBuffer.data = reallocateBuffer(
             colorBuffer, internalAllocatedCapacity, capacity, true);
-        groupBuffer = buffer_utils.reallocateBufferWithAllocDeferred(groupBuffer,
-            0, internalAllocatedCapacity, capacity, false, allocParticleGroup);
+        groupBuffer = buffer_utils.reallocateBufferWithAllocDeferred(
+            groupBuffer,
+            0,
+            internalAllocatedCapacity,
+            capacity,
+            false,
+            allocParticleGroup);
         userDataBuffer.data = reallocateBuffer(
             userDataBuffer, internalAllocatedCapacity, capacity, true);
         internalAllocatedCapacity = capacity;
@@ -677,9 +687,7 @@ class ParticleSystem {
   }
 
   Float64List requestParticleBufferFloat64(Float64List buffer) {
-    if (buffer == null) {
-      buffer = Float64List(internalAllocatedCapacity);
-    }
+    buffer ??= Float64List(internalAllocatedCapacity);
     return buffer;
   }
 
@@ -714,7 +722,7 @@ class ParticleSystem {
   final Vector2 _tempVec = Vector2.zero();
   final Transform _tempTransform = Transform.zero();
   final Transform _tempTransform2 = Transform.zero();
-  CreateParticleGroupCallback _createParticleGroupCallback =
+  final CreateParticleGroupCallback _createParticleGroupCallback =
       CreateParticleGroupCallback();
   final ParticleDef _tempParticleDef = ParticleDef();
 
@@ -1113,7 +1121,7 @@ class ParticleSystem {
     world.queryAABB(_ubccallback, aabb);
   }
 
-  SolveCollisionCallback _sccallback = SolveCollisionCallback();
+  final SolveCollisionCallback _sccallback = SolveCollisionCallback();
 
   void solveCollision(TimeStep step) {
     final AABB aabb = _temp;
@@ -1445,7 +1453,7 @@ class ParticleSystem {
   }
 
   void solveSpring(final TimeStep step) {
-    final double springStrength_ = step.inverseDt * springStrength;
+    final double springStrength = step.inverseDt * this.springStrength;
     for (int k = 0; k < pairCount; k++) {
       final PsPair pair = pairBuffer[k];
       if ((pair.flags & ParticleType.b2_springParticle) != 0) {
@@ -1457,8 +1465,10 @@ class ParticleSystem {
         final double dy = pb.y - pa.y;
         final double r0 = pair.distance;
         double r1 = math.sqrt(dx * dx + dy * dy);
-        if (r1 == 0) r1 = double.maxFinite;
-        final double strength = springStrength_ * pair.strength;
+        if (r1 == 0) {
+          r1 = double.maxFinite;
+        }
+        final double strength = springStrength * pair.strength;
         final double fx = strength * (r0 - r1) / r1 * dx;
         final double fy = strength * (r0 - r1) / r1 * dy;
         final Vector2 va = velocityBuffer.data[a];
@@ -2041,7 +2051,8 @@ class ParticleSystem {
     buffer.userSuppliedCapacity = newCapacity;
   }
 
-  void setParticleBuffer<T>(ParticleBuffer<T> buffer, List<T> newData, int newCapacity) {
+  void setParticleBuffer<T>(
+      ParticleBuffer<T> buffer, List<T> newData, int newCapacity) {
     assert((newData != null && newCapacity != 0) ||
         (newData == null && newCapacity == 0));
     if (buffer.userSuppliedCapacity != 0) {
@@ -2179,7 +2190,9 @@ class ParticleSystem {
     final double vx = point2.x - point1.x;
     final double vy = point2.y - point1.y;
     double v2 = vx * vx + vy * vy;
-    if (v2 == 0) v2 = double.maxFinite;
+    if (v2 == 0) {
+      v2 = double.maxFinite;
+    }
     for (int proxy = firstProxy; proxy < lastProxy; ++proxy) {
       final int i = proxyBuffer[proxy].index;
       final Vector2 posI = positionBuffer.data[i];

@@ -126,7 +126,9 @@ class DominoTower extends Demo {
 
       // Make 'I's
       for (int j = 1; j < BASE_COUNT; ++j) {
-        if (j > 3) dominoDensity *= .8;
+        if (j > 3) {
+          dominoDensity *= .8;
+        }
 
         // The y at the center of the I structure.
         final double currY =

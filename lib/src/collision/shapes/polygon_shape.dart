@@ -70,7 +70,7 @@ class PolygonShape extends Shape {
   final Vector2 _pool2 = Vector2.zero();
   final Vector2 _pool3 = Vector2.zero();
   final Vector2 _pool4 = Vector2.zero();
-  Transform _poolt1 = Transform.zero();
+  final Transform _poolt1 = Transform.zero();
 
   @override
   Shape clone() {

@@ -102,20 +102,20 @@ class WeldJoint extends Joint {
   }
 
   @override
-  void getReactionForce(double inv_dt, Vector2 out) {
+  void getReactionForce(double inverseDt, Vector2 out) {
     out.setValues(_impulse.x, _impulse.y);
-    out.scale(inv_dt);
+    out.scale(inverseDt);
   }
 
   @override
-  double getReactionTorque(double inv_dt) {
-    return inv_dt * _impulse.z;
+  double getReactionTorque(double inverseDt) {
+    return inverseDt * _impulse.z;
   }
 
   @override
   void initVelocityConstraints(final SolverData data) {
-    _indexA = _bodyA._islandIndex;
-    _indexB = _bodyB._islandIndex;
+    _indexA = _bodyA.islandIndex;
+    _indexB = _bodyB.islandIndex;
     _localCenterA.setFrom(_bodyA._sweep.localCenter);
     _localCenterB.setFrom(_bodyB._sweep.localCenter);
     _invMassA = _bodyA._invMass;

@@ -33,7 +33,7 @@ class ContactID implements Comparable<ContactID> {
     set(c);
   }
 
-  Int8List _data = Int8List(4);
+  final Int8List _data = Int8List(4);
 
   set indexA(int v) {
     _data[0] = v;

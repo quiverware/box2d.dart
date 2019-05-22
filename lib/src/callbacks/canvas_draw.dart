@@ -30,9 +30,9 @@ import 'package:box2d_flame/box2d.dart';
 import 'package:box2d_flame/src/math_utils.dart' as math_utils;
 
 class CanvasDraw extends DebugDraw {
-  CanvasDraw(ViewportTransform viewport, this.ctx) : super(viewport) {
-    assert(null != viewport && null != ctx);
-  }
+  CanvasDraw(ViewportTransform viewport, this.ctx)
+      : assert(null != viewport && null != ctx),
+        super(viewport);
 
   /** The canvas rendering context with which to draw. */
   final CanvasRenderingContext2D ctx;

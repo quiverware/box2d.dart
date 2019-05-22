@@ -30,13 +30,12 @@ part of box2d;
  * @author Daniel Murphy
  */
 class Body {
-  Body(final BodyDef bd, this.world) {
-    assert(math_utils.vector2IsValid(bd.position));
-    assert(math_utils.vector2IsValid(bd.linearVelocity));
-    assert(bd.gravityScale >= 0.0);
-    assert(bd.angularDamping >= 0.0);
-    assert(bd.linearDamping >= 0.0);
-
+  Body(final BodyDef bd, this.world)
+      : assert(math_utils.vector2IsValid(bd.position)),
+        assert(math_utils.vector2IsValid(bd.linearVelocity)),
+        assert(bd.gravityScale >= 0.0),
+        assert(bd.angularDamping >= 0.0),
+        assert(bd.linearDamping >= 0.0) {
     _flags = 0;
 
     if (bd.bullet) {
@@ -112,12 +111,13 @@ class Body {
 
   int _flags = 0;
 
-  int _islandIndex = 0;
+  int islandIndex = 0;
 
   /**
    * The body origin transform.
    */
   final Transform _transform = Transform.zero();
+
   /**
    * The previous transform for particle simulation
    */

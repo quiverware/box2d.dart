@@ -33,12 +33,12 @@ part of box2d;
  * @author Daniel
  */
 class MouseJoint extends Joint {
-  MouseJoint(IWorldPool argWorld, MouseJointDef def) : super(argWorld, def) {
-    assert(math_utils.vector2IsValid(def.target));
-    assert(def.maxForce >= 0);
-    assert(def.frequencyHz >= 0);
-    assert(def.dampingRatio >= 0);
-
+  MouseJoint(IWorldPool argWorld, MouseJointDef def)
+      : assert(math_utils.vector2IsValid(def.target)),
+        assert(def.maxForce >= 0),
+        assert(def.frequencyHz >= 0),
+        assert(def.dampingRatio >= 0),
+        super(argWorld, def) {
     _targetA.setFrom(def.target);
     Transform.mulTransToOutUnsafeVec2(
         _bodyB._transform, _targetA, _localAnchorB);
@@ -81,15 +81,15 @@ class MouseJoint extends Joint {
   }
 
   @override
-  void getReactionForce(double inv_dt, Vector2 out) {
+  void getReactionForce(double inverseDt, Vector2 out) {
     out
       ..setFrom(_impulse)
-      ..scale(inv_dt);
+      ..scale(inverseDt);
   }
 
   @override
-  double getReactionTorque(double inv_dt) {
-    return inv_dt * 0.0;
+  double getReactionTorque(double inverseDt) {
+    return inverseDt * 0.0;
   }
 
   void setTarget(Vector2 target) {
@@ -105,7 +105,7 @@ class MouseJoint extends Joint {
 
   @override
   void initVelocityConstraints(final SolverData data) {
-    _indexB = _bodyB._islandIndex;
+    _indexB = _bodyB.islandIndex;
     _localCenterB.setFrom(_bodyB._sweep.localCenter);
     _invMassB = _bodyB._invMass;
     _invIB = _bodyB._invI;

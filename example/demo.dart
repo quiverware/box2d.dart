@@ -140,7 +140,9 @@ abstract class Demo {
       frameCount = 0;
     });
     Timer.periodic(Duration(milliseconds: 200), (Timer t) {
-      if (elapsedUs == null) return;
+      if (elapsedUs == null) {
+        return;
+      }
       worldStepTime.innerHtml = '${elapsedUs / 1000} ms';
     });
   }

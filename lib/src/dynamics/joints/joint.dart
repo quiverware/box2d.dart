@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright (c) 2015, Daniel Murphy, Google
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  *  * Redistributions of source code must retain the above copyright notice,
@@ -9,7 +9,7 @@
  *  * Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
  *    and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -27,13 +27,13 @@ part of box2d;
 /**
  * The base joint class. Joints are used to constrain two bodies together in various fashions. Some
  * joints also feature limits and motors.
- * 
+ *
  * @author Daniel Murphy
  */
 abstract class Joint {
-  Joint(this.pool, JointDef def) : _type = def.type {
-    assert(def.bodyA != def.bodyB);
-
+  Joint(this.pool, JointDef def)
+      : _type = def.type,
+        assert(def.bodyA != def.bodyB) {
     _prev = null;
     _next = null;
     _bodyA = def.bodyA;
@@ -117,7 +117,7 @@ abstract class Joint {
 
   /**
    * get the type of the concrete joint.
-   * 
+   *
    * @return
    */
   JointType getType() {
@@ -133,7 +133,7 @@ abstract class Joint {
 
   /**
    * get the second body attached to this joint.
-   * 
+   *
    * @return
    */
   Body getBodyB() {
@@ -142,21 +142,21 @@ abstract class Joint {
 
   /**
    * get the anchor point on bodyA in world coordinates.
-   * 
+   *
    * @return
    */
   void getAnchorA(Vector2 out);
 
   /**
    * get the anchor point on bodyB in world coordinates.
-   * 
+   *
    * @return
    */
   void getAnchorB(Vector2 out);
 
   /**
    * get the reaction force on body2 at the joint anchor in Newtons.
-   * 
+   *
    * @param inv_dt
    * @return
    */
@@ -164,7 +164,7 @@ abstract class Joint {
 
   /**
    * get the reaction torque on body2 in N*m.
-   * 
+   *
    * @param inv_dt
    * @return
    */
@@ -187,7 +187,7 @@ abstract class Joint {
 
   /**
    * Short-cut function to determine if either body is inactive.
-   * 
+   *
    * @return
    */
   bool isActive() {

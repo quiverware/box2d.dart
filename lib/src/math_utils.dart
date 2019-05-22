@@ -61,9 +61,7 @@ double translateAndScale(
 }
 
 bool approxEquals(num expected, num actual, [num tolerance]) {
-  if (tolerance == null) {
-    tolerance = (expected / 1e4).abs();
-  }
+  tolerance ??= (expected / 1e4).abs();
   return (expected - actual).abs() <= tolerance;
 }
 
@@ -72,9 +70,15 @@ Vector2 crossDblVec2(double s, Vector2 a) {
 }
 
 bool vector2Equals(Vector2 a, Vector2 b) {
-  if ((a == null) || (b == null)) return false;
-  if (identical(a, b)) return true;
-  if (a is! Vector2 || b is! Vector2) return false;
+  if ((a == null) || (b == null)) {
+    return false;
+  }
+  if (identical(a, b)) {
+    return true;
+  }
+  if (a is! Vector2 || b is! Vector2) {
+    return false;
+  }
   return (a.x == b.x) && (a.y == b.y);
 }
 
@@ -119,9 +123,12 @@ void matrix3GetInverse22(Matrix3 m, Matrix3 M) {
 
 // / Returns the zero matrix if singular.
 void matrix3GetSymInverse33(Matrix3 m, Matrix3 M) {
-  final double bx = m.entry(1, 1) * m.entry(2, 2) - m.entry(2, 1) * m.entry(1, 2);
-  final double by = m.entry(2, 1) * m.entry(0, 2) - m.entry(0, 1) * m.entry(2, 2);
-  final double bz = m.entry(0, 1) * m.entry(1, 2) - m.entry(1, 1) * m.entry(0, 2);
+  final double bx =
+      m.entry(1, 1) * m.entry(2, 2) - m.entry(2, 1) * m.entry(1, 2);
+  final double by =
+      m.entry(2, 1) * m.entry(0, 2) - m.entry(0, 1) * m.entry(2, 2);
+  final double bz =
+      m.entry(0, 1) * m.entry(1, 2) - m.entry(1, 1) * m.entry(0, 2);
   double det = m.entry(0, 0) * bx + m.entry(1, 0) * by + m.entry(2, 0) * bz;
   if (det != 0.0) {
     det = 1.0 / det;

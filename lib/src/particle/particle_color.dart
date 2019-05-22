@@ -45,7 +45,7 @@ class ParticleColor {
     setColor3i(color);
   }
 
-  Int8List _data = Int8List(4);
+  final Int8List _data = Int8List(4);
 
   set r(int v) {
     _data[0] = v;

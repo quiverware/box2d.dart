@@ -198,17 +198,17 @@ class GearJoint extends Joint {
   }
 
   @override
-  void getReactionForce(double inv_dt, Vector2 out) {
+  void getReactionForce(double inverseDt, Vector2 out) {
     out
       ..setFrom(_JvAC)
       ..scale(_impulse);
-    out.scale(inv_dt);
+    out.scale(inverseDt);
   }
 
   @override
-  double getReactionTorque(double inv_dt) {
+  double getReactionTorque(double inverseDt) {
     final double L = _impulse * _JwA;
-    return inv_dt * L;
+    return inverseDt * L;
   }
 
   void setRatio(double argRatio) {
@@ -221,10 +221,10 @@ class GearJoint extends Joint {
 
   @override
   void initVelocityConstraints(SolverData data) {
-    _indexA = _bodyA._islandIndex;
-    _indexB = _bodyB._islandIndex;
-    _indexC = _bodyC._islandIndex;
-    _indexD = _bodyD._islandIndex;
+    _indexA = _bodyA.islandIndex;
+    _indexB = _bodyB.islandIndex;
+    _indexC = _bodyC.islandIndex;
+    _indexD = _bodyD.islandIndex;
     _lcA.setFrom(_bodyA._sweep.localCenter);
     _lcB.setFrom(_bodyB._sweep.localCenter);
     _lcC.setFrom(_bodyC._sweep.localCenter);

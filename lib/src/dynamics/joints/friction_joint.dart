@@ -76,15 +76,15 @@ class FrictionJoint extends Joint {
   }
 
   @override
-  void getReactionForce(double inv_dt, Vector2 out) {
+  void getReactionForce(double inverseDt, Vector2 out) {
     out
       ..setFrom(_linearImpulse)
-      ..scale(inv_dt);
+      ..scale(inverseDt);
   }
 
   @override
-  double getReactionTorque(double inv_dt) {
-    return inv_dt * _angularImpulse;
+  double getReactionTorque(double inverseDt) {
+    return inverseDt * _angularImpulse;
   }
 
   void setMaxForce(double force) {
@@ -111,8 +111,8 @@ class FrictionJoint extends Joint {
 
   @override
   void initVelocityConstraints(final SolverData data) {
-    _indexA = _bodyA._islandIndex;
-    _indexB = _bodyB._islandIndex;
+    _indexA = _bodyA.islandIndex;
+    _indexB = _bodyB.islandIndex;
     _localCenterA.setFrom(_bodyA._sweep.localCenter);
     _localCenterB.setFrom(_bodyB._sweep.localCenter);
     _invMassA = _bodyA._invMass;

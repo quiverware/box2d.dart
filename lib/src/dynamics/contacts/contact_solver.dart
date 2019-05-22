@@ -116,8 +116,8 @@ class ContactSolver {
         ..friction = contact._friction
         ..restitution = contact._restitution
         ..tangentSpeed = contact._tangentSpeed
-        ..indexA = bodyA._islandIndex
-        ..indexB = bodyB._islandIndex
+        ..indexA = bodyA.islandIndex
+        ..indexB = bodyB.islandIndex
         ..invMassA = bodyA._invMass
         ..invMassB = bodyB._invMass
         ..invIA = bodyA._invI
@@ -128,8 +128,8 @@ class ContactSolver {
         ..normalMass.setZero();
 
       final ContactPositionConstraint pc = _positionConstraints[i]
-        ..indexA = bodyA._islandIndex
-        ..indexB = bodyB._islandIndex
+        ..indexA = bodyA.islandIndex
+        ..indexB = bodyB.islandIndex
         ..invMassA = bodyA._invMass
         ..invMassB = bodyB._invMass
         ..localCenterA.setFrom(bodyA._sweep.localCenter)
