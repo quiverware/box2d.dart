@@ -29,7 +29,7 @@ class Tire {
   }
 
   void addGroundArea(GroundArea ga) {
-    // TODO: If http://dartbug.com/4210 is fixed, check the return value of add
+    // TODO(unassigned): If http://dartbug.com/4210 is fixed, check the return value of add
     // before calling _updateTraction().
     _groundAreas.add(ga);
     _updateTraction();

@@ -25,15 +25,11 @@
 part of box2d;
 
 abstract class IDynamicStack<E> {
-  /**
-   * Pops an item off the stack
-   * @return
-   */
+  /// Pops an item off the stack
   E pop();
 
-  /**
-   * Pushes an item back on the stack
-   * @param argObject
-   */
+  /// Pushes an item back on the stack
+  ///
+  /// [argObject]
   void push(E argObject);
 }

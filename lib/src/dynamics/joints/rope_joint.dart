@@ -24,15 +24,12 @@
 
 part of box2d;
 
-/**
- * A rope joint enforces a maximum distance between two points on two bodies. It has no other
- * effect. Warning: if you attempt to change the maximum length during the simulation you will get
- * some non-physical behavior. A model that would allow you to dynamically modify the length would
- * have some sponginess, so I chose not to implement it that way. See DistanceJoint if you want to
- * dynamically control length.
- *
- * @author Daniel Murphy
- */
+/// A rope joint enforces a maximum distance between two points on two bodies.
+/// It has no other effect. Warning: if you attempt to change the maximum length
+/// during the simulation you will get some non-physical behavior. A model that
+/// would allow you to dynamically modify the length would have some sponginess,
+/// so I chose not to implement it that way. See DistanceJoint if you want to
+/// dynamically control length.
 class RopeJoint extends Joint {
   RopeJoint(IWorldPool worldPool, RopeJointDef def) : super(worldPool, def) {
     _localAnchorA.setFrom(def.localAnchorA);

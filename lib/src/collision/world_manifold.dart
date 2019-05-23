@@ -24,11 +24,7 @@
 
 part of box2d;
 
-/**
- * This is used to compute the current state of a contact manifold.
- * 
- * @author daniel
- */
+/// This is used to compute the current state of a contact manifold.
 class WorldManifold {
   WorldManifold() {
     for (int i = 0; i < settings.maxManifoldPoints; i++) {
@@ -36,19 +32,13 @@ class WorldManifold {
     }
   }
 
-  /**
-   * World vector pointing from A to B
-   */
+  /// World vector pointing from A to B
   final Vector2 normal = Vector2.zero();
 
-  /**
-   * World contact point (point of intersection)
-   */
+  /// World contact point (point of intersection)
   final List<Vector2> points = List<Vector2>(settings.maxManifoldPoints);
 
-  /**
-   * A negative value indicates overlap, in meters.
-   */
+  /// A negative value indicates overlap, in meters.
   final Float64List separations = Float64List(settings.maxManifoldPoints);
 
   final Vector2 _pool3 = Vector2.zero();

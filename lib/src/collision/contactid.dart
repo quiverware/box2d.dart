@@ -80,9 +80,7 @@ class ContactID implements Comparable<ContactID> {
     typeB = tempA;
   }
 
-  /**
-   * zeros out the data
-   */
+  /// zeros out the data
   void zero() {
     indexA = 0;
     indexB = 0;

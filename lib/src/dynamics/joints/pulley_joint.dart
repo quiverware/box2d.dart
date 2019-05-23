@@ -24,15 +24,12 @@
 
 part of box2d;
 
-/**
- * The pulley joint is connected to two bodies and two fixed ground points. The pulley supports a
- * ratio such that: length1 + ratio * length2 <= constant Yes, the force transmitted is scaled by
- * the ratio. Warning: the pulley joint can get a bit squirrelly by itself. They often work better
- * when combined with prismatic joints. You should also cover the the anchor points with static
- * shapes to prevent one side from going to zero length.
- *
- * @author Daniel Murphy
- */
+/// The pulley joint is connected to two bodies and two fixed ground points. The
+/// pulley supports a ratio such that: length1 + ratio * length2 <= constant Yes,
+/// the force transmitted is scaled by the ratio. Warning: the pulley joint can
+/// get a bit squirrelly by itself. They often work better when combined with
+/// prismatic joints. You should also cover the the anchor points with static
+/// shapes to prevent one side from going to zero length.
 class PulleyJoint extends Joint {
   PulleyJoint(IWorldPool argWorldPool, PulleyJointDef def)
       : super(argWorldPool, def) {
@@ -80,13 +77,9 @@ class PulleyJoint extends Joint {
   double _invIB = 0.0;
   double _mass = 0.0;
 
-  double getLengthA() {
-    return _lengthA;
-  }
+  double getLengthA() => _lengthA;
 
-  double getLengthB() {
-    return _lengthB;
-  }
+  double getLengthB() => _lengthB;
 
   double getCurrentLengthA() {
     final Vector2 p = pool.popVec2();
@@ -106,13 +99,9 @@ class PulleyJoint extends Joint {
     return length;
   }
 
-  Vector2 getLocalAnchorA() {
-    return _localAnchorA;
-  }
+  Vector2 getLocalAnchorA() => _localAnchorA;
 
-  Vector2 getLocalAnchorB() {
-    return _localAnchorB;
-  }
+  Vector2 getLocalAnchorB() => _localAnchorB;
 
   @override
   void getAnchorA(Vector2 out) {

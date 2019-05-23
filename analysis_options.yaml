@@ -32,6 +32,9 @@ analyzer:
     # Stream and not importing dart:async
     # Please see https://github.com/flutter/flutter/pull/24528 for details.
     sdk_version_async_exported_from_core: ignore
+    # Temporarily ignore the incorrect identifier names until more time can be
+    # spent refactoring them.
+    non_constant_identifier_names: ignore
   exclude:
     - 'bin/cache/**'
     # the following two are relative to the stocks example and the flutter package respectively

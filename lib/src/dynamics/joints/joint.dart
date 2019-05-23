@@ -24,12 +24,8 @@
 
 part of box2d;
 
-/**
- * The base joint class. Joints are used to constrain two bodies together in various fashions. Some
- * joints also feature limits and motors.
- *
- * @author Daniel Murphy
- */
+/// The base joint class. Joints are used to constrain two bodies together
+/// in various fashions. Some joints also feature limits and motors.
 abstract class Joint {
   Joint(this.pool, JointDef def)
       : _type = def.type,
@@ -115,98 +111,51 @@ abstract class Joint {
   // double _invMassA, _invIA;
   // double _invMassB, _invIB;
 
-  /**
-   * get the type of the concrete joint.
-   *
-   * @return
-   */
-  JointType getType() {
-    return _type;
-  }
+  /// get the type of the concrete joint.
+  JointType getType() => _type;
 
-  /**
-   * get the first body attached to this joint.
-   */
-  Body getBodyA() {
-    return _bodyA;
-  }
+  /// get the first body attached to this joint.
+  Body getBodyA() => _bodyA;
 
-  /**
-   * get the second body attached to this joint.
-   *
-   * @return
-   */
-  Body getBodyB() {
-    return _bodyB;
-  }
+  /// get the second body attached to this joint.
+  Body getBodyB() => _bodyB;
 
-  /**
-   * get the anchor point on bodyA in world coordinates.
-   *
-   * @return
-   */
+  /// get the anchor point on bodyA in world coordinates.
   void getAnchorA(Vector2 out);
 
-  /**
-   * get the anchor point on bodyB in world coordinates.
-   *
-   * @return
-   */
+  /// get the anchor point on bodyB in world coordinates.
   void getAnchorB(Vector2 out);
 
-  /**
-   * get the reaction force on body2 at the joint anchor in Newtons.
-   *
-   * @param inv_dt
-   * @return
-   */
+  /// get the reaction force on body2 at the joint anchor in Newtons.
+  ///
+  /// [inverseDt]
   void getReactionForce(double inverseDt, Vector2 out);
 
-  /**
-   * get the reaction torque on body2 in N*m.
-   *
-   * @param inv_dt
-   * @return
-   */
+  /// get the reaction torque on body2 in N*m.
+  ///
+  /// [inverseDt]
   double getReactionTorque(double inverseDt);
 
-  /**
-   * get the next joint the world joint list.
-   */
-  Joint getNext() {
-    return _next;
-  }
+  /// get the next joint the world joint list.
+  Joint getNext() => _next;
 
-  /**
-   * Get collide connected. Note: modifying the collide connect flag won't work correctly because
-   * the flag is only checked when fixture AABBs begin to overlap.
-   */
-  bool getCollideConnected() {
-    return _collideConnected;
-  }
+  /// Get collide connected. Note: modifying the collide connect flag won't
+  /// work correctly because the flag is only checked when fixture AABBs
+  /// begin to overlap.
+  bool getCollideConnected() => _collideConnected;
 
-  /**
-   * Short-cut function to determine if either body is inactive.
-   *
-   * @return
-   */
-  bool isActive() {
-    return _bodyA.isActive() && _bodyB.isActive();
-  }
+  /// Short-cut function to determine if either body is inactive.
+  bool isActive() => _bodyA.isActive() && _bodyB.isActive();
 
-  /** Internal */
+  /// Internal
   void initVelocityConstraints(SolverData data);
 
-  /** Internal */
+  /// Internal
   void solveVelocityConstraints(SolverData data);
 
-  /**
-   * This returns true if the position errors are within tolerance. Internal.
-   */
+  /// This returns true if the position errors are within tolerance. Internal.
   bool solvePositionConstraints(SolverData data);
 
-  /**
-   * Override to handle destruction of joint
-   */
+  /// Override to handle destruction of joint
   void destructor() {}
 }

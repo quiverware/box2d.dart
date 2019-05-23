@@ -45,10 +45,8 @@ class Bench2dWeb extends Bench2d {
   ViewportTransform viewport;
   DebugDraw debugDraw;
 
-  /**
-   * Creates the canvas and readies the demo for animation. Must be called
-   * before calling runAnimation.
-   */
+  /// Creates the canvas and readies the demo for animation. Must be called
+  /// before calling runAnimation.
   void initializeAnimation() {
     // Setup the canvas.
     canvas = CanvasElement()

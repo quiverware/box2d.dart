@@ -24,37 +24,23 @@
 
 part of box2d;
 
-/**
- * Motor joint definition.
- *
- * @author dmurph
- */
+/// Motor joint definition.
 class MotorJointDef extends JointDef {
   MotorJointDef() : super(JointType.MOTOR);
 
-  /**
-   * Position of bodyB minus the position of bodyA, in bodyA's frame, in meters.
-   */
+  /// Position of bodyB minus the position of bodyA, in bodyA's frame, in meters.
   final Vector2 linearOffset = Vector2.zero();
 
-  /**
-   * The bodyB angle minus bodyA angle in radians.
-   */
+  /// The bodyB angle minus bodyA angle in radians.
   double angularOffset = 0.0;
 
-  /**
-   * The maximum motor force in N.
-   */
+  /// The maximum motor force in N.
   double maxForce = 1.0;
 
-  /**
-   * The maximum motor torque in N-m.
-   */
+  /// The maximum motor torque in N-m.
   double maxTorque = 1.0;
 
-  /**
-   * Position correction factor in the range [0,1].
-   */
+  /// Position correction factor in the range [0,1].
   double correctionFactor = 0.3;
 
   void initialize(Body bA, Body bB) {

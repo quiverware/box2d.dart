@@ -90,13 +90,10 @@ part of box2d;
 //Now compute impulse to be applied:
 //df = f2 - f1
 
-/**
- * A prismatic joint. This joint provides one degree of freedom: translation along an axis fixed in
- * bodyA. Relative rotation is prevented. You can use a joint limit to restrict the range of motion
- * and a joint motor to drive the motion or to model joint friction.
- *
- * @author Daniel
- */
+/// A prismatic joint. This joint provides one degree of freedom: translation
+/// along an axis fixed in bodyA. Relative rotation is prevented. You can use a
+/// joint limit to restrict the range of motion and a joint motor to drive the
+/// motion or to model joint friction.
 class PrismaticJoint extends Joint {
   PrismaticJoint(IWorldPool argWorld, PrismaticJointDef def)
       : _localAnchorA = Vector2.copy(def.localAnchorA),
@@ -188,9 +185,7 @@ class PrismaticJoint extends Joint {
     return inverseDt * _impulse.y;
   }
 
-  /**
-   * Get the current joint translation, usually in meters.
-   */
+  /// Get the current joint translation, usually in meters.
   double getJointSpeed() {
     final Body bA = _bodyA;
     final Body bB = _bodyB;
@@ -258,20 +253,12 @@ class PrismaticJoint extends Joint {
     return translation;
   }
 
-  /**
-   * Is the joint limit enabled?
-   *
-   * @return
-   */
-  bool isLimitEnabled() {
-    return _enableLimit;
-  }
+  /// Is the joint limit enabled?
+  bool isLimitEnabled() => _enableLimit;
 
-  /**
-   * Enable/disable the joint limit.
-   *
-   * @param flag
-   */
+  /// Enable/disable the joint limit.
+  ///
+  /// [flag]
   void enableLimit(bool flag) {
     if (flag != _enableLimit) {
       _bodyA.setAwake(true);
@@ -281,30 +268,16 @@ class PrismaticJoint extends Joint {
     }
   }
 
-  /**
-   * Get the lower joint limit, usually in meters.
-   *
-   * @return
-   */
-  double getLowerLimit() {
-    return _lowerTranslation;
-  }
+  /// Get the lower joint limit, usually in meters.
+  double getLowerLimit() => _lowerTranslation;
 
-  /**
-   * Get the upper joint limit, usually in meters.
-   *
-   * @return
-   */
-  double getUpperLimit() {
-    return _upperTranslation;
-  }
+  /// Get the upper joint limit, usually in meters.
+  double getUpperLimit() => _upperTranslation;
 
-  /**
-   * Set the joint limits, usually in meters.
-   *
-   * @param lower
-   * @param upper
-   */
+  /// Set the joint limits, usually in meters.
+  ///
+  /// [lower]
+  /// [upper]
   void setLimits(double lower, double upper) {
     assert(lower <= upper);
     if (lower != _lowerTranslation || upper != _upperTranslation) {
@@ -316,63 +289,42 @@ class PrismaticJoint extends Joint {
     }
   }
 
-  /**
-   * Is the joint motor enabled?
-   *
-   * @return
-   */
-  bool isMotorEnabled() {
-    return _enableMotor;
-  }
+  /// Is the joint motor enabled?
+  bool isMotorEnabled() => _enableMotor;
 
-  /**
-   * Enable/disable the joint motor.
-   *
-   * @param flag
-   */
+  /// Enable/disable the joint motor.
+  ///
+  /// [flag]
   void enableMotor(bool flag) {
     _bodyA.setAwake(true);
     _bodyB.setAwake(true);
     _enableMotor = flag;
   }
 
-  /**
-   * Set the motor speed, usually in meters per second.
-   *
-   * @param speed
-   */
+  /// Set the motor speed, usually in meters per second.
+  ///
+  /// [speed]
   void setMotorSpeed(double speed) {
     _bodyA.setAwake(true);
     _bodyB.setAwake(true);
     _motorSpeed = speed;
   }
 
-  /**
-   * Get the motor speed, usually in meters per second.
-   *
-   * @return
-   */
-  double getMotorSpeed() {
-    return _motorSpeed;
-  }
+  /// Get the motor speed, usually in meters per second.
+  double getMotorSpeed() => _motorSpeed;
 
-  /**
-   * Set the maximum motor force, usually in N.
-   *
-   * @param force
-   */
+  /// Set the maximum motor force, usually in N.
+  ///
+  /// [force]
   void setMaxMotorForce(double force) {
     _bodyA.setAwake(true);
     _bodyB.setAwake(true);
     _maxMotorForce = force;
   }
 
-  /**
-   * Get the current motor force, usually in N.
-   *
-   * @param inv_dt
-   * @return
-   */
+  /// Get the current motor force, usually in N.
+  ///
+  /// [inv_dt]
   double getMotorForce(double inv_dt) {
     return _motorImpulse * inv_dt;
   }

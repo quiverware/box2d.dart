@@ -24,44 +24,37 @@
 
 part of box2d;
 
-/** An axis-aligned bounding box. */
+/// An axis-aligned bounding box.
 class AABB {
-  /**
-   * Creates the default object, with vertices at 0,0 and 0,0.
-   */
+  /// Creates the default object, with vertices at 0,0 and 0,0.
   AABB()
       : lowerBound = Vector2.zero(),
         upperBound = Vector2.zero();
 
-  /**
-   * Copies from the given object
-   *
-   * @param copy the object to copy from
-   */
+  /// Copies from the given object
+  ///
+  /// [copy] the object to copy from
   AABB.copy(final AABB copy)
       : lowerBound = Vector2.copy(copy.lowerBound),
         upperBound = Vector2.copy(copy.upperBound);
 
-  /**
-   * Creates an AABB object using the given bounding vertices.
-   *
-   * @param lowerVertex the bottom left vertex of the bounding box
-   * @param maxVertex the top right vertex of the bounding box
-   */
+  /// Creates an AABB object using the given bounding vertices.
+  ///
+  /// [lowerVertex] the bottom left vertex of the bounding box
+  /// [maxVertex] the top right vertex of the bounding box
   AABB.withVec2(final Vector2 lowerVertex, final Vector2 upperVertex)
       : lowerBound = Vector2.copy(lowerVertex),
         upperBound = Vector2.copy(upperVertex);
 
-  /** Bottom left vertex of bounding box. */
+  /// Bottom left vertex of bounding box.
   final Vector2 lowerBound;
-  /** Top right vertex of bounding box. */
+
+  /// Top right vertex of bounding box.
   final Vector2 upperBound;
 
-  /**
-   * Sets this object from the given object
-   *
-   * @param aabb the object to copy from
-   */
+  /// Sets this object from the given object
+  ///
+  /// [aabb] the object to copy from
   void set(final AABB aabb) {
     final Vector2 v = aabb.lowerBound;
     lowerBound.x = v.x;
@@ -71,7 +64,7 @@ class AABB {
     upperBound.y = v1.y;
   }
 
-  /** Verify that the bounds are sorted */
+  /// Verify that the bounds are sorted
   bool isValid() {
     final double dx = upperBound.x - lowerBound.x;
     if (dx < 0.0) {
@@ -85,11 +78,7 @@ class AABB {
         math_utils.vector2IsValid(upperBound);
   }
 
-  /**
-   * Get the center of the AABB
-   *
-   * @return
-   */
+  /// Get the center of the AABB
   Vector2 getCenter() {
     final Vector2 center = Vector2.copy(lowerBound);
     center.add(upperBound);
@@ -102,11 +91,7 @@ class AABB {
     out.y = (lowerBound.y + upperBound.y) * .5;
   }
 
-  /**
-   * Get the extents of the AABB (half-widths).
-   *
-   * @return
-   */
+  /// Get the extents of the AABB (half-widths).
   Vector2 getExtents() {
     final Vector2 center = Vector2.copy(upperBound);
     center.sub(lowerBound);
@@ -128,12 +113,10 @@ class AABB {
     argRay[3].x -= upperBound.x - lowerBound.x;
   }
 
-  /**
-   * Combine two AABBs into this one.
-   *
-   * @param aabb1
-   * @param aab
-   */
+  /// Combine two AABBs into this one.
+  ///
+  /// [aabb1]
+  /// [aab]
   void combine2(final AABB aabb1, final AABB aab) {
     lowerBound.x = aabb1.lowerBound.x < aab.lowerBound.x
         ? aabb1.lowerBound.x
@@ -149,20 +132,14 @@ class AABB {
         : aab.upperBound.y;
   }
 
-  /**
-   * Gets the perimeter length
-   *
-   * @return
-   */
+  /// Gets the perimeter length
   double getPerimeter() {
     return 2.0 * (upperBound.x - lowerBound.x + upperBound.y - lowerBound.y);
   }
 
-  /**
-   * Combines another aabb with this one
-   *
-   * @param aabb
-   */
+  /// Combines another aabb with this one
+  ///
+  /// [aabb]
   void combine(final AABB aabb) {
     lowerBound.x =
         lowerBound.x < aabb.lowerBound.x ? lowerBound.x : aabb.lowerBound.x;
@@ -174,11 +151,7 @@ class AABB {
         upperBound.y > aabb.upperBound.y ? upperBound.y : aabb.upperBound.y;
   }
 
-  /**
-   * Does this aabb contain the provided AABB.
-   *
-   * @return
-   */
+  /// Does this aabb contain the provided AABB.
   bool contains(final AABB aabb) {
     /*
      * boolean result = true; result = result && lowerBound.x <= aabb.lowerBound.x; result = result
@@ -193,23 +166,19 @@ class AABB {
         aabb.upperBound.y <= upperBound.y;
   }
 
-  /**
-   * @deprecated please use {@link #raycast(RayCastOutput, RayCastInput, IWorldPool)} for better
-   *             performance
-   * @param output
-   * @param input
-   * @return
-   */
+  /// @deprecated please use [raycast(RayCastOutput, RayCastInput, IWorldPool)]
+  /// for better performance.
+  ///
+  /// [output]
+  /// [input]
   bool raycast(final RayCastOutput output, final RayCastInput input) {
     return raycastWithPool(output, input, DefaultWorldPool(4, 4));
   }
 
-  /**
-   * From Real-time Collision Detection, p179.
-   *
-   * @param output
-   * @param input
-   */
+  /// From Real-time Collision Detection, p179.
+  ///
+  /// [output]
+  /// [input]
   bool raycastWithPool(final RayCastOutput output, final RayCastInput input,
       IWorldPool argPool) {
     double tmin = -double.maxFinite;

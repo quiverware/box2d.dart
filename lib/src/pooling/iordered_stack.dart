@@ -24,26 +24,15 @@
 
 part of box2d;
 
-abstract class IOrderedStack<E> {
-  /**
-   * Returns the next object in the pool
-   * @return
-   */
-  E pop();
+abstract class IOrderedStack<T> {
+  /// Returns the next object in the pool.
+  T pop();
 
-  /**
-   * Returns the next 'argNum' objects in the pool
-   * in an array
-   * @param argNum
-   * @return an array containing the next pool objects in
-   *       items 0-argNum.  Array length and uniqueness not
-   *       guaranteed.
-   */
-  List<E> popSome(int argNum);
+  /// Returns the next [number] objects in the pool in a list.
+  ///
+  /// Array length and uniqueness are not guaranteed.
+  List<T> popSome(int number);
 
-  /**
-   * Tells the stack to take back the last 'argNum' items
-   * @param argNum
-   */
-  void push(int argNum);
+  /// Tells the stack to take back the last [number] items.
+  void push(int number);
 }

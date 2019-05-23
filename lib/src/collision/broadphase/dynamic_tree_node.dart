@@ -27,9 +27,7 @@ part of box2d;
 class DynamicTreeNode {
   DynamicTreeNode(this.id);
 
-  /**
-   * Enlarged AABB
-   */
+  /// Enlarged AABB
   final AABB aabb = AABB();
 
   Object userData;

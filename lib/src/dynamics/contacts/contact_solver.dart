@@ -47,15 +47,11 @@ class ContactSolver {
   static const bool DEBUG_SOLVER = false;
   static const double k_errorTol = 1e-3;
 
-  /**
-   * For each solver, this is the initial number of constraints in the array, which expands as
-   * needed.
-   */
+  /// For each solver, this is the initial number of constraints in the array,
+  /// which expands as needed.
   static const int INITIAL_NUM_CONSTRAINTS = 256;
 
-  /**
-   * Ensure a reasonable condition number. for the block solver
-   */
+  /// Ensure a reasonable condition number. for the block solver
   static const double k_maxConditionNumber = 100.0;
 
   TimeStep _step;
@@ -830,9 +826,7 @@ class ContactSolver {
 
   final PositionSolverManifold _psolver = PositionSolverManifold();
 
-  /**
-   * Sequential solver.
-   */
+  /// Sequential solver.
   bool solvePositionConstraints() {
     double minSeparation = 0.0;
 

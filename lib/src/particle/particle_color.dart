@@ -24,11 +24,7 @@
 
 part of box2d;
 
-/**
- * Small color object for each particle
- * 
- * @author dmurph
- */
+/// Small color object for each particle
 class ParticleColor {
   ParticleColor() {
     _data[0] = 127;

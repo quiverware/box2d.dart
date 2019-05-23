@@ -36,12 +36,9 @@ part of box2d;
 //J = [0 0 -1 0 0 1]
 //K = invI1 + invI2
 
-/**
- * A motor joint is used to control the relative motion between two bodies. A typical usage is to
- * control the movement of a dynamic body with respect to the ground.
- *
- * @author dmurph
- */
+/// A motor joint is used to control the relative motion between two bodies.
+/// A typical usage is to control the movement of a dynamic body with respect
+/// to the ground.
 class MotorJoint extends Joint {
   MotorJoint(IWorldPool pool, MotorJointDef def) : super(pool, def) {
     _linearOffset.setFrom(def.linearOffset);
@@ -101,9 +98,7 @@ class MotorJoint extends Joint {
     return _angularImpulse * inverseDt;
   }
 
-  /**
-   * Set the target linear offset, in frame A, in meters.
-   */
+  /// Set the target linear offset, in frame A, in meters.
   void setLinearOffset(Vector2 linearOffset) {
     if (linearOffset.x != _linearOffset.x ||
         linearOffset.y != _linearOffset.y) {
@@ -113,25 +108,19 @@ class MotorJoint extends Joint {
     }
   }
 
-  /**
-   * Get the target linear offset, in frame A, in meters.
-   */
+  /// Get the target linear offset, in frame A, in meters.
   void getLinearOffsetOut(Vector2 out) {
     out.setFrom(_linearOffset);
   }
 
-  /**
-   * Get the target linear offset, in frame A, in meters. Do not modify.
-   */
+  /// Get the target linear offset, in frame A, in meters. Do not modify.
   Vector2 getLinearOffset() {
     return _linearOffset;
   }
 
-  /**
-   * Set the target angular offset, in radians.
-   *
-   * @param angularOffset
-   */
+  /// Set the target angular offset, in radians.
+  ///
+  /// [angularOffset]
   void setAngularOffset(double angularOffset) {
     if (angularOffset != _angularOffset) {
       _bodyA.setAwake(true);
@@ -144,34 +133,26 @@ class MotorJoint extends Joint {
     return _angularOffset;
   }
 
-  /**
-   * Set the maximum friction force in N.
-   *
-   * @param force
-   */
+  /// Set the maximum friction force in N.
+  ///
+  /// [force]
   void setMaxForce(double force) {
     assert(force >= 0.0);
     _maxForce = force;
   }
 
-  /**
-   * Get the maximum friction force in N.
-   */
+  /// Get the maximum friction force in N.
   double getMaxForce() {
     return _maxForce;
   }
 
-  /**
-   * Set the maximum friction torque in N*m.
-   */
+  /// Set the maximum friction torque in N * m.
   void setMaxTorque(double torque) {
     assert(torque >= 0.0);
     _maxTorque = torque;
   }
 
-  /**
-   * Get the maximum friction torque in N*m.
-   */
+  /// Get the maximum friction torque in N * m.
   double getMaxTorque() {
     return _maxTorque;
   }

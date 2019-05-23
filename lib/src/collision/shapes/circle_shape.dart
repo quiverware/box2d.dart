@@ -24,9 +24,7 @@
 
 part of box2d;
 
-/**
- * A circle shape.
- */
+/// A circle shape.
 class CircleShape extends Shape {
   CircleShape() : super(ShapeType.CIRCLE) {
     radius = 0.0;
@@ -46,35 +44,22 @@ class CircleShape extends Shape {
   @override
   int getChildCount() => 1;
 
-  /**
-   * Get the supporting vertex index in the given direction.
-   *
-   * @param d
-   * @return
-   */
+  /// Get the supporting vertex index in the given direction.
+  ///
+  /// [d]
   int getSupport(final Vector2 d) => 0;
 
-  /**
-   * Get the supporting vertex in the given direction.
-   *
-   * @param d
-   * @return
-   */
+  /// Get the supporting vertex in the given direction.
+  ///
+  /// [d]
   Vector2 getSupportVertex(final Vector2 d) => p;
 
-  /**
-   * Get the vertex count.
-   *
-   * @return
-   */
+  /// Get the vertex count.
   int getVertexCount() => 1;
 
-  /**
-   * Get a vertex by index.
-   *
-   * @param index
-   * @return
-   */
+  /// Get a vertex by index.
+  ///
+  /// [index]
   Vector2 getVertex(final int index) {
     assert(index == 0);
     return p;

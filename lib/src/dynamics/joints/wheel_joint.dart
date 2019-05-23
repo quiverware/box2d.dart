@@ -40,14 +40,10 @@ part of box2d;
 //Cdot = wB - wA
 //J = [0 0 -1 0 0 1]
 
-/**
- * A wheel joint. This joint provides two degrees of freedom: translation along an axis fixed in
- * bodyA and rotation in the plane. You can use a joint limit to restrict the range of motion and a
- * joint motor to drive the rotation or to model rotational friction. This joint is designed for
- * vehicle suspensions.
- *
- * @author Daniel Murphy
- */
+/// A wheel joint. This joint provides two degrees of freedom: translation along
+/// an axis fixed in bodyA and rotation in the plane. You can use a joint limit
+/// to restrict the range of motion and a joint motor to drive the rotation or
+/// to model rotational friction. This joint is designed for vehicle suspensions.
 class WheelJoint extends Joint {
   WheelJoint(IWorldPool argPool, WheelJointDef def) : super(argPool, def) {
     _localAnchorA.setFrom(def.localAnchorA);
@@ -160,7 +156,7 @@ class WheelJoint extends Joint {
     return translation;
   }
 
-  /** For serialization */
+  /// For serialization
   Vector2 getLocalAxisA() {
     return _localXAxisA;
   }

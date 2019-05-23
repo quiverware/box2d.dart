@@ -24,20 +24,21 @@
 
 part of box2d.common;
 
-/**
- * This describes the motion of a body/shape for TOI computation. Shapes are defined with respect to
- * the body origin, which may not coincide with the center of mass. However, to support dynamics we
- * must interpolate the center of mass position.
- */
+/// This describes the motion of a body/shape for TOI computation. Shapes are
+/// defined with respect to the body origin, which may not coincide with the
+/// center of mass. However, to support dynamics we must interpolate the center
+/// of mass position.
 class Sweep {
-  /** Local center of mass position */
+  /// Local center of mass position
   final Vector2 localCenter = Vector2.zero();
-  /** Center world positions */
+
+  /// Center world positions
   final Vector2 c0 = Vector2.zero(), c = Vector2.zero();
-  /** World angles */
+
+  /// World angles
   double a0 = 0.0, a = 0.0;
 
-  /** Fraction of the current time step in the range [0,1] c0 and a0 are the positions at alpha0. */
+  /// Fraction of the current time step in the range [0,1] c0 and a0 are the positions at alpha0.
   double alpha0 = 0.0;
 
   @override
@@ -65,12 +66,10 @@ class Sweep {
     return this;
   }
 
-  /**
-   * Get the interpolated transform at a specific time.
-   *
-   * @param xf the result is placed here - must not be null
-   * @param t the normalized time in [0,1].
-   */
+  /// Get the interpolated transform at a specific time.
+  ///
+  /// [x]f the result is placed here - must not be null
+  /// [t] the normalized time in [0,1].
   void getTransform(final Transform xf, final double beta) {
     assert(xf != null);
     // xf->p = (1.0f - beta) * c0 + beta * c;
@@ -88,11 +87,9 @@ class Sweep {
     xf.p.y -= q.s * localCenter.x + q.c * localCenter.y;
   }
 
-  /**
-   * Advance the sweep forward, yielding a new initial state.
-   *
-   * @param alpha the new initial time.
-   */
+  /// Advance the sweep forward, yielding a new initial state.
+  ///
+  /// [alpha] the new initial time.
   void advance(double alpha) {
     assert(alpha0 < 1.0);
     // float32 beta = (alpha - alpha0) / (1.0f - alpha0);

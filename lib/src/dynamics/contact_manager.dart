@@ -24,11 +24,7 @@
 
 part of box2d;
 
-/**
- * Delegate of World.
- *
- * @author Daniel Murphy
- */
+/// Delegate of World.
 
 class ContactManager implements PairCallback {
   ContactManager(this._pool, this.broadPhase) {
@@ -45,12 +41,10 @@ class ContactManager implements PairCallback {
   ContactFilter contactFilter;
   ContactListener contactListener;
 
-  /**
-   * Broad-phase callback.
-   *
-   * @param proxyUserDataA
-   * @param proxyUserDataB
-   */
+  /// Broad-phase callback.
+  ///
+  /// [proxyUserDataA]
+  /// [proxyUserDataB]
   @override
   void addPair(FixtureProxy proxyUserDataA, FixtureProxy proxyUserDataB) {
     final FixtureProxy proxyA = proxyUserDataA;
@@ -219,10 +213,8 @@ class ContactManager implements PairCallback {
     --contactCount;
   }
 
-  /**
-   * This is the top level collision call for the time step. Here all the narrow phase collision is
-   * processed for the world contact list.
-   */
+  /// This is the top level collision call for the time step. Here all the
+  /// narrow phase collision is processed for the world contact list.
   void collide() {
     // Update awake contacts.
     Contact c = contactList;

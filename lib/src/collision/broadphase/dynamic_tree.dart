@@ -24,14 +24,11 @@
 
 part of box2d;
 
-/**
- * A dynamic tree arranges data in a binary tree to accelerate queries such as volume queries and
- * ray casts. Leafs are proxies with an AABB. In the tree we expand the proxy AABB by _fatAABBFactor
- * so that the proxy AABB is bigger than the client object. This allows the client object to move by
- * small amounts without triggering a tree update.
- *
- * @author daniel
- */
+/// A dynamic tree arranges data in a binary tree to accelerate queries such as
+/// volume queries and ray casts. Leafs are proxies with an AABB. In the tree we
+/// expand the proxy AABB by _fatAABBFactor so that the proxy AABB is bigger
+/// than the client object. This allows the client object to move by small
+/// amounts without triggering a tree update.
 class DynamicTree implements BroadPhaseStrategy {
   DynamicTree() {
     // Build a linked list for the free list.
@@ -310,9 +307,7 @@ class DynamicTree implements BroadPhaseStrategy {
     return 1 + math.max<int>(height1, height2);
   }
 
-  /**
-   * Validate this tree. For testing.
-   */
+  /// Validate this tree. For testing.
   void validate() {
     _validateStructure(_root);
     _validateMetrics(_root);
@@ -383,9 +378,7 @@ class DynamicTree implements BroadPhaseStrategy {
     return totalArea / rootArea;
   }
 
-  /**
-   * Build an optimal tree. Very expensive. For testing.
-   */
+  /// Build an optimal tree. Very expensive. For testing.
   void rebuildBottomUp() {
     final List<int> nodes = buffer_utils.allocClearIntList(_nodeCount);
     int count = 0;
@@ -481,9 +474,7 @@ class DynamicTree implements BroadPhaseStrategy {
     return treeNode;
   }
 
-  /**
-   * returns a node to the pool
-   */
+  /// returns a node to the pool
   void _freeNode(DynamicTreeNode node) {
     assert(node != null);
     assert(0 < _nodeCount);

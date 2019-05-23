@@ -318,9 +318,7 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
     return 1 + math.max<int>(height1, height2);
   }
 
-  /**
-   * Validate this tree. For testing.
-   */
+  /// Validate this tree. For testing.
   void validate() {
     _validateStructure(_root);
     _validateMetrics(_root);
@@ -402,9 +400,7 @@ class DynamicTreeFlatNodes implements BroadPhaseStrategy {
     return node;
   }
 
-  /**
-   * returns a node to the pool
-   */
+  /// returns a node to the pool
   void _freeNode(int node) {
     assert(node != NULL_NODE);
     assert(0 < _nodeCount);

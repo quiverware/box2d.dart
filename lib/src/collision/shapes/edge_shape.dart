@@ -24,35 +24,24 @@
 
 part of box2d;
 
-/**
- * A line segment (edge) shape. These can be connected in chains or loops to other edge shapes. The
- * connectivity information is used to ensure correct contact normals.
- *
- * @author Daniel
- */
+/// A line segment (edge) shape. These can be connected in chains or loops to
+/// other edge shapes. The connectivity information is used to ensure correct
+/// contact normals.
 class EdgeShape extends Shape {
   EdgeShape() : super(ShapeType.EDGE) {
     radius = settings.polygonRadius;
   }
 
-  /**
-   * edge vertex 1
-   */
+  /// edge vertex 1
   final Vector2 vertex1 = Vector2.zero();
 
-  /**
-   * edge vertex 2
-   */
+  /// edge vertex 2
   final Vector2 vertex2 = Vector2.zero();
 
-  /**
-   * optional adjacent vertex 1. Used for smooth collision
-   */
+  /// optional adjacent vertex 1. Used for smooth collision
   final Vector2 vertex0 = Vector2.zero();
 
-  /**
-   * optional adjacent vertex 2. Used for smooth collision
-   */
+  /// optional adjacent vertex 2. Used for smooth collision
   final Vector2 vertex3 = Vector2.zero();
   bool hasVertex0 = false, hasVertex3 = false;
 

@@ -23,12 +23,9 @@
  ******************************************************************************/
 part of box2d;
 
-/**
- * The class manages contact between two shapes. A contact exists for each overlapping AABB in the
- * broad-phase (except if filtered). Therefore a contact object may exist that has no contact
- * points.
- *
- */
+/// The class manages contact between two shapes. A contact exists for each
+/// overlapping AABB in the broad-phase (except if filtered). Therefore a
+/// contact object may exist that has no contact points.
 abstract class Contact {
   Contact(this._pool);
 
@@ -78,7 +75,7 @@ abstract class Contact {
 
   final IWorldPool _pool;
 
-  /** initialization for pooling */
+  /// initialization for pooling
   void init(Fixture fA, int indexA, Fixture fB, int indexB) {
     _flags = ENABLED_FLAG;
 
@@ -110,9 +107,7 @@ abstract class Contact {
     _tangentSpeed = 0.0;
   }
 
-  /**
-   * Get the world manifold.
-   */
+  /// Get the world manifold.
   void getWorldManifold(WorldManifold worldManifold) {
     final Body bodyA = _fixtureA.getBody();
     final Body bodyB = _fixtureB.getBody();
@@ -123,21 +118,14 @@ abstract class Contact {
         bodyB._transform, shapeB.radius);
   }
 
-  /**
-   * Is this contact touching
-   *
-   * @return
-   */
-  bool isTouching() {
-    return (_flags & TOUCHING_FLAG) == TOUCHING_FLAG;
-  }
+  /// Is this contact touching
+  bool isTouching() => (_flags & TOUCHING_FLAG) == TOUCHING_FLAG;
 
-  /**
-   * Enable/disable this contact. This can be used inside the pre-solve contact listener. The
-   * contact is only disabled for the current time step (or sub-step in continuous collisions).
-   *
-   * @param flag
-   */
+  /// Enable/disable this contact. This can be used inside the pre-solve contact
+  /// listener. The contact is only disabled for the current time step
+  /// (or sub-step in continuous collisions).
+  ///
+  /// [flag]
   void setEnabled(bool flag) {
     if (flag) {
       _flags |= ENABLED_FLAG;
@@ -146,45 +134,21 @@ abstract class Contact {
     }
   }
 
-  /**
-   * Has this contact been disabled?
-   *
-   * @return
-   */
-  bool isEnabled() {
-    return (_flags & ENABLED_FLAG) == ENABLED_FLAG;
-  }
+  /// Has this contact been disabled?
+  bool isEnabled() => (_flags & ENABLED_FLAG) == ENABLED_FLAG;
 
-  /**
-   * Get the next contact in the world's contact list.
-   *
-   * @return
-   */
-  Contact getNext() {
-    return _next;
-  }
+  /// Get the next contact in the world's contact list.
+  Contact getNext() => _next;
 
-  /**
-   * Get the first fixture in this contact.
-   *
-   * @return
-   */
+  /// Get the first fixture in this contact.
   Fixture get fixtureA => _fixtureA;
 
-  int getChildIndexA() {
-    return _indexA;
-  }
+  int getChildIndexA() => _indexA;
 
-  /**
-   * Get the second fixture in this contact.
-   *
-   * @return
-   */
+  /// Get the second fixture in this contact.
   Fixture get fixtureB => _fixtureB;
 
-  int getChildIndexB() {
-    return _indexB;
-  }
+  int getChildIndexB() => _indexB;
 
   void resetFriction() {
     _friction = Contact.mixFriction(_fixtureA._friction, _fixtureB._friction);
@@ -197,9 +161,7 @@ abstract class Contact {
 
   void evaluate(Manifold manifold, Transform xfA, Transform xfB);
 
-  /**
-   * Flag this contact for filtering. Filtering will occur the next time step.
-   */
+  /// Flag this contact for filtering. Filtering will occur the next time step.
   void flagForFiltering() {
     _flags |= FILTER_FLAG;
   }
@@ -288,26 +250,20 @@ abstract class Contact {
     }
   }
 
-  /**
-   * Friction mixing law. The idea is to allow either fixture to drive the restitution to zero. For
-   * example, anything slides on ice.
-   *
-   * @param friction1
-   * @param friction2
-   * @return
-   */
+  /// Friction mixing law. The idea is to allow either fixture to drive the
+  /// restitution to zero. For example, anything slides on ice.
+  ///
+  /// [friction1]
+  /// [friction2]
   static double mixFriction(double friction1, double friction2) {
     return math.sqrt(friction1 * friction2);
   }
 
-  /**
-   * Restitution mixing law. The idea is allow for anything to bounce off an inelastic surface. For
-   * example, a superball bounces on anything.
-   *
-   * @param restitution1
-   * @param restitution2
-   * @return
-   */
+  /// Restitution mixing law. The idea is allow for anything to bounce off an
+  /// inelastic surface. For example, a superball bounces on anything.
+  ///
+  /// [restitution1]
+  /// [restitution2]
   static double mixRestitution(double restitution1, double restitution2) {
     return restitution1 > restitution2 ? restitution1 : restitution2;
   }

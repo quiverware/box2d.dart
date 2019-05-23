@@ -24,17 +24,12 @@
 
 part of box2d;
 
-/**
- * callback for {@link DynamicTree}
- * @author Daniel Murphy
- *
- */
+/// callback for [DynamicTree]
 abstract class TreeRayCastCallback {
-  /**
-   * 
-   * @param input
-   * @param nodeId
-   * @return the fraction to the node
-   */
+  ///
+  ///
+  /// [input]
+  /// [nodeId]
+  /// Returns the fraction to the node
   double raycastCallback(RayCastInput input, int nodeId);
 }

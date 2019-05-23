@@ -142,9 +142,7 @@ part of box2d;
  However, we can compute sin+cos of the same angle fast.
  */
 
-/**
- * This is an internal class.
- */
+/// This is an internal class.
 class Island {
   ContactListener _listener;
 

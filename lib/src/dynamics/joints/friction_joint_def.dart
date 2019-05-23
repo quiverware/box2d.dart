@@ -24,41 +24,27 @@
 
 part of box2d;
 
-/**
- * Friction joint definition.
- *
- * @author Daniel Murphy
- */
+/// Friction joint definition.
 class FrictionJointDef extends JointDef {
   FrictionJointDef()
       : localAnchorA = Vector2.zero(),
         localAnchorB = Vector2.zero(),
         super(JointType.FRICTION);
 
-  /**
-   * The local anchor point relative to bodyA's origin.
-   */
+  /// The local anchor point relative to bodyA's origin.
   final Vector2 localAnchorA;
 
-  /**
-   * The local anchor point relative to bodyB's origin.
-   */
+  /// The local anchor point relative to bodyB's origin.
   final Vector2 localAnchorB;
 
-  /**
-   * The maximum friction force in N.
-   */
+  /// The maximum friction force in N.
   double maxForce = 0.0;
 
-  /**
-   * The maximum friction torque in N-m.
-   */
+  /// The maximum friction torque in N-m.
   double maxTorque = 0.0;
 
-  /**
-   * Initialize the bodies, anchors, axis, and reference angle using the world anchor and world
-   * axis.
-   */
+  /// Initialize the bodies, anchors, axis, and reference angle using the
+  /// world anchor and world axis.
   void initialize(Body bA, Body bB, Vector2 anchor) {
     bodyA = bA;
     bodyB = bB;

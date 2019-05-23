@@ -234,19 +234,19 @@ class ConstantVolumeJoint extends Joint {
     }
   }
 
-  /** No-op */
+  /// No-op
   @override
   void getAnchorA(Vector2 argOut) {}
 
-  /** No-op */
+  /// No-op
   @override
   void getAnchorB(Vector2 argOut) {}
 
-  /** No-op */
+  /// No-op
   @override
   void getReactionForce(double inv_dt, Vector2 argOut) {}
 
-  /** No-op */
+  /// No-op
   @override
   double getReactionTorque(double inv_dt) {
     return 0.0;

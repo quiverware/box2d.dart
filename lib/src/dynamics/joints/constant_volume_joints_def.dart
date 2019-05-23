@@ -24,11 +24,8 @@
 
 part of box2d;
 
-/**
- * Definition for a {@link ConstantVolumeJoint}, which connects a group a bodies together so they
- * maintain a constant volume within them.
- */
-
+/// Definition for a {@link ConstantVolumeJoint}, which connects a group a
+/// bodies together so they maintain a constant volume within them.
 class ConstantVolumeJointDef extends JointDef {
   ConstantVolumeJointDef() : super(JointType.CONSTANT_VOLUME) {
     collideConnected = false;
@@ -40,11 +37,9 @@ class ConstantVolumeJointDef extends JointDef {
   List<Body> bodies = <Body>[];
   List<DistanceJoint> joints;
 
-  /**
-   * Adds a body to the group
-   * 
-   * @param argBody
-   */
+  /// Adds a body to the group
+  ///
+  /// [argBody]
   void addBody(Body argBody) {
     bodies.add(argBody);
     if (bodies.length == 1) {
@@ -55,9 +50,8 @@ class ConstantVolumeJointDef extends JointDef {
     }
   }
 
-  /**
-   * Adds a body and the pre-made distance joint. Should only be used for deserialization.
-   */
+  /// Adds a body and the pre-made distance joint. Should only be used
+  /// for deserialization.
   void addBodyAndJoint(Body argBody, DistanceJoint argJoint) {
     addBody(argBody);
     joints ??= <DistanceJoint>[];

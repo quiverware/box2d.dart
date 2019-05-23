@@ -31,11 +31,8 @@ part of box2d;
 //K = J * invM * JT
 //= invMass1 + invI1 * cross(r1, u)^2 + invMass2 + invI2 * cross(r2, u)^2
 
-/**
- * A distance joint constrains two points on two bodies to remain at a fixed distance from each
- * other. You can view this as a massless, rigid rod.
- */
-
+/// A distance joint constrains two points on two bodies to remain at a fixed
+/// distance from each other. You can view this as a massless, rigid rod.
 class DistanceJoint extends Joint {
   DistanceJoint(IWorldPool argWorld, final DistanceJointDef def)
       : _localAnchorA = def.localAnchorA.clone(),
@@ -81,21 +78,15 @@ class DistanceJoint extends Joint {
     _bodyB.getWorldPointToOut(_localAnchorB, out);
   }
 
-  /**
-   * Get the reaction force given the inverse time step. Unit is N.
-   */
-
+  /// Get the reaction force given the inverse time step. Unit is N.
   @override
   void getReactionForce(double inv_dt, Vector2 out) {
     out.x = _impulse * _u.x * inv_dt;
     out.y = _impulse * _u.y * inv_dt;
   }
 
-  /**
-   * Get the reaction torque given the inverse time step. Unit is N*m. This is always zero for a
-   * distance joint.
-   */
-
+  /// Get the reaction torque given the inverse time step. Unit is N * m.
+  /// This is always zero for a distance joint.
   @override
   double getReactionTorque(double inv_dt) {
     return 0.0;

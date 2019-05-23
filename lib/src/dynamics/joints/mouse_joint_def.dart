@@ -24,33 +24,23 @@
 
 part of box2d;
 
-/**
- * Mouse joint definition. This requires a world target point, tuning parameters, and the time step.
- * 
- * @author Daniel
- */
+/// Mouse joint definition. This requires a world target point, tuning
+/// parameters, and the time step.
 class MouseJointDef extends JointDef {
   MouseJointDef() : super(JointType.MOUSE);
 
-  /**
-   * The initial world target point. This is assumed to coincide with the body anchor initially.
-   */
+  /// The initial world target point. This is assumed to coincide with
+  /// the body anchor initially.
   final Vector2 target = Vector2.zero();
 
-  /**
-   * The maximum constraint force that can be exerted to move the candidate body. Usually you will
-   * express as some multiple of the weight (multiplier * mass * gravity).
-   */
+  /// The maximum constraint force that can be exerted to move the candidate
+  /// body. Usually you will express as some multiple of the weight
+  /// (multiplier * mass * gravity).
   double maxForce = 0.0;
 
-  /**
-   * The response speed.
-   */
+  /// The response speed.
   double frequencyHz = 5.0;
 
-  /**
-   * The damping ratio. 0 = no damping, 1 = critical damping.
-   */
+  /// The damping ratio. 0 = no damping, 1 = critical damping.
   double dampingRatio = .7;
-
 }

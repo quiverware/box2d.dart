@@ -24,51 +24,47 @@
 
 part of box2d.common;
 
-/**
- * A transform contains translation and rotation. It is used to represent the position and
- * orientation of rigid frames.
- */
+/// A transform contains translation and rotation. It is used to represent the
+/// position and orientation of rigid frames.
 class Transform {
-  /** The default constructor. */
+  /// The default constructor.
   Transform.zero()
       : p = Vector2.zero(),
         q = Rot();
 
-  /** Initialize as a copy of another transform. */
+  /// Initialize as a copy of another transform.
   Transform.clone(final Transform xf)
       : p = xf.p.clone(),
         q = xf.q.clone();
 
-  /** Initialize using a position vector and a rotation matrix. */
+  /// Initialize using a position vector and a rotation matrix.
   Transform.from(final Vector2 position, final Rot rotationMatrix)
       : p = position.clone(),
         q = rotationMatrix.clone();
 
-  /** The translation caused by the transform */
+  /// The translation caused by the transform
   final Vector2 p;
 
-  /** A matrix representing a rotation */
+  /// A matrix representing a rotation
   final Rot q;
 
-  /** Set this to equal another transform. */
+  /// Set this to equal another transform.
   Transform set(final Transform xf) {
     p.setFrom(xf.p);
     q.set(xf.q);
     return this;
   }
 
-  /**
-   * Set this based on the position and angle.
-   *
-   * @param p
-   * @param angle
-   */
+  /// Set this based on the position and angle.
+  /// 
+  /// [p]
+  /// [angle]
   void setVec2Angle(Vector2 p, double angle) {
     p.setFrom(p);
     q.setAngle(angle);
   }
 
-  /** Set this to the identity transform. */
+  /// Set this to the identity transform.
   void setIdentity() {
     p.setZero();
     q.setIdentity();

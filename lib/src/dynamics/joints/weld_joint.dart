@@ -38,12 +38,8 @@ part of box2d;
 //J = [0 0 -1 0 0 1]
 //K = invI1 + invI2
 
-/**
- * A weld joint essentially glues two bodies together. A weld joint may distort somewhat because the
- * island constraint solver is approximate.
- *
- * @author Daniel Murphy
- */
+/// A weld joint essentially glues two bodies together. A weld joint may distort
+/// somewhat because the island constraint solver is approximate.
 class WeldJoint extends Joint {
   WeldJoint(IWorldPool argWorld, WeldJointDef def)
       : _localAnchorA = Vector2.copy(def.localAnchorA),

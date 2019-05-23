@@ -39,7 +39,7 @@ class ParticleBufferInt {
   int userSuppliedCapacity;
 }
 
-/** Connection between two particles */
+/// Connection between two particles
 class PsPair {
   int indexA = 0;
   int indexB = 0;
@@ -48,7 +48,7 @@ class PsPair {
   double distance = 0.0;
 }
 
-/** Connection between three particles */
+/// Connection between three particles
 class PsTriad {
   int indexA = 0, indexB = 0, indexC = 0;
   int flags = 0;
@@ -57,7 +57,7 @@ class PsTriad {
   double ka = 0.0, kb = 0.0, kc = 0.0, s = 0.0;
 }
 
-/** Used for detecting particle contacts */
+/// Used for detecting particle contacts
 class PsProxy implements Comparable<PsProxy> {
   int index = 0;
   int tag = 0;
@@ -100,7 +100,7 @@ class NewIndices {
 
 class DestroyParticlesInShapeCallback implements ParticleQueryCallback {
   DestroyParticlesInShapeCallback() {
-    // TODO Auto-generated constructor stub
+    // TODO(unassigned): Auto-generated constructor stub
   }
 
   ParticleSystem system;
@@ -470,13 +470,13 @@ class ParticleSystem {
     userDataBuffer = ParticleBuffer<Object>(allocObject);
   }
 
-  /** All particle types that require creating pairs */
+  /// All particle types that require creating pairs
   static const int k_pairFlags = ParticleType.b2_springParticle;
 
-  /** All particle types that require creating triads */
+  /// All particle types that require creating triads
   static const int k_triadFlags = ParticleType.b2_elasticParticle;
 
-  /** All particle types that require computing depth */
+  /// All particle types that require computing depth
   static const int k_noPressureFlags = ParticleType.b2_powderParticle;
 
   static const int xTruncBits = 12;
@@ -1872,7 +1872,7 @@ class ParticleSystem {
       if (group._toBeDestroyed) {
         destroyParticleGroup(group);
       } else if (group._toBeSplit) {
-        // TODO: split the group
+        // TODO(unassigned): split the group
       }
       group = next;
     }
@@ -2163,11 +2163,6 @@ class ParticleSystem {
     }
   }
 
-  /**
-   * @param callback
-   * @param point1
-   * @param point2
-   */
   void raycast(ParticleRaycastCallback callback, final Vector2 point1,
       final Vector2 point2) {
     if (proxyCount == 0) {
